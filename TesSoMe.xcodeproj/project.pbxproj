@@ -13,6 +13,7 @@
 		9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD319C3069F00CB92B2 /* Images.xcassets */; };
 		9EB8ADD719C3069F00CB92B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD519C3069F00CB92B2 /* LaunchScreen.xib */; };
 		9EB8ADE319C3069F00CB92B2 /* TesSoMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */; };
+		ABDAF7CC514440A3A2DE9A54 /* libPods-TesSoMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +27,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TesSoMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TesSoMe.xcconfig"; path = "Pods/Pods-TesSoMe.xcconfig"; sourceTree = "<group>"; };
 		9E95321919C348A80009B9EA /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		9E9FA0E219C368C400E209C3 /* Pods-ObjC-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-ObjC-Bridging-Header.h"; sourceTree = "<group>"; };
 		9EB8ADC519C3069F00CB92B2 /* TesSoMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TesSoMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EB8ADC919C3069F00CB92B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABDAF7CC514440A3A2DE9A54 /* libPods-TesSoMe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +67,8 @@
 				9EB8ADC719C3069F00CB92B2 /* TesSoMe */,
 				9EB8ADDF19C3069F00CB92B2 /* TesSoMeTests */,
 				9EB8ADC619C3069F00CB92B2 /* Products */,
+				9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */,
+				F605EA1DCF5E4866977D1C84 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
+				9E9FA0E219C368C400E209C3 /* Pods-ObjC-Bridging-Header.h */,
 				9EB8ADD019C3069F00CB92B2 /* Main.storyboard */,
 				9E95321919C348A80009B9EA /* RootViewController.swift */,
 				9EB8ADD319C3069F00CB92B2 /* Images.xcassets */,
@@ -112,6 +120,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F605EA1DCF5E4866977D1C84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +135,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9EB8ADE619C3069F00CB92B2 /* Build configuration list for PBXNativeTarget "TesSoMe" */;
 			buildPhases = (
+				5BC487C52E8D49A7A7E7D5C1 /* Check Pods Manifest.lock */,
 				9EB8ADC119C3069F00CB92B2 /* Sources */,
 				9EB8ADC219C3069F00CB92B2 /* Frameworks */,
 				9EB8ADC319C3069F00CB92B2 /* Resources */,
+				F1B489CC3DD04FC0A399DD3E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -206,6 +224,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5BC487C52E8D49A7A7E7D5C1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F1B489CC3DD04FC0A399DD3E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-TesSoMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9EB8ADC119C3069F00CB92B2 /* Sources */ = {
@@ -334,21 +385,25 @@
 		};
 		9EB8ADE719C3069F00CB92B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TesSoMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/TesSoMe/Pods-ObjC-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		9EB8ADE819C3069F00CB92B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TesSoMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/TesSoMe/Pods-ObjC-Bridging-Header.h";
 			};
 			name = Release;
 		};

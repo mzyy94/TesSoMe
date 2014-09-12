@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>38FCC8AA-B6C2-44F1-A4E2-4B4DA9FCC647</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TesSoMe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C400BBD96196499F4C9E0EA0943C9CC099B371A6</key>
+		<string>bitbucket.org:mzyy94/tessome.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TesSoMe.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C400BBD96196499F4C9E0EA0943C9CC099B371A6</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:mzyy94/tessome.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C400BBD96196499F4C9E0EA0943C9CC099B371A6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C400BBD96196499F4C9E0EA0943C9CC099B371A6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TesSoMe</string>
+		</dict>
+	</array>
+</dict>
+</plist>
