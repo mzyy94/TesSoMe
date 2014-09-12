@@ -7,6 +7,7 @@ pod 'AFNetworking'
 end
 
 target "TesSoMeTests" do
+pod 'AFNetworking'
 
 end
 
