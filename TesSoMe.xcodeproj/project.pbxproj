@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E95321919C348A80009B9EA /* RootViewController.swift */; };
 		9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */; };
 		9EB8ADD219C3069F00CB92B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD019C3069F00CB92B2 /* Main.storyboard */; };
 		9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD319C3069F00CB92B2 /* Images.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E95321919C348A80009B9EA /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		9EB8ADC519C3069F00CB92B2 /* TesSoMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TesSoMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EB8ADC919C3069F00CB92B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			children = (
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
 				9EB8ADD019C3069F00CB92B2 /* Main.storyboard */,
+				9E95321919C348A80009B9EA /* RootViewController.swift */,
 				9EB8ADD319C3069F00CB92B2 /* Images.xcassets */,
 				9EB8ADD519C3069F00CB92B2 /* LaunchScreen.xib */,
 				9EB8ADC819C3069F00CB92B2 /* Supporting Files */,
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */,
 				9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +405,7 @@
 				9EB8ADE819C3069F00CB92B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9EB8ADE919C3069F00CB92B2 /* Build configuration list for PBXNativeTarget "TesSoMeTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +414,7 @@
 				9EB8ADEB19C3069F00CB92B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
