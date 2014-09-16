@@ -80,6 +80,7 @@
 				2602EE70751843DE87C52312 /* Pods-TesSoMeTests.xcconfig */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		9EB8ADC619C3069F00CB92B2 /* Products */ = {
 			isa = PBXGroup;
