@@ -30,8 +30,10 @@ class TessoApiManager: NSObject {
 		req.POST("https://tesso.pw/users/sign_in", parameters: ["data[User][username]": userId, "data[User][password]": password], success:
 			{
 				res, data in
-				if res.response!.URL == NSURL(string: "https://tesso.pw/sns") && onSuccess != nil {
-					onSuccess()
+				if res.response!.URL == NSURL(string: "https://tesso.pw/sns") {
+					if onSuccess != nil {
+						onSuccess()
+					}
 				} else if onFailure != nil {
 					let err = NSError()
 					onFailure(err)
@@ -52,8 +54,10 @@ class TessoApiManager: NSObject {
 		NSURLConnection.sendAsynchronousRequest(req, queue: NSOperationQueue.mainQueue(), completionHandler:
 			{
 				res, data, err in
-				if err != nil && onFailure != nil {
-					onFailure(err)
+				if err != nil {
+					if onFailure != nil {
+						onFailure(err)
+					}
 				} else if onSuccess != nil {
 					onSuccess()
 				}
@@ -62,8 +66,10 @@ class TessoApiManager: NSObject {
 	
 	func checkResponce(data: AnyObject!, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		let object = data as NSDictionary
-		if object["status"] as NSString == "success" && onSuccess != nil {
-			onSuccess(object)
+		if object["status"] as NSString == "success" {
+			if onSuccess != nil {
+				onSuccess(object)
+			}
 		} else if onFailure != nil {
 			let err = NSError()
 			onFailure(err)
