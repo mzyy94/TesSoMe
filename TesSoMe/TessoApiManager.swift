@@ -45,7 +45,17 @@ class TessoApiManager: NSObject {
 		})
 	}
 	
-	func getData(#mode: Int, topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: String? = nil, onSuccess: ((NSURLSessionDataTask!, AnyObject!) -> Void)! = nil, onFailure: ((NSURLSessionDataTask!, NSError!) -> Void)! = nil) {
+	func checkResponce(data: AnyObject!, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		let object = data as NSDictionary
+		if object["status"] as NSString == "success" {
+			onSuccess(object)
+		} else {
+			let err = NSError()
+			onFailure(err)
+		}
+	}
+	
+	func getData(#mode: Int, topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: String? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
 		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
@@ -70,8 +80,25 @@ class TessoApiManager: NSObject {
 		if type != nil {
 			param.updateValue(type!, forKey: "type")
 		}
-		req.GET("\(apiEndPoint)/get", parameters: param, success: onSuccess, failure: onFailure)
+		req.GET("\(apiEndPoint)/get", parameters: param, success: {
+			res, data in
+			self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
+			}, failure: {
+			res, err in
+			onFailure(err)
+		})
+	}
+
+	func getTimeline(#topicid: Int, maxid: Int? = nil, sinceid: Int? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.getData(mode: 1, topicid: topicid, maxid: maxid, sinceid: sinceid, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
+	func getTopic(onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.getData(mode: 2, tag: "1", onSuccess: onSuccess, onFailure: onFailure)
+	}
+    
+	func getClass(onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.getData(mode: 3, onSuccess: onSuccess, onFailure: onFailure)
+	}
 	
 }

@@ -43,14 +43,53 @@ class TesSoMeTests: XCTestCase {
 	}
 	
 	func testGetTimeline() {
-		let apiExpectation = self.expectationWithDescription("api signin")
+		let apiExpectation = self.expectationWithDescription("api getTimeline")
 		
-		apiMgr.getData(mode: 1, topicid: 1, onSuccess:
-			{res, data in
+		apiMgr.getTimeline(topicid: 1, onSuccess:
+			{
+				data in
 				XCTAssert(true, "Pass")
 				apiExpectation.fulfill()
 			}
-			, onFailure: {res, err in
+			, onFailure:
+			{
+				err in
+				XCTAssert(false, "Fail")
+		})
+		self.waitForExpectationsWithTimeout(3.0, handler: {err in
+		})
+	}
+	
+	func testGetTopic() {
+		let apiExpectation = self.expectationWithDescription("api getTopic")
+		
+		apiMgr.getTopic(onSuccess:
+			{
+				data in
+				XCTAssert(true, "Pass")
+				apiExpectation.fulfill()
+			}
+			, onFailure:
+			{
+				err in
+				XCTAssert(false, "Fail")
+		})
+		self.waitForExpectationsWithTimeout(3.0, handler: {err in
+		})
+	}
+	
+	func testGetClass() {
+		let apiExpectation = self.expectationWithDescription("api getClass")
+		
+		apiMgr.getClass(onSuccess:
+			{
+				data in
+				XCTAssert(true, "Pass")
+				apiExpectation.fulfill()
+			}
+			, onFailure:
+			{
+				err in
 				XCTAssert(false, "Fail")
 		})
 		self.waitForExpectationsWithTimeout(3.0, handler: {err in
