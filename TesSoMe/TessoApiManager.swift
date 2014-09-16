@@ -51,9 +51,9 @@ class TessoApiManager: NSObject {
 	
 	func checkResponce(data: AnyObject!, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		let object = data as NSDictionary
-		if object["status"] as NSString == "success" {
+		if object["status"] as NSString == "success" && onSuccess != nil {
 			onSuccess(object)
-		} else {
+		} else if onFailure != nil {
 			let err = NSError()
 			onFailure(err)
 		}
@@ -92,7 +92,9 @@ class TessoApiManager: NSObject {
 			, failure:
 			{
 				res, err in
-				onFailure(err)
+				if onFailure != nil {
+					onFailure(err)
+				}
 		})
 	}
 
