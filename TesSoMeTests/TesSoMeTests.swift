@@ -131,7 +131,44 @@ class TesSoMeTests: XCTestCase {
 		self.waitForExpectationsWithTimeout(3.0, handler: {err in
 		})
 	}
+
+	func testSendMessageTest() {
+		let apiExpectation = self.expectationWithDescription("api sendMessageTest")
+		
+		apiMgr.sendMessage(topicid: 1, message: "Nemu", onSuccess:
+			{
+				data in
+				XCTAssert(true, "Pass")
+				apiExpectation.fulfill()
+			}
+			, onFailure:
+			{
+				err in
+				XCTAssert(false, "Fail")
+		})
+		self.waitForExpectationsWithTimeout(3.0, handler: {err in
+		})
+	}
 	
+	func testAddTitle() {
+		let apiExpectation = self.expectationWithDescription("api addTitle")
+		apiMgr.addTitle(username: "eula", title: "神の子", onSuccess:
+			{
+				data in
+				XCTAssert(true, "Pass")
+				apiExpectation.fulfill()
+			}
+			, onFailure:
+			{
+				err in
+				XCTAssert(false, "Fail")
+		})
+		self.waitForExpectationsWithTimeout(3.0, handler: {err in
+		})
+	}
+	
+
+
 	func testPerformanceExample() {
 		// This is an example of a performance test case.
 		self.measureBlock() {

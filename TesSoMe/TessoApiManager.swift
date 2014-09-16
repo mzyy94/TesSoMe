@@ -15,6 +15,10 @@ class TessoApiManager: NSObject {
 		case Test = 0, Timeline, Topic, Class, Profile, SearchResult;
 	};
 	
+	enum TesSoMeSendMode: Int {
+		case Message = 0, Drawing, FilePost, FileUpload, EditClass, UpdateProfile, AddTitle;
+	};
+	
 	enum TesSoMeSearchType: Int {
 		case All = -1
 		case Message = 0
@@ -115,6 +119,95 @@ class TessoApiManager: NSObject {
 		})
 	}
 
+	func sendData(#mode: TesSoMeSendMode, target: String? = nil, text: String? = nil, data: String? = nil, file: NSDictionary? = nil, onProgress: ((session: NSURLSession!, task: NSURLSessionTask!, bytesSent:Int64, totalBytesSent:Int64, totalBytesExpectedToSend: Int64) -> Void)! = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+		sessionConfig.HTTPShouldSetCookies = true
+		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
+		req.responseSerializer.acceptableContentTypes = NSSet(object: "text/html")
+
+		var param = ["mode": mode.toRaw() as AnyObject]
+		if target != nil {
+			param.updateValue(target!, forKey: "target")
+		}
+		if text != nil {
+			param.updateValue(text!, forKey: "text")
+		}
+		if data != nil {
+			param.updateValue(data!, forKey: "data")
+		}
+		
+		
+		if file != nil {
+			if file!["data"] == nil || file!["name"] == nil || file!["mimeType"] == nil {
+				if onFailure != nil {
+					let err = NSError()
+					onFailure(err)
+				}
+				return
+			}
+			switch file!["mimeType"] as String {
+			case "image/jpeg":
+				let imgData = NSData(data: UIImageJPEGRepresentation(file!["data"] as UIImage, 0.80))
+				
+				let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock: {(formData: AFMultipartFormData!) in
+					formData.appendPartWithFileData(imgData, name: "file", fileName: file!["name"] as String, mimeType: file!["mimeType"] as String)
+					}
+					, success:
+					{
+						res, data in
+						self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
+					}
+					, failure:
+					{
+						res, err in
+						if onFailure != nil {
+							onFailure(err)
+						}
+				})
+				
+				req.setTaskDidSendBodyDataBlock(onProgress)
+				task.resume()
+			default:
+				let mime = "application/octet-stream"
+				let data = NSData(data: file!["data"] as NSData)
+				let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock: {(formData: AFMultipartFormData!) in
+					formData.appendPartWithFileData(data, name: "file", fileName: file!["name"] as String, mimeType: "application/octet-stream")
+					}
+					, success:
+					{
+						res, data in
+						self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
+					}
+					, failure:
+					{
+						res, err in
+						if onFailure != nil {
+							onFailure(err)
+						}
+				})
+				
+				req.setTaskDidSendBodyDataBlock(onProgress)
+				task.resume()
+			}
+		} else {
+			println(param)
+
+			req.POST("\(apiEndPoint)/send", parameters: param, success:
+				{
+					res, data in
+					self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
+				}
+				, failure:
+				{
+					res, err in
+					if onFailure != nil {
+						onFailure(err)
+					}
+			})
+		}
+		
+	}
+	
 	func getTimeline(#topicid: Int, maxid: Int? = nil, sinceid: Int? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		self.getData(mode: .Timeline, topicid: topicid, maxid: maxid, sinceid: sinceid, onSuccess: onSuccess, onFailure: onFailure)
 	}
@@ -137,6 +230,55 @@ class TessoApiManager: NSObject {
 			typeValue = nil
 		}
 		self.getData(mode: .SearchResult, maxid: maxid, sinceid: sinceid, tag: tag, username: username, type: typeValue, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func sendMessage(#topicid: Int, message: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.sendData(mode: .Message, target: String(topicid), text: message, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func sendDrawing(#topicid: Int, message: String? = nil, drawing: UIImage, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		let encodedImage = UIImagePNGRepresentation(drawing).base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+		self.sendData(mode: .Drawing, target: String(topicid), text: message, data: encodedImage, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func postFile(#topicid: Int, fileId: Int, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.sendData(mode: .FilePost, target: String(topicid), data: String(fileId), onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func uploadFile(#file: NSDictionary, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.sendData(mode: .FileUpload, file: file, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func addClass(#date: NSDate, text: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "YYYY/M/d/H"
+		
+		let timeZone = NSTimeZone.systemTimeZone()
+		let timeDiffSeconds = timeZone.secondsFromGMTForDate(date)
+		let gmtDate = date.dateByAddingTimeInterval(-NSTimeInterval(timeDiffSeconds))
+		let dateString = dateFormatter.stringFromDate(gmtDate)
+		
+		self.sendData(mode: .EditClass, target: dateString, text: text, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func removeClass(#date: NSDate, text: String = "", onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "YYYY/M/d/H"
+		
+		let timeZone = NSTimeZone.systemTimeZone()
+		let timeDiffSeconds = timeZone.secondsFromGMTForDate(date)
+		let gmtDate = date.dateByAddingTimeInterval(-NSTimeInterval(timeDiffSeconds))
+		let dateString = dateFormatter.stringFromDate(gmtDate)
+		
+		self.sendData(mode: .EditClass, target: dateString, data: "1", onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func updateProfile(nickname: String? = nil, profile: String? = nil, icon: NSDictionary? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.sendData(mode: .UpdateProfile, target: nickname, text: profile, file: icon, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func addTitle(#username: String, title: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.sendData(mode: .AddTitle, target: username, text: title, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
 }
