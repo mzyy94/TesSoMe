@@ -16,15 +16,18 @@ class TessoApiManager: NSObject {
 		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer = AFHTTPResponseSerializer()
-		req.POST("https://tesso.pw/users/sign_in", parameters: [ "data[User][username]":userId, "data[User][password]":password], success: {
-			res, data in
-			if res.response!.URL == NSURL(string: "https://tesso.pw/sns") && onSuccess != nil {
-				onSuccess()
-			} else if onFailure != nil {
-				let err = NSError()
-				onFailure(err)
+		req.POST("https://tesso.pw/users/sign_in", parameters: ["data[User][username]": userId, "data[User][password]": password], success:
+			{
+				res, data in
+				if res.response!.URL == NSURL(string: "https://tesso.pw/sns") && onSuccess != nil {
+					onSuccess()
+				} else if onFailure != nil {
+					let err = NSError()
+					onFailure(err)
+				}
 			}
-			}, failure: {
+			, failure:
+			{
 				res, err in
 				if onFailure != nil {
 					onFailure(err)
@@ -35,13 +38,14 @@ class TessoApiManager: NSObject {
 	func signOut(onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		var url = NSURL(string: "https://tesso.pw/users/sign_out")
 		var req = NSMutableURLRequest(URL: url)
-		NSURLConnection.sendAsynchronousRequest(req, queue: NSOperationQueue.mainQueue(), completionHandler: {
-		res, data, err in
-			if err != nil && onFailure != nil {
-				onFailure(err)
-			} else if onSuccess != nil {
-				onSuccess()
-			}
+		NSURLConnection.sendAsynchronousRequest(req, queue: NSOperationQueue.mainQueue(), completionHandler:
+			{
+				res, data, err in
+				if err != nil && onFailure != nil {
+					onFailure(err)
+				} else if onSuccess != nil {
+					onSuccess()
+				}
 		})
 	}
 	
@@ -80,12 +84,15 @@ class TessoApiManager: NSObject {
 		if type != nil {
 			param.updateValue(type!, forKey: "type")
 		}
-		req.GET("\(apiEndPoint)/get", parameters: param, success: {
-			res, data in
-			self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
-			}, failure: {
-			res, err in
-			onFailure(err)
+		req.GET("\(apiEndPoint)/get", parameters: param, success:
+			{
+				res, data in
+				self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
+			}
+			, failure:
+			{
+				res, err in
+				onFailure(err)
 		})
 	}
 
