@@ -20,7 +20,7 @@ class TesSoMeTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let apiExpectation = self.expectationWithDescription("api signin")
         
-        apiMgr.signIn(self.userId, password: self.password, onSuccess: {
+        apiMgr.signIn(userId: self.userId, password: self.password, onSuccess: {
             XCTAssert(true, "Pass")
             apiExpectation.fulfill()
             }, onFailure: { err in
@@ -33,7 +33,7 @@ class TesSoMeTests: XCTestCase {
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        apiMgr.signOut(nil, onFailure: nil)
+        apiMgr.signOut(onSuccess: nil, onFailure: nil)
         super.tearDown()
     }
     
@@ -45,7 +45,7 @@ class TesSoMeTests: XCTestCase {
     func testGetTimeline() {
         let apiExpectation = self.expectationWithDescription("api signin")
         
-        apiMgr.getData(1, topicid: 1, maxid: nil, sinceid: nil, tag: nil, username: nil, type: nil, onSuccess:
+        apiMgr.getData(mode: 1, topicid: 1, onSuccess:
             {res, data in
                 XCTAssert(true, "Pass")
                 apiExpectation.fulfill()

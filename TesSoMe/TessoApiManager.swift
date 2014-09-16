@@ -11,7 +11,7 @@ import UIKit
 class TessoApiManager: NSObject {
     let apiEndPoint = "https://tesso.pw/sns/api"
     
-    func signIn(userId: String, password: String, onSuccess: (() -> Void)!, onFailure: ((NSError) -> Void)!) {
+    func signIn(#userId: String, password: String, onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
         var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         sessionConfig.HTTPShouldSetCookies = true
         let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
@@ -32,7 +32,7 @@ class TessoApiManager: NSObject {
         })
     }
     
-    func signOut(onSuccess: (() -> Void)!, onFailure: ((NSError) -> Void)!) {
+    func signOut(onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
         var url = NSURL(string: "https://tesso.pw/users/sign_out")
         var req = NSMutableURLRequest(URL: url)
         NSURLConnection.sendAsynchronousRequest(req, queue: NSOperationQueue.mainQueue(), completionHandler: {
@@ -45,7 +45,7 @@ class TessoApiManager: NSObject {
         })
     }
     
-    func getData(mode: Int, topicid: Int?, maxid: Int?, sinceid: Int?, tag: String?, username: String?, type: String?, onSuccess: ((NSURLSessionDataTask!, AnyObject!) -> Void)!, onFailure: ((NSURLSessionDataTask!, NSError!) -> Void)!) {
+    func getData(#mode: Int, topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: String? = nil, onSuccess: ((NSURLSessionDataTask!, AnyObject!) -> Void)! = nil, onFailure: ((NSURLSessionDataTask!, NSError!) -> Void)! = nil) {
         var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         sessionConfig.HTTPShouldSetCookies = true
         let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
