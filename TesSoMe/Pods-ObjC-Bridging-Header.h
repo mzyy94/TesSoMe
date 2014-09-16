@@ -10,6 +10,7 @@
 #define TesSoMe_Pods_ObjC_Bridging_Header_h
 
 #import <AFNetworking/AFNetworking.h>
+#import <REFrostedViewController/REFrostedViewController.h>
 
 
 #endif
