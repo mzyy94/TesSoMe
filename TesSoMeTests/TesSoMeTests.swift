@@ -96,6 +96,42 @@ class TesSoMeTests: XCTestCase {
 		})
 	}
 	
+	func testGetProfile() {
+		let apiExpectation = self.expectationWithDescription("api getProfile")
+		
+		apiMgr.getProfile(username: "eula", onSuccess:
+			{
+				data in
+				XCTAssert(true, "Pass")
+				apiExpectation.fulfill()
+			}
+			, onFailure:
+			{
+				err in
+				XCTAssert(false, "Fail")
+		})
+		self.waitForExpectationsWithTimeout(3.0, handler: {err in
+		})
+	}
+	
+	func testGetSearchResult() {
+		let apiExpectation = self.expectationWithDescription("api getSearchResult")
+		
+		apiMgr.getSearchResult(username: "eula", onSuccess:
+			{
+				data in
+				XCTAssert(true, "Pass")
+				apiExpectation.fulfill()
+			}
+			, onFailure:
+			{
+				err in
+				XCTAssert(false, "Fail")
+		})
+		self.waitForExpectationsWithTimeout(3.0, handler: {err in
+		})
+	}
+	
 	func testPerformanceExample() {
 		// This is an example of a performance test case.
 		self.measureBlock() {

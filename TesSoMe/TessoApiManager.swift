@@ -59,7 +59,7 @@ class TessoApiManager: NSObject {
 		}
 	}
 	
-	func getData(#mode: Int, topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: String? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+	func getData(#mode: Int, topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: Int? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
 		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
@@ -108,6 +108,14 @@ class TessoApiManager: NSObject {
     
 	func getClass(onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		self.getData(mode: 3, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func getProfile(#username: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.getData(mode: 4, tag: "1", type: 1, username: username, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func getSearchResult(topicid: Int? = 1, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: Int? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.getData(mode: 5, maxid: maxid, sinceid: sinceid, tag: tag, username: username, type: type, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
 }
