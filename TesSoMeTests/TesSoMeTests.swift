@@ -152,7 +152,7 @@ class TesSoMeTests: XCTestCase {
 	
 	func testAddTitle() {
 		let apiExpectation = self.expectationWithDescription("api addTitle")
-		apiMgr.addTitle(username: "eula", title: "神の子", onSuccess:
+		apiMgr.addTitle(username: "gao", title: "GAO!!", onSuccess:
 			{
 				data in
 				XCTAssert(true, "Pass")
