@@ -10,6 +10,8 @@ import UIKit
 
 class TimelineViewController: UITableViewController {
 
+	var messages: [TesSoMeData] = []
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -38,14 +40,15 @@ class TimelineViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of Messages.
-        return 0
+        return messages.count
     }
 
 	
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
+		let data = messages[indexPath.row]
         // Configure the cell...
-
+		data.setDataToCell(&cell)
         return cell
     }
 	
