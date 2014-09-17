@@ -33,7 +33,7 @@ class TesSoMeData: NSObject {
 	};
 
 	
-	class func dataFromResponce(#responce: NSDictionary) -> NSArray {
+	class func dataFromResponce(responce: NSDictionary) -> NSArray {
 		let data: NSArray = responce["data"] as NSArray
 		return data
 	}
@@ -90,7 +90,9 @@ class TesSoMeData: NSObject {
 			let filedata = converter.decodeXML(data["data"] as String).componentsSeparatedByString(",")
 			fileName = filedata[1]
 			fileSize = filedata[2].toInt()
-			message = filedata[3]
+			if filedata.count > 3 {
+				message = filedata[3]
+			}
 			fileURL = NSURL(string: "https://tesso.pw/files/snsuploads/\(filedata[0])/\(fileName!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
 		}
 		getReplyUsernames()
