@@ -14,7 +14,9 @@ class TopicMenuViewController: UITableViewController {
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var lebelLabel: UILabel!
-    
+
+	var topics: [NSDictionary] = []
+	
     @IBAction func userIconBtnTapped(sender: AnyObject) {
 		showSettingView()
     }
@@ -60,16 +62,25 @@ class TopicMenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // Return the number of topics
-        return 0
+        return topics.count
     }
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 68.0
+	}
 
-	/*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TopicCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TopicCell", forIndexPath: indexPath) as TopicCell
         // Edit cell
+		let topic = topics[indexPath.row]
+		cell.topicTitleLabel.text = (topic["title"] as String)
+		cell.latestMessageLabel.text = (topic["message"] as String)
+		cell.userIcon.image = UIImage(data: NSData(contentsOfURL: NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png")))
+		cell.topicNumLabel.text = String((topic["id"] as String).toInt()! + 99)
+		println(cell.topicNumLabel.text)
+		
         return cell
     }
-    */
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString("Topic", comment: "Topic")
