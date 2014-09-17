@@ -20,6 +20,11 @@ class TopicMenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		self.userIconBtn.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
+		self.userIconBtn.layer.borderWidth = 1.0
+		self.userIconBtn.layer.cornerRadius = 4.0
+		self.userIconBtn.clipsToBounds = true
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
