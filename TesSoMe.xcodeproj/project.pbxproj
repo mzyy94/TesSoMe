@@ -13,6 +13,7 @@
 		9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */; };
 		9E8FFF2619C96CD500E4459A /* TimelineMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */; };
 		9E8FFF2819C97C0A00E4459A /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2719C97C0A00E4459A /* TimelineViewController.swift */; };
+		9E8FFF2A19C9868200E4459A /* TesSoMeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2919C9868200E4459A /* TesSoMeData.swift */; };
 		9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E95321919C348A80009B9EA /* RootViewController.swift */; };
 		9E9BF75619C37C9A001290D7 /* TessoApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA0E619C36A6D00E209C3 /* TessoApiManager.swift */; };
 		9E9FA0E719C36A6D00E209C3 /* TessoApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA0E619C36A6D00E209C3 /* TessoApiManager.swift */; };
@@ -47,6 +48,7 @@
 		9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineMessageCell.swift; sourceTree = "<group>"; };
 		9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineMessageCell.xib; sourceTree = "<group>"; };
 		9E8FFF2719C97C0A00E4459A /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		9E8FFF2919C9868200E4459A /* TesSoMeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TesSoMeData.swift; sourceTree = "<group>"; };
 		9E95321919C348A80009B9EA /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		9E9BF75419C37C2C001290D7 /* Pods-ObjC-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-ObjC-Bridging-Header.h"; sourceTree = "<group>"; };
 		9E9FA0E219C368C400E209C3 /* Pods-ObjC-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pods-ObjC-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				9E9FA0E619C36A6D00E209C3 /* TessoApiManager.swift */,
 				9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */,
 				9E8FFF2119C95E4900E4459A /* SettingViewController.swift */,
+				9E8FFF2919C9868200E4459A /* TesSoMeData.swift */,
 				9EEF01A919C93E4B005CCF7C /* Settings.storyboard */,
 				9E8FFF2719C97C0A00E4459A /* TimelineViewController.swift */,
 				9E95321919C348A80009B9EA /* RootViewController.swift */,
@@ -333,6 +336,7 @@
 			files = (
 				9E8FFF2219C95E4900E4459A /* SettingViewController.swift in Sources */,
 				9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */,
+				9E8FFF2A19C9868200E4459A /* TesSoMeData.swift in Sources */,
 				9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */,
 				9E9FA0E719C36A6D00E209C3 /* TessoApiManager.swift in Sources */,
 				9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */,
