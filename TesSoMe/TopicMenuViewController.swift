@@ -16,8 +16,20 @@ class TopicMenuViewController: UITableViewController {
     @IBOutlet weak var lebelLabel: UILabel!
     
     @IBAction func userIconBtnTapped(sender: AnyObject) {
+		showSettingView()
     }
     
+	func showSettingView() {
+		let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+		var settingViewController: UINavigationController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigation") as UINavigationController
+		settingViewController.viewControllers.first?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: Selector("closeSettingView"))
+		self.presentViewController(settingViewController, animated: true, completion: nil)
+	}
+	
+	func closeSettingView() {
+		self.presentedViewController!.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		

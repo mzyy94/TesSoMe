@@ -16,6 +16,7 @@
 		9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD319C3069F00CB92B2 /* Images.xcassets */; };
 		9EB8ADD719C3069F00CB92B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD519C3069F00CB92B2 /* LaunchScreen.xib */; };
 		9EB8ADE319C3069F00CB92B2 /* TesSoMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */; };
+		9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EEF01A919C93E4B005CCF7C /* Settings.storyboard */; };
 		ABDAF7CC514440A3A2DE9A54 /* libPods-TesSoMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */; };
 		F97CC65721D5414AAB4EC912 /* libPods-TesSoMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 630EA8FBBA01483BA749F9DB /* libPods-TesSoMeTests.a */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		9EB8ADDC19C3069F00CB92B2 /* TesSoMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesSoMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EB8ADE119C3069F00CB92B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesSoMeTests.swift; sourceTree = "<group>"; };
+		9EEF01A919C93E4B005CCF7C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				9E9FA0E219C368C400E209C3 /* Pods-ObjC-Bridging-Header.h */,
 				9EB8ADD019C3069F00CB92B2 /* Main.storyboard */,
 				9E9FA0E619C36A6D00E209C3 /* TessoApiManager.swift */,
+				9EEF01A919C93E4B005CCF7C /* Settings.storyboard */,
 				9E95321919C348A80009B9EA /* RootViewController.swift */,
 				9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */,
 				9EB8ADD319C3069F00CB92B2 /* Images.xcassets */,
@@ -231,6 +234,7 @@
 				9EB8ADD219C3069F00CB92B2 /* Main.storyboard in Resources */,
 				9EB8ADD719C3069F00CB92B2 /* LaunchScreen.xib in Resources */,
 				9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */,
+				9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
