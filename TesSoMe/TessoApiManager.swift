@@ -39,7 +39,8 @@ class TessoApiManager: NSObject {
 						onSuccess()
 					}
 				} else if onFailure != nil {
-					let err = NSError()
+					let errorDetails = NSDictionary.dictionaryWithObjects([NSLocalizedString("Your username or password was incorrect.", comment: "Your username or password was incorrect.")], forKeys: [NSLocalizedDescriptionKey], count: 1)
+					let err = NSError(domain: "Sign in", code: 401, userInfo: errorDetails)
 					onFailure(err)
 				}
 			}
@@ -75,7 +76,9 @@ class TessoApiManager: NSObject {
 				onSuccess(object)
 			}
 		} else if onFailure != nil {
-			let err = NSError()
+			let errMsg = ((object["data"] as NSArray)[0] as NSDictionary)["data"] as String
+			let errorDetails = NSDictionary.dictionaryWithObjects([errMsg], forKeys: [NSLocalizedDescriptionKey], count: 1)
+			let err = NSError(domain: "API", code: 400, userInfo: errorDetails)
 			onFailure(err)
 		}
 	}
@@ -140,7 +143,8 @@ class TessoApiManager: NSObject {
 		if file != nil {
 			if file!["data"] == nil || file!["name"] == nil || file!["mimeType"] == nil {
 				if onFailure != nil {
-					let err = NSError()
+					let errorDetails = NSDictionary.dictionaryWithObjects([NSLocalizedString("Attached file is broken", comment: "Attached file is broken")], forKeys: [NSLocalizedDescriptionKey], count: 1)
+					let err = NSError(domain: "File attachment", code: 591, userInfo: errorDetails)
 					onFailure(err)
 				}
 				return
