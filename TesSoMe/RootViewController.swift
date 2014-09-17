@@ -9,13 +9,27 @@
 import UIKit
 
 class RootViewController: UITabBarController {
+	let app = UIApplication.sharedApplication()
+	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+	let ud = NSUserDefaults()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		// Do any additional setup after loading the view.
+		let chooseTopicBtn = UIBarButtonItem(image: UIImage(named: "menu_icon"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showTopicMenu"))
+
+		for var i = 0; i < self.viewControllers?.count; i++ {
+			let navigationController: UINavigationController = self.viewControllers?[i] as UINavigationController
+			let topViewController: UIViewController = navigationController.viewControllers?[0] as UIViewController
+			topViewController.navigationItem.leftBarButtonItem = chooseTopicBtn
+		}
 	}
 
+	func showTopicMenu() {
+		appDelegate.frostedViewController!.presentMenuViewController()
+	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.

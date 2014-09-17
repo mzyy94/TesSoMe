@@ -7,15 +7,30 @@
 //
 
 import UIKit
+import Accelerate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+    var frostedViewController: REFrostedViewController?
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let topicMenuView: UITableViewController = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
+		let rootTabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
+		
+		frostedViewController = REFrostedViewController(contentViewController: rootTabBarController, menuViewController: topicMenuView)
+		frostedViewController!.direction = .Left
+		let windowFrame = self.window?.frame
+		frostedViewController!.menuViewSize = CGSizeMake((windowFrame?.size.width as CGFloat?)! * 0.7, (windowFrame?.size.height as CGFloat?)!)
+		frostedViewController!.liveBlur = true
+		frostedViewController!.menuViewController.view.backgroundColor = UIColor.clearColor()
+		
+		self.window?.rootViewController = frostedViewController
+
 		return true
 	}
 
