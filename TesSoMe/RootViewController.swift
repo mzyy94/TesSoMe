@@ -12,6 +12,7 @@ class RootViewController: UITabBarController {
 	let app = UIApplication.sharedApplication()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	let ud = NSUserDefaults()
+	let apiManager = TessoApiManager()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -23,12 +24,32 @@ class RootViewController: UITabBarController {
 			let topViewController: UIViewController = viewController.viewControllers?[0] as UIViewController
 			topViewController.navigationItem.leftBarButtonItem = chooseTopicBtn
 		}
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+			self.getSelfInfo()
+		})
 	}
 
 	func showTopicMenu() {
 		appDelegate.frostedViewController!.presentMenuViewController()
 	}
 	
+	func getSelfInfo() {
+		if appDelegate.usernameOfTesSoMe != nil {
+			let topicViewController = self.appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
+			topicViewController.userIconBtn.setImage(UIImage(data: NSData(contentsOfURL: NSURL(string: "https://tesso.pw/img/icons/" + appDelegate.usernameOfTesSoMe! + ".png"))), forState: .Normal)
+			
+			apiManager.getProfile(username: appDelegate.usernameOfTesSoMe!, withTimeline: false, onSuccess:
+				{ data in
+					let userinfo = (TesSoMeData.dataFromResponce(data) as NSArray)[0] as NSDictionary
+					topicViewController.usernameLabel.text = "@" + (userinfo["username"] as String)
+					topicViewController.nicknameLabel.text = userinfo["nickname"] as? String
+					topicViewController.lebelLabel.text = "Lv. " + (userinfo["lv"] as String)
+				}
+				, onFailure: nil
+			)
+		}
+	}
+
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
