@@ -211,8 +211,8 @@ class TessoApiManager: NSObject {
 		self.getData(mode: .Class, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
-	func getProfile(#username: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		self.getData(mode: .Profile, tag: "1", type: 1, username: username, onSuccess: onSuccess, onFailure: onFailure)
+	func getProfile(#username: String, withTitle: Bool = true, withTimeline: Bool = true, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.getData(mode: .Profile, tag: String(withTitle.hashValue), type: withTimeline.hashValue, username: username, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
 	func getSearchResult(topicid: Int? = 1, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: TesSoMeSearchType = TesSoMeSearchType.All, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
