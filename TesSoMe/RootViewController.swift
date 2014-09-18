@@ -41,8 +41,8 @@ class RootViewController: UITabBarController {
 	func getSelfInfo() {
 		if appDelegate.usernameOfTesSoMe != nil {
 			let topicViewController = self.appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
-			topicViewController.userIconBtn.setImage(UIImage(data: NSData(contentsOfURL: NSURL(string: "https://tesso.pw/img/icons/" + appDelegate.usernameOfTesSoMe! + ".png"))), forState: .Normal)
-			
+			topicViewController.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + appDelegate.usernameOfTesSoMe! + ".png"), forState: .Normal)
+
 			apiManager.getProfile(username: appDelegate.usernameOfTesSoMe!, withTimeline: false, onSuccess:
 				{ data in
 					let userinfo = (TesSoMeData.dataFromResponce(data) as NSArray)[0] as NSDictionary

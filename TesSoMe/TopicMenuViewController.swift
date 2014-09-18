@@ -70,7 +70,8 @@ class TopicMenuViewController: UITableViewController {
 		let topic = topics[indexPath.row]
 		cell.topicTitleLabel.text = (topic["title"] as String)
 		cell.latestMessageLabel.text = (topic["message"] as String)
-		cell.userIcon.image = UIImage(data: NSData(contentsOfURL: NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png")))
+//		cell.userIcon.image = UIImage(data: NSData(contentsOfURL: NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png")))
+		cell.userIcon.sd_setImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png"))
 		cell.topicNumLabel.text = String((topic["id"] as String).toInt()! + 99)
 		println(cell.topicNumLabel.text)
 		

@@ -167,7 +167,7 @@ class TesSoMeData: NSObject {
 		cell.nicknameLabel.text = nickname
 		cell.timeStampLabel.text = NSLocalizedString("0 s", comment: "Initial seconds")
 		cell.messageTextView.attributedText = generateAttributedMessage()
-		cell.userIconBtn.setImage(UIImage(data: NSData(contentsOfURL: NSURL(string: "https://tesso.pw/img/icons/" + username + ".png")), scale: 0.5), forState: .Normal)
+		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + username + ".png"), forState: .Normal)
 	}
 	
 }
