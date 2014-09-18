@@ -68,7 +68,11 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 			self.timeStampLabel.text = dateFormatter.stringFromDate(postedDate!)
 			return
 		}
-		self.timeStampLabel.text = dateFormatter.stringFromDate(timeDate)
+		let timeZone = NSTimeZone.systemTimeZone()
+		let timeDiffSeconds = timeZone.secondsFromGMTForDate(timeDate)
+		let gmtTimeDate = timeDate.dateByAddingTimeInterval(-NSTimeInterval(timeDiffSeconds))
+
+		self.timeStampLabel.text = dateFormatter.stringFromDate(gmtTimeDate)
     }
 	
 	func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {

@@ -24,7 +24,7 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <view contentMode="scaleToFill" verticalHuggingPriority="300" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-0x-A25">
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-0x-A25">
                         <rect key="frame" x="80" y="9" width="267" height="21"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NICKNAME_HERE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f06-SG-QJZ">
@@ -51,7 +51,7 @@
                             <constraint firstItem="ZDb-60-qGD" firstAttribute="top" secondItem="yGv-0x-A25" secondAttribute="top" constant="1" id="xq7-EG-qJY"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="150" misplaced="YES" text="0 Sec" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="82" translatesAutoresizingMaskIntoConstraints="NO" id="VyJ-Cw-euy">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" misplaced="YES" text="0 Sec" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="82" translatesAutoresizingMaskIntoConstraints="NO" id="VyJ-Cw-euy">
                         <rect key="frame" x="355" y="10" width="82" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="9O3-fh-Gjd"/>
