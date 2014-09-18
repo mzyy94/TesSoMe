@@ -24,6 +24,9 @@ class RootViewController: UITabBarController {
 			let topViewController: UIViewController = viewController.viewControllers?[0] as UIViewController
 			topViewController.navigationItem.leftBarButtonItem = chooseTopicBtn
 		}
+		
+		self.tabBar.tintColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 			self.getSelfInfo()
 			self.getTopic()
