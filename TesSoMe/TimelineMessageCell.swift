@@ -60,9 +60,9 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 		case 0..<60:
 			dateFormatter.dateFormat = "s's'"
 		case 60..<60*60:
-			dateFormatter.dateFormat = "m'm 's's'"
+			dateFormatter.dateFormat = "m'm 'ss's'"
 		case 60*60..<60*60*12:
-			dateFormatter.dateFormat = "h'h 'm'm 's's'"
+			dateFormatter.dateFormat = "h'h 'mm'm 'ss's'"
 		default:
 			dateFormatter.dateFormat = "MM/dd HH:mm:ss"
 			self.timeStampLabel.text = dateFormatter.stringFromDate(postedDate!)
