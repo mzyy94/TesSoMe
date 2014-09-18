@@ -9,8 +9,13 @@
 import UIKit
 
 class TimelineViewController: UITableViewController {
+	let app = UIApplication.sharedApplication()
+	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+	let ud = NSUserDefaults()
+	let apiManager = TessoApiManager()
 
 	var messages: [TesSoMeData] = []
+	var latestMessageId = 0
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +23,12 @@ class TimelineViewController: UITableViewController {
 		let nib = UINib(nibName: "TimelineMessageCell", bundle: nil)
 		self.tableView.registerNib(nib, forCellReuseIdentifier: "MessageCell")
 		
+		self.tableView.estimatedRowHeight = 90.5
+		self.tableView.rowHeight = UITableViewAutomaticDimension
+		
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+			self.getTimeline()
+		})
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -52,6 +63,81 @@ class TimelineViewController: UITableViewController {
         return cell
     }
 
+	func getTimeline() {
+		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
+		apiManager.getTimeline(topicid: topic, onSuccess:
+			{ data in
+
+				let timeline = TesSoMeData.tlFromResponce(data)
+				for post in timeline as [NSDictionary] {
+					self.messages.append(TesSoMeData(data: post))
+				}
+				self.latestMessageId = self.messages.first!.statusid
+				self.tableView.reloadData()
+				
+				let topCell: UITableViewCell? = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as UITableViewCell?
+
+				let updateTimelineFetchTimer = NSTimer(timeInterval:Double(5.0), target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
+				NSRunLoop.currentRunLoop().addTimer(updateTimelineFetchTimer, forMode: NSRunLoopCommonModes)
+			}
+			, onFailure: nil
+		)
+	}
+	
+	func updateTimeline() {
+		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
+		apiManager.getTimeline(topicid: topic, sinceid: latestMessageId, onSuccess:
+			{ data in
+				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+					let timeline = TesSoMeData.tlFromResponce(data)
+					if timeline.count == 0 {
+						return
+					}
+					
+					var path:[NSIndexPath] = []
+					
+					for (i, post) in enumerate((timeline as [NSDictionary]).reverse()) {
+						self.messages.insert(TesSoMeData(data: post), atIndex: 0)
+						path.append(NSIndexPath(forRow: i, inSection: 0))
+					}
+					self.latestMessageId = self.messages.first!.statusid
+					
+					let topOffset = self.tableView.contentOffset.y
+					let autoScroll = !(topOffset > -40.0) // more
+					
+					dispatch_sync(dispatch_get_main_queue(), {
+						// self.tableview.beginUpdates()
+						
+						UIView.setAnimationsEnabled(false)
+						self.tableView.insertRowsAtIndexPaths(path, withRowAnimation: .None)
+						
+						if autoScroll {
+							var offsetDiff = 0.0 as CGFloat
+							
+							for p in path {
+								let cell: UITableViewCell? = self.tableView.cellForRowAtIndexPath(p) as UITableViewCell?
+								offsetDiff += cell!.frame.height
+							}
+							
+							self.tableView.setContentOffset(CGPointMake(0.0, topOffset + offsetDiff), animated: false)
+							UIView.setAnimationsEnabled(true)
+							self.tableView.setContentOffset(CGPointMake(0.0, -64.0), animated: true)
+						} else {
+							self.navigationController!.tabBarItem.title = "●"
+							UIView.setAnimationsEnabled(true)
+						}
+
+						// self.tableview.endUpdates()
+					})
+				})
+			}
+			, onFailure: nil
+		)
+	}
+	
+	
+	
+	
     /*
     // MARK: - Navigation
 

@@ -16,6 +16,7 @@ class TopicMenuViewController: UITableViewController {
     @IBOutlet weak var lebelLabel: UILabel!
 
 	var topics: [NSDictionary] = []
+	var currentTopic = 1
 	
     @IBAction func userIconBtnTapped(sender: AnyObject) {
 		showSettingView()
