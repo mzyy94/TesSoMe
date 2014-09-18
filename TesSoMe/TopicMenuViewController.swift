@@ -71,16 +71,24 @@ class TopicMenuViewController: UITableViewController {
 		let topic = topics[indexPath.row]
 		cell.topicTitleLabel.text = (topic["title"] as String)
 		cell.latestMessageLabel.text = (topic["message"] as String)
-//		cell.userIcon.image = UIImage(data: NSData(contentsOfURL: NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png")))
 		cell.userIcon.sd_setImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png"))
 		cell.topicNumLabel.text = String((topic["id"] as String).toInt()! + 99)
-		println(cell.topicNumLabel.text)
-		
+		if currentTopic == (topic["id"] as String).toInt()! {
+			cell.backgroundColor =  UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 0.2)
+		} else {
+			cell.backgroundColor = UIColor.clearColor()
+		}
         return cell
     }
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return NSLocalizedString("Topic", comment: "Topic")
+	}
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		let cell = tableView.cellForRowAtIndexPath(indexPath) as TopicCell
+		currentTopic = cell.topicNumLabel.text!.toInt()! - 99
+		tableView.reloadData()
 	}
 
 }

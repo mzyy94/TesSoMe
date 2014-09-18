@@ -338,7 +338,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopicCell" rowHeight="68" id="icM-Ly-cjq" customClass="TopicCell" customModule="TesSoMe" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TopicCell" rowHeight="68" id="icM-Ly-cjq" customClass="TopicCell" customModule="TesSoMe" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="icM-Ly-cjq" id="f9f-U6-Ou5">
                                     <autoresizingMask key="autoresizingMask"/>

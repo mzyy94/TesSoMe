@@ -82,10 +82,6 @@ class RootViewController: UITabBarController {
 				topicViewController.topics = topicsWithMsgs
 				topicViewController.tableView.reloadData()
 				
-				if selectInitialTopic {
-					topicViewController.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.selected = true
-				}
-				
 			}
 			, onFailure: nil
 		)
