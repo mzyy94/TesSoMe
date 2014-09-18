@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
     var frostedViewController: REFrostedViewController?
+	var usernameOfTesSoMe: String? = nil
+	var passwordOfTesSoMe: String? = nil
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -30,6 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		frostedViewController!.menuViewController.view.backgroundColor = UIColor.clearColor()
 		
 		self.window?.rootViewController = frostedViewController
+		
+		let serviceName = "TesSoMe"
+		let accounts = SSKeychain.accountsForService(serviceName)
+		if accounts != nil {
+			let account = accounts.last as? NSDictionary
+			usernameOfTesSoMe = account!["acct"] as? String
+			passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
+		}
 
 		return true
 	}

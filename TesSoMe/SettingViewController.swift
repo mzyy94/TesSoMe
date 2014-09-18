@@ -29,6 +29,10 @@ class SettingViewController: UITableViewController {
 				}
 				alertController.addAction(okAction)
 
+				// save password
+                let serviceName = "TesSoMe"
+				SSKeychain.setPassword(self.passwordField.text!, forService: serviceName, account: self.userIdField.text!)
+				
                 // close keyboard
                 self.userIdField.resignFirstResponder()
                 self.passwordField.resignFirstResponder()
@@ -51,6 +55,9 @@ class SettingViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.userIdField.text = appDelegate.usernameOfTesSoMe
+        self.passwordField.text = appDelegate.passwordOfTesSoMe
+		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
