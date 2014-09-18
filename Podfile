@@ -5,6 +5,7 @@ target "TesSoMe" do
 pod 'AFNetworking'
 pod 'REFrostedViewController'
 pod 'SSKeychain'
+pod 'SDWebImage'
 
 end
 

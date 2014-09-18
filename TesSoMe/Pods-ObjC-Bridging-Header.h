@@ -12,6 +12,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import <REFrostedViewController/REFrostedViewController.h>
 #import <SSKeychain/SSKeychain.h>
+#import <SDWebImage/UIButton+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 #endif
