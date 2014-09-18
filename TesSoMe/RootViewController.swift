@@ -26,6 +26,7 @@ class RootViewController: UITabBarController {
 		}
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 			self.getSelfInfo()
+			self.getTopic()
 		})
 	}
 
@@ -50,6 +51,43 @@ class RootViewController: UITabBarController {
 		}
 	}
 
+	func getTopic() {
+		apiManager.getTopic(onSuccess:
+			{ data in
+				let topicViewController = self.appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
+				let topics = TesSoMeData.dataFromResponce(data)
+				let latestMsgs = TesSoMeData.tlFromResponce(data)
+				var topicsWithMsgs:[NSMutableDictionary] = []
+				
+				for (index, topic) in enumerate(topics as [NSDictionary]) {
+					let mutableDic = NSMutableDictionary()
+					let latestMsg = latestMsgs[index] as NSDictionary
+					let converter = HTMLEntityConverter()
+					mutableDic.setValuesForKeysWithDictionary(topic)
+					mutableDic.setValue(mutableDic["data"] as String, forKeyPath: "title")
+					mutableDic.setValuesForKeysWithDictionary(latestMsg)
+					mutableDic.setValue(converter.decodeXML(mutableDic["data"] as String), forKeyPath: "message")
+					
+					topicsWithMsgs.append(mutableDic)
+				}
+				
+				var selectInitialTopic = false
+				if topicViewController.topics.count == 0 {
+					selectInitialTopic = true
+				}
+				
+				topicViewController.topics = topicsWithMsgs
+				topicViewController.tableView.reloadData()
+				
+				if selectInitialTopic {
+					topicViewController.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.selected = true
+				}
+				
+			}
+			, onFailure: nil
+		)
+	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
