@@ -9,6 +9,8 @@
 import UIKit
 
 class TopicMenuViewController: UITableViewController {
+	let apiManager = TessoApiManager()
+	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
     @IBOutlet weak var userIconBtn: UIButton!
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -40,7 +42,12 @@ class TopicMenuViewController: UITableViewController {
 		self.userIconBtn.layer.borderWidth = 1.0
 		self.userIconBtn.layer.cornerRadius = 4.0
 		self.userIconBtn.clipsToBounds = true
-
+		
+		
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+			self.getSelfInfo()
+			self.getTopic()
+		})
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,6 +72,56 @@ class TopicMenuViewController: UITableViewController {
 		return 68.0
 	}
 
+	func getSelfInfo() {
+		if appDelegate.usernameOfTesSoMe != nil {
+			let topicViewController = self.appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
+			topicViewController.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + appDelegate.usernameOfTesSoMe! + ".png"), forState: .Normal)
+			
+			apiManager.getProfile(username: appDelegate.usernameOfTesSoMe!, withTimeline: false, onSuccess:
+				{ data in
+					let userinfo = (TesSoMeData.dataFromResponce(data) as NSArray)[0] as NSDictionary
+					topicViewController.usernameLabel.text = "@" + (userinfo["username"] as String)
+					topicViewController.nicknameLabel.text = userinfo["nickname"] as? String
+					topicViewController.lebelLabel.text = "Lv. " + (userinfo["lv"] as String)
+				}
+				, onFailure: nil
+			)
+		}
+	}
+	
+	func getTopic() {
+		apiManager.getTopic(onSuccess:
+			{ data in
+				let topicViewController = self.appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
+				let topics = TesSoMeData.dataFromResponce(data)
+				let latestMsgs = TesSoMeData.tlFromResponce(data)
+				var topicsWithMsgs:[NSMutableDictionary] = []
+				
+				for (index, topic) in enumerate(topics as [NSDictionary]) {
+					let mutableDic = NSMutableDictionary()
+					let latestMsg = latestMsgs[index] as NSDictionary
+					let converter = HTMLEntityConverter()
+					mutableDic.setValuesForKeysWithDictionary(topic)
+					mutableDic.setValue(mutableDic["data"] as String, forKeyPath: "title")
+					mutableDic.setValuesForKeysWithDictionary(latestMsg)
+					mutableDic.setValue(converter.decodeXML(mutableDic["data"] as String), forKeyPath: "message")
+					
+					topicsWithMsgs.append(mutableDic)
+				}
+				
+				var selectInitialTopic = false
+				if topicViewController.topics.count == 0 {
+					selectInitialTopic = true
+				}
+				
+				topicViewController.topics = topicsWithMsgs
+				topicViewController.tableView.reloadData()
+				
+			}
+			, onFailure: nil
+		)
+	}
+	
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TopicCell", forIndexPath: indexPath) as TopicCell
         // Edit cell
