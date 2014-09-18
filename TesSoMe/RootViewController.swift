@@ -19,9 +19,11 @@ class RootViewController: UITabBarController {
 		// Do any additional setup after loading the view.
 		let chooseTopicBtn = UIBarButtonItem(image: UIImage(named: "menu_icon"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showTopicMenu"))
 
+		let unreadMessageLabelAppearance = [NSForegroundColorAttributeName: UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)]
 		for viewController in self.viewControllers! as [UINavigationController] {
 			let topViewController: UIViewController = viewController.viewControllers?[0] as UIViewController
 			topViewController.navigationItem.leftBarButtonItem = chooseTopicBtn
+			viewController.tabBarItem.setTitleTextAttributes(unreadMessageLabelAppearance, forState: .Normal)
 		}
 		
 		self.tabBar.tintColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
