@@ -14,13 +14,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-RV-5Ir">
-                        <rect key="frame" x="52" y="50" width="32" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="32" id="O9L-KU-81I"/>
-                            <constraint firstAttribute="width" constant="32" id="yMS-mn-7m1"/>
-                        </constraints>
-                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fME-jh-zLc">
                         <rect key="frame" x="8" y="9" width="64" height="64"/>
                         <constraints>
@@ -85,6 +78,13 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TesSoMe_icon" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-RV-5Ir">
+                        <rect key="frame" x="60" y="58" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="O9L-KU-81I"/>
+                            <constraint firstAttribute="width" constant="24" id="yMS-mn-7m1"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="VyJ-Cw-euy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7y1-X2-c8h"/>
@@ -98,8 +98,8 @@
                     <constraint firstItem="1aH-AO-rl8" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="U1w-Ug-gUD"/>
                     <constraint firstItem="fME-jh-zLc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ba8-KA-jHr"/>
                     <constraint firstItem="VyJ-Cw-euy" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="jAC-Tk-chI"/>
-                    <constraint firstItem="NyX-RV-5Ir" firstAttribute="top" secondItem="yGv-0x-A25" secondAttribute="bottom" constant="19" id="pcm-Ks-SLc"/>
-                    <constraint firstItem="NyX-RV-5Ir" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="44" id="qhY-mb-7oj"/>
+                    <constraint firstItem="NyX-RV-5Ir" firstAttribute="top" secondItem="yGv-0x-A25" secondAttribute="bottom" constant="28" id="pcm-Ks-SLc"/>
+                    <constraint firstItem="NyX-RV-5Ir" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="52" id="qhY-mb-7oj"/>
                     <constraint firstItem="1aH-AO-rl8" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="rJe-Uv-5WR"/>
                     <constraint firstItem="yGv-0x-A25" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="wks-gL-9H5"/>
                 </constraints>
@@ -116,4 +116,7 @@
             <point key="canvasLocation" x="323.5" y="523.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="TesSoMe_icon" width="32" height="32"/>
+    </resources>
 </document>

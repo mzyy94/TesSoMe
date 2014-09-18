@@ -169,6 +169,7 @@ class TesSoMeData: NSObject {
 		cell.messageTextView.attributedText = generateAttributedMessage()
 		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + username + ".png"), forState: .Normal)
 		cell.postedDate = date
+		cell.viaTesSoMeBadge.hidden = !isViaTesSoMe()
 	}
 	
 }
