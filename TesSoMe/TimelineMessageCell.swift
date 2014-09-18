@@ -24,8 +24,8 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 	func rightButtons() -> NSArray {
 		let rightUtilityButtons = NSMutableArray()
         
-		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.lightGrayColor(), title: "More")
-		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Reply")
+		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.lightGrayColor(), icon: UIImage(named: "comment_icon"))
+		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.grayColor(), icon: UIImage(named: "reply_icon"))
 		
 		return rightUtilityButtons
 	}
