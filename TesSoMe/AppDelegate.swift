@@ -26,8 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		frostedViewController = REFrostedViewController(contentViewController: rootTabBarController, menuViewController: topicMenuView)
 		frostedViewController!.direction = .Left
-		let windowFrame = self.window?.frame
-		frostedViewController!.menuViewSize = CGSizeMake((windowFrame?.size.width as CGFloat?)! * 0.7, (windowFrame?.size.height as CGFloat?)!)
 		frostedViewController!.liveBlur = true
 		frostedViewController!.menuViewController.view.backgroundColor = UIColor.clearColor()
 		

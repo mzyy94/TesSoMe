@@ -18,6 +18,8 @@ class TopicCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+		
+		// Circle icon
 		self.userIcon.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
 		self.userIcon.layer.borderWidth = 1.0
 		self.userIcon.layer.cornerRadius = 32

@@ -22,6 +22,7 @@ class TimelineMessageCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
 		
+		// Round edge
 		self.userIconBtn.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
 		self.userIconBtn.layer.borderWidth = 1.0
 		self.userIconBtn.layer.cornerRadius = 4.0

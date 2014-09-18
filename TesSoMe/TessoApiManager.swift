@@ -35,21 +35,18 @@ class TessoApiManager: NSObject {
 			{
 				res, data in
 				if res.response!.URL == NSURL(string: "https://tesso.pw/sns") {
-					if onSuccess != nil {
-						onSuccess()
-					}
-				} else if onFailure != nil {
+					onSuccess?()
+				} else {
 					let errorDetails = NSDictionary.dictionaryWithObjects([NSLocalizedString("Your username or password was incorrect.", comment: "Your username or password was incorrect.")], forKeys: [NSLocalizedDescriptionKey], count: 1)
 					let err = NSError(domain: "Sign in", code: 401, userInfo: errorDetails)
-					onFailure(err)
+					onFailure?(err)
 				}
 			}
 			, failure:
 			{
 				res, err in
-				if onFailure != nil {
-					onFailure(err)
-				}
+				false // to avoid error
+				onFailure?(err)
 		})
 	}
 	
@@ -60,11 +57,9 @@ class TessoApiManager: NSObject {
 			{
 				res, data, err in
 				if err != nil {
-					if onFailure != nil {
-						onFailure(err)
-					}
-				} else if onSuccess != nil {
-					onSuccess()
+					onFailure?(err)
+				} else {
+					onSuccess?()
 				}
 		})
 	}
@@ -72,14 +67,12 @@ class TessoApiManager: NSObject {
 	func checkResponce(data: AnyObject!, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		let object = data as NSDictionary
 		if object["status"] as NSString == "success" {
-			if onSuccess != nil {
-				onSuccess(object)
-			}
-		} else if onFailure != nil {
+			onSuccess?(object)
+		} else {
 			let errMsg = ((object["data"] as NSArray)[0] as NSDictionary)["data"] as String
 			let errorDetails = NSDictionary.dictionaryWithObjects([errMsg], forKeys: [NSLocalizedDescriptionKey], count: 1)
 			let err = NSError(domain: "API", code: 400, userInfo: errorDetails)
-			onFailure(err)
+			onFailure?(err)
 		}
 	}
 	
@@ -116,9 +109,8 @@ class TessoApiManager: NSObject {
 			, failure:
 			{
 				res, err in
-				if onFailure != nil {
-					onFailure(err)
-				}
+				false // to avoid error
+				onFailure?(err)
 		})
 	}
 
@@ -142,11 +134,9 @@ class TessoApiManager: NSObject {
 		
 		if file != nil {
 			if file!["data"] == nil || file!["name"] == nil || file!["mimeType"] == nil {
-				if onFailure != nil {
-					let errorDetails = NSDictionary.dictionaryWithObjects([NSLocalizedString("Attached file is broken", comment: "Attached file is broken")], forKeys: [NSLocalizedDescriptionKey], count: 1)
-					let err = NSError(domain: "File attachment", code: 591, userInfo: errorDetails)
-					onFailure(err)
-				}
+				let errorDetails = NSDictionary.dictionaryWithObjects([NSLocalizedString("Attached file is broken", comment: "Attached file is broken")], forKeys: [NSLocalizedDescriptionKey], count: 1)
+				let err = NSError(domain: "File attachment", code: 591, userInfo: errorDetails)
+				onFailure?(err)
 				return
 			}
 			switch file!["mimeType"] as String {
@@ -164,9 +154,8 @@ class TessoApiManager: NSObject {
 					, failure:
 					{
 						res, err in
-						if onFailure != nil {
-							onFailure(err)
-						}
+						false // to avoid error
+						onFailure?(err)
 				})
 				
 				req.setTaskDidSendBodyDataBlock(onProgress)
@@ -185,9 +174,8 @@ class TessoApiManager: NSObject {
 					, failure:
 					{
 						res, err in
-						if onFailure != nil {
-							onFailure(err)
-						}
+						false // to avoid error
+						onFailure?(err)
 				})
 				
 				req.setTaskDidSendBodyDataBlock(onProgress)
@@ -204,9 +192,8 @@ class TessoApiManager: NSObject {
 				, failure:
 				{
 					res, err in
-					if onFailure != nil {
-						onFailure(err)
-					}
+					false // to avoid error
+					onFailure?(err)
 			})
 		}
 		
@@ -253,28 +240,23 @@ class TessoApiManager: NSObject {
 		self.sendData(mode: .FileUpload, file: file, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
-	func addClass(#date: NSDate, text: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+	func convertDateToTessoAPIStyle(date:NSDate) -> String {
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "YYYY/M/d/H"
 		
 		let timeZone = NSTimeZone.systemTimeZone()
 		let timeDiffSeconds = timeZone.secondsFromGMTForDate(date)
 		let gmtDate = date.dateByAddingTimeInterval(-NSTimeInterval(timeDiffSeconds))
-		let dateString = dateFormatter.stringFromDate(gmtDate)
+		return dateFormatter.stringFromDate(gmtDate)
+	}
+	
+	func addClass(#date: NSDate, text: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		
-		self.sendData(mode: .EditClass, target: dateString, text: text, onSuccess: onSuccess, onFailure: onFailure)
+		self.sendData(mode: .EditClass, target: convertDateToTessoAPIStyle(date), text: text, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
 	func removeClass(#date: NSDate, text: String = "", onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "YYYY/M/d/H"
-		
-		let timeZone = NSTimeZone.systemTimeZone()
-		let timeDiffSeconds = timeZone.secondsFromGMTForDate(date)
-		let gmtDate = date.dateByAddingTimeInterval(-NSTimeInterval(timeDiffSeconds))
-		let dateString = dateFormatter.stringFromDate(gmtDate)
-		
-		self.sendData(mode: .EditClass, target: dateString, data: "1", onSuccess: onSuccess, onFailure: onFailure)
+		self.sendData(mode: .EditClass, target: convertDateToTessoAPIStyle(date), data: "1", onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
 	func updateProfile(nickname: String? = nil, profile: String? = nil, icon: NSDictionary? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {

@@ -19,9 +19,8 @@ class RootViewController: UITabBarController {
 		// Do any additional setup after loading the view.
 		let chooseTopicBtn = UIBarButtonItem(image: UIImage(named: "menu_icon"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showTopicMenu"))
 
-		for var i = 0; i < self.viewControllers?.count; i++ {
-			let navigationController: UINavigationController = self.viewControllers?[i] as UINavigationController
-			let topViewController: UIViewController = navigationController.viewControllers?[0] as UIViewController
+		for viewController in self.viewControllers! as [UINavigationController] {
+			let topViewController: UIViewController = viewController.viewControllers?[0] as UIViewController
 			topViewController.navigationItem.leftBarButtonItem = chooseTopicBtn
 		}
 	}

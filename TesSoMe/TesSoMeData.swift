@@ -48,7 +48,7 @@ class TesSoMeData: NSObject {
 		
 		func getReplyUsernames() {
 			let usernames = message.componentsSeparatedByString("@")
-			for var i = 1; i < usernames.count; i++ {
+			for i in 1..<usernames.count {
 				if usernames[i].rangeOfString("^[a-z0-9]{1,16}[^a-z0-9]?", options: .RegularExpressionSearch) != nil {
 					replyUserIds.append(usernames[i].stringByReplacingOccurrencesOfString("^([a-z0-9]{1,16})[^a-z0-9]?.*", withString: "$1", options: .RegularExpressionSearch))
 				}
@@ -57,7 +57,7 @@ class TesSoMeData: NSObject {
 		
 		func getRelatedMessageIds() {
 			let replies = message.componentsSeparatedByString(">")
-			for var i = 1; i < replies.count; i++ {
+			for i in 1..<replies.count {
 				if replies[i].rangeOfString("^[0-9]{1,16}[^0-9]?", options: .RegularExpressionSearch) != nil {
 					relatedMessageIds.append(replies[i].stringByReplacingOccurrencesOfString("^([0-9]{1,16})[^0-9]?.*", withString: "$1", options: .RegularExpressionSearch).toInt()!)
 				}
@@ -66,7 +66,7 @@ class TesSoMeData: NSObject {
 		
 		func getHashTags() {
 			let hashtags = message.componentsSeparatedByString("#")
-			for var i = 1; i < hashtags.count; i++ {
+			for i in 1..<hashtags.count {
 				if hashtags[i].rangeOfString("^[a-zA-Z0-9]{1,16}[^a-zA-Z0-9]?", options: .RegularExpressionSearch) != nil {
 					hashTags.append(hashtags[i].stringByReplacingOccurrencesOfString("^([a-zA-Z0-9]{1,16})[^a-zA-Z0-9]?.*", withString: "$1", options: .RegularExpressionSearch))
 				}
@@ -105,13 +105,12 @@ class TesSoMeData: NSObject {
 	func generateAttributedMessage() -> NSAttributedString {
 		// space replace
 		var space = " "
-		for var i = 2; i < 32; i++ {
+		for i in 2...32 {
 			space += " "
 			message = message.stringByReplacingOccurrencesOfString("%sp(\(i))", withString: space)
 		}
 		// new line replace
-		let newLine = "\n"
-		message = message.stringByReplacingOccurrencesOfString("%br()", withString: newLine)
+		message = message.stringByReplacingOccurrencesOfString("%br()", withString: "\n")
 		
 		var attributedMessage = NSMutableAttributedString(string: message)
 		
@@ -128,30 +127,30 @@ class TesSoMeData: NSObject {
 			boldRange = NSString(string: message).rangeOfString("%b\\((.+)\\)", options: .RegularExpressionSearch)
 		}
 		
-		for var i = 0; i < replyUserIds.count; i++ {
-			var usernameRange = NSString(string: message).rangeOfString("@" + replyUserIds[i], options: .RegularExpressionSearch)
+		for username in replyUserIds {
+			var usernameRange = NSString(string: message).rangeOfString("@" + username, options: .RegularExpressionSearch)
 			while (usernameRange.length > 0) {
-				let userLink = NSString(format: "tesso://user/%@", replyUserIds[i])
+				let userLink = NSString(format: "tesso://user/%@", username)
 				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: userLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: usernameRange)
-				usernameRange = NSString(string: message).rangeOfString("@" + replyUserIds[i], options: .RegularExpressionSearch, range: NSMakeRange(usernameRange.location + usernameRange.length, message.utf16Count - (usernameRange.location + usernameRange.length)))
+				usernameRange = NSString(string: message).rangeOfString("@" + username, options: .RegularExpressionSearch, range: NSMakeRange(usernameRange.location + usernameRange.length, message.utf16Count - (usernameRange.location + usernameRange.length)))
 			}
 		}
 		
-		for var i = 0; i < relatedMessageIds.count; i++ {
-			var relatedMsgRange = NSString(string: message).rangeOfString(">\(relatedMessageIds[i])", options: .RegularExpressionSearch)
+		for messageid in relatedMessageIds {
+			var relatedMsgRange = NSString(string: message).rangeOfString(">\(messageid)", options: .RegularExpressionSearch)
 			while (relatedMsgRange.length > 0) {
-				let messageLink = NSString(format: "tesso://message/%d", relatedMessageIds[i])
+				let messageLink = NSString(format: "tesso://message/%d", messageid)
 				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: messageLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: relatedMsgRange)
-				relatedMsgRange = NSString(string: message).rangeOfString(">\(relatedMessageIds[i])", options: .RegularExpressionSearch, range: NSMakeRange(relatedMsgRange.location + relatedMsgRange.length, message.utf16Count - (relatedMsgRange.location + relatedMsgRange.length)))
+				relatedMsgRange = NSString(string: message).rangeOfString(">\(messageid)", options: .RegularExpressionSearch, range: NSMakeRange(relatedMsgRange.location + relatedMsgRange.length, message.utf16Count - (relatedMsgRange.location + relatedMsgRange.length)))
 			}
 		}
 
-		for var i = 0; i < hashTags.count; i++ {
-			var hashtagRange = NSString(string: message).rangeOfString("#\(hashTags[i])", options: .RegularExpressionSearch)
+		for hashtag in hashTags {
+			var hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch)
 			while (hashtagRange.length > 0) {
-				let messageLink = NSString(format: "tesso://search/?hash=%s", hashTags[i])
+				let messageLink = NSString(format: "tesso://search/?hash=%s", hashtag)
 				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: messageLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: hashtagRange)
-				hashtagRange = NSString(string: message).rangeOfString("#\(hashTags[i])", options: .RegularExpressionSearch, range: NSMakeRange(hashtagRange.location + hashtagRange.length, message.utf16Count - (hashtagRange.location + hashtagRange.length)))
+				hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch, range: NSMakeRange(hashtagRange.location + hashtagRange.length, message.utf16Count - (hashtagRange.location + hashtagRange.length)))
 			}
 		}
 		
@@ -159,10 +158,7 @@ class TesSoMeData: NSObject {
 	}
 	
 	func isViaTesSoMe() -> Bool {
-		if message.rangeOfString("    $", options: NSStringCompareOptions.RegularExpressionSearch) != nil {
-			return true
-		}
-		return false
+		return message.rangeOfString("    $", options: .RegularExpressionSearch) != nil
 	}
 	
 	func setDataToCell(inout cell: TimelineMessageCell) {
