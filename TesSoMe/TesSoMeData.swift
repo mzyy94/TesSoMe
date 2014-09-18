@@ -168,6 +168,7 @@ class TesSoMeData: NSObject {
 		cell.timeStampLabel.text = NSLocalizedString("0 s", comment: "Initial seconds")
 		cell.messageTextView.attributedText = generateAttributedMessage()
 		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + username + ".png"), forState: .Normal)
+		cell.postedDate = date
 	}
 	
 }

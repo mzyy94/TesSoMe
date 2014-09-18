@@ -19,6 +19,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 	@IBOutlet weak var timeStampLabel: UILabel!
 	@IBOutlet weak var viaTesSoMeBadge: UIImageView!
 	
+	var postedDate: NSDate?
 	
 	func rightButtons() -> NSArray {
 		let rightUtilityButtons = NSMutableArray()
