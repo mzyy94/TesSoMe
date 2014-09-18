@@ -60,6 +60,7 @@ class TimelineViewController: UITableViewController {
 		let data = messages[indexPath.row]
         // Configure the cell...
 		data.setDataToCell(&cell)
+		cell.updateTimestamp()
         return cell
     }
 
@@ -79,9 +80,19 @@ class TimelineViewController: UITableViewController {
 
 				let updateTimelineFetchTimer = NSTimer(timeInterval:Double(5.0), target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
 				NSRunLoop.currentRunLoop().addTimer(updateTimelineFetchTimer, forMode: NSRunLoopCommonModes)
+				let updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
+				NSRunLoop.currentRunLoop().addTimer(updateTimestampTimer, forMode: NSRunLoopCommonModes)
+
 			}
 			, onFailure: nil
 		)
+	}
+	
+	func updateTimestamp() {
+		var cells: [TimelineMessageCell] = tableView.visibleCells() as [TimelineMessageCell]
+		for cell in cells {
+			cell.updateTimestamp()
+		}
 	}
 	
 	func updateTimeline() {

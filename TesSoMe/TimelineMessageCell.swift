@@ -45,6 +45,25 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 		self.rightUtilityButtons = self.rightButtons()
 		self.delegate = self
     }
+    
+    func updateTimestamp() {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "s's'"
+		let timeDate = NSDate(timeIntervalSinceReferenceDate: -postedDate!.timeIntervalSinceNow)
+		switch timeDate.timeIntervalSinceReferenceDate {
+		case 0..<60:
+			dateFormatter.dateFormat = "s's'"
+		case 60..<60*60:
+			dateFormatter.dateFormat = "m'm 's's'"
+		case 60*60..<60*60*12:
+			dateFormatter.dateFormat = "h'h 'm'm 's's'"
+		default:
+			dateFormatter.dateFormat = "MM/dd HH:mm:ss"
+			self.timeStampLabel.text = dateFormatter.stringFromDate(postedDate!)
+			return
+		}
+		self.timeStampLabel.text = dateFormatter.stringFromDate(timeDate)
+    }
 	
 	func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
 		switch index {
