@@ -148,8 +148,8 @@ class TesSoMeData: NSObject {
 		for hashtag in hashTags {
 			var hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch)
 			while (hashtagRange.length > 0) {
-				let messageLink = NSString(format: "tesso://search/?hash=%s", hashtag)
-				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: messageLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: hashtagRange)
+				let hashtagLink = NSString(format: "tesso://search/?hash=%@", hashtag)
+				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: hashtagLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: hashtagRange)
 				hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch, range: NSMakeRange(hashtagRange.location + hashtagRange.length, message.utf16Count - (hashtagRange.location + hashtagRange.length)))
 			}
 		}
