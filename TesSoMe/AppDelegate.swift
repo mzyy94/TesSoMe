@@ -20,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
+		let serviceName = "TesSoMe"
+		let accounts = SSKeychain.accountsForService(serviceName)
+		if accounts != nil {
+			let account = accounts.last as? NSDictionary
+			usernameOfTesSoMe = account!["acct"] as? String
+			passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
+		}
+		
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let topicMenuView: UITableViewController = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
 		let rootTabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
@@ -31,14 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		self.window?.rootViewController = frostedViewController
 		
-		let serviceName = "TesSoMe"
-		let accounts = SSKeychain.accountsForService(serviceName)
-		if accounts != nil {
-			let account = accounts.last as? NSDictionary
-			usernameOfTesSoMe = account!["acct"] as? String
-			passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
-		}
-
 		return true
 	}
 
