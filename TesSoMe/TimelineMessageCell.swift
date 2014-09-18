@@ -27,6 +27,9 @@ class TimelineMessageCell: UITableViewCell {
 		self.userIconBtn.layer.borderWidth = 1.0
 		self.userIconBtn.layer.cornerRadius = 4.0
 		self.userIconBtn.clipsToBounds = true
+		self.messageTextView.textContainer.lineFragmentPadding = 0
+        self.messageTextView.contentInset.top = -8.0
+		
     }
 	
     override func setSelected(selected: Bool, animated: Bool) {
