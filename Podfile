@@ -6,6 +6,7 @@ pod 'AFNetworking'
 pod 'REFrostedViewController'
 pod 'SSKeychain'
 pod 'SDWebImage'
+pod 'SWTableViewCell'
 
 end
 

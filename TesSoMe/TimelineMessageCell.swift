@@ -8,7 +8,8 @@
 
 import UIKit
 
-class TimelineMessageCell: UITableViewCell {
+class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
+	let app = UIApplication.sharedApplication()
 
 	@IBOutlet weak var userIconBtn: UIButton!
 	@IBOutlet weak var statusIdLabel: UILabel!
@@ -18,6 +19,16 @@ class TimelineMessageCell: UITableViewCell {
 	@IBOutlet weak var timeStampLabel: UILabel!
 	@IBOutlet weak var viaTesSoMeBadge: UIImageView!
 	
+	
+	func rightButtons() -> NSArray {
+		let rightUtilityButtons = NSMutableArray()
+        
+		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.lightGrayColor(), title: "More")
+		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Reply")
+		
+		return rightUtilityButtons
+	}
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,10 +41,30 @@ class TimelineMessageCell: UITableViewCell {
 		self.messageTextView.textContainer.lineFragmentPadding = 0
         self.messageTextView.contentInset.top = -8.0
 		
+		self.rightUtilityButtons = self.rightButtons()
+		self.delegate = self
     }
 	
+	func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
+		switch index {
+		case 0: // More button
+			app.openURL(NSURL(string: NSString(format: "tesso://message/%@", (cell as TimelineMessageCell).statusIdLabel.text!)))
+		case 1: // Reply button
+			let messageId = (cell as TimelineMessageCell).statusIdLabel.text!
+			let username = (cell as TimelineMessageCell).usernameLabel.text!.stringByReplacingOccurrencesOfString("@", withString: "%40")
+			app.openURL(NSURL(string: NSString(format: "tesso://post/?text=%@", "%3E\(messageId)(\(username))")))
+		default:
+			NSLog("Pressed SWTableViewCell utility button index is out of range.")
+		}
+		cell.hideUtilityButtonsAnimated(true)
+	}
+	
+	func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
+		return true
+	}
+	
     override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        super.setSelected(false, animated: animated)
 
         // Configure the view for the selected state
     }

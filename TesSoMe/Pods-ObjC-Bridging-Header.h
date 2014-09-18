@@ -14,6 +14,7 @@
 #import <SSKeychain/SSKeychain.h>
 #import <SDWebImage/UIButton+WebCache.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SWTableViewCell/SWTableViewCell.h>
 
 
 #endif
