@@ -9,6 +9,8 @@
 import UIKit
 
 class TessoApiManager: NSObject {
+	let app = UIApplication.sharedApplication()
+	
 	let apiEndPoint = "https://tesso.pw/sns/api"
 	
 	enum TesSoMeGetMode: Int {
@@ -66,6 +68,9 @@ class TessoApiManager: NSObject {
 	
 	func checkResponce(data: AnyObject!, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		let object = data as NSDictionary
+		
+		app.networkActivityIndicatorVisible = false
+
 		if object["status"] as NSString == "success" {
 			onSuccess?(object)
 		} else {
@@ -82,6 +87,8 @@ class TessoApiManager: NSObject {
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer.acceptableContentTypes = NSSet(object: "text/html")
 		
+		app.networkActivityIndicatorVisible = true
+
 		var param = ["mode": mode.toRaw() as AnyObject]
 		if topicid != nil {
 			param.updateValue(topicid!, forKey: "topicid")
