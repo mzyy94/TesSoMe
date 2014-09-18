@@ -27,6 +27,7 @@ class RootViewController: UITabBarController {
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 			self.getSelfInfo()
 			self.getTopic()
+			self.getTimeline(1)
 		})
 	}
 
@@ -83,6 +84,21 @@ class RootViewController: UITabBarController {
 					topicViewController.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.selected = true
 				}
 				
+			}
+			, onFailure: nil
+		)
+	}
+	
+	func getTimeline(topic: Int) {
+		apiManager.getTimeline(topicid: topic, onSuccess:
+			{ data in
+				let navigationController: UINavigationController = self.viewControllers?[0] as UINavigationController
+				let timelineVC: TimelineViewController = navigationController.viewControllers?[0] as TimelineViewController
+				let timeline = TesSoMeData.tlFromResponce(data)
+				for tl in timeline as [NSDictionary] {
+					timelineVC.messages.append(TesSoMeData(data: tl))
+				}
+				timelineVC.tableView.reloadData()
 			}
 			, onFailure: nil
 		)
