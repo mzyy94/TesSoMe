@@ -26,6 +26,7 @@
 		9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD319C3069F00CB92B2 /* Images.xcassets */; };
 		9EB8ADD719C3069F00CB92B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB8ADD519C3069F00CB92B2 /* LaunchScreen.xib */; };
 		9EB8ADE319C3069F00CB92B2 /* TesSoMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */; };
+		9EE50FDD19CC4E34006AA6EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE50FDC19CC4E34006AA6EA /* Images.xcassets */; };
 		9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EEF01A919C93E4B005CCF7C /* Settings.storyboard */; };
 		ABDAF7CC514440A3A2DE9A54 /* libPods-TesSoMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */; };
 		F97CC65721D5414AAB4EC912 /* libPods-TesSoMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 630EA8FBBA01483BA749F9DB /* libPods-TesSoMeTests.a */; };
@@ -99,6 +100,7 @@
 		9EB8ADDC19C3069F00CB92B2 /* TesSoMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesSoMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EB8ADE119C3069F00CB92B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesSoMeTests.swift; sourceTree = "<group>"; };
+		9EE50FDC19CC4E34006AA6EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9EEF01A919C93E4B005CCF7C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +136,7 @@
 			children = (
 				9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */,
 				9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */,
+				9EE50FDC19CC4E34006AA6EA /* Images.xcassets */,
 				9E5D6A6019CC42BA00C3A915 /* Supporting Files */,
 			);
 			path = Share;
@@ -339,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */,
+				9EE50FDD19CC4E34006AA6EA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +508,7 @@
 		9E5D6A6B19CC42BA00C3A915 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -512,16 +517,19 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		9E5D6A6C19CC42BA00C3A915 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -674,6 +682,7 @@
 				9E5D6A6C19CC42BA00C3A915 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9EB8ADC019C3069F00CB92B2 /* Build configuration list for PBXProject "TesSoMe" */ = {
 			isa = XCConfigurationList;
