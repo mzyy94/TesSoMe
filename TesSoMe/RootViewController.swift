@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class RootViewController: UITabBarController {
 	let app = UIApplication.sharedApplication()
@@ -37,7 +38,9 @@ class RootViewController: UITabBarController {
 	}
 	
 	func showPostView() {
-		
+        let bundleId = NSBundle.mainBundle().bundleIdentifier!
+		let composeView = SLComposeViewController(forServiceType: bundleId + ".Share")
+		self.presentViewController(composeView, animated: true, completion: nil)
 	}
 	
 	override func didReceiveMemoryWarning() {

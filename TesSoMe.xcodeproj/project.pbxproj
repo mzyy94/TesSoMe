@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		9E05785619C92D2A001CEA3F /* TopicMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */; };
 		9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D818219C9D50F0023EA4C /* TopicCell.swift */; };
+		9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */; };
+		9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */; };
+		9E5D6A6819CC42BA00C3A915 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9E5D6A5E19CC42BA00C3A915 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */; };
 		9E8FFF2219C95E4900E4459A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2119C95E4900E4459A /* SettingViewController.swift */; };
 		9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */; };
@@ -29,6 +32,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9E5D6A6619CC42BA00C3A915 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9EB8ADBD19C3069F00CB92B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E5D6A5D19CC42BA00C3A915;
+			remoteInfo = Share;
+		};
+		9E5D6A6919CC42BA00C3A915 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9EB8ADBD19C3069F00CB92B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E5D6A5D19CC42BA00C3A915;
+			remoteInfo = Share;
+		};
 		9EB8ADDD19C3069F00CB92B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9EB8ADBD19C3069F00CB92B2 /* Project object */;
@@ -38,6 +55,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9E5D6A6E19CC42BA00C3A915 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9E5D6A6819CC42BA00C3A915 /* Share.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2602EE70751843DE87C52312 /* Pods-TesSoMeTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TesSoMeTests.xcconfig"; path = "Pods/Pods-TesSoMeTests.xcconfig"; sourceTree = "<group>"; };
 		630EA8FBBA01483BA749F9DB /* libPods-TesSoMeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TesSoMeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +76,10 @@
 		9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TesSoMe.xcconfig"; path = "Pods/Pods-TesSoMe.xcconfig"; sourceTree = "<group>"; };
 		9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicMenuViewController.swift; sourceTree = "<group>"; };
 		9E4D818219C9D50F0023EA4C /* TopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
+		9E5D6A5E19CC42BA00C3A915 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E5D6A6119CC42BA00C3A915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLEntityConverter.swift; sourceTree = "<group>"; };
 		9E8FFF2119C95E4900E4459A /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineMessageCell.swift; sourceTree = "<group>"; };
@@ -68,6 +103,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9E5D6A5B19CC42BA00C3A915 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9EB8ADC219C3069F00CB92B2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -87,11 +129,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E5D6A5F19CC42BA00C3A915 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */,
+				9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */,
+				9E5D6A6019CC42BA00C3A915 /* Supporting Files */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		9E5D6A6019CC42BA00C3A915 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E5D6A6119CC42BA00C3A915 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9EB8ADBC19C3069F00CB92B2 = {
 			isa = PBXGroup;
 			children = (
 				9EB8ADC719C3069F00CB92B2 /* TesSoMe */,
 				9EB8ADDF19C3069F00CB92B2 /* TesSoMeTests */,
+				9E5D6A5F19CC42BA00C3A915 /* Share */,
 				9EB8ADC619C3069F00CB92B2 /* Products */,
 				9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */,
 				F605EA1DCF5E4866977D1C84 /* Frameworks */,
@@ -105,6 +166,7 @@
 			children = (
 				9EB8ADC519C3069F00CB92B2 /* TesSoMe.app */,
 				9EB8ADDC19C3069F00CB92B2 /* TesSoMeTests.xctest */,
+				9E5D6A5E19CC42BA00C3A915 /* Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +233,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9E5D6A5D19CC42BA00C3A915 /* Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E5D6A6D19CC42BA00C3A915 /* Build configuration list for PBXNativeTarget "Share" */;
+			buildPhases = (
+				9E5D6A5A19CC42BA00C3A915 /* Sources */,
+				9E5D6A5B19CC42BA00C3A915 /* Frameworks */,
+				9E5D6A5C19CC42BA00C3A915 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Share;
+			productName = Share;
+			productReference = 9E5D6A5E19CC42BA00C3A915 /* Share.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9EB8ADC419C3069F00CB92B2 /* TesSoMe */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9EB8ADE619C3069F00CB92B2 /* Build configuration list for PBXNativeTarget "TesSoMe" */;
@@ -180,10 +259,13 @@
 				9EB8ADC219C3069F00CB92B2 /* Frameworks */,
 				9EB8ADC319C3069F00CB92B2 /* Resources */,
 				F1B489CC3DD04FC0A399DD3E /* Copy Pods Resources */,
+				9E5D6A6E19CC42BA00C3A915 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9E5D6A6719CC42BA00C3A915 /* PBXTargetDependency */,
+				9E5D6A6A19CC42BA00C3A915 /* PBXTargetDependency */,
 			);
 			name = TesSoMe;
 			productName = TesSoMe;
@@ -219,6 +301,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Yuki Mizuno";
 				TargetAttributes = {
+					9E5D6A5D19CC42BA00C3A915 = {
+						CreatedOnToolsVersion = 6.0;
+					};
 					9EB8ADC419C3069F00CB92B2 = {
 						CreatedOnToolsVersion = 6.0;
 					};
@@ -243,11 +328,20 @@
 			targets = (
 				9EB8ADC419C3069F00CB92B2 /* TesSoMe */,
 				9EB8ADDB19C3069F00CB92B2 /* TesSoMeTests */,
+				9E5D6A5D19CC42BA00C3A915 /* Share */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9E5D6A5C19CC42BA00C3A915 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9EB8ADC319C3069F00CB92B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,6 +427,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9E5D6A5A19CC42BA00C3A915 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9EB8ADC119C3069F00CB92B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,6 +464,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9E5D6A6719CC42BA00C3A915 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E5D6A5D19CC42BA00C3A915 /* Share */;
+			targetProxy = 9E5D6A6619CC42BA00C3A915 /* PBXContainerItemProxy */;
+		};
+		9E5D6A6A19CC42BA00C3A915 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E5D6A5D19CC42BA00C3A915 /* Share */;
+			targetProxy = 9E5D6A6919CC42BA00C3A915 /* PBXContainerItemProxy */;
+		};
 		9EB8ADDE19C3069F00CB92B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9EB8ADC419C3069F00CB92B2 /* TesSoMe */;
@@ -389,6 +501,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9E5D6A6B19CC42BA00C3A915 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Share/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9E5D6A6C19CC42BA00C3A915 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Share/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		9EB8ADE419C3069F00CB92B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -531,6 +667,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9E5D6A6D19CC42BA00C3A915 /* Build configuration list for PBXNativeTarget "Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E5D6A6B19CC42BA00C3A915 /* Debug */,
+				9E5D6A6C19CC42BA00C3A915 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		9EB8ADC019C3069F00CB92B2 /* Build configuration list for PBXProject "TesSoMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
