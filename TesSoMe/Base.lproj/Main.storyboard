@@ -105,7 +105,9 @@
         <scene sceneID="oXj-LU-SLe">
             <objects>
                 <navigationController title="ReplyNavigationController" id="LMZ-3m-Gfc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reply" id="q4T-U1-CY6"/>
+                    <tabBarItem key="tabBarItem" title="" image="inbox_icon" id="q4T-U1-CY6">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rD6-EU-iGv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -149,7 +151,10 @@
         <scene sceneID="xsh-4Z-yTk">
             <objects>
                 <navigationController title="SearchNavigationController" id="trs-8k-ebW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="Pzl-ML-rhf"/>
+                    <tabBarItem key="tabBarItem" title="" image="search_icon" id="Pzl-ML-rhf">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="guC-Vr-jT8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -162,11 +167,13 @@
             </objects>
             <point key="canvasLocation" x="-748" y="267"/>
         </scene>
-        <!--TopicsNavigatoinController-->
+        <!--ProfileNavigatoinController-->
         <scene sceneID="OQi-sB-yUs">
             <objects>
-                <navigationController title="TopicsNavigatoinController" id="54g-bg-dRI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Topics" id="NuB-4S-YjV"/>
+                <navigationController title="ProfileNavigatoinController" id="54g-bg-dRI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" image="profile_icon" id="NuB-4S-YjV">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wBa-NO-vxA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -183,7 +190,9 @@
         <scene sceneID="tqa-Jp-SUH">
             <objects>
                 <navigationController title="TimelineNavigationController" id="W19-Qw-u2V" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Timeline" id="iiO-Sr-sGa"/>
+                    <tabBarItem key="tabBarItem" title="" image="chat_icon" id="iiO-Sr-sGa">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bzk-x0-97L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -258,8 +267,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="W19-Qw-u2V" kind="relationship" relationship="viewControllers" id="Kf8-Yl-ndv"/>
-                        <segue destination="54g-bg-dRI" kind="relationship" relationship="viewControllers" id="Ltb-va-ob3"/>
                         <segue destination="LMZ-3m-Gfc" kind="relationship" relationship="viewControllers" id="yfe-yX-wSv"/>
+                        <segue destination="54g-bg-dRI" kind="relationship" relationship="viewControllers" id="Ltb-va-ob3"/>
                         <segue destination="trs-8k-ebW" kind="relationship" relationship="viewControllers" id="YKm-sB-jxX"/>
                     </connections>
                 </tabBarController>
@@ -420,5 +429,11 @@
             <point key="canvasLocation" x="-1522" y="259"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chat_icon" width="30" height="30"/>
+        <image name="inbox_icon" width="30" height="30"/>
+        <image name="profile_icon" width="30" height="30"/>
+        <image name="search_icon" width="30" height="30"/>
+    </resources>
     <color key="tintColor" red="0.96470588235294119" green="0.31764705882352939" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
 </document>
