@@ -15,3 +15,9 @@ pod 'AFNetworking'
 
 end
 
+target "Share" do
+pod 'AFNetworking'
+pod 'SSKeychain'
+
+end
+
