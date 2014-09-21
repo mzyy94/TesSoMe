@@ -109,6 +109,28 @@ class TimelineViewController: UITableViewController {
 		}
 	}
 	
+    func clearUnreadMark() {
+        if self.tableView.contentOffset.y < -30.0 {
+            self.navigationController?.tabBarItem.title = ""
+        }
+    }
+
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        clearUnreadMark()
+    }
+    
+    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        clearUnreadMark()
+    }
+    
+    override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+        clearUnreadMark()
+    }
+    
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        clearUnreadMark()
+    }
+    
 	func updateTimeline() {
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		apiManager.getTimeline(topicid: topic, sinceid: latestMessageId, onSuccess:
@@ -142,8 +164,9 @@ class TimelineViewController: UITableViewController {
 							var offsetDiff = 0.0 as CGFloat
 							
 							for p in path {
-								let cell: UITableViewCell? = self.tableView.cellForRowAtIndexPath(p) as UITableViewCell?
-								offsetDiff += cell!.frame.height
+                                if let cell: UITableViewCell? = self.tableView.cellForRowAtIndexPath(p) as UITableViewCell? {
+                                    offsetDiff += cell!.frame.height
+                                }
 							}
 							
 							self.tableView.setContentOffset(CGPointMake(0.0, topOffset + offsetDiff), animated: false)
