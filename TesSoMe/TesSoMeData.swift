@@ -42,6 +42,11 @@ class TesSoMeData: NSObject {
 		let tl: NSArray = responce["tl"] as NSArray
 		return tl
 	}
+    
+    class func convertKML(text: String) -> String {
+        var kml = text.stringByReplacingOccurrencesOfString("\n", withString: "%br()", options: .RegularExpressionSearch)
+        return kml
+    }
 	
 	init(data: NSDictionary) {
 		super.init()
