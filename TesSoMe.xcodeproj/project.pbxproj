@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E015F6519CEBDE200E0A177 /* TessoApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA0E619C36A6D00E209C3 /* TessoApiManager.swift */; };
 		9E05785619C92D2A001CEA3F /* TopicMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */; };
 		9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D818219C9D50F0023EA4C /* TopicCell.swift */; };
 		9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */; };
@@ -476,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */,
+				9E015F6519CEBDE200E0A177 /* TessoApiManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +558,7 @@
 				);
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-DTARGET_IS_SHARE_EXTENSION";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Share/Pods-ObjC-Bridging-Header.h";
@@ -570,6 +573,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				OTHER_SWIFT_FLAGS = "-DTARGET_IS_SHARE_EXTENSION";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Share/Pods-ObjC-Bridging-Header.h";

@@ -9,7 +9,10 @@
 import UIKit
 
 class TessoApiManager: NSObject {
+#if TARGET_IS_SHARE_EXTENSION
+#else
 	let app = UIApplication.sharedApplication()
+#endif
 	
 	let apiEndPoint = "https://tesso.pw/sns/api"
 	
@@ -69,7 +72,10 @@ class TessoApiManager: NSObject {
 	func checkResponce(data: AnyObject!, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		let object = data as NSDictionary
 		
+#if TARGET_IS_SHARE_EXTENSION
+#else
 		app.networkActivityIndicatorVisible = false
+#endif
 
 		if object["status"] as NSString == "success" {
 			onSuccess?(object)
@@ -87,7 +93,10 @@ class TessoApiManager: NSObject {
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer.acceptableContentTypes = NSSet(object: "text/html")
 		
+#if TARGET_IS_SHARE_EXTENSION
+#else
 		app.networkActivityIndicatorVisible = true
+#endif
 
 		var param = ["mode": mode.toRaw() as AnyObject]
 		if topicid != nil {
