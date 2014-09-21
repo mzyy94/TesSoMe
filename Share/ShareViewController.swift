@@ -51,11 +51,34 @@ class ShareViewController: SLComposeServiceViewController {
 			let attachmentConfig = SLComposeSheetConfigurationItem()
 			attachmentConfig.title = NSLocalizedString("File attachment", comment: "File attachment")
 			attachmentConfig.value = NSLocalizedString("None", comment: "None")
+            attachmentConfig.tapHandler = {
+				let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+
+				let takePhoto = UIAlertAction(title: NSLocalizedString("Camera", comment: "Camera"), style: .Default) {
+					action in
+				}
+				actionSheet.addAction(takePhoto)
+
+				let choosePhoto = UIAlertAction(title: NSLocalizedString("Photo Library", comment: "Photo Library"), style: .Default) {
+					action in
+				}
+				actionSheet.addAction(choosePhoto)
+				
+				let cancelBtn = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Cancel, handler: nil)
+				actionSheet.addAction(cancelBtn)
+
+				self.presentViewController(actionSheet, animated: true, completion: nil)
+
+            }
 			configurationItems.append(attachmentConfig)
 			
 			let drawingConfig = SLComposeSheetConfigurationItem()
 			drawingConfig.title = NSLocalizedString("Drawing", comment: "Drawing")
 			drawingConfig.value = NSLocalizedString("None", comment: "None")
+            drawingConfig.tapHandler = {
+                let view = UIViewController()
+                self.pushConfigurationViewController(view)
+            }
 			configurationItems.append(drawingConfig)
 		}
 		
