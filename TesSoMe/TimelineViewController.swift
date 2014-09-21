@@ -26,6 +26,9 @@ class TimelineViewController: UITableViewController {
 		self.tableView.estimatedRowHeight = 90.5
 		self.tableView.rowHeight = UITableViewAutomaticDimension
 		
+		self.refreshControl?.backgroundColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		self.refreshControl?.tintColor = UIColor.whiteColor()
+		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 			self.getTimeline()
 		})
@@ -63,11 +66,22 @@ class TimelineViewController: UITableViewController {
 		cell.updateTimestamp()
         return cell
     }
+	
+	func refreshUpdatedDate() {
+		let format = NSLocalizedString("'Last update: 'MMM d, h:mm:ss a", comment: "Updated date format")
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = format
+		let now = NSDate()
+		
+		let refreshed = NSMutableAttributedString(string: dateFormatter.stringFromDate(now), attributes: [NSForegroundColorAttributeName: UIColor(white: 0.8, alpha: 1.0)])
+		self.refreshControl?.attributedTitle = refreshed
+	}
 
 	func getTimeline() {
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		apiManager.getTimeline(topicid: topic, onSuccess:
 			{ data in
+				self.refreshUpdatedDate()
 
 				let timeline = TesSoMeData.tlFromResponce(data)
 				for post in timeline as [NSDictionary] {
@@ -99,6 +113,8 @@ class TimelineViewController: UITableViewController {
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		apiManager.getTimeline(topicid: topic, sinceid: latestMessageId, onSuccess:
 			{ data in
+				self.refreshUpdatedDate()
+                
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 					let timeline = TesSoMeData.tlFromResponce(data)
 					if timeline.count == 0 {
