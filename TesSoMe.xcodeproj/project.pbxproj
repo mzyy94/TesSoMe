@@ -78,6 +78,8 @@
 		87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TesSoMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TesSoMe.xcconfig"; path = "Pods/Pods-TesSoMe.xcconfig"; sourceTree = "<group>"; };
 		9E015F6319CEBC4B00E0A177 /* Pods-ObjC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-ObjC-Bridging-Header.h"; sourceTree = "<group>"; };
+		9E015F6619CEC49500E0A177 /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Share.entitlements; sourceTree = "<group>"; };
+		9E015F6719CEC51900E0A177 /* TesSoMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TesSoMe.entitlements; sourceTree = "<group>"; };
 		9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicMenuViewController.swift; sourceTree = "<group>"; };
 		9E4D818219C9D50F0023EA4C /* TopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		9E5D6A5E19CC42BA00C3A915 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,7 @@
 		9E5D6A5F19CC42BA00C3A915 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				9E015F6619CEC49500E0A177 /* Share.entitlements */,
 				9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */,
 				9E015F6319CEBC4B00E0A177 /* Pods-ObjC-Bridging-Header.h */,
 				9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */,
@@ -185,6 +188,7 @@
 		9EB8ADC719C3069F00CB92B2 /* TesSoMe */ = {
 			isa = PBXGroup;
 			children = (
+				9E015F6719CEC51900E0A177 /* TesSoMe.entitlements */,
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
 				9E9FA0E219C368C400E209C3 /* Pods-ObjC-Bridging-Header.h */,
 				9EB8ADD019C3069F00CB92B2 /* Main.storyboard */,
@@ -317,9 +321,24 @@
 				TargetAttributes = {
 					9E5D6A5D19CC42BA00C3A915 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = NFV2G334ZW;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					9EB8ADC419C3069F00CB92B2 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = NFV2G334ZW;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					9EB8ADDB19C3069F00CB92B2 = {
 						CreatedOnToolsVersion = 6.0;
@@ -552,6 +571,9 @@
 			baseConfigurationReference = B20B5F052CA249308E7C163D /* Pods-Share.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -560,6 +582,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				OTHER_SWIFT_FLAGS = "-DTARGET_IS_SHARE_EXTENSION";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Share/Pods-ObjC-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -571,10 +594,14 @@
 			baseConfigurationReference = B20B5F052CA249308E7C163D /* Pods-Share.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Share/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				OTHER_SWIFT_FLAGS = "-DTARGET_IS_SHARE_EXTENSION";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Share/Pods-ObjC-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -663,9 +690,13 @@
 			baseConfigurationReference = 9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TesSoMe/TesSoMe.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TesSoMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/TesSoMe/Pods-ObjC-Bridging-Header.h";
 			};
 			name = Debug;
@@ -675,9 +706,13 @@
 			baseConfigurationReference = 9577CEC4AF7740BCB00D45CD /* Pods-TesSoMe.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TesSoMe/TesSoMe.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TesSoMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/TesSoMe/Pods-ObjC-Bridging-Header.h";
 			};
 			name = Release;
