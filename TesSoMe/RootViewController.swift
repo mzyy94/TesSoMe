@@ -38,9 +38,9 @@ class RootViewController: UITabBarController {
 	}
 	
 	func showPostView() {
-        let bundleId = NSBundle.mainBundle().bundleIdentifier!
-		let composeView = SLComposeViewController(forServiceType: bundleId + ".Share")
-		self.presentViewController(composeView, animated: true, completion: nil)
+		let storyboard = UIStoryboard(name: "PostMessage", bundle: nil)
+		var postViewController: UINavigationController = storyboard.instantiateViewControllerWithIdentifier("PostNavigation") as UINavigationController
+		self.presentViewController(postViewController, animated: true, completion: nil)
 	}
 	
 	override func didReceiveMemoryWarning() {

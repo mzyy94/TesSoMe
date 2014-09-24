@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9E015F6519CEBDE200E0A177 /* TessoApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA0E619C36A6D00E209C3 /* TessoApiManager.swift */; };
 		9E05785619C92D2A001CEA3F /* TopicMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */; };
+		9E15A72619D27DD20020601D /* PostMessage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E15A72519D27DD20020601D /* PostMessage.storyboard */; };
+		9E15A72819D27F160020601D /* PostMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15A72719D27F160020601D /* PostMainViewController.swift */; };
 		9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D818219C9D50F0023EA4C /* TopicCell.swift */; };
 		9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */; };
 		9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */; };
@@ -81,6 +83,8 @@
 		9E015F6619CEC49500E0A177 /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Share.entitlements; sourceTree = "<group>"; };
 		9E015F6719CEC51900E0A177 /* TesSoMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TesSoMe.entitlements; sourceTree = "<group>"; };
 		9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicMenuViewController.swift; sourceTree = "<group>"; };
+		9E15A72519D27DD20020601D /* PostMessage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostMessage.storyboard; sourceTree = "<group>"; };
+		9E15A72719D27F160020601D /* PostMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMainViewController.swift; sourceTree = "<group>"; };
 		9E4D818219C9D50F0023EA4C /* TopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		9E5D6A5E19CC42BA00C3A915 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E5D6A6119CC42BA00C3A915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 				9E015F6719CEC51900E0A177 /* TesSoMe.entitlements */,
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
 				9E9FA0E219C368C400E209C3 /* Pods-ObjC-Bridging-Header.h */,
+				9E15A72519D27DD20020601D /* PostMessage.storyboard */,
+				9E15A72719D27F160020601D /* PostMainViewController.swift */,
 				9EB8ADD019C3069F00CB92B2 /* Main.storyboard */,
 				9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */,
 				9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */,
@@ -384,6 +390,7 @@
 				9EB8ADD719C3069F00CB92B2 /* LaunchScreen.xib in Resources */,
 				9E8FFF2619C96CD500E4459A /* TimelineMessageCell.xib in Resources */,
 				9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */,
+				9E15A72619D27DD20020601D /* PostMessage.storyboard in Resources */,
 				9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +517,7 @@
 				9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */,
 				9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */,
 				9E9FA0E719C36A6D00E209C3 /* TessoApiManager.swift in Sources */,
+				9E15A72819D27F160020601D /* PostMainViewController.swift in Sources */,
 				9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */,
 				9E8FFF2819C97C0A00E4459A /* TimelineViewController.swift in Sources */,
 				9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */,
