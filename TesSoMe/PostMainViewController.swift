@@ -17,9 +17,12 @@ class PostMainViewController: UIViewController {
 	
 	@IBAction func postTitleBtnPressed(sender: AnyObject) {
 		if menu.isOpen {
-			menu.close()
+			menu.closeWithCompletion({
+				self.showKeyboard()
+			})
 		} else {
 			menu.showFromNavigationController(self.navigationController)
+            closeKeyboard()
 		}
 	}
 	
@@ -36,12 +39,15 @@ class PostMainViewController: UIViewController {
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("closeView"))
 
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("sendPost"))
+		
+		showKeyboard()
 	}
 	
 	func initMenu() {
 		let selectMessageItem = REMenuItem(title: NSLocalizedString("Message", comment: "Message on navigation bar"), image: nil, highlightedImage: nil, action: {
 			item in
 			self.setTitleBtnText("Message")
+			self.showKeyboard()
 		})
 		let selectFileUploadItem = REMenuItem(title: NSLocalizedString("File upload", comment: "File upload on navigation bar"), image: nil, highlightedImage: nil, action: {
 			item in
@@ -73,6 +79,14 @@ class PostMainViewController: UIViewController {
 	func closeView() {
 		self.dismissViewControllerAnimated(true, completion: nil)
 	}
+    
+    func showKeyboard() {
+        self.textView.becomeFirstResponder()
+    }
+    
+    func closeKeyboard() {
+        self.textView.endEditing(true)
+    }
 
 	func sendPost() {
 		let apiManager = TessoApiManager()
