@@ -76,6 +76,9 @@
                                             </fragment>
                                         </attributedString>
                                     </state>
+                                    <connections>
+                                        <action selector="postTitleBtnPressed:" destination="w5K-Q7-QgL" eventType="touchUpInside" id="BGn-sM-3cn"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

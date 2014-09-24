@@ -10,27 +10,64 @@ import UIKit
 
 class PostMainViewController: UIViewController {
 
+	var menu: REMenu!
+	
 	@IBOutlet weak var postTitleBtn: UIButton!
 	@IBOutlet weak var textView: UITextView!
 	
-    override func viewDidLoad() {
+	@IBAction func postTitleBtnPressed(sender: AnyObject) {
+		if menu.isOpen {
+			menu.close()
+		} else {
+			menu.showFromNavigationController(self.navigationController)
+		}
+	}
+	
+	override func viewDidLoad() {
         super.viewDidLoad()
+		
+		initMenu()
+		
+		setTitleBtnText("Message")
 		
 		self.providesPresentationContextTransitionStyle = true
 		self.definesPresentationContext = true
-
-		self.postTitleBtn.backgroundColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
-		self.postTitleBtn.layer.cornerRadius = 14.0
-		self.postTitleBtn.clipsToBounds = true
-		let titleText = NSMutableAttributedString(string: "Message", attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(16.0), NSForegroundColorAttributeName: UIColor.whiteColor()])
-		let dropDownMenuText = NSAttributedString(string: "  ▼", attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(10.0), NSForegroundColorAttributeName: UIColor.whiteColor()])
-		
-		titleText.appendAttributedString(dropDownMenuText)
-		self.postTitleBtn.setAttributedTitle(titleText, forState: .Normal)
 		
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("closeView"))
 
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("sendPost"))
+	}
+	
+	func initMenu() {
+		let selectMessageItem = REMenuItem(title: NSLocalizedString("Message", comment: "Message on navigation bar"), image: nil, highlightedImage: nil, action: {
+			item in
+			self.setTitleBtnText("Message")
+		})
+		let selectFileUploadItem = REMenuItem(title: NSLocalizedString("File upload", comment: "File upload on navigation bar"), image: nil, highlightedImage: nil, action: {
+			item in
+			self.setTitleBtnText("File upload")
+		})
+		let selectDrawingItem = REMenuItem(title: NSLocalizedString("Drawing", comment: "Drawing on navigation bar"), image: nil, highlightedImage: nil, action: {
+			item in
+			self.setTitleBtnText("Drawing")
+		})
+		self.menu = REMenu(items: [selectMessageItem, selectFileUploadItem, selectDrawingItem])
+		menu.liveBlur = true
+		menu.liveBlurBackgroundStyle = REMenuLiveBackgroundStyle.Dark
+		menu.separatorColor = UIColor(white: 0.0, alpha: 0.4)
+		menu.borderColor = UIColor.clearColor()
+		menu.textColor = UIColor(white: 1.0, alpha: 0.78)
+	}
+	
+	func setTitleBtnText(text: String) {
+		self.postTitleBtn.backgroundColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		self.postTitleBtn.layer.cornerRadius = 14.0
+		self.postTitleBtn.clipsToBounds = true
+		let titleText = NSMutableAttributedString(string: text, attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(16.0), NSForegroundColorAttributeName: UIColor.whiteColor()])
+		let dropDownMenuText = NSAttributedString(string: "  ▼", attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(10.0), NSForegroundColorAttributeName: UIColor.whiteColor()])
+		
+		titleText.appendAttributedString(dropDownMenuText)
+		self.postTitleBtn.setAttributedTitle(titleText, forState: .Normal)
 	}
 	
 	func closeView() {
