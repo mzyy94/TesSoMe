@@ -32,6 +32,9 @@ class TimelineViewController: UITableViewController {
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 			self.getTimeline()
 		})
+		
+		self.refreshControl!.addTarget(self, action: Selector("updateTimeline"), forControlEvents: .ValueChanged)
+		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -136,7 +139,10 @@ class TimelineViewController: UITableViewController {
 		apiManager.getTimeline(topicid: topic, sinceid: latestMessageId, onSuccess:
 			{ data in
 				self.refreshUpdatedDate()
-                
+				if self.refreshControl!.refreshing {
+					self.refreshControl?.endRefreshing()
+				}
+				
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 					let timeline = TesSoMeData.tlFromResponce(data)
 					if timeline.count == 0 {
