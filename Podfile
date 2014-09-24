@@ -7,6 +7,7 @@ pod 'REFrostedViewController'
 pod 'SSKeychain'
 pod 'SDWebImage'
 pod 'SWTableViewCell'
+pod 'REMenu'
 
 end
 

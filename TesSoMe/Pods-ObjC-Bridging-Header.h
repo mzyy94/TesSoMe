@@ -15,6 +15,7 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SWTableViewCell/SWTableViewCell.h>
+#import <REMenu/REMenu.h>
 
 
 #endif
