@@ -41,6 +41,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		return true
 	}
+	
+	func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
+		switch url.host! {
+		case "post":
+			let storyboard = UIStoryboard(name: "PostMessage", bundle: nil)
+			let postNavigationController = storyboard.instantiateViewControllerWithIdentifier("PostNavigation") as UINavigationController
+			let postViewController = postNavigationController.viewControllers.first as PostMainViewController
+			
+			if let query = url.query {
+				let postText = query.stringByReplacingOccurrencesOfString("^text=", withString: "", options: .RegularExpressionSearch).stringByRemovingPercentEncoding!
+				println(postText)
+				postViewController.preparedText = postText
+			}
+			
+			self.window?.rootViewController!.presentViewController(postNavigationController, animated: true, completion: nil)
+
+		default:
+			return false
+		}
+		return true
+
+	}
 
 	func applicationWillResignActive(application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -14,6 +14,7 @@ class PostMainViewController: UIViewController {
 	let ud = NSUserDefaults()
 
 	var menu: REMenu!
+	var preparedText = ""
 	
 	@IBOutlet weak var postTitleBtn: UIButton!
 	@IBOutlet weak var textView: UITextView!
@@ -33,6 +34,8 @@ class PostMainViewController: UIViewController {
         super.viewDidLoad()
 		
 		initMenu()
+		
+		self.textView.text = preparedText
 		
 		setTitleBtnText("Message")
 		
