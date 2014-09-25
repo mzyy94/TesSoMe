@@ -8,6 +8,7 @@ pod 'SSKeychain'
 pod 'SDWebImage'
 pod 'SWTableViewCell'
 pod 'REMenu'
+pod 'MPGNotification'
 
 end
 

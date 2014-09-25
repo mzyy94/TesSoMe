@@ -16,6 +16,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SWTableViewCell/SWTableViewCell.h>
 #import <REMenu/REMenu.h>
+#import <MPGNotification/MPGNotification.h>
 
 
 #endif
