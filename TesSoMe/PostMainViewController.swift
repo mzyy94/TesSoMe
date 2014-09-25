@@ -9,6 +9,9 @@
 import UIKit
 
 class PostMainViewController: UIViewController {
+	let app = UIApplication.sharedApplication()
+	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+	let ud = NSUserDefaults()
 
 	var menu: REMenu!
 	
@@ -77,7 +80,13 @@ class PostMainViewController: UIViewController {
 	}
 	
 	func closeView() {
+		closeKeyboard()
 		self.dismissViewControllerAnimated(true, completion: nil)
+	}
+
+	func closeView(completion: (() -> Void)! = nil) {
+		closeKeyboard()
+		self.dismissViewControllerAnimated(true, completion: completion)
 	}
     
     func showKeyboard() {
@@ -91,8 +100,23 @@ class PostMainViewController: UIViewController {
 	func sendPost() {
 		let apiManager = TessoApiManager()
 		let text = self.textView.text
-		apiManager.sendMessage(topicid: 1, message: text, onSuccess: nil, onFailure: nil)
-		closeView()
+		closeView({
+			apiManager.sendMessage(topicid: 1, message: text, onSuccess: nil, onFailure: {
+				err in
+				let notification = MPGNotification(title: NSLocalizedString("Post failed.", comment: "Post failed."), subtitle: err.localizedDescription, backgroundColor: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), iconImage: UIImage(named: "warning_icon"))
+				notification.duration = 5.0
+				notification.animationType = .Drop
+				notification.setButtonConfiguration(.OneButton, withButtonTitles: [NSLocalizedString("Edit", comment: "Edit")])
+				notification.buttonHandler = {
+					notification, buttonIndex in
+					if buttonIndex == notification.firstButton.tag ||
+						buttonIndex == notification.backgroundView.tag {
+							self.app.openURL(NSURL(string: NSString(format: "tesso://post/?text=%@", text)))
+					}
+				}
+				notification.show()
+			})
+		})
 	}
 	
     override func didReceiveMemoryWarning() {
