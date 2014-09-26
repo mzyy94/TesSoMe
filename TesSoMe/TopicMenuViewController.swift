@@ -131,7 +131,7 @@ class TopicMenuViewController: UITableViewController {
 		cell.userIcon.sd_setImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png"))
 		cell.topicNumLabel.text = String((topic["id"] as String).toInt()! + 99)
 		if currentTopic == (topic["id"] as String).toInt()! {
-			cell.backgroundColor =  UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 0.2)
+			cell.backgroundColor =  UIColor.globalTintColor(alpha: 0.2)
 		} else {
 			cell.backgroundColor = UIColor.clearColor()
 		}

@@ -21,7 +21,7 @@ class RootViewController: UITabBarController {
 		let chooseTopicBtn = UIBarButtonItem(image: UIImage(named: "menu_icon"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showTopicMenu"))
 		let newPostBtn = UIBarButtonItem(image: UIImage(named: "post_icon"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showPostView"))
 
-		let unreadMessageLabelAppearance = [NSForegroundColorAttributeName: UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)]
+		let unreadMessageLabelAppearance = [NSForegroundColorAttributeName: UIColor.globalTintColor()]
 
 		for viewController in self.viewControllers! as [UINavigationController] {
 			let topViewController: UIViewController = viewController.viewControllers?[0] as UIViewController
@@ -30,7 +30,7 @@ class RootViewController: UITabBarController {
 			viewController.tabBarItem.setTitleTextAttributes(unreadMessageLabelAppearance, forState: .Normal)
 		}
 		
-		self.tabBar.tintColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		self.tabBar.tintColor = UIColor.globalTintColor()
 	}
 
 	func showTopicMenu() {

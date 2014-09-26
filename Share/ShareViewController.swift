@@ -16,12 +16,12 @@ class ShareViewController: SLComposeServiceViewController {
 	
 	override func viewDidLoad() {
 		self.isContentValid()
-		self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 0.3)
+		self.navigationController?.navigationBar.backgroundColor = UIColor.globalTintColor(alpha: 0.3)
 		self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 		self.title = "TesSoMe"
-		self.textView.tintColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		self.textView.tintColor = UIColor.globalTintColor()
 
-		self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		self.navigationController?.navigationBar.backgroundColor = UIColor.globalTintColor()
 
 	}
 	

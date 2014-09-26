@@ -72,7 +72,7 @@ class PostMainViewController: UIViewController {
 	}
 	
 	func setTitleBtnText(text: String) {
-		self.postTitleBtn.backgroundColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		self.postTitleBtn.backgroundColor = UIColor.globalTintColor()
 		self.postTitleBtn.layer.cornerRadius = 14.0
 		self.postTitleBtn.clipsToBounds = true
 		let titleText = NSMutableAttributedString(string: text, attributes: [NSFontAttributeName: UIFont.boldSystemFontOfSize(16.0), NSForegroundColorAttributeName: UIColor.whiteColor()])

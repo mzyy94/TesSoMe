@@ -27,7 +27,7 @@ class TimelineViewController: UITableViewController {
 		self.tableView.estimatedRowHeight = 90.5
 		self.tableView.rowHeight = UITableViewAutomaticDimension
 		
-		self.refreshControl?.backgroundColor = UIColor(red: 0.96470588235294119, green: 0.31764705882352939, blue: 0.058823529411764705, alpha: 1.0)
+		self.refreshControl?.backgroundColor = UIColor.globalTintColor()
 		self.refreshControl?.tintColor = UIColor.whiteColor()
 		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
