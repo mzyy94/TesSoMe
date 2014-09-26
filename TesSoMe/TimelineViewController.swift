@@ -150,6 +150,7 @@ class TimelineViewController: UITableViewController {
 					}
 					
 					var path:[NSIndexPath] = []
+                    let insertedCellCount = timeline.count
 					
 					for (i, post) in enumerate((timeline as [NSDictionary]).reverse()) {
 						self.messages.insert(TesSoMeData(data: post), atIndex: 0)
@@ -158,7 +159,7 @@ class TimelineViewController: UITableViewController {
 					self.latestMessageId = self.messages.first!.statusid
 					
 					let topOffset = self.tableView.contentOffset.y
-					let autoScroll = !(topOffset > -40.0) // more
+					let autoScroll = !(topOffset > -60.0) // more
 					
 					dispatch_sync(dispatch_get_main_queue(), {
 						// self.tableview.beginUpdates()
@@ -167,17 +168,9 @@ class TimelineViewController: UITableViewController {
 						self.tableView.insertRowsAtIndexPaths(path, withRowAnimation: .None)
 						
 						if autoScroll {
-							var offsetDiff = 0.0 as CGFloat
-							
-							for p in path {
-                                if let cell: UITableViewCell? = self.tableView.cellForRowAtIndexPath(p) as UITableViewCell? {
-                                    offsetDiff += cell!.frame.height
-                                }
-							}
-							
-							self.tableView.setContentOffset(CGPointMake(0.0, topOffset + offsetDiff), animated: false)
+                            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: insertedCellCount, inSection: 0), atScrollPosition: .Top, animated: false)
 							UIView.setAnimationsEnabled(true)
-							self.tableView.setContentOffset(CGPointMake(0.0, -64.0), animated: true)
+							self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
 						} else {
 							self.navigationController!.tabBarItem.title = "●"
 							UIView.setAnimationsEnabled(true)
