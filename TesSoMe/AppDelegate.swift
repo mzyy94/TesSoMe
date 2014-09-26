@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var frostedViewController: REFrostedViewController?
 	var usernameOfTesSoMe: String? = nil
 	var passwordOfTesSoMe: String? = nil
+	let ud = NSUserDefaults()
 
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -27,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			usernameOfTesSoMe = account!["acct"] as? String
 			passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
 		}
+		
+		initUserDefault()
 		
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		let topicMenuView: UITableViewController = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
@@ -64,6 +67,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	}
 
+	func initUserDefault() {
+		let defaultConfig = NSMutableDictionary.dictionary()
+		defaultConfig.setObject(true, forKey: "relativeTimestamp")
+		defaultConfig.setObject(11.0, forKey: "fontSize")
+		defaultConfig.setObject(false, forKey: "viaSignature")
+		defaultConfig.setObject(true, forKey: "backgroundNotification")
+		defaultConfig.setObject(true, forKey: "vibratingNotification")
+		defaultConfig.setObject(true, forKey: "streaming")
+		defaultConfig.setObject(true, forKey: "wifiOnly")
+		defaultConfig.setObject(10.0, forKey: "interval")
+		defaultConfig.setObject(false, forKey: "debug")
+		defaultConfig.setObject(false, forKey: "detailNetwork")
+		ud.registerDefaults(defaultConfig)
+	}
+	
 	func applicationWillResignActive(application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

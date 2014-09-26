@@ -8,8 +8,8 @@
         <!--Settings-->
         <scene sceneID="nm4-9V-2PX">
             <objects>
-                <tableViewController id="hw5-TT-4dK" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RGK-VF-UHh">
+                <tableViewController id="hw5-TT-4dK" customClass="SettingViewController" customModule="TesSoMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RootSetting" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RGK-VF-UHh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -117,29 +117,6 @@
                                             <segue destination="Cdt-BC-dtP" kind="show" id="Ns5-RH-Xgu"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="2aa-iS-69g" detailTextLabel="o0g-OL-kIE" style="IBUITableViewCellStyleValue1" id="BLL-x0-x9E">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BLL-x0-x9E" id="MrR-jF-KkO">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Browser" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2aa-iS-69g">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Safari" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o0g-OL-kIE">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="zyY-3w-1BS" kind="show" id="2zW-Fo-UwN"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Account" id="UK0-z0-Bzh">
@@ -215,6 +192,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="ktW-nA-FdK"/>
+                    <connections>
+                        <outlet property="developerCell" destination="RMd-mJ-noD" id="NaS-bP-cb3"/>
+                        <outlet property="notificationCell" destination="BPY-EC-rVB" id="fUB-OZ-I4W"/>
+                        <outlet property="streamingCell" destination="U7a-lR-TEt" id="c8L-fJ-dmU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLJ-sm-sVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -223,8 +205,8 @@
         <!--Post-->
         <scene sceneID="y7e-md-xbc">
             <objects>
-                <tableViewController title="Post" id="FCf-hR-DUx" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uv4-z8-f6g">
+                <tableViewController title="Post" id="FCf-hR-DUx" customClass="SettingViewController" customModule="TesSoMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Post" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uv4-z8-f6g">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -245,6 +227,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dJR-0c-svi">
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="viaSignatureSwitchChanged:" destination="FCf-hR-DUx" eventType="valueChanged" id="TTE-T1-D3Z"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -265,6 +250,9 @@
                             <outlet property="delegate" destination="FCf-hR-DUx" id="N99-Im-LYg"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="viaSignatureSwitch" destination="dJR-0c-svi" id="6qM-Qe-ijm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mut-n3-dVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -273,15 +261,15 @@
         <!--Appearance-->
         <scene sceneID="1s0-h4-ZuI">
             <objects>
-                <tableViewController title="Appearance" id="tAh-8F-06f" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="teU-Ew-Ry8">
+                <tableViewController title="Appearance" id="tAh-8F-06f" customClass="SettingViewController" customModule="TesSoMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Appearance" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="teU-Ew-Ry8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Timestamp" id="Xm3-0B-mDw">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" textLabel="bwn-0b-zGT" style="IBUITableViewCellStyleDefault" id="f8p-Ha-QZx">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="bwn-0b-zGT" style="IBUITableViewCellStyleDefault" id="f8p-Ha-QZx">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f8p-Ha-QZx" id="q21-1Y-J4N">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -329,6 +317,9 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="11" minValue="9" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="oBJ-kW-nUI">
                                                     <rect key="frame" x="93" y="7" width="501" height="31"/>
+                                                    <connections>
+                                                        <action selector="fontSizeSliderChanged:" destination="tAh-8F-06f" eventType="valueChanged" id="Hbn-1n-xFK"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -350,6 +341,11 @@
                             <outlet property="delegate" destination="tAh-8F-06f" id="P02-wb-dy8"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="absoluteCell" destination="T8d-bn-Ql4" id="tVu-M7-Gwx"/>
+                        <outlet property="fontSizeSlider" destination="oBJ-kW-nUI" id="ft7-Ak-DZC"/>
+                        <outlet property="relativeCell" destination="f8p-Ha-QZx" id="Uwb-EP-iXn"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yFi-0m-7gB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -359,7 +355,7 @@
         <scene sceneID="zdB-Tu-RbP">
             <objects>
                 <tableViewController title="Account" id="Xxq-wa-FFq" customClass="SettingViewController" customModule="TesSoMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zbY-Wg-o1l">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Account" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zbY-Wg-o1l">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -465,8 +461,8 @@
         <!--Notification-->
         <scene sceneID="UAr-yJ-aC3">
             <objects>
-                <tableViewController title="Notification" id="ePW-yX-uxK" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="CJ6-en-muQ">
+                <tableViewController title="Notification" id="ePW-yX-uxK" customClass="SettingViewController" customModule="TesSoMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Notification" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="CJ6-en-muQ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -487,6 +483,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UiQ-s4-IaI">
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="backgroundNotificationSwitchChanged:" destination="ePW-yX-uxK" eventType="valueChanged" id="Rn8-4A-hfO"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -513,6 +512,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e6z-7x-j8z">
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="vibratingNotificationSwitchChanged:" destination="ePW-yX-uxK" eventType="valueChanged" id="fth-vO-ufZ"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -533,6 +535,10 @@
                             <outlet property="delegate" destination="ePW-yX-uxK" id="b9a-My-vbG"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="backgroundNotificationSwitch" destination="UiQ-s4-IaI" id="O3p-7C-MYl"/>
+                        <outlet property="vibratingNotificationSwitch" destination="e6z-7x-j8z" id="Lry-Dj-eC6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQS-LF-eMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -541,8 +547,8 @@
         <!--Streaming-->
         <scene sceneID="T8H-3Q-7Gm">
             <objects>
-                <tableViewController title="Streaming" id="Cdt-BC-dtP" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="h8e-IV-RM2">
+                <tableViewController title="Streaming" id="Cdt-BC-dtP" customClass="SettingViewController" customModule="TesSoMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Streaming" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="h8e-IV-RM2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -557,6 +563,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PCK-wi-mnA">
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="streamingSwitchChanged:" destination="Cdt-BC-dtP" eventType="valueChanged" id="9Mk-ZD-xQm"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Streaming" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYE-3g-zPq">
                                                     <rect key="frame" x="15" y="11" width="520" height="21"/>
@@ -583,6 +592,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EYD-jx-GC9">
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="wifiOnlySwitchChanged:" destination="Cdt-BC-dtP" eventType="valueChanged" id="x0B-Pb-di0"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi Only" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3e-1B-jni">
                                                     <rect key="frame" x="15" y="11" width="520" height="21"/>
@@ -621,6 +633,9 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="5" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="19k-YQ-3ZV">
                                                     <rect key="frame" x="15" y="7" width="499" height="31"/>
+                                                    <connections>
+                                                        <action selector="intervalSliderChanged:" destination="Cdt-BC-dtP" eventType="valueChanged" id="BYl-v4-9M9"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -640,68 +655,22 @@
                             <outlet property="delegate" destination="Cdt-BC-dtP" id="9kC-Nb-wZI"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="intervalLabel" destination="BQz-1Q-gLc" id="Cxt-WV-IYk"/>
+                        <outlet property="intervalSlider" destination="19k-YQ-3ZV" id="mhc-y2-dHo"/>
+                        <outlet property="streamingSwitch" destination="PCK-wi-mnA" id="Qnw-wf-ca0"/>
+                        <outlet property="wifiOnlySwitch" destination="EYD-jx-GC9" id="3Bu-l3-xQp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSu-jP-ePA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1493" y="1448"/>
         </scene>
-        <!--Browser-->
-        <scene sceneID="NEx-fR-VRh">
-            <objects>
-                <tableViewController title="Browser" id="zyY-3w-1BS" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="lNn-YF-k3j">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="Open URL with" id="kMk-sA-3IW">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" textLabel="IKf-bI-qFl" style="IBUITableViewCellStyleDefault" id="AG5-Eg-aiI">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AG5-Eg-aiI" id="Y8y-nd-SFo">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Safari" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IKf-bI-qFl">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="ryh-4g-afJ" style="IBUITableViewCellStyleDefault" id="PhA-3p-gcV">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PhA-3p-gcV" id="8Lb-T1-9RB">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Chrome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ryh-4g-afJ">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="zyY-3w-1BS" id="NDZ-E5-Wcv"/>
-                            <outlet property="delegate" destination="zyY-3w-1BS" id="Qbj-pX-49x"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WTC-U5-Bvm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1493" y="2140"/>
-        </scene>
-        <!--Notification-->
+        <!--Developer Mode-->
         <scene sceneID="WBI-YE-mBX">
             <objects>
-                <tableViewController title="Notification" id="xNu-Me-4mX" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0uc-7g-ued">
+                <tableViewController title="Developer Mode" id="xNu-Me-4mX" customClass="SettingViewController" customModule="TesSoMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Developer" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0uc-7g-ued">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -722,6 +691,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rjh-Xh-r2L">
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="debugLogSwitchChanged:" destination="xNu-Me-4mX" eventType="valueChanged" id="CEj-vC-fpY"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -748,6 +720,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ayH-FH-uxQ">
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="detailNetworkSwitchChanged:" destination="xNu-Me-4mX" eventType="valueChanged" id="Kfl-Rf-pyE"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -768,6 +743,10 @@
                             <outlet property="delegate" destination="xNu-Me-4mX" id="Ioz-Yd-7tN"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="debugLogSwitch" destination="Rjh-Xh-r2L" id="rYN-rA-xAJ"/>
+                        <outlet property="detailNetworkSwitch" destination="ayH-FH-uxQ" id="oh9-J2-alc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o6D-Ad-IEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
