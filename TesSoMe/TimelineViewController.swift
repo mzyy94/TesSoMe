@@ -171,7 +171,9 @@ class TimelineViewController: UITableViewController {
 		} else {
 			self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: paths.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
 			let currentOffset = self.tableView.contentOffset.y
-			self.tableView.setContentOffset(CGPointMake(0.0, topOffset + currentOffset + 64.0), animated: false)
+            let navigationBarHeight = self.navigationController!.navigationBar.frame.height
+            
+			self.tableView.setContentOffset(CGPointMake(0.0, topOffset + currentOffset + navigationBarHeight), animated: false)
 			self.navigationController!.tabBarItem.title = "●"
 			UIView.setAnimationsEnabled(true)
 		}
