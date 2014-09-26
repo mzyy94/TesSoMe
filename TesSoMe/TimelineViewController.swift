@@ -15,6 +15,7 @@ class TimelineViewController: UITableViewController {
 	let apiManager = TessoApiManager()
 
 	var messages: [TesSoMeData] = []
+	var stackedCellPaths: [NSIndexPath] = []
 	var latestMessageId = 0
 	
     override func viewDidLoad() {
@@ -118,12 +119,19 @@ class TimelineViewController: UITableViewController {
         }
     }
 
+	var isScrolling = false
+	
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         clearUnreadMark()
     }
     
     override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         clearUnreadMark()
+		if !decelerate && isScrolling {
+			isScrolling = false
+			insertCellAtPaths(stackedCellPaths)
+			stackedCellPaths.removeAll(keepCapacity: false)
+		}
     }
     
     override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
@@ -132,8 +140,45 @@ class TimelineViewController: UITableViewController {
     
     override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         clearUnreadMark()
+		if isScrolling {
+			isScrolling = false
+			insertCellAtPaths(stackedCellPaths)
+			stackedCellPaths.removeAll(keepCapacity: false)
+		}
     }
     
+	override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+		isScrolling = true
+	}
+
+	func insertCellAtPaths(paths: [NSIndexPath]) {
+		// self.tableview.beginUpdates()
+
+		if paths.count == 0 {
+			return
+		}
+		
+		let topOffset = self.tableView.contentOffset.y
+		let autoScroll = !(topOffset > -60.0) // more
+		
+		UIView.setAnimationsEnabled(false)
+		self.tableView.insertRowsAtIndexPaths(paths, withRowAnimation: .None)
+		
+		if autoScroll {
+			self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: paths.count, inSection: 0), atScrollPosition: .Top, animated: false)
+			UIView.setAnimationsEnabled(true)
+			self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+		} else {
+			self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: paths.count, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+			let currentOffset = self.tableView.contentOffset.y
+			self.tableView.setContentOffset(CGPointMake(0.0, topOffset + currentOffset + 64.0), animated: false)
+			self.navigationController!.tabBarItem.title = "●"
+			UIView.setAnimationsEnabled(true)
+		}
+		
+		// self.tableview.endUpdates()
+	}
+	
 	func updateTimeline() {
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		apiManager.getTimeline(topicid: topic, sinceid: latestMessageId, onSuccess:
@@ -158,25 +203,20 @@ class TimelineViewController: UITableViewController {
 					}
 					self.latestMessageId = self.messages.first!.statusid
 					
-					let topOffset = self.tableView.contentOffset.y
-					let autoScroll = !(topOffset > -60.0) // more
-					
-					dispatch_sync(dispatch_get_main_queue(), {
-						// self.tableview.beginUpdates()
-						
-						UIView.setAnimationsEnabled(false)
-						self.tableView.insertRowsAtIndexPaths(path, withRowAnimation: .None)
-						
-						if autoScroll {
-                            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: insertedCellCount, inSection: 0), atScrollPosition: .Top, animated: false)
-							UIView.setAnimationsEnabled(true)
-							self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
-						} else {
-							self.navigationController!.tabBarItem.title = "●"
-							UIView.setAnimationsEnabled(true)
+					if self.isScrolling {
+						let newStackedCellPaths = path + self.stackedCellPaths
+						self.stackedCellPaths = newStackedCellPaths
+						let topOffset = self.tableView.contentOffset.y
+						if topOffset > -60.0 {
+							dispatch_sync(dispatch_get_main_queue(), {
+								self.navigationController!.tabBarItem.title = "●"
+							})
 						}
-
-						// self.tableview.endUpdates()
+						return
+                    }
+                    
+                    dispatch_sync(dispatch_get_main_queue(), {
+						self.insertCellAtPaths(path)
 					})
 				})
 			}
