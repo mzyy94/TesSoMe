@@ -94,7 +94,7 @@ class TimelineViewController: UITableViewController {
 				self.latestMessageId = self.messages.first!.statusid
 				self.tableView.reloadData()
 				
-				let topCell: UITableViewCell? = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as UITableViewCell?
+				self.refreshControl?.endRefreshing()
 
 				let updateTimelineFetchTimer = NSTimer(timeInterval:Double(5.0), target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
 				NSRunLoop.currentRunLoop().addTimer(updateTimelineFetchTimer, forMode: NSRunLoopCommonModes)
