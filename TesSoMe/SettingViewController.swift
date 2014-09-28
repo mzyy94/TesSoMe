@@ -129,7 +129,7 @@ class SettingViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && indexPath == NSIndexPath(forRow: 0, inSection: 0) {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+            return 100.0
         }
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
