@@ -8,6 +8,14 @@
 
 import UIKit
 
+
+enum TessoMessageType: Int {
+	case Unknown = -1
+	case Message = 0
+	case Drawing = 1
+	case File = 2
+};
+
 class TesSoMeData: NSObject {
 	
 	var statusid = -1
@@ -23,14 +31,6 @@ class TesSoMeData: NSObject {
 	var fileURL: NSURL?
 	var fileSize: Int?
 	var fileName: String?
-	
-	
-	enum TessoMessageType: Int {
-		case Unknown = -1
-		case Message = 0
-		case Drawing = 1
-		case File = 2
-	};
 
 	
 	class func dataFromResponce(responce: NSDictionary) -> NSArray {
