@@ -18,6 +18,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 	@IBOutlet weak var messageTextView: UITextView!
 	@IBOutlet weak var timeStampLabel: UILabel!
 	@IBOutlet weak var viaTesSoMeBadge: UIImageView!
+	@IBOutlet weak var previewView: UIImageView!
 	
 	var postedDate: NSDate?
 	
