@@ -48,6 +48,23 @@ class TesSoMeData: NSObject {
         return kml
     }
 	
+	class func convertText(fromKML kml: String) -> String {
+		var message = kml
+		// space replace
+		var space = " "
+		for i in 2...32 {
+			space += " "
+			message = message.stringByReplacingOccurrencesOfString("%sp(\(i))", withString: space)
+		}
+		// new line replace
+		message = message.stringByReplacingOccurrencesOfString("%br()", withString: "\n")
+		
+		// bold characters
+		message = message.stringByReplacingOccurrencesOfString("%b\\(([^\\)]*)\\)", withString: "$1", options: .RegularExpressionSearch)
+			
+		return message
+	}
+	
 	init(data: NSDictionary) {
 		super.init()
 		
