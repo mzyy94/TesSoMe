@@ -55,7 +55,7 @@ class SettingViewController: UITableViewController {
 		}
         switch tableView.restorationIdentifier! {
         case "Appearance":
-            if indexPath.section == 0 { // timestamp
+            if indexPath.section == 1 { // timestamp
                 for i in 0..<tableView.numberOfRowsInSection(indexPath.section) {
                     tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: indexPath.section))?.accessoryType = .None
                 }
@@ -74,6 +74,7 @@ class SettingViewController: UITableViewController {
         }
     }
 	
+	@IBOutlet weak var previewCell: UITableViewCell!
 	@IBOutlet weak var relativeCell: UITableViewCell!
 	@IBOutlet weak var absoluteCell: UITableViewCell!
 	@IBOutlet weak var fontSizeSlider: UISlider!
@@ -81,6 +82,8 @@ class SettingViewController: UITableViewController {
 	@IBAction func fontSizeSliderChanged(sender: UISlider) {
 		sender.value = Float(Int(sender.value))
 		ud.setFloat(sender.value, forKey: "fontSize")
+        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
+        cell.messageTextView.font = UIFont.systemFontOfSize(CGFloat(sender.value))
 	}
 	
 	func initAppearanceSetting() {
@@ -95,6 +98,41 @@ class SettingViewController: UITableViewController {
 		}
 	}
 	
+	
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && indexPath == NSIndexPath(forRow: 0, inSection: 0) {
+            let nib = UINib(nibName: "TimelineMessageCell", bundle: nil)
+            self.tableView.registerNib(nib, forCellReuseIdentifier: "MessageCell")
+
+			var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
+            let postedDate = NSDate(timeIntervalSinceNow: -557.0)
+            let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
+			let cellData = TesSoMeData(data: data)
+			cellData.setDataToCell(&cell)
+            cell.updateTimestamp()
+			
+			return cell
+		}
+        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+	}
+	
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && section == 0 {
+            return 1
+        }
+        return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+	
+    override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+        return super.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && indexPath == NSIndexPath(forRow: 0, inSection: 0) {
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+    }
 	
 	// Post
 	@IBOutlet weak var viaSignatureSwitch: UISwitch!

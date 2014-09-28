@@ -267,6 +267,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
+                            <tableViewSection headerTitle="Preview" id="BwH-Fb-qw3">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="knC-Rb-SYN">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="knC-Rb-SYN" id="SLl-17-aS2">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Timestamp" id="Xm3-0B-mDw">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="bwn-0b-zGT" style="IBUITableViewCellStyleDefault" id="f8p-Ha-QZx">
@@ -344,6 +354,7 @@
                     <connections>
                         <outlet property="absoluteCell" destination="T8d-bn-Ql4" id="tVu-M7-Gwx"/>
                         <outlet property="fontSizeSlider" destination="oBJ-kW-nUI" id="ft7-Ak-DZC"/>
+                        <outlet property="previewCell" destination="knC-Rb-SYN" id="Dcp-vo-zgq"/>
                         <outlet property="relativeCell" destination="f8p-Ha-QZx" id="Uwb-EP-iXn"/>
                     </connections>
                 </tableViewController>
