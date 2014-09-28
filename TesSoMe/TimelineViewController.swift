@@ -17,6 +17,7 @@ class TimelineViewController: UITableViewController {
 	var messages: [TesSoMeData] = []
 	var stackedCellPaths: [NSIndexPath] = []
 	var latestMessageId = 0
+	var messageFontSize = 0.0 as CGFloat
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,12 @@ class TimelineViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
+		self.tableView.reloadData()
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -66,7 +73,7 @@ class TimelineViewController: UITableViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
 		let data = messages[indexPath.row]
         // Configure the cell...
-		data.setDataToCell(&cell)
+		data.setDataToCell(&cell, withFontSize: messageFontSize)
 		cell.updateTimestamp()
         return cell
     }

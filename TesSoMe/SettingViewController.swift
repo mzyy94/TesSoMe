@@ -108,7 +108,7 @@ class SettingViewController: UITableViewController {
             let postedDate = NSDate(timeIntervalSinceNow: -557.0)
             let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
 			let cellData = TesSoMeData(data: data)
-			cellData.setDataToCell(&cell)
+			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")))
             cell.updateTimestamp()
 			
 			return cell
