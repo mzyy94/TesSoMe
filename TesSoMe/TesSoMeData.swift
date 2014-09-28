@@ -171,11 +171,29 @@ class TesSoMeData: NSObject {
 		cell.usernameLabel.text = "@" + username
 		cell.nicknameLabel.text = nickname
 		cell.timeStampLabel.text = NSLocalizedString("0 s", comment: "Initial seconds")
-		cell.messageTextView.attributedText = generateAttributedMessage()
-		cell.messageTextView.font = UIFont.systemFontOfSize(fontSize)
 		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + username + ".png"), forState: .Normal)
 		cell.postedDate = date
 		cell.viaTesSoMeBadge.hidden = !isViaTesSoMe()
+		switch type {
+		case .Message:
+			cell.messageTextView.attributedText = generateAttributedMessage()
+			cell.messageTextView.font = UIFont.systemFontOfSize(fontSize)
+			cell.previewView.image = nil
+		case .File:
+			if fileURL!.lastPathComponent.rangeOfString("(.[jJ][pP][eE]?[gG]|.[pP][nN][gG]|.[gG][iI][fF]|.[bB][mM][pP])$", options: .RegularExpressionSearch) != nil {
+				cell.messageTextView.font = UIFont.systemFontOfSize(0)
+				cell.previewView.sd_setImageWithURL(fileURL)
+			}
+		case .Drawing:
+			cell.messageTextView.attributedText = generateAttributedMessage()
+			cell.messageTextView.font = UIFont.systemFontOfSize(fontSize)
+			let drawingURL = NSURL(string: "https://tesso.pw/img/snspics/\(statusid).png")
+			cell.previewView.sd_setImageWithURL(drawingURL)
+		default:
+			NSLog("Unknown post type found.")
+		}
+		
+		
 	}
 	
 }
