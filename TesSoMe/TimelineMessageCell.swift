@@ -42,7 +42,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 		
 		self.viaTesSoMeBadge.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
 		self.viaTesSoMeBadge.layer.borderWidth = 1.0
-		self.viaTesSoMeBadge.layer.cornerRadius = 12.0
+		self.viaTesSoMeBadge.layer.cornerRadius = self.viaTesSoMeBadge.frame.height / 2
 		self.viaTesSoMeBadge.clipsToBounds = true
 		
 		self.messageTextView.textContainer.lineFragmentPadding = 0
