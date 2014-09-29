@@ -42,6 +42,8 @@ class TimelineViewController: UITableViewController {
 		
 		self.refreshControl!.addTarget(self, action: Selector("updateTimeline"), forControlEvents: .ValueChanged)
 		
+		self.tableView.addInfiniteScrollingWithActionHandler(loadOlderTimeline)
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -114,6 +116,35 @@ class TimelineViewController: UITableViewController {
 				self.updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
 				NSRunLoop.currentRunLoop().addTimer(self.updateTimestampTimer!, forMode: NSRunLoopCommonModes)
 
+			}
+			, onFailure: nil
+		)
+	}
+	
+	func loadOlderTimeline() {
+		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
+		let oldestMessageId = messages.last?.statusid
+		apiManager.getTimeline(topicid: topic, maxid: oldestMessageId, onSuccess:
+			{ data in
+				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+					var timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]
+					if timeline.count <= 1 { // No more messages
+						return
+					}
+					
+					var path:[NSIndexPath] = []
+					let insertIndex = self.messages.count
+					timeline.removeAtIndex(0)
+					for (i, post) in enumerate(timeline) {
+						self.messages.insert(TesSoMeData(data: post), atIndex: insertIndex + i)
+						path.append(NSIndexPath(forRow: insertIndex + i, inSection: 0))
+					}
+					
+					dispatch_sync(dispatch_get_main_queue(), {
+						self.tableView.reloadData()
+						self.tableView.infiniteScrollingView.stopAnimating()
+					})
+				})
 			}
 			, onFailure: nil
 		)
