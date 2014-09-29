@@ -17,6 +17,7 @@
 #import <SWTableViewCell/SWTableViewCell.h>
 #import <REMenu/REMenu.h>
 #import <MPGNotification/MPGNotification.h>
+#import <SVPullToRefresh/UIScrollView+SVInfiniteScrolling.h>
 
 
 #endif

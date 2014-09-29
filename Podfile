@@ -9,6 +9,7 @@ pod 'SDWebImage'
 pod 'SWTableViewCell'
 pod 'REMenu'
 pod 'MPGNotification'
+pod 'SVPullToRefresh'
 
 end
 
