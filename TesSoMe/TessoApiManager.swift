@@ -130,7 +130,7 @@ class TessoApiManager: NSObject {
 		})
 	}
 
-	func sendData(#mode: TesSoMeSendMode, target: String? = nil, text: String? = nil, data: String? = nil, file: NSDictionary? = nil, onProgress: ((session: NSURLSession!, task: NSURLSessionTask!, bytesSent:Int64, totalBytesSent:Int64, totalBytesExpectedToSend: Int64) -> Void)! = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+	func sendData(#mode: TesSoMeSendMode, target: String? = nil, text: String? = nil, data: String? = nil, fileURL: NSURL? = nil, onProgress: ((session: NSURLSession!, task: NSURLSessionTask!, bytesSent:Int64, totalBytesSent:Int64, totalBytesExpectedToSend: Int64) -> Void)! = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
 		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
@@ -148,55 +148,27 @@ class TessoApiManager: NSObject {
 		}
 		
 		
-		if file != nil {
-			if file!["data"] == nil || file!["name"] == nil || file!["mimeType"] == nil {
-				let errorDetails = NSDictionary.dictionaryWithObjects([NSLocalizedString("Attached file is broken", comment: "Attached file is broken")], forKeys: [NSLocalizedDescriptionKey], count: 1)
-				let err = NSError(domain: "File attachment", code: 591, userInfo: errorDetails)
-				onFailure?(err)
-				return
-			}
-			switch file!["mimeType"] as String {
-			case "image/jpeg":
-				let imgData = NSData(data: UIImageJPEGRepresentation(file!["data"] as UIImage, 0.80))
-				
-				let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock: {(formData: AFMultipartFormData!) in
-					formData.appendPartWithFileData(imgData, name: "file", fileName: file!["name"] as String, mimeType: file!["mimeType"] as String)
-					}
-					, success:
-					{
-						res, data in
-						self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
-					}
-					, failure:
-					{
-						res, err in
-						false // to avoid error
-						onFailure?(err)
-				})
-				
-				req.setTaskDidSendBodyDataBlock(onProgress)
-				task.resume()
-			default:
-				let mime = "application/octet-stream"
-				let data = NSData(data: file!["data"] as NSData)
-				let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock: {(formData: AFMultipartFormData!) in
-					formData.appendPartWithFileData(data, name: "file", fileName: file!["name"] as String, mimeType: "application/octet-stream")
-					}
-					, success:
-					{
-						res, data in
-						self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
-					}
-					, failure:
-					{
-						res, err in
-						false // to avoid error
-						onFailure?(err)
-				})
-				
-				req.setTaskDidSendBodyDataBlock(onProgress)
-				task.resume()
-			}
+		if fileURL != nil {
+			let data = NSData(contentsOfURL: fileURL!)
+			let fileName = fileURL?.lastPathComponent
+			let mimeType = getMimeType(fromURL: fileURL!)
+			let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock: {(formData: AFMultipartFormData!) in
+				formData.appendPartWithFileData(data, name: "file", fileName: fileName, mimeType: mimeType)
+				}
+				, success:
+				{
+					res, data in
+					self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
+				}
+				, failure:
+				{
+					res, err in
+					false // to avoid error
+					onFailure?(err)
+			})
+			
+			req.setTaskDidSendBodyDataBlock(onProgress)
+			task.resume()
 		} else {
 			println(param)
 
@@ -252,8 +224,16 @@ class TessoApiManager: NSObject {
 		self.sendData(mode: .FilePost, target: String(topicid), data: String(fileId), onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
-	func uploadFile(#file: NSDictionary, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		self.sendData(mode: .FileUpload, file: file, onSuccess: onSuccess, onFailure: onFailure)
+	func uploadFile(#fileURL: NSURL, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.sendData(mode: .FileUpload, fileURL: fileURL, onSuccess: onSuccess, onFailure: onFailure)
+	}
+	
+	func uploadFile(#fileURL: NSURL, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil)(topicid: Int) {
+		self.sendData(mode: .FileUpload, fileURL: fileURL, onSuccess: {
+			res in
+			let id = (((res["data"] as NSArray)[0] as NSDictionary)["id"] as String).toInt()!
+			self.postFile(topicid: topicid, fileId: id, onSuccess: onSuccess, onFailure: onFailure)
+			}, onFailure: onFailure)
 	}
 	
 	func convertDateToTessoAPIStyle(date:NSDate) -> String {
@@ -275,12 +255,28 @@ class TessoApiManager: NSObject {
 		self.sendData(mode: .EditClass, target: convertDateToTessoAPIStyle(date), data: "1", onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
-	func updateProfile(nickname: String? = nil, profile: String? = nil, icon: NSDictionary? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		self.sendData(mode: .UpdateProfile, target: nickname, text: profile, file: icon, onSuccess: onSuccess, onFailure: onFailure)
+	func updateProfile(nickname: String? = nil, profile: String? = nil, iconURL: NSURL? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		self.sendData(mode: .UpdateProfile, target: nickname, text: profile, fileURL: iconURL, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
 	func addTitle(#username: String, title: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		self.sendData(mode: .AddTitle, target: username, text: title, onSuccess: onSuccess, onFailure: onFailure)
 	}
+
+	func getMimeType(fromURL fileURL: NSURL) -> String {
+		let req = NSURLRequest(URL: fileURL, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 0.1)
+		var err: NSError? = nil
+		var res: NSURLResponse? = nil
+		
+		let data = NSURLConnection.sendSynchronousRequest(req, returningResponse: &res, error: &err)
+		let mimeType = res?.MIMEType
+		
+		if mimeType == nil {
+			return "application/octet-stream"
+		}
+		
+		return mimeType!
+	}
 	
+
 }
