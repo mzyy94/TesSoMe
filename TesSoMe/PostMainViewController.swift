@@ -44,6 +44,8 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		setTitleBtnText("Message")
 		messageType = .Message
 		
+		self.textView.font = UIFont.systemFontOfSize(CGFloat(ud.floatForKey("fontSize") + 4.0))
+		
 		let topicMenuViewController = appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
 		topicid = topicMenuViewController.currentTopic
 		
