@@ -78,12 +78,19 @@ class SettingViewController: UITableViewController {
 	@IBOutlet weak var relativeCell: UITableViewCell!
 	@IBOutlet weak var absoluteCell: UITableViewCell!
 	@IBOutlet weak var fontSizeSlider: UISlider!
+	@IBOutlet weak var badgeSwitch: UISwitch!
 	
 	@IBAction func fontSizeSliderChanged(sender: UISlider) {
 		sender.value = Float(Int(sender.value))
 		ud.setFloat(sender.value, forKey: "fontSize")
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
         cell.messageTextView.font = UIFont.systemFontOfSize(CGFloat(sender.value))
+	}
+	
+	@IBAction func badgeSwitchChanged(sender: UISwitch) {
+		ud.setBool(sender.on, forKey: "badge")
+		let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
+		cell.viaTesSoMeBadge.hidden = !sender.on
 	}
 	
 	func initAppearanceSetting() {
@@ -96,6 +103,8 @@ class SettingViewController: UITableViewController {
 		} else {
 			absoluteCell.accessoryType = .Checkmark
 		}
+		
+		badgeSwitch.on = ud.boolForKey("badge")
 	}
 	
 	
@@ -108,7 +117,7 @@ class SettingViewController: UITableViewController {
             let postedDate = NSDate(timeIntervalSinceNow: -557.0)
             let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
 			let cellData = TesSoMeData(data: data)
-			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")))
+			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: ud.boolForKey("badge"))
             cell.updateTimestamp()
 			
 			return cell

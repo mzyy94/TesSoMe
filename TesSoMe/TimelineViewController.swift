@@ -18,6 +18,7 @@ class TimelineViewController: UITableViewController {
 	var stackedCellPaths: [NSIndexPath] = []
 	var latestMessageId = 0
 	var messageFontSize = 0.0 as CGFloat
+	var withBadge: Bool = true
 	
 	var updateTimelineFetchTimer: NSTimer? = nil
 	var updateTimestampTimer: NSTimer? = nil
@@ -50,6 +51,7 @@ class TimelineViewController: UITableViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
+		withBadge = ud.boolForKey("badge")
 		self.tableView.reloadData()
 	}
 
@@ -76,7 +78,7 @@ class TimelineViewController: UITableViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
 		let data = messages[indexPath.row]
         // Configure the cell...
-		data.setDataToCell(&cell, withFontSize: messageFontSize)
+		data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge)
 		cell.updateTimestamp()
         return cell
     }

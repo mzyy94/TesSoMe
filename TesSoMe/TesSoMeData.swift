@@ -183,14 +183,14 @@ class TesSoMeData: NSObject {
 		return message.rangeOfString("    $", options: .RegularExpressionSearch) != nil
 	}
 	
-	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat) {
+	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool) {
 		cell.statusIdLabel.text = String(statusid)
 		cell.usernameLabel.text = "@" + username
 		cell.nicknameLabel.text = nickname
 		cell.timeStampLabel.text = NSLocalizedString("0 s", comment: "Initial seconds")
 		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + username + ".png"), forState: .Normal)
 		cell.postedDate = date
-		cell.viaTesSoMeBadge.hidden = !isViaTesSoMe()
+		cell.viaTesSoMeBadge.hidden = !withBadge || !isViaTesSoMe()
 		switch type {
 		case .Message:
 			cell.messageTextView.attributedText = generateAttributedMessage()

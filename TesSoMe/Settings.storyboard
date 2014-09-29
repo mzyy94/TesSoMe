@@ -345,6 +345,40 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Badge" id="jRO-IG-s3z">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="k6u-SL-f0m">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k6u-SL-f0m" id="Drt-mt-oFw">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show &quot;via TesSoMe&quot; badge" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-xI-FVG">
+                                                    <rect key="frame" x="15" y="11" width="520" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JpJ-Mt-drk">
+                                                    <rect key="frame" x="543" y="7" width="51" height="30"/>
+                                                    <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="badgeSwitchChanged:" destination="tAh-8F-06f" eventType="valueChanged" id="oZu-PF-dtt"/>
+                                                        <action selector="viaSignatureSwitchChanged:" destination="FCf-hR-DUx" eventType="valueChanged" id="3kR-ae-ziG"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JpJ-Mt-drk" firstAttribute="leading" secondItem="PdK-xI-FVG" secondAttribute="trailing" constant="8" symbolic="YES" id="8ml-yc-1RM"/>
+                                                <constraint firstItem="PdK-xI-FVG" firstAttribute="top" secondItem="Drt-mt-oFw" secondAttribute="topMargin" constant="3" id="HCE-4u-yGz"/>
+                                                <constraint firstItem="PdK-xI-FVG" firstAttribute="leading" secondItem="Drt-mt-oFw" secondAttribute="leadingMargin" constant="7" id="JuF-VW-4kK"/>
+                                                <constraint firstItem="JpJ-Mt-drk" firstAttribute="top" secondItem="Drt-mt-oFw" secondAttribute="topMargin" constant="-1" id="dB1-1d-85K"/>
+                                                <constraint firstItem="JpJ-Mt-drk" firstAttribute="trailing" secondItem="Drt-mt-oFw" secondAttribute="trailingMargin" id="e3B-EM-v7a"/>
+                                                <constraint firstItem="PdK-xI-FVG" firstAttribute="centerY" secondItem="Drt-mt-oFw" secondAttribute="centerY" id="pjW-DG-z7f"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="tAh-8F-06f" id="Ehj-9Z-9YA"/>
@@ -353,6 +387,7 @@
                     </tableView>
                     <connections>
                         <outlet property="absoluteCell" destination="T8d-bn-Ql4" id="tVu-M7-Gwx"/>
+                        <outlet property="badgeSwitch" destination="JpJ-Mt-drk" id="ySI-fT-8R5"/>
                         <outlet property="fontSizeSlider" destination="oBJ-kW-nUI" id="ft7-Ak-DZC"/>
                         <outlet property="previewCell" destination="knC-Rb-SYN" id="Dcp-vo-zgq"/>
                         <outlet property="relativeCell" destination="f8p-Ha-QZx" id="Uwb-EP-iXn"/>
