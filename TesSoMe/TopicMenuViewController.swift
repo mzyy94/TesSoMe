@@ -146,6 +146,9 @@ class TopicMenuViewController: UITableViewController {
 		let cell = tableView.cellForRowAtIndexPath(indexPath) as TopicCell
 		currentTopic = cell.topicNumLabel.text!.toInt()! - 99
 		tableView.reloadData()
+		let timelineViewController = appDelegate.frostedViewController?.contentViewController.childViewControllers.first?.childViewControllers.first as TimelineViewController
+		timelineViewController.resetTimeline()
+		appDelegate.frostedViewController?.hideMenuViewController()
 	}
 
 }

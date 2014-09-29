@@ -19,6 +19,9 @@ class TimelineViewController: UITableViewController {
 	var latestMessageId = 0
 	var messageFontSize = 0.0 as CGFloat
 	
+	var updateTimelineFetchTimer: NSTimer? = nil
+	var updateTimestampTimer: NSTimer? = nil
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -103,14 +106,21 @@ class TimelineViewController: UITableViewController {
 				
 				self.refreshControl?.endRefreshing()
 
-				let updateTimelineFetchTimer = NSTimer(timeInterval:Double(5.0), target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
-				NSRunLoop.currentRunLoop().addTimer(updateTimelineFetchTimer, forMode: NSRunLoopCommonModes)
-				let updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
-				NSRunLoop.currentRunLoop().addTimer(updateTimestampTimer, forMode: NSRunLoopCommonModes)
+				self.updateTimelineFetchTimer = NSTimer(timeInterval:Double(5.0), target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
+				NSRunLoop.currentRunLoop().addTimer(self.updateTimelineFetchTimer!, forMode: NSRunLoopCommonModes)
+				self.updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
+				NSRunLoop.currentRunLoop().addTimer(self.updateTimestampTimer!, forMode: NSRunLoopCommonModes)
 
 			}
 			, onFailure: nil
 		)
+	}
+	
+	func resetTimeline() {
+		updateTimelineFetchTimer?.invalidate()
+		updateTimestampTimer?.invalidate()
+		messages = []
+		getTimeline()
 	}
 	
 	func updateTimestamp() {
