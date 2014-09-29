@@ -63,11 +63,10 @@ class SettingViewController: UITableViewController {
                 selectedCell.accessoryType = .Checkmark
                 selectedCell.selected = false
 				
-				if indexPath.row == 0 { // Relative
-					ud.setBool(true, forKey: "relativeTimestamp")
-				} else { // Absolute
-					ud.setBool(false, forKey: "relativeTimestamp")
-				}
+				let isRelative = !Bool(indexPath.row)
+				ud.setBool(isRelative, forKey: "relativeTimestamp")
+				let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
+				cell.updateTimestamp(relative: isRelative)
             }
         default:
             return
@@ -118,7 +117,7 @@ class SettingViewController: UITableViewController {
             let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
 			let cellData = TesSoMeData(data: data)
 			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: ud.boolForKey("badge"))
-            cell.updateTimestamp()
+			cell.updateTimestamp(relative: ud.boolForKey("relativeTimestamp"))
 			
 			return cell
 		}

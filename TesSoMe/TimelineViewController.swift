@@ -19,6 +19,7 @@ class TimelineViewController: UITableViewController {
 	var latestMessageId = 0
 	var messageFontSize = 0.0 as CGFloat
 	var withBadge: Bool = true
+	var timestampIsRelative: Bool = true
 	
 	var updateTimelineFetchTimer: NSTimer? = nil
 	var updateTimestampTimer: NSTimer? = nil
@@ -52,6 +53,7 @@ class TimelineViewController: UITableViewController {
 		super.viewDidAppear(animated)
 		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
 		withBadge = ud.boolForKey("badge")
+		timestampIsRelative = ud.boolForKey("relativeTimestamp")
 		self.tableView.reloadData()
 	}
 
@@ -79,7 +81,7 @@ class TimelineViewController: UITableViewController {
 		let data = messages[indexPath.row]
         // Configure the cell...
 		data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge)
-		cell.updateTimestamp()
+		cell.updateTimestamp(relative: timestampIsRelative)
         return cell
     }
 	
@@ -136,7 +138,7 @@ class TimelineViewController: UITableViewController {
 	func updateTimestamp() {
 		var cells: [TimelineMessageCell] = tableView.visibleCells() as [TimelineMessageCell]
 		for cell in cells {
-			cell.updateTimestamp()
+			cell.updateTimestamp(relative: timestampIsRelative)
 		}
 	}
 	

@@ -52,8 +52,18 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 		self.rightUtilityButtons = self.rightButtons()
 		self.delegate = self
     }
-    
-    func updateTimestamp() {
+	
+	func updateTimestamp(#relative: Bool) {
+		if relative {
+			updateRelativeTimestamp()
+		} else {
+			let dateFormatter = NSDateFormatter()
+			dateFormatter.dateFormat = "MM/dd HH:mm:ss"
+			self.timeStampLabel.text = dateFormatter.stringFromDate(postedDate!)
+		}
+	}
+	
+    private func updateRelativeTimestamp() {
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "s's'"
 		let timeDate = NSDate(timeIntervalSinceReferenceDate: -postedDate!.timeIntervalSinceNow)
