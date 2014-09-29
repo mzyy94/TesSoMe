@@ -305,6 +305,15 @@ class SettingViewController: UITableViewController {
 	
 	override func viewWillDisappear(animated: Bool) {
 		ud.synchronize()
+		
+		switch tableView.restorationIdentifier! {
+		case "Streaming":
+			let timelineViewController = appDelegate.frostedViewController?.contentViewController.childViewControllers.first?.childViewControllers.first as TimelineViewController
+			timelineViewController.setUpdateTimelineFetchTimer()
+		default:
+			false // Add more functions
+		}
+		
 	}
 
     override func didReceiveMemoryWarning() {

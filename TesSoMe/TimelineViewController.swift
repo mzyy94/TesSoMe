@@ -106,8 +106,7 @@ class TimelineViewController: UITableViewController {
 				
 				self.refreshControl?.endRefreshing()
 
-				self.updateTimelineFetchTimer = NSTimer(timeInterval:Double(5.0), target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
-				NSRunLoop.currentRunLoop().addTimer(self.updateTimelineFetchTimer!, forMode: NSRunLoopCommonModes)
+				self.setUpdateTimelineFetchTimer()
 				self.updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
 				NSRunLoop.currentRunLoop().addTimer(self.updateTimestampTimer!, forMode: NSRunLoopCommonModes)
 
@@ -121,6 +120,15 @@ class TimelineViewController: UITableViewController {
 		updateTimestampTimer?.invalidate()
 		messages = []
 		getTimeline()
+	}
+	
+	func setUpdateTimelineFetchTimer() {
+		updateTimelineFetchTimer?.invalidate()
+		if self.ud.boolForKey("streaming") {
+			let interval = NSTimeInterval(ud.floatForKey("interval"))
+			updateTimelineFetchTimer = NSTimer(timeInterval:interval, target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
+			NSRunLoop.currentRunLoop().addTimer(updateTimelineFetchTimer!, forMode: NSRunLoopCommonModes)
+		}
 	}
 	
 	func updateTimestamp() {
