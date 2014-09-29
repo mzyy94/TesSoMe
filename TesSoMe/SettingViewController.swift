@@ -166,7 +166,6 @@ class SettingViewController: UITableViewController {
 	
 	// Streaming
 	@IBOutlet weak var streamingSwitch: UISwitch!
-	@IBOutlet weak var wifiOnlySwitch: UISwitch!
 	@IBOutlet weak var intervalSlider: UISlider!
 	@IBOutlet weak var intervalLabel: UILabel!
 	
@@ -174,11 +173,7 @@ class SettingViewController: UITableViewController {
 	
 	@IBAction func streamingSwitchChanged(sender: UISwitch) {
 		ud.setBool(sender.on, forKey: "streaming")
-		wifiOnlySwitch.enabled = sender.on
-	}
-	
-	@IBAction func wifiOnlySwitchChanged(sender: UISwitch) {
-		ud.setBool(sender.on, forKey: "wifiOnly")
+		intervalSlider.enabled = sender.on
 	}
 	
 	@IBAction func intervalSliderChanged(sender: UISlider) {
@@ -191,9 +186,8 @@ class SettingViewController: UITableViewController {
 	func initStreamingSetting() {
 		streamingSwitch.on = ud.boolForKey("streaming")
 		if !streamingSwitch.on {
-			wifiOnlySwitch.enabled = false
+			intervalSlider.enabled = false
 		}
-		wifiOnlySwitch.on = ud.boolForKey("wifiOnly")
 		intervalSlider.value = ud.floatForKey("interval")
 		intervalLabel.text = NSString(format: intervalLabelFormat, Int(ud.floatForKey("interval")))
 	}

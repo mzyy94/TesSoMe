@@ -595,40 +595,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="d4h-WL-tZF">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d4h-WL-tZF" id="SAJ-TT-Cau">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EYD-jx-GC9">
-                                                    <rect key="frame" x="543" y="7" width="51" height="30"/>
-                                                    <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="wifiOnlySwitchChanged:" destination="Cdt-BC-dtP" eventType="valueChanged" id="x0B-Pb-di0"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wi-Fi Only" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3e-1B-jni">
-                                                    <rect key="frame" x="15" y="11" width="520" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="EYD-jx-GC9" firstAttribute="leading" secondItem="F3e-1B-jni" secondAttribute="trailing" constant="8" symbolic="YES" id="1S9-nf-5xi"/>
-                                                <constraint firstItem="EYD-jx-GC9" firstAttribute="trailing" secondItem="SAJ-TT-Cau" secondAttribute="trailingMargin" id="Fbf-aH-jBP"/>
-                                                <constraint firstItem="F3e-1B-jni" firstAttribute="top" secondItem="SAJ-TT-Cau" secondAttribute="topMargin" constant="3" id="khC-hq-POF"/>
-                                                <constraint firstItem="F3e-1B-jni" firstAttribute="centerY" secondItem="SAJ-TT-Cau" secondAttribute="centerY" id="uWi-ep-ZXd"/>
-                                                <constraint firstItem="EYD-jx-GC9" firstAttribute="top" secondItem="SAJ-TT-Cau" secondAttribute="topMargin" constant="-1" id="vhC-vC-5a2"/>
-                                                <constraint firstItem="F3e-1B-jni" firstAttribute="leading" secondItem="SAJ-TT-Cau" secondAttribute="leadingMargin" constant="7" id="zeo-hQ-zqz"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Interval" id="Siy-Ns-D8y">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="le7-As-FC4">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="le7-As-FC4">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="le7-As-FC4" id="VYR-tQ-j7Q">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -670,7 +641,6 @@
                         <outlet property="intervalLabel" destination="BQz-1Q-gLc" id="Cxt-WV-IYk"/>
                         <outlet property="intervalSlider" destination="19k-YQ-3ZV" id="mhc-y2-dHo"/>
                         <outlet property="streamingSwitch" destination="PCK-wi-mnA" id="Qnw-wf-ca0"/>
-                        <outlet property="wifiOnlySwitch" destination="EYD-jx-GC9" id="3Bu-l3-xQp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSu-jP-ePA" userLabel="First Responder" sceneMemberID="firstResponder"/>

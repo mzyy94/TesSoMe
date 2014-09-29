@@ -75,7 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		defaultConfig.setObject(true, forKey: "backgroundNotification")
 		defaultConfig.setObject(true, forKey: "vibratingNotification")
 		defaultConfig.setObject(true, forKey: "streaming")
-		defaultConfig.setObject(true, forKey: "wifiOnly")
 		defaultConfig.setObject(10.0, forKey: "interval")
 		defaultConfig.setObject(false, forKey: "debug")
 		defaultConfig.setObject(false, forKey: "detailNetwork")
