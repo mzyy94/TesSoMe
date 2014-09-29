@@ -18,6 +18,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	var preparedText = ""
 	
     var fileURLtoPost: NSURL? = nil
+	var topicid = 1
 	
 	@IBOutlet weak var postTitleBtn: UIButton!
 	@IBOutlet weak var textView: UITextView!
@@ -42,6 +43,9 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		
 		setTitleBtnText("Message")
 		messageType = .Message
+		
+		let topicMenuViewController = appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
+		topicid = topicMenuViewController.currentTopic
 		
 		self.providesPresentationContextTransitionStyle = true
 		self.definesPresentationContext = true
@@ -175,15 +179,15 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		switch messageType {
 		case .Message:
 			closeView({
-				apiManager.sendMessage(topicid: 1, message: text, onSuccess: nil, onFailure: onFailure)
+				apiManager.sendMessage(topicid: self.topicid, message: text, onSuccess: nil, onFailure: onFailure)
 			})
 		case .File:
 			closeView({
-				apiManager.uploadFile(fileURL: self.fileURLtoPost!, onSuccess: nil, onFailure: onFailure)(topicid: 1)
+				apiManager.uploadFile(fileURL: self.fileURLtoPost!, onSuccess: nil, onFailure: onFailure)(topicid: self.topicid)
 			})
 		case .Drawing:
 			closeView({
-				apiManager.sendMessage(topicid: 1, message: text, onSuccess: nil, onFailure: onFailure)
+				apiManager.sendMessage(topicid: self.topicid, message: text, onSuccess: nil, onFailure: onFailure)
 			})
 		default:
 			NSLog("Unknown message type to post (value: %d)", messageType.toRaw())
