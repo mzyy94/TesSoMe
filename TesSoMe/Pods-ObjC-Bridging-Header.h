@@ -18,6 +18,7 @@
 #import <REMenu/REMenu.h>
 #import <MPGNotification/MPGNotification.h>
 #import <SVPullToRefresh/UIScrollView+SVInfiniteScrolling.h>
+#import <IDMPhotoBrowser/IDMPhotoBrowser.h>
 
 
 #endif

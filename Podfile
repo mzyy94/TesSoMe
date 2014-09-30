@@ -10,6 +10,7 @@ pod 'SWTableViewCell'
 pod 'REMenu'
 pod 'MPGNotification'
 pod 'SVPullToRefresh'
+pod 'IDMPhotoBrowser'
 
 end
 
