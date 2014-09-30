@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class PostMainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	let app = UIApplication.sharedApplication()
@@ -121,6 +122,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 					fileManager.createFileAtPath(fileURLtoPost!.relativePath!, contents: fileToPost, attributes: nil)
 					self.setTitleBtnText("File upload")
 					self.messageType = .File
+					self.addPreviewImage(image)
 				}
 			}
 			picker.dismissViewControllerAnimated(true, completion: nil)
@@ -137,8 +139,47 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			if picker.sourceType == .Camera && mediaType == "public.movie" {
 				UISaveVideoAtPathToSavedPhotosAlbum(fileURLtoPost?.path, self, nil, nil)
 			}
+			self.addPreviewImage(makeThumbNail(fileURLtoPost!))
 			picker.dismissViewControllerAnimated(true, completion: nil)
         }
+	}
+	
+	func makeThumbNail(fileURL: NSURL) -> UIImage! {
+		let asset = AVURLAsset(URL: fileURL, options: nil)
+		if asset.tracksWithMediaCharacteristic(AVMediaTypeVideo) != nil {
+			let imageGenerator = AVAssetImageGenerator(asset: asset)
+			let duration = CMTimeGetSeconds(asset.duration)
+			let startPoint = CMTimeMakeWithSeconds(duration / 8, 600)
+			var err: NSError? = nil
+			let thumbnailCGImage = imageGenerator.copyCGImageAtTime(startPoint, actualTime: nil, error: &err)
+			if thumbnailCGImage != nil {
+				return UIImage(CGImage: thumbnailCGImage)
+			}
+		}
+		return nil
+	}
+	
+	func addPreviewImage(image: UIImage!) {
+		self.textView.editable = false
+
+		if image == nil {
+			return
+		}
+		let previewImage = UIImageView()
+		previewImage.setTranslatesAutoresizingMaskIntoConstraints(false)
+		
+		self.view.addSubview(previewImage)
+		
+		let constrains: [NSLayoutAttribute: CGFloat] = [.Top: 8.0, .Left: 8.0, .Right: -8.0, .Bottom: -8.0]
+		
+		for (layoutAttribute, value) in constrains {
+			let constraint = NSLayoutConstraint(item: previewImage, attribute: layoutAttribute, relatedBy: .Equal, toItem: self.view, attribute: layoutAttribute, multiplier: 1.0, constant: value)
+			self.view.addConstraint(constraint)
+		}
+		previewImage.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+		previewImage.clipsToBounds = true
+		previewImage.contentMode = UIViewContentMode.ScaleAspectFit
+		previewImage.image = image
 	}
 	
 	func resizeImageActionSheet(image: UIImage, compilation:((UIImage) -> Void)) {
