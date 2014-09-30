@@ -10,6 +10,7 @@ import UIKit
 
 class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 	let app = UIApplication.sharedApplication()
+	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
 	@IBOutlet weak var userIconBtn: UIButton!
 	@IBOutlet weak var statusIdLabel: UILabel!
@@ -51,7 +52,26 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 		
 		self.rightUtilityButtons = self.rightButtons()
 		self.delegate = self
+		
+		let previewViewTapGesture = UITapGestureRecognizer(target: self, action: Selector("previewViewTapped:"))
+		previewViewTapGesture.numberOfTapsRequired = 1
+		previewViewTapGesture.numberOfTouchesRequired = 1
+		self.userInteractionEnabled = true
+		self.previewView.userInteractionEnabled = true
+		self.previewView.addGestureRecognizer(previewViewTapGesture)
     }
+	
+	func previewViewTapped(sender: UITapGestureRecognizer) {
+		if sender.state == .Ended {
+			let image = self.previewView.image
+			let photo = IDMPhoto(image: image)
+			photo.caption = "\(self.nicknameLabel.text!) \(self.usernameLabel.text!)"
+			let browser = IDMPhotoBrowser(photos: [photo], animatedFromView: self)
+			browser.scaleImage = self.previewView.image
+			browser.displayActionButton = false
+			appDelegate.frostedViewController?.contentViewController.presentViewController(browser, animated: true, completion: nil)
+		}
+	}
 	
 	func updateTimestamp(#relative: Bool) {
 		if relative {
