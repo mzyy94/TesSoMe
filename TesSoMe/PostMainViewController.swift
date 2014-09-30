@@ -223,20 +223,28 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			}
 			notification.show()
 		}
+        
+        func successAction(data: NSDictionary) {
+			let rootTabBarController = appDelegate.frostedViewController?.contentViewController as RootViewController
+			let timelineViewController = rootTabBarController.viewControllers?.first?.viewControllers?.first as TimelineViewController
+			timelineViewController.updateTimelineFetchTimer?.fire()
+        }
+        
 		let onFailure = failureAction
+		let onSuccess = successAction
 		
 		switch messageType {
 		case .Message:
 			closeView({
-				apiManager.sendMessage(topicid: self.topicid, message: text, onSuccess: nil, onFailure: onFailure)
+				apiManager.sendMessage(topicid: self.topicid, message: text, onSuccess: onSuccess, onFailure: onFailure)
 			})
 		case .File:
 			closeView({
-				apiManager.uploadFile(fileURL: self.fileURLtoPost!, onSuccess: nil, onFailure: onFailure)(topicid: self.topicid)
+				apiManager.uploadFile(fileURL: self.fileURLtoPost!, onSuccess: onSuccess, onFailure: onFailure)(topicid: self.topicid)
 			})
 		case .Drawing:
 			closeView({
-				apiManager.sendMessage(topicid: self.topicid, message: text, onSuccess: nil, onFailure: onFailure)
+				apiManager.sendMessage(topicid: self.topicid, message: text, onSuccess: onSuccess, onFailure: onFailure)
 			})
 		default:
 			NSLog("Unknown message type to post (value: %d)", messageType.toRaw())
