@@ -127,7 +127,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			let image = infoDic[UIImagePickerControllerOriginalImage] as UIImage
 			self.resizeImageActionSheet(image, compilation: saveImageToTmp)
 		} else {
-            fileURLtoPost = NSURL(string: infoDic[UIImagePickerControllerMediaURL] as String)
+            fileURLtoPost = infoDic[UIImagePickerControllerMediaURL] as? NSURL
 			self.setTitleBtnText("File upload")
 			self.messageType = .File
 			picker.dismissViewControllerAnimated(true, completion: nil)
