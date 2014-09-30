@@ -105,28 +105,75 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				let infoDic = NSDictionary(dictionary: info)
 		let mediaType = infoDic[UIImagePickerControllerMediaType] as String
 		if mediaType == "public.image" {
-			let image = infoDic[UIImagePickerControllerOriginalImage] as UIImage
-            let fileName = "Image.jpg"
-            var tmpDir = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            let fileToPost = UIImageJPEGRepresentation(image, 0.8)
-            let fileManager = NSFileManager.defaultManager()
-            let now = NSDate()
-            var err: NSError? = nil
-            tmpDir = tmpDir.URLByAppendingPathComponent("\(now.timeIntervalSince1970)")
-            fileManager.createDirectoryAtURL(tmpDir, withIntermediateDirectories: true, attributes: nil, error: &err)
-            println(err?.localizedDescription)
-            if err == nil {
-                fileURLtoPost = tmpDir.URLByAppendingPathComponent(fileName)
-                fileManager.createFileAtPath(fileURLtoPost!.relativePath!, contents: fileToPost, attributes: nil)
-				self.setTitleBtnText("File upload")
-				self.messageType = .File
+			func saveImageToTmp(image: UIImage) {
+				let fileName = "Image.jpg"
+				var tmpDir = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+				let fileToPost = UIImageJPEGRepresentation(image, 0.8)
+				let fileManager = NSFileManager.defaultManager()
+				let now = NSDate()
+				var err: NSError? = nil
+				tmpDir = tmpDir.URLByAppendingPathComponent("\(now.timeIntervalSince1970)")
+				fileManager.createDirectoryAtURL(tmpDir, withIntermediateDirectories: true, attributes: nil, error: &err)
+				println(err?.localizedDescription)
+				if err == nil {
+					fileURLtoPost = tmpDir.URLByAppendingPathComponent(fileName)
+					fileManager.createFileAtPath(fileURLtoPost!.relativePath!, contents: fileToPost, attributes: nil)
+					self.setTitleBtnText("File upload")
+					self.messageType = .File
+				}
 			}
+			picker.dismissViewControllerAnimated(true, completion: nil)
+
+			let image = infoDic[UIImagePickerControllerOriginalImage] as UIImage
+			self.resizeImageActionSheet(image, compilation: saveImageToTmp)
 		} else {
             fileURLtoPost = NSURL(string: infoDic[UIImagePickerControllerMediaURL] as String)
 			self.setTitleBtnText("File upload")
 			self.messageType = .File
+			picker.dismissViewControllerAnimated(true, completion: nil)
         }
-		picker.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
+	func resizeImageActionSheet(image: UIImage, compilation:((UIImage) -> Void)) {
+		let width = Int(image.size.width)
+		let height = Int(image.size.height)
+		
+		var alertController = UIAlertController(title: NSLocalizedString("Resize image", comment: "Resize image on ActionSheet"), message: NSLocalizedString("You can reduce message size by scaling the image to one of the sizes below.", comment: "You can reduce message size by scaling the image to one of the sizes below."), preferredStyle: .ActionSheet)
+		
+		let actualSize = UIAlertAction(title: NSString(format: NSLocalizedString("Actual Size (%d x %d)", comment: "Actual Size"), width, height), style: .Default) {
+			action in
+			compilation(image)
+		}
+		alertController.addAction(actualSize)
+
+		let largeSize = UIAlertAction(title: NSString(format: NSLocalizedString("Large Size (%d x %d)", comment: "Large Size"), width * 2 / 3, height * 2 / 3), style: .Default) {
+			action in
+			compilation(self.resizeImage(image, width: CGFloat(width * 2 / 3), height: CGFloat(height * 2 / 3)))
+		}
+		alertController.addAction(largeSize)
+		
+		let mediumSize = UIAlertAction(title: NSString(format: NSLocalizedString("Medium Size (%d x %d)", comment: "Medium Size"), width * 2 / 5, height * 2 / 5), style: .Default) {
+			action in
+			compilation(self.resizeImage(image, width: CGFloat(width * 2 / 5), height: CGFloat(height * 2 / 5)))
+		}
+		alertController.addAction(mediumSize)
+		
+		let smallSize = UIAlertAction(title: NSString(format: NSLocalizedString("Small Size (%d x %d)", comment: "Small Size"), width * 1 / 4, height * 1 / 4), style: .Default) {
+			action in
+			compilation(self.resizeImage(image, width: CGFloat(width * 1 / 4), height: CGFloat(height * 1 / 4)))
+		}
+		alertController.addAction(smallSize)
+		
+		self.presentViewController(alertController, animated: true, completion: nil)
+	}
+	
+	func resizeImage(image: UIImage, width: CGFloat, height: CGFloat) -> UIImage {
+		let size = CGSizeMake(width, height)
+		UIGraphicsBeginImageContext(size)
+		image.drawInRect(CGRectMake(0, 0, size.width, size.height))
+		let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return resizedImage
 	}
 	
 	func setTitleBtnText(text: String) {
