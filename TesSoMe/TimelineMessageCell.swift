@@ -53,6 +53,9 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		self.rightUtilityButtons = self.rightButtons()
 		self.delegate = self
 		
+		self.previewView.layer.cornerRadius = 3.0
+		self.previewView.clipsToBounds = true
+		
 		let previewViewTapGesture = UITapGestureRecognizer(target: self, action: Selector("previewViewTapped:"))
 		previewViewTapGesture.numberOfTapsRequired = 1
 		previewViewTapGesture.numberOfTouchesRequired = 1
