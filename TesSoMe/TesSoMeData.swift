@@ -197,13 +197,13 @@ class TesSoMeData: NSObject {
 			cell.previewView.image = nil
 		case .File:
 			if fileURL!.lastPathComponent.rangeOfString("(.[jJ][pP][eE]?[gG]|.[pP][nN][gG]|.[gG][iI][fF]|.[bB][mM][pP])$", options: .RegularExpressionSearch) != nil {
-				cell.previewView.sd_setImageWithURL(fileURL)
+				cell.previewView.sd_setImageWithURL(fileURL, placeholderImage: UIImage(named: "white.png"))
 			}
 			cell.messageTextView.text = fileURL?.absoluteString
 		case .Drawing:
 			cell.messageTextView.attributedText = generateAttributedMessage()
 			let drawingURL = NSURL(string: "https://tesso.pw/img/snspics/\(statusid).png")
-			cell.previewView.sd_setImageWithURL(drawingURL)
+			cell.previewView.sd_setImageWithURL(drawingURL, placeholderImage: UIImage(named: "white.png"))
 		default:
 			NSLog("Unknown post type found.")
 		}
