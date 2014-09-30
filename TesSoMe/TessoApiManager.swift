@@ -203,7 +203,7 @@ class TessoApiManager: NSObject {
 		self.getData(mode: .Profile, tag: String(withTitle.hashValue), type: withTimeline.hashValue, username: username, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
-	func getSearchResult(topicid: Int? = 1, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: TesSoMeSearchType = TesSoMeSearchType.All, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+	func getSearchResult(topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: TesSoMeSearchType = TesSoMeSearchType.All, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		var typeValue: Int? = type.toRaw()
 		if type == .All {
 			typeValue = nil
