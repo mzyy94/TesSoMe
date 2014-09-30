@@ -74,6 +74,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
                 picker.delegate = own
 				picker.sourceType = type
 				picker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(type)!
+				picker.videoQuality = .TypeIFrame1280x720
 				own.presentViewController(picker, animated: true, completion: nil)
 				doAfter()
 			}
@@ -125,11 +126,17 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			picker.dismissViewControllerAnimated(true, completion: nil)
 
 			let image = infoDic[UIImagePickerControllerOriginalImage] as UIImage
+			if picker.sourceType == .Camera {
+				UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+			}
 			self.resizeImageActionSheet(image, compilation: saveImageToTmp)
 		} else {
             fileURLtoPost = infoDic[UIImagePickerControllerMediaURL] as? NSURL
 			self.setTitleBtnText("File upload")
 			self.messageType = .File
+			if picker.sourceType == .Camera && mediaType == "public.movie" {
+				UISaveVideoAtPathToSavedPhotosAlbum(fileURLtoPost?.path, self, nil, nil)
+			}
 			picker.dismissViewControllerAnimated(true, completion: nil)
         }
 	}
