@@ -19,6 +19,8 @@
 		9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */; };
 		9E5D6A6819CC42BA00C3A915 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9E5D6A5E19CC42BA00C3A915 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */; };
+		9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E76D83019DA703000624761 /* PhotoCaptionView.swift */; };
+		9E76D83319DA704600624761 /* PhotoCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E76D83219DA704600624761 /* PhotoCaptionView.xib */; };
 		9E8FFF2219C95E4900E4459A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2119C95E4900E4459A /* SettingViewController.swift */; };
 		9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */; };
 		9E8FFF2619C96CD500E4459A /* TimelineMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */; };
@@ -95,6 +97,8 @@
 		9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLEntityConverter.swift; sourceTree = "<group>"; };
+		9E76D83019DA703000624761 /* PhotoCaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptionView.swift; sourceTree = "<group>"; };
+		9E76D83219DA704600624761 /* PhotoCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCaptionView.xib; sourceTree = "<group>"; };
 		9E8FFF2119C95E4900E4459A /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineMessageCell.swift; sourceTree = "<group>"; };
 		9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineMessageCell.xib; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			children = (
 				9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */,
 				9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */,
+				9E76D83219DA704600624761 /* PhotoCaptionView.xib */,
+				9E76D83019DA703000624761 /* PhotoCaptionView.swift */,
 				9E4D818219C9D50F0023EA4C /* TopicCell.swift */,
 			);
 			name = Views;
@@ -413,6 +419,7 @@
 				9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */,
 				9E15A72619D27DD20020601D /* PostMessage.storyboard in Resources */,
 				9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */,
+				9E76D83319DA704600624761 /* PhotoCaptionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +550,7 @@
 				9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */,
 				9E8FFF2819C97C0A00E4459A /* TimelineViewController.swift in Sources */,
 				9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */,
+				9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */,
 				9E05785619C92D2A001CEA3F /* TopicMenuViewController.swift in Sources */,
 				9E16EAE619D5C95E007A5B7C /* UIColorExtension.swift in Sources */,
 			);

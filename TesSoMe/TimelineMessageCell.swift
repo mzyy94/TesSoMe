@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
+class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBrowserDelegate {
 	let app = UIApplication.sharedApplication()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
@@ -65,11 +65,14 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 		if sender.state == .Ended {
 			let image = self.previewView.image
 			let photo = IDMPhoto(image: image)
-			photo.caption = "\(self.nicknameLabel.text!) \(self.usernameLabel.text!)"
 			let browser = IDMPhotoBrowser(photos: [photo], animatedFromView: self)
 			browser.scaleImage = self.previewView.image
+			browser.delegate = self
 			browser.displayActionButton = false
-			appDelegate.frostedViewController?.contentViewController.presentViewController(browser, animated: true, completion: nil)
+			
+			let tableView = self.superview?.superview as UITableView
+			let tableViewController = tableView.dataSource as UITableViewController
+			tableViewController.presentViewController(browser, animated: true, completion: nil)
 		}
 	}
 	
@@ -83,6 +86,44 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate {
 		}
 	}
 	
+    func photoBrowser(photoBrowser: IDMPhotoBrowser!, captionViewForPhotoAtIndex index: UInt) -> IDMCaptionView! {
+		let photo = photoBrowser.photoAtIndex(index)
+		let captionView = IDMCaptionView(photo: photo)
+		captionView.setupCaption()
+		
+		let nib = UINib(nibName: "PhotoCaptionView", bundle: nil)
+		let photoCaptionView = nib.instantiateWithOwner(self, options: nil).first as PhotoCaptionView
+		
+		photoCaptionView.userIcon.image = self.userIconBtn.backgroundImageForState(.Normal)
+		photoCaptionView.usernameLabel.text = self.usernameLabel.text
+		photoCaptionView.nicknameLabel.text = self.nicknameLabel.text
+		
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+		photoCaptionView.timeStampLabel.text = dateFormatter.stringFromDate(self.postedDate!)
+		
+		photoCaptionView.viaTesSoMeBadge.hidden = self.viaTesSoMeBadge.hidden
+		photoCaptionView.statusIdLabel.text = self.statusIdLabel.text
+		
+		let photoCaptionFormat = NSLocalizedString("File name: %@", comment: "Photo caption format")
+		let fileName = self.messageTextView.text.lastPathComponent.stringByRemovingPercentEncoding
+		photoCaptionView.messageTextView.text = NSString(format: photoCaptionFormat, fileName!)
+		photoCaptionView.messageTextView.textColor = UIColor.whiteColor()
+		
+		photoCaptionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+
+		captionView.addSubview(photoCaptionView)
+		
+		let constrains: [NSLayoutAttribute: CGFloat] = [.Top: 0.0, .Left: 0.0, .Right: 0.0, .Bottom: 48.0] // Remove bottom toolbar margin
+		
+		for (layoutAttribute, value) in constrains {
+			let constraint = NSLayoutConstraint(item: photoCaptionView, attribute: layoutAttribute, relatedBy: .Equal, toItem: captionView, attribute: layoutAttribute, multiplier: 1.0, constant: value)
+			captionView.addConstraint(constraint)
+		}
+		
+		return captionView
+	}
+
     private func updateRelativeTimestamp() {
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "s's'"
