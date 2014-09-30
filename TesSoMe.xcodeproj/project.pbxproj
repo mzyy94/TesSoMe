@@ -36,6 +36,7 @@
 		9EB8ADE319C3069F00CB92B2 /* TesSoMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */; };
 		9EE50FDD19CC4E34006AA6EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE50FDC19CC4E34006AA6EA /* Images.xcassets */; };
 		9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EEF01A919C93E4B005CCF7C /* Settings.storyboard */; };
+		9EF6703C19DAEBEB0037DB88 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */; };
 		ABDAF7CC514440A3A2DE9A54 /* libPods-TesSoMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */; };
 		F97CC65721D5414AAB4EC912 /* libPods-TesSoMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 630EA8FBBA01483BA749F9DB /* libPods-TesSoMeTests.a */; };
 		FEB790599C66421288E3AC94 /* libPods-Share.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3219F2474F4BF397934997 /* libPods-Share.a */; };
@@ -119,6 +120,7 @@
 		9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesSoMeTests.swift; sourceTree = "<group>"; };
 		9EE50FDC19CC4E34006AA6EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9EEF01A919C93E4B005CCF7C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		B20B5F052CA249308E7C163D /* Pods-Share.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.xcconfig"; path = "Pods/Pods-Share.xcconfig"; sourceTree = "<group>"; };
 		BE3219F2474F4BF397934997 /* libPods-Share.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Share.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -233,6 +235,7 @@
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
 				9E15A72719D27F160020601D /* PostMainViewController.swift */,
 				9E8FFF2119C95E4900E4459A /* SettingViewController.swift */,
+				9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */,
 				9E8FFF2719C97C0A00E4459A /* TimelineViewController.swift */,
 				9E95321919C348A80009B9EA /* RootViewController.swift */,
 				9E05785519C92D2A001CEA3F /* TopicMenuViewController.swift */,
@@ -547,6 +550,7 @@
 				9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */,
 				9E9FA0E719C36A6D00E209C3 /* TessoApiManager.swift in Sources */,
 				9E15A72819D27F160020601D /* PostMainViewController.swift in Sources */,
+				9EF6703C19DAEBEB0037DB88 /* ReplyViewController.swift in Sources */,
 				9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */,
 				9E8FFF2819C97C0A00E4459A /* TimelineViewController.swift in Sources */,
 				9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */,
