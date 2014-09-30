@@ -127,6 +127,11 @@ class ReplyViewController: UITableViewController {
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 					var timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]
 					if timeline.count <= 1 { // No more messages
+						dispatch_sync(dispatch_get_main_queue(), {
+							self.tableView.infiniteScrollingView.stopAnimating()
+							//	self.tableView.showsInfiniteScrolling = false
+							self.tableView.infiniteScrollingView.enabled = false
+						})
 						return
 					}
 					
