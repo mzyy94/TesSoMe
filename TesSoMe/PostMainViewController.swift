@@ -269,7 +269,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag ||
 					buttonIndex == notification.backgroundView.tag {
-						self.app.openURL(NSURL(string: "tesso://post/?text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding))"))
+						self.app.openURL(NSURL(string: "tesso://post/?text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
 				}
 			}
 			notification.show()
