@@ -258,7 +258,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 
 	func sendPost() {
 		let apiManager = TessoApiManager()
-		let text = self.textView.text
+		var text = TesSoMeData.convertKML(self.textView.text)
 		
 		func failureAction(err: NSError) {
 			let notification = MPGNotification(title: NSLocalizedString("Post failed.", comment: "Post failed."), subtitle: err.localizedDescription, backgroundColor: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), iconImage: UIImage(named: "warning_icon"))
@@ -269,7 +269,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag ||
 					buttonIndex == notification.backgroundView.tag {
-						self.app.openURL(NSURL(string: "tesso://post/?text=\(text!)"))
+						self.app.openURL(NSURL(string: "tesso://post/?text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding))"))
 				}
 			}
 			notification.show()
