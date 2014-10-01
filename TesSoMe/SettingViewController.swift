@@ -46,32 +46,32 @@ class SettingViewController: UITableViewController {
 	
 	/* ================
 	===   General   ===
-    ================ */
+	================ */
 
 	// Appearance
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		if tableView.restorationIdentifier == nil {
 			return
 		}
-        switch tableView.restorationIdentifier! {
-        case "Appearance":
-            if indexPath.section == 1 { // timestamp
-                for i in 0..<tableView.numberOfRowsInSection(indexPath.section) {
-                    tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: indexPath.section))?.accessoryType = .None
-                }
-                let selectedCell = tableView.cellForRowAtIndexPath(indexPath)!
-                selectedCell.accessoryType = .Checkmark
-                selectedCell.selected = false
+		switch tableView.restorationIdentifier! {
+		case "Appearance":
+			if indexPath.section == 1 { // timestamp
+				for i in 0..<tableView.numberOfRowsInSection(indexPath.section) {
+					tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: indexPath.section))?.accessoryType = .None
+				}
+				let selectedCell = tableView.cellForRowAtIndexPath(indexPath)!
+				selectedCell.accessoryType = .Checkmark
+				selectedCell.selected = false
 				
 				let isRelative = !Bool(indexPath.row)
 				ud.setBool(isRelative, forKey: "relativeTimestamp")
 				let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
 				cell.updateTimestamp(relative: isRelative)
-            }
-        default:
-            return
-        }
-    }
+			}
+		default:
+			return
+		}
+	}
 	
 	@IBOutlet weak var previewCell: UITableViewCell!
 	@IBOutlet weak var relativeCell: UITableViewCell!
@@ -82,8 +82,8 @@ class SettingViewController: UITableViewController {
 	@IBAction func fontSizeSliderChanged(sender: UISlider) {
 		sender.value = Float(Int(sender.value))
 		ud.setFloat(sender.value, forKey: "fontSize")
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
-        cell.messageTextView.font = UIFont.systemFontOfSize(CGFloat(sender.value))
+		let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
+		cell.messageTextView.font = UIFont.systemFontOfSize(CGFloat(sender.value))
 	}
 	
 	@IBAction func badgeSwitchChanged(sender: UISwitch) {
@@ -109,38 +109,38 @@ class SettingViewController: UITableViewController {
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && indexPath == NSIndexPath(forRow: 0, inSection: 0) {
-            let nib = UINib(nibName: "TimelineMessageCell", bundle: nil)
-            self.tableView.registerNib(nib, forCellReuseIdentifier: "MessageCell")
+			let nib = UINib(nibName: "TimelineMessageCell", bundle: nil)
+			self.tableView.registerNib(nib, forCellReuseIdentifier: "MessageCell")
 
 			var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
-            let postedDate = NSDate(timeIntervalSinceNow: -557.0)
-            let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
+			let postedDate = NSDate(timeIntervalSinceNow: -557.0)
+			let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
 			let cellData = TesSoMeData(data: data)
 			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: ud.boolForKey("badge"))
 			cell.updateTimestamp(relative: ud.boolForKey("relativeTimestamp"))
 			
 			return cell
 		}
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+		return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
 	}
 	
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && section == 0 {
-            return 1
-        }
-        return super.tableView(tableView, numberOfRowsInSection: section)
-    }
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && section == 0 {
+			return 1
+		}
+		return super.tableView(tableView, numberOfRowsInSection: section)
+	}
 	
-    override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
-        return super.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && indexPath == NSIndexPath(forRow: 0, inSection: 0) {
-            return 100.0
-        }
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-    }
+	override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+		return super.tableView(tableView, indentationLevelForRowAtIndexPath: indexPath)
+	}
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		if tableView.restorationIdentifier != nil && tableView.restorationIdentifier == "Appearance" && indexPath == NSIndexPath(forRow: 0, inSection: 0) {
+			return 100.0
+		}
+		return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+	}
 	
 	// Post
 	@IBOutlet weak var viaSignatureSwitch: UISwitch!
@@ -210,44 +210,40 @@ class SettingViewController: UITableViewController {
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var signInBtn: UIButton!
 	
-	@IBAction func signInBtnPressed(sender: AnyObject) {
+	@IBAction func signInBtnPressed() {
 		let apiMgr = TessoApiManager()
-		apiMgr.signIn(userId: userIdField.text!, password: passwordField.text!, onSuccess:
+		apiMgr.signIn(username: userIdField.text!, password: passwordField.text!, onSuccess:
 			{
 				var alertController = UIAlertController(title: NSLocalizedString("Success", comment: "Success on AlertView"), message: NSLocalizedString("You have signed in.", comment: "You have signed in."), preferredStyle: .Alert)
 				
-				let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
-					action in
-				}
+				let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler: nil)
 				alertController.addAction(okAction)
 
 				// save password
-                let serviceName = "TesSoMe"
+				let serviceName = "TesSoMe"
 				SSKeychain.setPassword(self.passwordField.text!, forService: serviceName, account: self.userIdField.text!)
 				
-                // close keyboard
-                self.userIdField.resignFirstResponder()
-                self.passwordField.resignFirstResponder()
+				// close keyboard
+				self.userIdField.resignFirstResponder()
+				self.passwordField.resignFirstResponder()
 				
-                self.presentViewController(alertController, animated: true, completion: nil)
+				self.presentViewController(alertController, animated: true, completion: nil)
 			}
 			, onFailure:
 			{ err in
 				var alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error on AlertView"), message: err.localizedDescription, preferredStyle: .Alert)
 				
-				let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
-					action in
-				}
+				let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler: nil)
 				alertController.addAction(okAction)
 				
 				self.presentViewController(alertController, animated: true, completion: nil)
 		})
 	}
 
-    func initAccountSetting() {
-        self.userIdField.text = appDelegate.usernameOfTesSoMe
-        self.passwordField.text = appDelegate.passwordOfTesSoMe
-    }
+	func initAccountSetting() {
+		self.userIdField.text = appDelegate.usernameOfTesSoMe
+		self.passwordField.text = appDelegate.passwordOfTesSoMe
+	}
 	
 	/* ================
 	===  Developer  ===
@@ -287,7 +283,7 @@ class SettingViewController: UITableViewController {
 		case "Streaming":
 			initStreamingSetting()
 		case "Account":
-            initAccountSetting()
+			initAccountSetting()
 		case "Developer":
 			initDeveloperSetting()
 		default:
@@ -295,15 +291,15 @@ class SettingViewController: UITableViewController {
 		}
 	}
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+		// Uncomment the following line to preserve selection between presentations
+		// self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
+		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+		// self.navigationItem.rightBarButtonItem = self.editButtonItem()
+	}
 	
 	override func viewWillDisappear(animated: Bool) {
 		ud.synchronize()
@@ -318,8 +314,8 @@ class SettingViewController: UITableViewController {
 		
 	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
 }

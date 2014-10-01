@@ -21,20 +21,20 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	@IBOutlet weak var viaTesSoMeBadge: UIImageView!
 	@IBOutlet weak var previewView: UIImageView!
 	
-	var postedDate: NSDate?
+	var postedDate: NSDate? = nil
 	
 	func rightButtons() -> NSArray {
 		let rightUtilityButtons = NSMutableArray()
-        
+		
 		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.lightGrayColor(), icon: UIImage(named: "comment_icon"))
 		rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.grayColor(), icon: UIImage(named: "reply_icon"))
 		
 		return rightUtilityButtons
 	}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		// Initialization code
 		
 		// Round edge
 		self.userIconBtn.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
@@ -48,7 +48,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		self.viaTesSoMeBadge.clipsToBounds = true
 		
 		self.messageTextView.textContainer.lineFragmentPadding = 0
-        self.messageTextView.contentInset.top = -8.0
+		self.messageTextView.contentInset.top = -8.0
 		
 		self.rightUtilityButtons = self.rightButtons()
 		self.delegate = self
@@ -62,7 +62,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		self.userInteractionEnabled = true
 		self.previewView.userInteractionEnabled = true
 		self.previewView.addGestureRecognizer(previewViewTapGesture)
-    }
+	}
 	
 	func previewViewTapped(sender: UITapGestureRecognizer) {
 		if sender.state == .Ended {
@@ -89,7 +89,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		}
 	}
 	
-    func photoBrowser(photoBrowser: IDMPhotoBrowser!, captionViewForPhotoAtIndex index: UInt) -> IDMCaptionView! {
+	func photoBrowser(photoBrowser: IDMPhotoBrowser!, captionViewForPhotoAtIndex index: UInt) -> IDMCaptionView! {
 		let photo = photoBrowser.photoAtIndex(index)
 		let captionView = IDMCaptionView(photo: photo)
 		captionView.setupCaption()
@@ -127,7 +127,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		return captionView
 	}
 
-    private func updateRelativeTimestamp() {
+	private func updateRelativeTimestamp() {
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "s's'"
 		let timeDate = NSDate(timeIntervalSinceReferenceDate: -postedDate!.timeIntervalSinceNow)
@@ -148,16 +148,17 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		let gmtTimeDate = timeDate.dateByAddingTimeInterval(-NSTimeInterval(timeDiffSeconds))
 
 		self.timeStampLabel.text = dateFormatter.stringFromDate(gmtTimeDate)
-    }
+	}
 	
 	func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
 		switch index {
 		case 0: // More button
-			app.openURL(NSURL(string: NSString(format: "tesso://message/%@", (cell as TimelineMessageCell).statusIdLabel.text!)))
+			let statusId = (cell as TimelineMessageCell).statusIdLabel.text!
+			app.openURL(NSURL(string: "tesso://message/\(statusId)"))
 		case 1: // Reply button
 			let messageId = (cell as TimelineMessageCell).statusIdLabel.text!
 			let username = (cell as TimelineMessageCell).usernameLabel.text!.stringByReplacingOccurrencesOfString("@", withString: "%40")
-			app.openURL(NSURL(string: NSString(format: "tesso://post/?text=%@", "%3E\(messageId)(\(username))%20")))
+			app.openURL(NSURL(string: "tesso://post/?text=%3E\(messageId)(\(username))%20"))
 		default:
 			NSLog("Pressed SWTableViewCell utility button index is out of range.")
 		}
@@ -168,10 +169,10 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		return true
 	}
 	
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(false, animated: animated)
+	override func setSelected(selected: Bool, animated: Bool) {
+		super.setSelected(false, animated: animated)
 
-        // Configure the view for the selected state
-    }
-    
+		// Configure the view for the selected state
+	}
+	
 }

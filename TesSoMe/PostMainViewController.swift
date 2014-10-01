@@ -14,29 +14,29 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	let ud = NSUserDefaults()
 
-	var menu: REMenu!
+	var menu: REMenu! = nil
 	var messageType: TessoMessageType = .Unknown
 	var preparedText = ""
 	
-    var fileURLtoPost: NSURL? = nil
+	var fileURLtoPost: NSURL? = nil
 	var topicid = 1
 	
 	@IBOutlet weak var postTitleBtn: UIButton!
 	@IBOutlet weak var textView: UITextView!
 	
-	@IBAction func postTitleBtnPressed(sender: AnyObject) {
+	@IBAction func postTitleBtnPressed() {
 		if menu.isOpen {
 			menu.closeWithCompletion({
 				self.showKeyboard()
 			})
 		} else {
 			menu.showFromNavigationController(self.navigationController)
-            closeKeyboard()
+			closeKeyboard()
 		}
 	}
 	
 	override func viewDidLoad() {
-        super.viewDidLoad()
+		super.viewDidLoad()
 		
 		initMenu()
 		
@@ -61,51 +61,54 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	}
 	
 	func initMenu() {
-		let selectMessageItem = REMenuItem(title: NSLocalizedString("Message", comment: "Message on navigation bar"), image: nil, highlightedImage: nil, action: {
-			item in
-			self.setTitleBtnText("Message")
-			self.messageType = .Message
-			self.showKeyboard()
-		})
-		let selectFileUploadItem = REMenuItem(title: NSLocalizedString("File upload", comment: "File upload on navigation bar"), image: nil, highlightedImage: nil, action: {
-			item in
-			let oldMenuItems = self.menu.items
-			func generateChoosePhotoFunc(own: PostMainViewController)(type: UIImagePickerControllerSourceType)(item: REMenuItem!) {
-                let picker = UIImagePickerController()
-                picker.delegate = own
-				picker.sourceType = type
-				picker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(type)!
-				picker.videoQuality = .TypeIFrame1280x720
-				own.presentViewController(picker, animated: true, completion: nil)
+		let selectMessageItem = REMenuItem(title: NSLocalizedString("Message", comment: "Message on navigation bar"), image: nil, highlightedImage: nil, action:
+			{ item in
+				self.setTitleBtnText("Message")
+				self.messageType = .Message
+				self.showKeyboard()
 			}
-
-			let choosePhoto = generateChoosePhotoFunc(self)
-			
-			let takePhoto = REMenuItem(title: NSLocalizedString("Camera", comment: "Camera"), image: nil, highlightedImage: nil, action: choosePhoto(type: .Camera))
-			
-			let selectPhoto = REMenuItem(title: NSLocalizedString("Photo Library", comment: "Photo Library"), image: nil, highlightedImage: nil, action: choosePhoto(type: .PhotoLibrary))
-			
-			self.menu.items = [takePhoto, selectPhoto]
-			self.menu.showFromNavigationController(self.navigationController)
-			self.menu.items = oldMenuItems
-			
-		})
-		let selectDrawingItem = REMenuItem(title: NSLocalizedString("Drawing", comment: "Drawing on navigation bar"), image: nil, highlightedImage: nil, action: {
-			item in
-			self.setTitleBtnText("Drawing")
-			self.messageType = .Drawing
-		})
+		)
+		let selectFileUploadItem = REMenuItem(title: NSLocalizedString("File upload", comment: "File upload on navigation bar"), image: nil, highlightedImage: nil, action:
+			{ item in
+				let oldMenuItems = self.menu.items
+				func generateChoosePhotoFunc(own: PostMainViewController)(type: UIImagePickerControllerSourceType)(item: REMenuItem!) {
+					let picker = UIImagePickerController()
+					picker.delegate = own
+					picker.sourceType = type
+					picker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(type)!
+					picker.videoQuality = .TypeIFrame1280x720
+					own.presentViewController(picker, animated: true, completion: nil)
+				}
+				
+				let choosePhoto = generateChoosePhotoFunc(self)
+				
+				let takePhoto = REMenuItem(title: NSLocalizedString("Camera", comment: "Camera"), image: nil, highlightedImage: nil, action: choosePhoto(type: .Camera))
+				
+				let selectPhoto = REMenuItem(title: NSLocalizedString("Photo Library", comment: "Photo Library"), image: nil, highlightedImage: nil, action: choosePhoto(type: .PhotoLibrary))
+				
+				self.menu.items = [takePhoto, selectPhoto]
+				self.menu.showFromNavigationController(self.navigationController)
+				self.menu.items = oldMenuItems
+			}
+		)
+		let selectDrawingItem = REMenuItem(title: NSLocalizedString("Drawing", comment: "Drawing on navigation bar"), image: nil, highlightedImage: nil, action:
+			{ item in
+				self.setTitleBtnText("Drawing")
+				self.messageType = .Drawing
+			}
+		)
 		self.menu = REMenu(items: [selectMessageItem, selectFileUploadItem, selectDrawingItem])
-		menu.liveBlur = true
-		menu.liveBlurBackgroundStyle = REMenuLiveBackgroundStyle.Dark
-		menu.separatorColor = UIColor(white: 0.0, alpha: 0.4)
-		menu.borderColor = UIColor.clearColor()
-		menu.textColor = UIColor(white: 1.0, alpha: 0.78)
+		self.menu.liveBlur = true
+		self.menu.liveBlurBackgroundStyle = .Dark
+		self.menu.separatorColor = UIColor(white: 0.0, alpha: 0.4)
+		self.menu.borderColor = UIColor.clearColor()
+		self.menu.textColor = UIColor(white: 1.0, alpha: 0.78)
 	}
 	
 	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-				let infoDic = NSDictionary(dictionary: info)
+		let infoDic = NSDictionary(dictionary: info)
 		let mediaType = infoDic[UIImagePickerControllerMediaType] as String
+		
 		if mediaType == "public.image" {
 			func saveImageToTmp(image: UIImage) {
 				let fileName = "Image.jpg"
@@ -133,7 +136,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			}
 			self.resizeImageActionSheet(image, compilation: saveImageToTmp)
 		} else {
-            fileURLtoPost = infoDic[UIImagePickerControllerMediaURL] as? NSURL
+			fileURLtoPost = infoDic[UIImagePickerControllerMediaURL] as? NSURL
 			self.setTitleBtnText("File upload")
 			self.messageType = .File
 			if picker.sourceType == .Camera && mediaType == "public.movie" {
@@ -141,7 +144,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			}
 			self.addPreviewImage(makeThumbNail(fileURLtoPost!))
 			picker.dismissViewControllerAnimated(true, completion: nil)
-        }
+		}
 	}
 	
 	func makeThumbNail(fileURL: NSURL) -> UIImage! {
@@ -176,9 +179,9 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			let constraint = NSLayoutConstraint(item: previewImage, attribute: layoutAttribute, relatedBy: .Equal, toItem: self.view, attribute: layoutAttribute, multiplier: 1.0, constant: value)
 			self.view.addConstraint(constraint)
 		}
-		previewImage.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+		previewImage.autoresizingMask = .FlexibleHeight
 		previewImage.clipsToBounds = true
-		previewImage.contentMode = UIViewContentMode.ScaleAspectFit
+		previewImage.contentMode = .ScaleAspectFit
 		previewImage.image = image
 	}
 	
@@ -188,27 +191,27 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		
 		var alertController = UIAlertController(title: NSLocalizedString("Resize image", comment: "Resize image on ActionSheet"), message: NSLocalizedString("You can reduce message size by scaling the image to one of the sizes below.", comment: "You can reduce message size by scaling the image to one of the sizes below."), preferredStyle: .ActionSheet)
 		
-		let actualSize = UIAlertAction(title: NSString(format: NSLocalizedString("Actual Size (%d x %d)", comment: "Actual Size"), width, height), style: .Default) {
-			action in
-			compilation(image)
+		let actualSize = UIAlertAction(title: NSString(format: NSLocalizedString("Actual Size (%d x %d)", comment: "Actual Size"), width, height), style: .Default)
+			{ action in
+				compilation(image)
 		}
 		alertController.addAction(actualSize)
 
-		let largeSize = UIAlertAction(title: NSString(format: NSLocalizedString("Large Size (%d x %d)", comment: "Large Size"), width * 2 / 3, height * 2 / 3), style: .Default) {
-			action in
-			compilation(self.resizeImage(image, width: CGFloat(width * 2 / 3), height: CGFloat(height * 2 / 3)))
+		let largeSize = UIAlertAction(title: NSString(format: NSLocalizedString("Large Size (%d x %d)", comment: "Large Size"), width * 2 / 3, height * 2 / 3), style: .Default)
+			{ action in
+				compilation(self.resizeImage(image, width: CGFloat(width * 2 / 3), height: CGFloat(height * 2 / 3)))
 		}
 		alertController.addAction(largeSize)
 		
-		let mediumSize = UIAlertAction(title: NSString(format: NSLocalizedString("Medium Size (%d x %d)", comment: "Medium Size"), width * 2 / 5, height * 2 / 5), style: .Default) {
-			action in
-			compilation(self.resizeImage(image, width: CGFloat(width * 2 / 5), height: CGFloat(height * 2 / 5)))
+		let mediumSize = UIAlertAction(title: NSString(format: NSLocalizedString("Medium Size (%d x %d)", comment: "Medium Size"), width * 2 / 5, height * 2 / 5), style: .Default)
+			{ action in
+				compilation(self.resizeImage(image, width: CGFloat(width * 2 / 5), height: CGFloat(height * 2 / 5)))
 		}
 		alertController.addAction(mediumSize)
 		
-		let smallSize = UIAlertAction(title: NSString(format: NSLocalizedString("Small Size (%d x %d)", comment: "Small Size"), width * 1 / 4, height * 1 / 4), style: .Default) {
-			action in
-			compilation(self.resizeImage(image, width: CGFloat(width * 1 / 4), height: CGFloat(height * 1 / 4)))
+		let smallSize = UIAlertAction(title: NSString(format: NSLocalizedString("Small Size (%d x %d)", comment: "Small Size"), width * 1 / 4, height * 1 / 4), style: .Default)
+			{ action in
+				compilation(self.resizeImage(image, width: CGFloat(width * 1 / 4), height: CGFloat(height * 1 / 4)))
 		}
 		alertController.addAction(smallSize)
 		
@@ -244,14 +247,14 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		closeKeyboard()
 		self.dismissViewControllerAnimated(true, completion: completion)
 	}
-    
-    func showKeyboard() {
-        self.textView.becomeFirstResponder()
-    }
-    
-    func closeKeyboard() {
-        self.textView.endEditing(true)
-    }
+	
+	func showKeyboard() {
+		self.textView.becomeFirstResponder()
+	}
+	
+	func closeKeyboard() {
+		self.textView.endEditing(true)
+	}
 
 	func sendPost() {
 		let apiManager = TessoApiManager()
@@ -266,18 +269,18 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag ||
 					buttonIndex == notification.backgroundView.tag {
-						self.app.openURL(NSURL(string: NSString(format: "tesso://post/?text=%@", text)))
+						self.app.openURL(NSURL(string: "tesso://post/?text=\(text!)"))
 				}
 			}
 			notification.show()
 		}
-        
-        func successAction(data: NSDictionary) {
+		
+		func successAction(data: NSDictionary) {
 			let rootTabBarController = appDelegate.frostedViewController?.contentViewController as RootViewController
 			let timelineViewController = rootTabBarController.viewControllers?.first?.viewControllers?.first as TimelineViewController
 			timelineViewController.updateTimelineFetchTimer?.fire()
-        }
-        
+		}
+		
 		let onFailure = failureAction
 		let onSuccess = successAction
 		
@@ -299,20 +302,10 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		}
 	}
 	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
+	
+	
 }

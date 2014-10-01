@@ -15,9 +15,9 @@ class TopicCell: UITableViewCell {
 	@IBOutlet weak var topicTitleLabel: UILabel!
 	@IBOutlet weak var latestMessageLabel: UILabel!
 	
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		// Initialization code
 		
 		// Circle icon
 		self.userIcon.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
@@ -25,12 +25,12 @@ class TopicCell: UITableViewCell {
 		self.userIcon.layer.cornerRadius = 32
 		self.userIcon.clipsToBounds = true
 		self.backgroundColor = UIColor.clearColor()
-    }
+	}
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+	override func setSelected(selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
-    }
+		// Configure the view for the selected state
+	}
 
 }

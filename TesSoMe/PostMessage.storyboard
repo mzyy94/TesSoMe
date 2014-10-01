@@ -77,7 +77,7 @@
                                         </attributedString>
                                     </state>
                                     <connections>
-                                        <action selector="postTitleBtnPressed:" destination="w5K-Q7-QgL" eventType="touchUpInside" id="BGn-sM-3cn"/>
+                                        <action selector="postTitleBtnPressed" destination="w5K-Q7-QgL" eventType="touchUpInside" id="saC-yb-6ks"/>
                                     </connections>
                                 </button>
                             </subviews>

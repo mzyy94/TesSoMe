@@ -20,7 +20,7 @@ class TesSoMeTests: XCTestCase {
 		// Put setup code here. This method is called before the invocation of each test method in the class.
 		let apiExpectation = self.expectationWithDescription("api signin")
 		
-		apiMgr.signIn(userId: self.userId, password: self.password, onSuccess: {
+		apiMgr.signIn(username: self.userId, password: self.password, onSuccess: {
 			XCTAssert(true, "Pass")
 			apiExpectation.fulfill()
 			}, onFailure: { err in

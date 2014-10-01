@@ -24,7 +24,7 @@ class RootViewController: UITabBarController {
 		let unreadMessageLabelAppearance = [NSForegroundColorAttributeName: UIColor.globalTintColor()]
 
 		for viewController in self.viewControllers! as [UINavigationController] {
-			let topViewController: UIViewController = viewController.viewControllers?[0] as UIViewController
+			let topViewController = viewController.viewControllers?[0] as UIViewController
 			topViewController.navigationItem.leftBarButtonItem = chooseTopicBtn
 			topViewController.navigationItem.rightBarButtonItem = newPostBtn
 			viewController.tabBarItem.setTitleTextAttributes(unreadMessageLabelAppearance, forState: .Normal)
@@ -48,15 +48,5 @@ class RootViewController: UITabBarController {
 		// Dispose of any resources that can be recreated.
 	}
 	
-
-	/*
-	// MARK: - Navigation
-
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-		// Get the new view controller using segue.destinationViewController.
-		// Pass the selected object to the new view controller.
-	}
-	*/
 
 }

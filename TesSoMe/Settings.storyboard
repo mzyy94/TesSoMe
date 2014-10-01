@@ -458,7 +458,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="signInBtnPressed:" destination="Xxq-wa-FFq" eventType="touchUpInside" id="5GT-Lk-yPy"/>
+                                                        <action selector="signInBtnPressed" destination="Xxq-wa-FFq" eventType="touchUpInside" id="Nps-oo-fDV"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

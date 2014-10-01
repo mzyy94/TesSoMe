@@ -18,35 +18,35 @@ enum TessoMessageType: Int {
 
 class TesSoMeData: NSObject {
 	
-	var statusid = -1
-	var nickname = ""
-	var username = ""
-	var date = NSDate()
-	var topicid = 0
-	var type = TessoMessageType.Unknown
-	var message = ""
+	var statusId: Int = -1
+	var nickname: String = ""
+	var username: String = ""
+	var date: NSDate = NSDate()
+	var topicid: Int = 0
+	var type: TessoMessageType = .Unknown
+	var message: String = ""
 	var relatedMessageIds: [Int] = []
 	var replyUserIds: [String] = []
 	var hashTags: [String] = []
-	var fileURL: NSURL?
-	var fileSize: Int?
-	var fileName: String?
+	var fileURL: NSURL? = nil
+	var fileSize: Int? = nil
+	var fileName: String? = nil
 
 	
 	class func dataFromResponce(responce: NSDictionary) -> NSArray {
-		let data: NSArray = responce["data"] as NSArray
+		let data = responce["data"] as NSArray
 		return data
 	}
 
 	class func tlFromResponce(responce: NSDictionary) -> NSArray {
-		let tl: NSArray = responce["tl"] as NSArray
+		let tl = responce["tl"] as NSArray
 		return tl
 	}
-    
-    class func convertKML(text: String) -> String {
-        var kml = text.stringByReplacingOccurrencesOfString("\n", withString: "%br()", options: .RegularExpressionSearch)
-        return kml
-    }
+	
+	class func convertKML(text: String) -> String {
+		let kml = text.stringByReplacingOccurrencesOfString("\n", withString: "%br()", options: .RegularExpressionSearch)
+		return kml
+	}
 	
 	class func convertText(fromKML kml: String) -> String {
 		var message = kml
@@ -95,11 +95,11 @@ class TesSoMeData: NSObject {
 			}
 		}
 		
-		statusid = (data["statusid"] as String).toInt()!
+		statusId = (data["statusid"] as String).toInt()!
 		nickname = data["nickname"] as String
 		username = data["username"] as String
 		let unixtime = (data["unixtime"] as String).toInt()!
-		date = NSDate(timeIntervalSince1970: Double(unixtime))
+		date = NSDate(timeIntervalSince1970: NSTimeInterval(unixtime))
 		topicid = (data["topicid"] as String).toInt()!
 		type = TessoMessageType.fromRaw((data["type"] as String).toInt()!)!
 		
@@ -152,25 +152,25 @@ class TesSoMeData: NSObject {
 		for username in replyUserIds {
 			var usernameRange = NSString(string: message).rangeOfString("@" + username, options: .RegularExpressionSearch)
 			while (usernameRange.length > 0) {
-				let userLink = NSString(format: "tesso://user/%@", username)
+				let userLink = "tesso://user/\(username)"
 				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: userLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: usernameRange)
 				usernameRange = NSString(string: message).rangeOfString("@" + username, options: .RegularExpressionSearch, range: NSMakeRange(usernameRange.location + usernameRange.length, message.utf16Count - (usernameRange.location + usernameRange.length)))
 			}
 		}
 		
-		for messageid in relatedMessageIds {
-			var relatedMsgRange = NSString(string: message).rangeOfString(">\(messageid)", options: .RegularExpressionSearch)
+		for messageId in relatedMessageIds {
+			var relatedMsgRange = NSString(string: message).rangeOfString(">\(messageId)", options: .RegularExpressionSearch)
 			while (relatedMsgRange.length > 0) {
-				let messageLink = NSString(format: "tesso://message/%d", messageid)
+				let messageLink = "tesso://message/\(messageId)"
 				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: messageLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: relatedMsgRange)
-				relatedMsgRange = NSString(string: message).rangeOfString(">\(messageid)", options: .RegularExpressionSearch, range: NSMakeRange(relatedMsgRange.location + relatedMsgRange.length, message.utf16Count - (relatedMsgRange.location + relatedMsgRange.length)))
+				relatedMsgRange = NSString(string: message).rangeOfString(">\(messageId)", options: .RegularExpressionSearch, range: NSMakeRange(relatedMsgRange.location + relatedMsgRange.length, message.utf16Count - (relatedMsgRange.location + relatedMsgRange.length)))
 			}
 		}
 
 		for hashtag in hashTags {
 			var hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch)
 			while (hashtagRange.length > 0) {
-				let hashtagLink = NSString(format: "tesso://search/?hash=%@", hashtag)
+				let hashtagLink = "tesso://search/?hash=\(hashtag)"
 				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: hashtagLink), NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: hashtagRange)
 				hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch, range: NSMakeRange(hashtagRange.location + hashtagRange.length, message.utf16Count - (hashtagRange.location + hashtagRange.length)))
 			}
@@ -184,11 +184,11 @@ class TesSoMeData: NSObject {
 	}
 	
 	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool) {
-		cell.statusIdLabel.text = String(statusid)
-		cell.usernameLabel.text = "@" + username
+		cell.statusIdLabel.text = "\(statusId)"
+		cell.usernameLabel.text = "@\(username)"
 		cell.nicknameLabel.text = nickname
 		cell.timeStampLabel.text = NSLocalizedString("0 s", comment: "Initial seconds")
-		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + username + ".png"), forState: .Normal)
+		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(username).png"), forState: .Normal)
 		cell.postedDate = date
 		cell.viaTesSoMeBadge.hidden = !withBadge || !isViaTesSoMe()
 		switch type {
@@ -202,7 +202,7 @@ class TesSoMeData: NSObject {
 			cell.messageTextView.text = fileURL?.absoluteString
 		case .Drawing:
 			cell.messageTextView.attributedText = generateAttributedMessage()
-			let drawingURL = NSURL(string: "https://tesso.pw/img/snspics/\(statusid).png")
+			let drawingURL = NSURL(string: "https://tesso.pw/img/snspics/\(statusId).png")
 			cell.previewView.sd_setImageWithURL(drawingURL, placeholderImage: UIImage(named: "white.png"))
 		default:
 			NSLog("Unknown post type found.")

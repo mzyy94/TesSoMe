@@ -13,7 +13,7 @@ import Accelerate
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-    var frostedViewController: REFrostedViewController?
+	var frostedViewController: REFrostedViewController?
 	var usernameOfTesSoMe: String? = nil
 	var passwordOfTesSoMe: String? = nil
 	let ud = NSUserDefaults()
@@ -32,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		initUserDefault()
 		
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let topicMenuView: UITableViewController = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
-		let rootTabBarController: UITabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
+		let topicMenuView = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
+		let rootTabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
 		
 		frostedViewController = REFrostedViewController(contentViewController: rootTabBarController, menuViewController: topicMenuView)
 		frostedViewController!.direction = .Left

@@ -12,18 +12,18 @@ class TopicMenuViewController: UITableViewController {
 	let apiManager = TessoApiManager()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
-    @IBOutlet weak var userIconBtn: UIButton!
-    @IBOutlet weak var nicknameLabel: UILabel!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var lebelLabel: UILabel!
+	@IBOutlet weak var userIconBtn: UIButton!
+	@IBOutlet weak var nicknameLabel: UILabel!
+	@IBOutlet weak var usernameLabel: UILabel!
+	@IBOutlet weak var lebelLabel: UILabel!
 
 	var topics: [NSDictionary] = []
-	var currentTopic = 1
+	var currentTopic: Int = 1
 	
-    @IBAction func userIconBtnTapped(sender: AnyObject) {
+	@IBAction func userIconBtnTapped() {
 		showSettingView()
-    }
-    
+	}
+	
 	func showSettingView() {
 		let storyboard = UIStoryboard(name: "Settings", bundle: nil)
 		var settingViewController: UINavigationController = storyboard.instantiateViewControllerWithIdentifier("SettingsNavigation") as UINavigationController
@@ -35,8 +35,8 @@ class TopicMenuViewController: UITableViewController {
 		self.presentedViewController!.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
 		self.userIconBtn.layer.borderColor = UIColor(white: 0.0, alpha: 0.3).CGColor
 		self.userIconBtn.layer.borderWidth = 1.0
@@ -48,25 +48,25 @@ class TopicMenuViewController: UITableViewController {
 			self.getSelfInfo()
 			self.getTopic()
 		})
-    }
+	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
 
-    // MARK: - Table view data source
+	// MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections.
-        return 1
-    }
+	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		// Return the number of sections.
+		return 1
+	}
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        // Return the number of topics
-        return topics.count
-    }
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		
+		// Return the number of topics
+		return topics.count
+	}
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		return 68.0
@@ -80,9 +80,12 @@ class TopicMenuViewController: UITableViewController {
 			apiManager.getProfile(username: appDelegate.usernameOfTesSoMe!, withTimeline: false, onSuccess:
 				{ data in
 					let userinfo = (TesSoMeData.dataFromResponce(data) as NSArray)[0] as NSDictionary
-					topicViewController.usernameLabel.text = "@" + (userinfo["username"] as String)
-					topicViewController.nicknameLabel.text = userinfo["nickname"] as? String
-					topicViewController.lebelLabel.text = "Lv. " + (userinfo["lv"] as String)
+					let username = userinfo["username"] as String!
+					let nickname = userinfo["nickname"] as String!
+					let level = userinfo["lv"] as String!
+					topicViewController.usernameLabel.text = "@\(username)"
+					topicViewController.nicknameLabel.text = username
+					topicViewController.lebelLabel.text = "Lv. \(level)"
 				}
 				, onFailure: nil
 			)
@@ -109,10 +112,6 @@ class TopicMenuViewController: UITableViewController {
 					topicsWithMsgs.append(mutableDic)
 				}
 				
-				var selectInitialTopic = false
-				if topicViewController.topics.count == 0 {
-					selectInitialTopic = true
-				}
 				
 				topicViewController.topics = topicsWithMsgs
 				topicViewController.tableView.reloadData()
@@ -122,24 +121,26 @@ class TopicMenuViewController: UITableViewController {
 		)
 	}
 	
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TopicCell", forIndexPath: indexPath) as TopicCell
-        // Edit cell
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCellWithIdentifier("TopicCell", forIndexPath: indexPath) as TopicCell
+		// Edit cell
 		let topic = topics[indexPath.row]
-		cell.topicTitleLabel.text = (topic["title"] as String)
-		cell.latestMessageLabel.text = (topic["message"] as String)
-		cell.userIcon.sd_setImageWithURL(NSURL(string: "https://tesso.pw/img/icons/" + (topic["username"] as String) + ".png"))
-		cell.topicNumLabel.text = String((topic["id"] as String).toInt()! + 99)
-		if currentTopic == (topic["id"] as String).toInt()! {
+		cell.topicTitleLabel.text = topic["title"] as String!
+		cell.latestMessageLabel.text = topic["message"] as String!
+		let username = topic["username"] as String!
+		cell.userIcon.sd_setImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(username).png"))
+		let topicId = (topic["id"] as String).toInt()!
+		cell.topicNumLabel.text = "\(topicId + 99)"
+		if currentTopic == topicId {
 			cell.backgroundColor =  UIColor.globalTintColor(alpha: 0.2)
 		} else {
 			cell.backgroundColor = UIColor.clearColor()
 		}
-        return cell
-    }
+		return cell
+	}
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("Topic", comment: "Topic")
+		return NSLocalizedString("Topic", comment: "Topic")
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

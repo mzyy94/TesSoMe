@@ -15,8 +15,8 @@ class SuperTimelineViewController: UITableViewController {
 	
 	var messages: [TesSoMeData] = []
 	var stackedCellPaths: [NSIndexPath] = []
-	var latestMessageId = 0
-	var messageFontSize = 0.0 as CGFloat
+	var latestMessageId: Int = 0
+	var messageFontSize: CGFloat = 0.0
 	var withBadge: Bool = true
 	var timestampIsRelative: Bool = true
 	
@@ -125,7 +125,7 @@ class SuperTimelineViewController: UITableViewController {
 	}
 	
 	func updateTimestamp() {
-		var cells: [TimelineMessageCell] = tableView.visibleCells() as [TimelineMessageCell]
+		var cells = tableView.visibleCells() as [TimelineMessageCell]
 		for cell in cells {
 			cell.updateTimestamp(relative: timestampIsRelative)
 		}

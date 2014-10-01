@@ -21,7 +21,7 @@ class TimelineViewController: SuperTimelineViewController {
 				for post in timeline as [NSDictionary] {
 					self.messages.append(TesSoMeData(data: post))
 				}
-				self.latestMessageId = self.messages.first!.statusid
+				self.latestMessageId = self.messages.first!.statusId
 				self.tableView.reloadData()
 				
 				self.refreshControl?.endRefreshing()
@@ -57,7 +57,7 @@ class TimelineViewController: SuperTimelineViewController {
 						self.messages.insert(TesSoMeData(data: post), atIndex: 0)
 						path.append(NSIndexPath(forRow: i, inSection: 0))
 					}
-					self.latestMessageId = self.messages.first!.statusid
+					self.latestMessageId = self.messages.first!.statusId
 					
 					if self.isScrolling {
 						let newStackedCellPaths = path + self.stackedCellPaths
@@ -82,7 +82,7 @@ class TimelineViewController: SuperTimelineViewController {
 	
 	override func loadOlderTimeline() {
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
-		let oldestMessageId = messages.last?.statusid
+		let oldestMessageId = messages.last?.statusId
 		apiManager.getTimeline(topicid: topic, maxid: oldestMessageId, onSuccess:
 			{ data in
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {

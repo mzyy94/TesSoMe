@@ -19,7 +19,7 @@ class ReplyViewController: SuperTimelineViewController {
 	}
 	
 	override func getTimeline() {
-		apiManager.getSearchResult(tag: "at_\(appDelegate.usernameOfTesSoMe!)", type: TessoApiManager.TesSoMeSearchType.All, onSuccess:
+		apiManager.getSearchResult(tag: "at_\(appDelegate.usernameOfTesSoMe!)", type: .All, onSuccess:
 			{ data in
 				self.refreshUpdatedDate()
 				
@@ -27,7 +27,7 @@ class ReplyViewController: SuperTimelineViewController {
 				for post in timeline as [NSDictionary] {
 					self.messages.append(TesSoMeData(data: post))
 				}
-				self.latestMessageId = self.messages.first!.statusid
+				self.latestMessageId = self.messages.first!.statusId
 				self.tableView.reloadData()
 				
 				self.refreshControl?.endRefreshing()
@@ -41,7 +41,7 @@ class ReplyViewController: SuperTimelineViewController {
 	}
 	
 	override func updateTimeline() {
-		apiManager.getSearchResult(sinceid: latestMessageId, tag: "at_\(appDelegate.usernameOfTesSoMe!)", type: TessoApiManager.TesSoMeSearchType.All, onSuccess:
+		apiManager.getSearchResult(sinceid: latestMessageId, tag: "at_\(appDelegate.usernameOfTesSoMe!)", type: .All, onSuccess:
 			{ data in
 				self.refreshUpdatedDate()
 				if self.refreshControl!.refreshing {
@@ -61,7 +61,7 @@ class ReplyViewController: SuperTimelineViewController {
 						self.messages.insert(TesSoMeData(data: post), atIndex: 0)
 						path.append(NSIndexPath(forRow: i, inSection: 0))
 					}
-					self.latestMessageId = self.messages.first!.statusid
+					self.latestMessageId = self.messages.first!.statusId
 					
 					dispatch_sync(dispatch_get_main_queue(), {
 						self.tableView.insertRowsAtIndexPaths(path, withRowAnimation: .Top)
@@ -73,8 +73,8 @@ class ReplyViewController: SuperTimelineViewController {
 	}
 
 	override func loadOlderTimeline() {
-		let oldestMessageId = messages.last?.statusid
-		apiManager.getSearchResult(maxid: oldestMessageId, tag: "at_\(appDelegate.usernameOfTesSoMe!)", type: TessoApiManager.TesSoMeSearchType.All, onSuccess:
+		let oldestMessageId = messages.last?.statusId
+		apiManager.getSearchResult(maxid: oldestMessageId, tag: "at_\(appDelegate.usernameOfTesSoMe!)", type: .All, onSuccess:
 			{ data in
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 					var timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]

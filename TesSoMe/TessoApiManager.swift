@@ -31,14 +31,13 @@ class TessoApiManager: NSObject {
 		case File = 2
 	};
 	
-	func signIn(#userId: String, password: String, onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+	func signIn(#username: String, password: String, onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+		let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
 		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer = AFHTTPResponseSerializer()
-		req.POST("https://tesso.pw/users/sign_in", parameters: ["data[User][username]": userId, "data[User][password]": password], success:
-			{
-				res, data in
+		req.POST("https://tesso.pw/users/sign_in", parameters: ["data[User][username]": username, "data[User][password]": password], success:
+			{ res, data in
 				if res.response!.URL == NSURL(string: "https://tesso.pw/sns") {
 					onSuccess?()
 				} else {
@@ -48,8 +47,7 @@ class TessoApiManager: NSObject {
 				}
 			}
 			, failure:
-			{
-				res, err in
+			{ res, err in
 				false // to avoid error
 				onFailure?(err)
 		})
@@ -59,8 +57,7 @@ class TessoApiManager: NSObject {
 		var url = NSURL(string: "https://tesso.pw/users/sign_out")
 		var req = NSMutableURLRequest(URL: url)
 		NSURLConnection.sendAsynchronousRequest(req, queue: NSOperationQueue.mainQueue(), completionHandler:
-			{
-				res, data, err in
+			{ res, data, err in
 				if err != nil {
 					onFailure?(err)
 				} else {
@@ -118,13 +115,11 @@ class TessoApiManager: NSObject {
 			param.updateValue(type!, forKey: "type")
 		}
 		req.GET("\(apiEndPoint)/get", parameters: param, success:
-			{
-				res, data in
+			{ res, data in
 				self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
 			}
 			, failure:
-			{
-				res, err in
+			{ res, err in
 				false // to avoid error
 				onFailure?(err)
 		})
@@ -152,17 +147,16 @@ class TessoApiManager: NSObject {
 			let data = NSData(contentsOfURL: fileURL!)
 			let fileName = fileURL?.lastPathComponent
 			let mimeType = getMimeType(fromURL: fileURL!)
-			let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock: {(formData: AFMultipartFormData!) in
-				formData.appendPartWithFileData(data, name: "file", fileName: fileName, mimeType: mimeType)
+			let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock:
+				{ formData in
+					formData.appendPartWithFileData(data, name: "file", fileName: fileName, mimeType: mimeType)
 				}
 				, success:
-				{
-					res, data in
+				{ res, data in
 					self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
 				}
 				, failure:
-				{
-					res, err in
+				{ res, err in
 					false // to avoid error
 					onFailure?(err)
 			})
@@ -173,13 +167,11 @@ class TessoApiManager: NSObject {
 			println(param)
 
 			req.POST("\(apiEndPoint)/send", parameters: param, success:
-				{
-					res, data in
+				{ res, data in
 					self.checkResponce(data, onSuccess: onSuccess, onFailure: onFailure)
 				}
 				, failure:
-				{
-					res, err in
+				{ res, err in
 					false // to avoid error
 					onFailure?(err)
 			})
@@ -194,7 +186,7 @@ class TessoApiManager: NSObject {
 	func getTopic(onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		self.getData(mode: .Topic, tag: "1", onSuccess: onSuccess, onFailure: onFailure)
 	}
-    
+	
 	func getClass(onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		self.getData(mode: .Class, onSuccess: onSuccess, onFailure: onFailure)
 	}
@@ -203,7 +195,7 @@ class TessoApiManager: NSObject {
 		self.getData(mode: .Profile, tag: String(withTitle.hashValue), type: withTimeline.hashValue, username: username, onSuccess: onSuccess, onFailure: onFailure)
 	}
 	
-	func getSearchResult(topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: TesSoMeSearchType = TesSoMeSearchType.All, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
+	func getSearchResult(topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: TesSoMeSearchType = .All, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
 		var typeValue: Int? = type.toRaw()
 		if type == .All {
 			typeValue = nil
@@ -229,11 +221,12 @@ class TessoApiManager: NSObject {
 	}
 	
 	func uploadFile(#fileURL: NSURL, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil)(topicid: Int) {
-		self.sendData(mode: .FileUpload, fileURL: fileURL, onSuccess: {
-			res in
-			let id = (((res["data"] as NSArray)[0] as NSDictionary)["id"] as String).toInt()!
-			self.postFile(topicid: topicid, fileId: id, onSuccess: onSuccess, onFailure: onFailure)
-			}, onFailure: onFailure)
+		self.sendData(mode: .FileUpload, fileURL: fileURL, onSuccess:
+			{ res in
+				let id = (((res["data"] as NSArray)[0] as NSDictionary)["id"] as String).toInt()!
+				self.postFile(topicid: topicid, fileId: id, onSuccess: onSuccess, onFailure: onFailure)
+			}
+			, onFailure: onFailure)
 	}
 	
 	func convertDateToTessoAPIStyle(date:NSDate) -> String {
