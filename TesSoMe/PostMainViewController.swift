@@ -70,17 +70,16 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		let selectFileUploadItem = REMenuItem(title: NSLocalizedString("File upload", comment: "File upload on navigation bar"), image: nil, highlightedImage: nil, action: {
 			item in
 			let oldMenuItems = self.menu.items
-			func generateChoosePhotoFunc(own: PostMainViewController, #doAfter: () -> Void)(type: UIImagePickerControllerSourceType)(item: REMenuItem!) {
+			func generateChoosePhotoFunc(own: PostMainViewController)(type: UIImagePickerControllerSourceType)(item: REMenuItem!) {
                 let picker = UIImagePickerController()
                 picker.delegate = own
 				picker.sourceType = type
 				picker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(type)!
 				picker.videoQuality = .TypeIFrame1280x720
 				own.presentViewController(picker, animated: true, completion: nil)
-				doAfter()
 			}
 
-			let choosePhoto = generateChoosePhotoFunc(self, doAfter: {self.menu.items = oldMenuItems})
+			let choosePhoto = generateChoosePhotoFunc(self)
 			
 			let takePhoto = REMenuItem(title: NSLocalizedString("Camera", comment: "Camera"), image: nil, highlightedImage: nil, action: choosePhoto(type: .Camera))
 			
@@ -88,6 +87,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			
 			self.menu.items = [takePhoto, selectPhoto]
 			self.menu.showFromNavigationController(self.navigationController)
+			self.menu.items = oldMenuItems
 			
 		})
 		let selectDrawingItem = REMenuItem(title: NSLocalizedString("Drawing", comment: "Drawing on navigation bar"), image: nil, highlightedImage: nil, action: {
