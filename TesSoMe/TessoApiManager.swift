@@ -145,7 +145,7 @@ class TessoApiManager: NSObject {
 		
 		if fileURL != nil {
 			let data = NSData(contentsOfURL: fileURL!)
-			let fileName = fileURL?.lastPathComponent
+			let fileName = fileURL?.lastPathComponent.stringByRemovingPercentEncoding
 			let mimeType = getMimeType(fromURL: fileURL!)
 			let task = req.POST("\(apiEndPoint)/send", parameters: param, constructingBodyWithBlock:
 				{ formData in
