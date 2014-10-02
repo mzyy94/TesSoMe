@@ -119,13 +119,13 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				var err: NSError? = nil
 				tmpDir = tmpDir.URLByAppendingPathComponent("\(now.timeIntervalSince1970)")
 				fileManager.createDirectoryAtURL(tmpDir, withIntermediateDirectories: true, attributes: nil, error: &err)
-				println(err?.localizedDescription)
 				if err == nil {
 					fileURLtoPost = tmpDir.URLByAppendingPathComponent(fileName)
 					fileManager.createFileAtPath(fileURLtoPost!.relativePath!, contents: fileToPost, attributes: nil)
 					self.setTitleBtnText("File upload")
 					self.messageType = .File
 					self.addPreviewImage(image)
+					self.addRenameFileMenu()
 				}
 			}
 			picker.dismissViewControllerAnimated(true, completion: nil)
@@ -143,7 +143,83 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				UISaveVideoAtPathToSavedPhotosAlbum(fileURLtoPost?.path, self, nil, nil)
 			}
 			self.addPreviewImage(makeThumbNail(fileURLtoPost!))
+			self.addRenameFileMenu()
 			picker.dismissViewControllerAnimated(true, completion: nil)
+		}
+	}
+	
+	var renameAction: UIAlertAction! = nil
+	
+	func addRenameFileMenu() {
+		let renameFile = REMenuItem(title: NSLocalizedString("Rename file ", comment: "Rename file"), image: nil, highlightedImage: nil, action:
+			{ item in
+				let alertController = UIAlertController(title: NSLocalizedString("Rename File", comment: "Rename File on AlertView"), message: NSLocalizedString("Please type new file name.", comment: "Please type new file name."), preferredStyle: .Alert)
+				self.renameAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+					action in
+					
+					let textField = alertController.textFields?.first as UITextField
+					let filename = textField.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+					
+					//let originalFileBaseURL = self.fileURLtoPost!.baseURL  // ERROR
+					let originalFileBaseURL = NSURL(string: self.fileURLtoPost!.absoluteString!.stringByDeletingLastPathComponent)
+					let fileExtension = self.fileURLtoPost!.pathExtension
+					let renamedFileURL = NSURL(string: "\(filename!).\(fileExtension)", relativeToURL: originalFileBaseURL)
+					
+					if renamedFileURL == self.fileURLtoPost {
+						// Will not rename
+						return
+					}
+					
+					let fileManager = NSFileManager.defaultManager()
+					var err: NSError? = nil
+					fileManager.moveItemAtURL(self.fileURLtoPost!, toURL: renamedFileURL, error: &err)
+					if err == nil {
+						self.fileURLtoPost = renamedFileURL
+					} else {
+						let errorAlertController = UIAlertController(title: NSLocalizedString("Rename Failed", comment: "Rename Failed on AlertView"), message: err?.localizedDescription, preferredStyle: .Alert)
+						let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler: nil)
+						errorAlertController.addAction(okAction)
+						self.presentViewController(errorAlertController, animated: true, completion: nil)
+					}
+					NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: alertController.textFields?.first)
+				}
+				self.renameAction.enabled = false
+				alertController.addAction(self.renameAction)
+				
+				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel) {
+					action in
+					NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: alertController.textFields?.first)
+				}
+				alertController.addAction(cancelAction)
+				alertController.addTextFieldWithConfigurationHandler(
+					{ textField in
+						let label = UILabel(frame: CGRectMake(0, 0, 100, 20))
+						label.text = " .\(self.fileURLtoPost!.pathExtension)"
+						label.font = textField.font
+						label.sizeToFit()
+						textField.rightView = label
+						textField.rightViewMode = UITextFieldViewMode.Always
+						textField.placeholder = self.fileURLtoPost?.lastPathComponent.stringByDeletingPathExtension.stringByRemovingPercentEncoding
+						NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleTextFieldTextDidChangeNotification:"), name: UITextFieldTextDidChangeNotification, object: textField)
+					}
+				)
+				
+				self.presentViewController(alertController, animated: true, completion: nil)
+				
+				
+		})
+		self.menu.items = [renameFile]
+	}
+	
+	func handleTextFieldTextDidChangeNotification(notification: NSNotification) {
+		let textField = notification.object as UITextField
+		let filename = textField.text
+		if filename == nil ||
+			filename.rangeOfString("^ *$", options: .RegularExpressionSearch) != nil ||
+			filename.rangeOfString("[/\\\\]", options: .RegularExpressionSearch) != nil {
+				renameAction.enabled = false
+		} else {
+			renameAction.enabled = true
 		}
 	}
 	
