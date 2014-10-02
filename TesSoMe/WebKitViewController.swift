@@ -36,6 +36,7 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.webView.addObserver(self, forKeyPath: "estimatedProgress", options: .New, context: nil)
 		self.webView.addObserver(self, forKeyPath: "title", options: .New, context: nil)
 		self.webView.addObserver(self, forKeyPath: "loading", options: .New, context: nil)
 		
@@ -71,12 +72,15 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
 	}
 	
 	deinit {
+		self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
 		self.webView.removeObserver(self, forKeyPath: "title")
 		self.webView.removeObserver(self, forKeyPath: "loading")
 	}
 
 	override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
 		switch keyPath {
+		case "estimatedProgress":
+			self.navigationController?.setSGProgressPercentage(Float(self.webView.estimatedProgress * 100.0), andTintColor: UIColor.globalTintColor())
 		case "title":
 			self.title = self.webView.title
 		case "loading":
