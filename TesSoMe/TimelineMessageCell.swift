@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBrowserDelegate {
+class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBrowserDelegate, UITextViewDelegate {
 	let app = UIApplication.sharedApplication()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
@@ -49,6 +49,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		
 		self.messageTextView.textContainer.lineFragmentPadding = 0
 		self.messageTextView.contentInset.top = -8.0
+		self.messageTextView.delegate = self
 		
 		self.rightUtilityButtons = self.rightButtons()
 		self.delegate = self
@@ -167,6 +168,21 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	
 	func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
 		return true
+	}
+	
+	func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+		if URL.scheme == "tesso" {
+			return true
+		}
+		
+		let webKitViewController = WebKitViewController()
+		webKitViewController.url = URL
+		
+		let tableView = self.superview?.superview as UITableView
+		let tableViewController = tableView.dataSource as UITableViewController
+		tableViewController.navigationController?.pushViewController(webKitViewController, animated: true)
+		
+		return false
 	}
 	
 	override func setSelected(selected: Bool, animated: Bool) {

@@ -14,6 +14,7 @@
 		9E16EAE619D5C95E007A5B7C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EAE519D5C95E007A5B7C /* UIColorExtension.swift */; };
 		9E16EAE719D5CB8D007A5B7C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EAE519D5C95E007A5B7C /* UIColorExtension.swift */; };
 		9E16EAE819D5CB8D007A5B7C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EAE519D5C95E007A5B7C /* UIColorExtension.swift */; };
+		9E47ADB219DD30B300F42BA4 /* WebKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */; };
 		9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D818219C9D50F0023EA4C /* TopicCell.swift */; };
 		9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */; };
 		9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */; };
@@ -94,6 +95,7 @@
 		9E15A72519D27DD20020601D /* PostMessage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PostMessage.storyboard; sourceTree = "<group>"; };
 		9E15A72719D27F160020601D /* PostMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMainViewController.swift; sourceTree = "<group>"; };
 		9E16EAE519D5C95E007A5B7C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebKitViewController.swift; sourceTree = "<group>"; };
 		9E4D818219C9D50F0023EA4C /* TopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		9E5D6A5E19CC42BA00C3A915 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E5D6A6119CC42BA00C3A915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				9E15A72719D27F160020601D /* PostMainViewController.swift */,
 				9E8FFF2119C95E4900E4459A /* SettingViewController.swift */,
 				9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */,
+				9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */,
 				9EBA91AB19DB2292002C0F94 /* SuperTimelineViewController.swift */,
 				9E8FFF2719C97C0A00E4459A /* TimelineViewController.swift */,
 				9E95321919C348A80009B9EA /* RootViewController.swift */,
@@ -560,6 +563,7 @@
 				9E15A72819D27F160020601D /* PostMainViewController.swift in Sources */,
 				9EF6703C19DAEBEB0037DB88 /* ReplyViewController.swift in Sources */,
 				9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */,
+				9E47ADB219DD30B300F42BA4 /* WebKitViewController.swift in Sources */,
 				9E8FFF2819C97C0A00E4459A /* TimelineViewController.swift in Sources */,
 				9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */,
 				9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */,
