@@ -19,6 +19,7 @@
 #import <MPGNotification/MPGNotification.h>
 #import <SVPullToRefresh/UIScrollView+SVInfiniteScrolling.h>
 #import <IDMPhotoBrowser/IDMPhotoBrowser.h>
+#import <SGNavigationProgress/UINavigationController+SGProgress.h>
 
 
 #endif

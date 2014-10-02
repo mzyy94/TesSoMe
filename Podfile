@@ -11,6 +11,7 @@ pod 'REMenu'
 pod 'MPGNotification'
 pod 'SVPullToRefresh'
 pod 'IDMPhotoBrowser'
+pod 'SGNavigationProgress'
 
 end
 
