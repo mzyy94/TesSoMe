@@ -84,7 +84,7 @@ class TopicMenuViewController: UITableViewController {
 					let nickname = userinfo["nickname"] as String!
 					let level = userinfo["lv"] as String!
 					topicViewController.usernameLabel.text = "@\(username)"
-					topicViewController.nicknameLabel.text = username
+					topicViewController.nicknameLabel.text = nickname
 					topicViewController.lebelLabel.text = "Lv. \(level)"
 				}
 				, onFailure: nil
