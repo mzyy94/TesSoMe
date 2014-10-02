@@ -40,11 +40,22 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.tabBarController!.delegate = self
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("insertCellWhenActive"), name: UIApplicationDidBecomeActiveNotification, object: nil)
+	}
+	
+	
+	func insertCellWhenActive() {
+		if !appearing || stackedCellPaths.count == 0 || isScrolling {
+			return
+		}
+		insertCellAtPaths(stackedCellPaths)
+		stackedCellPaths.removeAll(keepCapacity: false)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		appearing = true
+		insertCellWhenActive()
 	}
 	
 	override func viewDidDisappear(animated: Bool) {
@@ -83,7 +94,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 					}
 					self.latestMessageId = self.messages.first!.statusId
 					
-					if self.isScrolling {
+					if self.isScrolling || self.app.applicationState != .Active {
 						let newStackedCellPaths = path + self.stackedCellPaths
 						self.stackedCellPaths = newStackedCellPaths
 						let topOffset = self.tableView.contentOffset.y
@@ -151,7 +162,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	
 	override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
-		if !decelerate && isScrolling {
+		if !decelerate && isScrolling && self.app.applicationState != .Active {
 			isScrolling = false
 			insertCellAtPaths(stackedCellPaths)
 			stackedCellPaths.removeAll(keepCapacity: false)
@@ -160,7 +171,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	
 	override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 		super.scrollViewDidEndDecelerating(scrollView)
-		if isScrolling {
+		if isScrolling && self.app.applicationState != .Active {
 			isScrolling = false
 			insertCellAtPaths(stackedCellPaths)
 			stackedCellPaths.removeAll(keepCapacity: false)
