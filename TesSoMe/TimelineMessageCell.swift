@@ -75,8 +75,8 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 			browser.displayActionButton = false
 			
 			let tableView = self.superview?.superview as UITableView
-			let tableViewController = tableView.dataSource as UITableViewController
-			tableViewController.presentViewController(browser, animated: true, completion: nil)
+			let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+			viewController.presentViewController(browser, animated: true, completion: nil)
 		}
 	}
 	
@@ -179,8 +179,8 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		webKitViewController.url = URL
 		
 		let tableView = self.superview?.superview as UITableView
-		let tableViewController = tableView.dataSource as UITableViewController
-		tableViewController.navigationController?.pushViewController(webKitViewController, animated: true)
+		let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+		viewController.navigationController?.pushViewController(webKitViewController, animated: true)
 		
 		return false
 	}
