@@ -12,6 +12,7 @@ pod 'MPGNotification'
 pod 'SVPullToRefresh'
 pod 'IDMPhotoBrowser'
 pod 'SGNavigationProgress'
+pod 'HMSegmentedControl'
 
 end
 

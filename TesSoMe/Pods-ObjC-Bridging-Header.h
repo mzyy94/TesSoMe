@@ -20,6 +20,7 @@
 #import <SVPullToRefresh/UIScrollView+SVInfiniteScrolling.h>
 #import <IDMPhotoBrowser/IDMPhotoBrowser.h>
 #import <SGNavigationProgress/UINavigationController+SGProgress.h>
+#import <HMSegmentedControl/HMSegmentedControl.h>
 
 
 #endif
