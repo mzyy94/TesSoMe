@@ -31,7 +31,7 @@ class TimelineViewController: SuperTimelineViewController {
 				NSRunLoop.currentRunLoop().addTimer(self.updateTimestampTimer!, forMode: NSRunLoopCommonModes)
 				
 			}
-			, onFailure: nil
+			, onFailure: failureAction
 		)
 	}
 	
@@ -76,7 +76,7 @@ class TimelineViewController: SuperTimelineViewController {
 					})
 				})
 			}
-			, onFailure: nil
+			, onFailure: failureAction
 		)
 	}
 	
@@ -110,10 +110,19 @@ class TimelineViewController: SuperTimelineViewController {
 					})
 				})
 			}
-			, onFailure: nil
+			, onFailure: failureAction
 		)
 	}
 	
+	func failureAction(err: NSError) {
+		self.refreshControl?.endRefreshing()
+		
+		let notification = MPGNotification(title: NSLocalizedString("Failed to load timeline", comment: "Failed to load timeline"), subtitle: err.localizedDescription, backgroundColor: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), iconImage: UIImage(named: "warning_icon"))
+		notification.duration = 5.0
+		notification.animationType = .Drop
+		notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
+		notification.show()
+	}
 
 	
 	override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
