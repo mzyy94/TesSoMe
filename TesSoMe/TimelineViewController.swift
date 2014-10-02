@@ -8,9 +8,11 @@
 
 import UIKit
 
-class TimelineViewController: SuperTimelineViewController {
+class TimelineViewController: SuperTimelineViewController, UITabBarControllerDelegate {
 	let apiManager = TessoApiManager()
 
+	var appearing = false
+	
 	override func getTimeline() {
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		apiManager.getTimeline(topicid: topic, onSuccess:
@@ -34,7 +36,29 @@ class TimelineViewController: SuperTimelineViewController {
 			, onFailure: failureAction
 		)
 	}
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		self.tabBarController!.delegate = self
+	}
 	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		appearing = true
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		appearing = false
+	}
+
+	func tabBarController(tabBarController: UITabBarController!, didSelectViewController viewController: UIViewController!) {
+		let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+		if appearing && self.parentViewController == viewController && self.tableView.numberOfRowsInSection(0) > 0 {
+			self.tableView.scrollToRowAtIndexPath(topIndexPath, atScrollPosition: .Top, animated: true)
+		}
+	}
+
 	override func updateTimeline() {
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		apiManager.getTimeline(topicid: topic, sinceid: latestMessageId, onSuccess:
