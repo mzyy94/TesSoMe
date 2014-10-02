@@ -20,8 +20,14 @@ class SuperTimelineViewController: UITableViewController {
 	var withBadge: Bool = true
 	var timestampIsRelative: Bool = true
 	
+	var updateTimelineMethod: (() -> Void) = {}
+	
 	var updateTimelineFetchTimer: NSTimer? = nil
 	var updateTimestampTimer: NSTimer? = nil
+	
+	let updateTimelineQueue = dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
+	let updateTimelineSemaphore = dispatch_semaphore_create(1)
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,13 +41,16 @@ class SuperTimelineViewController: UITableViewController {
 		self.refreshControl?.backgroundColor = UIColor.globalTintColor()
 		self.refreshControl?.tintColor = UIColor.whiteColor()
 		
+		self.updateTimelineMethod = getTimeline
+		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-			self.getTimeline()
+			self.updateTimelineMethod()
 		})
 		
-		self.refreshControl!.addTarget(self, action: Selector("updateTimeline"), forControlEvents: .ValueChanged)
+		self.refreshControl!.addTarget(self, action: Selector("updateTimelineWithSemaphoreLock"), forControlEvents: .ValueChanged)
 		
 		self.tableView.addInfiniteScrollingWithActionHandler(loadOlderTimeline)
+		self.tableView.infiniteScrollingView.enabled = false
 		
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
@@ -96,6 +105,14 @@ class SuperTimelineViewController: UITableViewController {
 		self.refreshControl?.attributedTitle = refreshed
 	}
 	
+	func updateTimelineWithSemaphoreLock() {
+		dispatch_semaphore_wait(updateTimelineSemaphore, DISPATCH_TIME_FOREVER)
+		dispatch_sync(updateTimelineQueue, {
+			self.updateTimelineMethod()
+			dispatch_semaphore_signal(self.updateTimelineSemaphore)
+		})
+	}
+
 	func getTimeline() {
 		fatalError("This method must be overridden")
 	}
@@ -119,9 +136,11 @@ class SuperTimelineViewController: UITableViewController {
 		updateTimelineFetchTimer?.invalidate()
 		if self.ud.boolForKey("streaming") {
 			let interval = NSTimeInterval(ud.floatForKey("interval"))
-			updateTimelineFetchTimer = NSTimer(timeInterval:interval, target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: true)
+			updateTimelineFetchTimer = NSTimer(timeInterval:interval, target: self, selector: Selector("updateTimelineWithSemaphoreLock"), userInfo: nil, repeats: true)
 			NSRunLoop.currentRunLoop().addTimer(updateTimelineFetchTimer!, forMode: NSRunLoopCommonModes)
 		}
+		updateTimelineMethod = updateTimeline
+		self.tableView.infiniteScrollingView.enabled = true
 	}
 	
 	func updateTimestamp() {
