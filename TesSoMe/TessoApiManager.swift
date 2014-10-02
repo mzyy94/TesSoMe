@@ -120,7 +120,10 @@ class TessoApiManager: NSObject {
 			}
 			, failure:
 			{ res, err in
-				false // to avoid error
+#if TARGET_IS_SHARE_EXTENSION
+#else
+					self.app.networkActivityIndicatorVisible = false
+#endif
 				onFailure?(err)
 		})
 	}
@@ -157,7 +160,10 @@ class TessoApiManager: NSObject {
 				}
 				, failure:
 				{ res, err in
-					false // to avoid error
+#if TARGET_IS_SHARE_EXTENSION
+#else
+						self.app.networkActivityIndicatorVisible = false
+#endif
 					onFailure?(err)
 			})
 			
@@ -172,7 +178,10 @@ class TessoApiManager: NSObject {
 				}
 				, failure:
 				{ res, err in
-					false // to avoid error
+#if TARGET_IS_SHARE_EXTENSION
+#else
+						self.app.networkActivityIndicatorVisible = false
+#endif
 					onFailure?(err)
 			})
 		}
