@@ -125,13 +125,6 @@ class SuperTimelineViewController: UITableViewController {
 		fatalError("This method must be overridden")
 	}
 	
-	func resetTimeline() {
-		updateTimelineFetchTimer?.invalidate()
-		updateTimestampTimer?.invalidate()
-		messages = []
-		getTimeline()
-	}
-	
 	func setUpdateTimelineFetchTimer() {
 		updateTimelineFetchTimer?.invalidate()
 		if self.ud.boolForKey("streaming") {

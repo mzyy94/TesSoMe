@@ -158,6 +158,14 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 		notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
 		notification.show()
 	}
+	
+	func resetTimeline() {
+		updateTimelineFetchTimer?.invalidate()
+		updateTimestampTimer?.invalidate()
+		messages = []
+		self.tableView.infiniteScrollingView.enabled = true
+		getTimeline()
+	}
 
 	
 	override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
