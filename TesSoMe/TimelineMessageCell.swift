@@ -23,6 +23,18 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	
 	var postedDate: NSDate? = nil
 	
+	@IBAction func userIconBtnPressed() {
+		let username = usernameLabel.text?.stringByReplacingOccurrencesOfString("@", withString: "")
+		
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
+		userViewController.username = username!
+		
+		let tableView = self.superview?.superview as UITableView
+		let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+		viewController.navigationController?.pushViewController(userViewController, animated: true)
+	}
+	
 	func rightButtons() -> NSArray {
 		let rightUtilityButtons = NSMutableArray()
 		
