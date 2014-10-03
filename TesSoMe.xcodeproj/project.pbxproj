@@ -15,6 +15,7 @@
 		9E16EAE719D5CB8D007A5B7C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EAE519D5C95E007A5B7C /* UIColorExtension.swift */; };
 		9E16EAE819D5CB8D007A5B7C /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EAE519D5C95E007A5B7C /* UIColorExtension.swift */; };
 		9E47ADB219DD30B300F42BA4 /* WebKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */; };
+		9E47ADB419DD52D900F42BA4 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47ADB319DD52D900F42BA4 /* UserViewController.swift */; };
 		9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D818219C9D50F0023EA4C /* TopicCell.swift */; };
 		9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */; };
 		9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */; };
@@ -37,6 +38,7 @@
 		9EB8ADE319C3069F00CB92B2 /* TesSoMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */; };
 		9EBA91AA19DB1DB1002C0F94 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EBA91A919DB1DB1002C0F94 /* white.png */; };
 		9EBA91AC19DB2292002C0F94 /* SuperTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA91AB19DB2292002C0F94 /* SuperTimelineViewController.swift */; };
+		9EE11FA819DDA66100AC30D6 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE11FA719DDA66100AC30D6 /* LabelCell.swift */; };
 		9EE50FDD19CC4E34006AA6EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE50FDC19CC4E34006AA6EA /* Images.xcassets */; };
 		9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EEF01A919C93E4B005CCF7C /* Settings.storyboard */; };
 		9EF6703C19DAEBEB0037DB88 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */; };
@@ -96,6 +98,7 @@
 		9E15A72719D27F160020601D /* PostMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMainViewController.swift; sourceTree = "<group>"; };
 		9E16EAE519D5C95E007A5B7C /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebKitViewController.swift; sourceTree = "<group>"; };
+		9E47ADB319DD52D900F42BA4 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		9E4D818219C9D50F0023EA4C /* TopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		9E5D6A5E19CC42BA00C3A915 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E5D6A6119CC42BA00C3A915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 		9EB8ADE219C3069F00CB92B2 /* TesSoMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesSoMeTests.swift; sourceTree = "<group>"; };
 		9EBA91A919DB1DB1002C0F94 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white.png; sourceTree = "<group>"; };
 		9EBA91AB19DB2292002C0F94 /* SuperTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTimelineViewController.swift; sourceTree = "<group>"; };
+		9EE11FA719DDA66100AC30D6 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		9EE50FDC19CC4E34006AA6EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9EEF01A919C93E4B005CCF7C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				9EBA91A919DB1DB1002C0F94 /* white.png */,
 				9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */,
 				9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */,
+				9EE11FA719DDA66100AC30D6 /* LabelCell.swift */,
 				9E76D83219DA704600624761 /* PhotoCaptionView.xib */,
 				9E76D83019DA703000624761 /* PhotoCaptionView.swift */,
 				9E4D818219C9D50F0023EA4C /* TopicCell.swift */,
@@ -241,6 +246,7 @@
 				9E15A72519D27DD20020601D /* PostMessage.storyboard */,
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
 				9E15A72719D27F160020601D /* PostMainViewController.swift */,
+				9E47ADB319DD52D900F42BA4 /* UserViewController.swift */,
 				9E8FFF2119C95E4900E4459A /* SettingViewController.swift */,
 				9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */,
 				9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */,
@@ -558,6 +564,7 @@
 				9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */,
 				9E8FFF2A19C9868200E4459A /* TesSoMeData.swift in Sources */,
 				9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */,
+				9E47ADB419DD52D900F42BA4 /* UserViewController.swift in Sources */,
 				9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */,
 				9E9FA0E719C36A6D00E209C3 /* TessoApiManager.swift in Sources */,
 				9E15A72819D27F160020601D /* PostMainViewController.swift in Sources */,
@@ -568,6 +575,7 @@
 				9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */,
 				9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */,
 				9E05785619C92D2A001CEA3F /* TopicMenuViewController.swift in Sources */,
+				9EE11FA819DDA66100AC30D6 /* LabelCell.swift in Sources */,
 				9E16EAE619D5C95E007A5B7C /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
