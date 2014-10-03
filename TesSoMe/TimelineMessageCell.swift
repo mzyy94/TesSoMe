@@ -142,6 +142,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 
 	private func updateRelativeTimestamp() {
 		let dateFormatter = NSDateFormatter()
+		dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
 		dateFormatter.dateFormat = "s's'"
 		let timeDate = NSDate(timeIntervalSinceReferenceDate: -postedDate!.timeIntervalSinceNow)
 		switch timeDate.timeIntervalSinceReferenceDate {
