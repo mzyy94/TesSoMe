@@ -10,10 +10,11 @@ import UIKit
 
 class SearchValue: NSObject {
 	enum SearchTarget {
-		case Post, Reply, Hashtag
+		case User, Post, Reply, Hashtag
 	}
 	
 	let formatString: [SearchTarget: String] = [
+		.User: NSLocalizedString("Go to user \"%@\"", comment: "Search user format"),
 		.Post: NSLocalizedString("Post by \"%@\"", comment: "Search post format"),
 		.Reply: NSLocalizedString("Reply to @%@", comment: "Search reply format"),
 		.Hashtag: NSLocalizedString("Hashtag #%@", comment: "Search hashtag format")
@@ -93,6 +94,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 			self.searchWords.removeAll(keepCapacity: true)
 			if let searchWord = searchWords.first {
 				if SearchValue.matchUsernameFormat(searchWord) {
+					self.searchWords.append(SearchValue(target: .User, words: searchWord))
 					self.searchWords.append(SearchValue(target: .Post, words: searchWord))
 					self.searchWords.append(SearchValue(target: .Reply, words: searchWord))
 				}
@@ -190,11 +192,30 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     }
     */
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if searchWords[indexPath.row].target == .User {
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
+			userViewController.username = searchWords[indexPath.row].words.first!
+			
+			self.navigationController?.pushViewController(userViewController, animated: true)
+            closeKeyboard()
+        }
+    }
+	
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the item to be re-orderable.
         return true
     }
 
+	override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+		let indexPath = tableView.indexPathForCell(sender as UITableViewCell)!
+		if searchWords[indexPath.row].target == .User {
+			return false
+		}
+		return true
+	}
+	
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
 		let indexPath = tableView.indexPathForCell(sender as UITableViewCell)!
 		if indexPath.section == 0 {
@@ -203,6 +224,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 			var resultView = segue.destinationViewController as SearchResultViewController
 			searchValue.setSearchValue(&resultView, withType: type)
 		}
+		closeKeyboard()
     }
 
 }

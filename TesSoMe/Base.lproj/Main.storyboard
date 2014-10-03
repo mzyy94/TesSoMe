@@ -162,7 +162,7 @@
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <segue destination="GDr-Pt-0bd" kind="show" id="17S-AA-aeA"/>
+                                    <segue destination="GDr-Pt-0bd" kind="show" identifier="ShowSearchResult" id="17S-AA-aeA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
