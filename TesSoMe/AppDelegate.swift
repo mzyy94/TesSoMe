@@ -59,6 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 			
 			self.window?.rootViewController!.presentViewController(postNavigationController, animated: true, completion: nil)
+			
+		case "user":
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
+			
+			self.window?.rootViewController!.presentViewController(userViewController, animated: true, completion: nil)
+
 
 		default:
 			return false
