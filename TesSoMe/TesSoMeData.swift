@@ -31,6 +31,7 @@ class TesSoMeData: NSObject {
 	var fileURL: NSURL? = nil
 	var fileSize: Int? = nil
 	var fileName: String? = nil
+    var attributedMessage: NSAttributedString! = nil
 
 	
 	class func dataFromResponce(responce: NSDictionary) -> NSArray {
@@ -111,6 +112,10 @@ class TesSoMeData: NSObject {
 		switch type {
 		case .Message, .Drawing:
 			message = converter.decodeXML(data["data"] as String)
+			getReplyUsernames()
+			getRelatedMessageIds()
+			getHashTags()
+            attributedMessage = generateAttributedMessage()
 		default:
 			let filedata = converter.decodeXML(data["data"] as String).componentsSeparatedByString(",")
 			fileName = filedata[1]
@@ -119,11 +124,24 @@ class TesSoMeData: NSObject {
 				message = filedata[3]
 			}
 			fileURL = NSURL(string: "https://tesso.pw/files/snsuploads/\(filedata[0])/\(fileName!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
+            
+            var filesizeText = ""
+            switch fileSize! {
+            case 0..<4096:
+                filesizeText = "\(fileSize!) Byte"
+            case 4096..<4096*1024:
+                filesizeText = "\(fileSize! / 1024) KB"
+            case 4096*1024..<4096*1024*1024:
+                filesizeText = "\(fileSize! / 1024 / 1024) MB"
+            default:
+                filesizeText = "\(fileSize! / 1024 / 1024 / 1024) GB"
+            }
+            
+            let attributedText = NSMutableAttributedString(string: fileName!, attributes: [NSLinkAttributeName: fileURL!])
+            attributedText.appendAttributedString(NSAttributedString(string: " [\(filesizeText)]"))
+            attributedMessage = attributedText
+            message = attributedText.string
 		}
-		getReplyUsernames()
-		getRelatedMessageIds()
-		getHashTags()
-
 	}
 	
 	class func convertAttributedProfile(raw: String) -> NSMutableAttributedString {
@@ -181,7 +199,7 @@ class TesSoMeData: NSObject {
 	}
 	
 	
-	func generateAttributedMessage() -> NSAttributedString {
+	private func generateAttributedMessage() -> NSAttributedString {
 		// space replace
 		var space = " "
 		for i in 2...32 {
@@ -257,32 +275,15 @@ class TesSoMeData: NSObject {
 		} else {
 			cell.backgroundColor = UIColor.whiteColor()
 		}
+        cell.messageTextView.attributedText = attributedMessage
 		switch type {
 		case .Message:
-			cell.messageTextView.attributedText = generateAttributedMessage()
 			cell.previewView.image = nil
 		case .File:
 			if fileURL!.lastPathComponent.rangeOfString("(.[jJ][pP][eE]?[gG]|.[pP][nN][gG]|.[gG][iI][fF]|.[bB][mM][pP])$", options: .RegularExpressionSearch) != nil {
 				cell.previewView.sd_setImageWithURL(fileURL, placeholderImage: UIImage(named: "white.png"))
 			}
-			var filesizeText = ""
-			switch fileSize! {
-			case 0..<4096:
-				filesizeText = "\(fileSize!) Byte"
-			case 4096..<4096*1024:
-				filesizeText = "\(fileSize! / 1024) KB"
-			case 4096*1024..<4096*1024*1024:
-				filesizeText = "\(fileSize! / 1024 / 1024) MB"
-			default:
-				filesizeText = "\(fileSize! / 1024 / 1024 / 1024) GB"
-			}
-			
-			let attributedText = NSMutableAttributedString(string: fileName!, attributes: [NSLinkAttributeName: fileURL!])
-			attributedText.appendAttributedString(NSAttributedString(string: " [\(filesizeText)]"))
-			
-			cell.messageTextView.attributedText = attributedText
 		case .Drawing:
-			cell.messageTextView.attributedText = generateAttributedMessage()
 			let drawingURL = NSURL(string: "https://tesso.pw/img/snspics/\(statusId).png")
 			cell.previewView.sd_setImageWithURL(drawingURL, placeholderImage: UIImage(named: "white.png"))
 		default:
