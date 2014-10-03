@@ -117,10 +117,16 @@ class SuperTimelineViewController: UITableViewController {
 	}
 	
 	func manualUpdateTimeline() {
-		updateTimelineFetchTimer?.fire()
+		if updateTimelineFetchTimer != nil {
+			updateTimelineFetchTimer?.fire()
+		} else {
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+				self.tryUpdateTimeline()
+			})
+		}
 	}
 
-	func endUpdating() {
+	func endUpdating(null: AnyObject? = nil) {
 		isUpdating = false
 	}
 	

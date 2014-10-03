@@ -47,6 +47,7 @@ class SearchResultViewController: SuperTimelineViewController {
 
 				self.updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
 				NSRunLoop.currentRunLoop().addTimer(self.updateTimestampTimer!, forMode: NSRunLoopCommonModes)
+				self.endUpdating()
 				
 			}
 			, onFailure: failureAction
@@ -78,6 +79,7 @@ class SearchResultViewController: SuperTimelineViewController {
 					
 					dispatch_sync(dispatch_get_main_queue(), {
 						self.tableView.insertRowsAtIndexPaths(path, withRowAnimation: .Top)
+						self.endUpdating()
 					})
 				})
 			}
@@ -111,6 +113,7 @@ class SearchResultViewController: SuperTimelineViewController {
 					dispatch_sync(dispatch_get_main_queue(), {
 						self.tableView.reloadData()
 						self.tableView.infiniteScrollingView.stopAnimating()
+						self.endUpdating()
 					})
 				})
 			}
@@ -126,6 +129,7 @@ class SearchResultViewController: SuperTimelineViewController {
 		notification.animationType = .Drop
 		notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
 		notification.show()
+		endUpdating()
 	}
 	
 
