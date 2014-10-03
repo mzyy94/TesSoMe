@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum TesSoMeSearchType: Int {
+	case All = -1
+	case Message = 0
+	case Drawing = 1
+	case File = 2
+};
+
 class TessoApiManager: NSObject {
 #if TARGET_IS_SHARE_EXTENSION
 #else
@@ -22,13 +29,6 @@ class TessoApiManager: NSObject {
 	
 	enum TesSoMeSendMode: Int {
 		case Message = 0, Drawing, FilePost, FileUpload, EditClass, UpdateProfile, AddTitle;
-	};
-	
-	enum TesSoMeSearchType: Int {
-		case All = -1
-		case Message = 0
-		case Drawing = 1
-		case File = 2
 	};
 	
 	func signIn(#username: String, password: String, onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
