@@ -280,7 +280,7 @@ class TesSoMeData: NSObject {
 		case .Message:
 			cell.previewView.image = nil
 		case .File:
-			if fileURL!.lastPathComponent.rangeOfString("(.[jJ][pP][eE]?[gG]|.[pP][nN][gG]|.[gG][iI][fF]|.[bB][mM][pP])$", options: .RegularExpressionSearch) != nil {
+			if fileURL!.lastPathComponent.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
 				cell.previewView.sd_setImageWithURL(fileURL, placeholderImage: UIImage(named: "white.png"))
 			}
 		case .Drawing:
