@@ -25,9 +25,7 @@ class SuperTimelineViewController: UITableViewController {
 	var updateTimelineFetchTimer: NSTimer? = nil
 	var updateTimestampTimer: NSTimer? = nil
 	
-	let updateTimelineQueue = dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-	let updateTimelineSemaphore = dispatch_semaphore_create(1)
-
+	var isUpdating = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -47,7 +45,7 @@ class SuperTimelineViewController: UITableViewController {
 			self.updateTimelineMethod()
 		})
 		
-		self.refreshControl!.addTarget(self, action: Selector("updateTimelineWithSemaphoreLock"), forControlEvents: .ValueChanged)
+		self.refreshControl!.addTarget(self, action: Selector("manualUpdateTimeline"), forControlEvents: .ValueChanged)
 		
 		self.tableView.addInfiniteScrollingWithActionHandler(loadOlderTimeline)
 		self.tableView.infiniteScrollingView.enabled = false
@@ -101,18 +99,31 @@ class SuperTimelineViewController: UITableViewController {
 		dateFormatter.dateFormat = format
 		let now = NSDate()
 		
+		isUpdating = false
+		
 		let refreshed = NSMutableAttributedString(string: dateFormatter.stringFromDate(now), attributes: [NSForegroundColorAttributeName: UIColor(white: 0.8, alpha: 1.0)])
 		self.refreshControl?.attributedTitle = refreshed
 	}
 	
-	func updateTimelineWithSemaphoreLock() {
-		dispatch_semaphore_wait(updateTimelineSemaphore, DISPATCH_TIME_FOREVER)
-		dispatch_sync(updateTimelineQueue, {
-			self.updateTimelineMethod()
-			dispatch_semaphore_signal(self.updateTimelineSemaphore)
-		})
+	func tryUpdateTimeline() {
+		if isUpdating {
+			if self.refreshControl!.refreshing {
+				self.refreshControl?.endRefreshing()
+			}
+			return
+		}
+		isUpdating = true
+		updateTimelineMethod()
+	}
+	
+	func manualUpdateTimeline() {
+		updateTimelineFetchTimer?.fire()
 	}
 
+	func endUpdating() {
+		isUpdating = false
+	}
+	
 	func getTimeline() {
 		fatalError("This method must be overridden")
 	}
@@ -129,7 +140,7 @@ class SuperTimelineViewController: UITableViewController {
 		updateTimelineFetchTimer?.invalidate()
 		if self.ud.boolForKey("streaming") {
 			let interval = NSTimeInterval(ud.floatForKey("interval"))
-			updateTimelineFetchTimer = NSTimer(timeInterval:interval, target: self, selector: Selector("updateTimelineWithSemaphoreLock"), userInfo: nil, repeats: true)
+			updateTimelineFetchTimer = NSTimer(timeInterval:interval, target: self, selector: Selector("tryUpdateTimeline"), userInfo: nil, repeats: true)
 			NSRunLoop.currentRunLoop().addTimer(updateTimelineFetchTimer!, forMode: NSRunLoopCommonModes)
 		}
 		updateTimelineMethod = updateTimeline

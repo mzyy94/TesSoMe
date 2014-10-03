@@ -112,6 +112,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 					
 					dispatch_sync(dispatch_get_main_queue(), {
 						self.insertCellAtPaths(path)
+						self.endUpdating()
 					})
 				})
 			}
@@ -161,6 +162,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 		notification.animationType = .Drop
 		notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
 		notification.show()
+		endUpdating()
 	}
 	
 	func resetTimeline() {
