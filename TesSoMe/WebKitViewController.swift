@@ -46,6 +46,11 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
 		self.webView.loadRequest(req)
 	}
 	
+	override func viewWillDisappear(animated: Bool) {
+		self.navigationController?.setSGProgressPercentage(0.0, andTintColor: UIColor.globalTintColor())
+		app.networkActivityIndicatorVisible = false
+	}
+	
 	func showShareAction() {
 		var alertController = UIAlertController(title: NSLocalizedString("Share", comment: "Share on ActionSheet"), message: nil, preferredStyle: .ActionSheet)
 		
