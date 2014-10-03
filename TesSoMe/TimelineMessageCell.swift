@@ -172,6 +172,18 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	
 	func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
 		if URL.scheme == "tesso" {
+			if URL.host == "user" {
+				let storyboard = UIStoryboard(name: "Main", bundle: nil)
+				let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
+				userViewController.username = URL.lastPathComponent
+				
+				let tableView = self.superview?.superview as UITableView
+				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+				viewController.navigationController?.pushViewController(userViewController, animated: true)
+				
+				return false
+	
+			}
 			return true
 		}
 		
