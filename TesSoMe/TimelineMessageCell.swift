@@ -121,9 +121,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		photoCaptionView.viaTesSoMeBadge.hidden = self.viaTesSoMeBadge.hidden
 		photoCaptionView.statusIdLabel.text = self.statusIdLabel.text
 		
-		let photoCaptionFormat = NSLocalizedString("File name: %@", comment: "Photo caption format")
-		let fileName = self.messageTextView.text.lastPathComponent.stringByRemovingPercentEncoding
-		photoCaptionView.messageTextView.text = NSString(format: photoCaptionFormat, fileName!)
+		photoCaptionView.messageTextView.text = self.messageTextView.text
 		photoCaptionView.messageTextView.textColor = UIColor.whiteColor()
 		
 		photoCaptionView.setTranslatesAutoresizingMaskIntoConstraints(false)
