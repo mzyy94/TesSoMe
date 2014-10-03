@@ -71,8 +71,9 @@ class TesSoMeData: NSObject {
 		func getReplyUsernames() {
 			let usernames = message.componentsSeparatedByString("@")
 			for i in 1..<usernames.count {
-				if usernames[i].rangeOfString("^[a-z0-9]{1,16}[^a-z0-9]?", options: .RegularExpressionSearch) != nil {
-					replyUserIds.append(usernames[i].stringByReplacingOccurrencesOfString("^([a-z0-9]{1,16})[^a-z0-9]?.*", withString: "$1", options: .RegularExpressionSearch))
+				let range =  usernames[i].rangeOfString("^[a-z0-9]{1,16}(?![a-z0-9])", options: .RegularExpressionSearch)
+				if range != nil {
+					replyUserIds.append(usernames[i].substringWithRange(range!))
 				}
 			}
 		}
@@ -80,8 +81,9 @@ class TesSoMeData: NSObject {
 		func getRelatedMessageIds() {
 			let replies = message.componentsSeparatedByString(">")
 			for i in 1..<replies.count {
-				if replies[i].rangeOfString("^[0-9]{1,16}[^0-9]?", options: .RegularExpressionSearch) != nil {
-					relatedMessageIds.append(replies[i].stringByReplacingOccurrencesOfString("^([0-9]{1,16})[^0-9]?.*", withString: "$1", options: .RegularExpressionSearch).toInt()!)
+				let range = replies[i].rangeOfString("^[0-9]{1,16}(?![0-9])", options: .RegularExpressionSearch)
+				if range != nil {
+					relatedMessageIds.append(replies[i].substringWithRange(range!).toInt()!)
 				}
 			}
 		}
@@ -89,8 +91,9 @@ class TesSoMeData: NSObject {
 		func getHashTags() {
 			let hashtags = message.componentsSeparatedByString("#")
 			for i in 1..<hashtags.count {
-				if hashtags[i].rangeOfString("^[a-zA-Z0-9]{1,16}[^a-zA-Z0-9]?", options: .RegularExpressionSearch) != nil {
-					hashTags.append(hashtags[i].stringByReplacingOccurrencesOfString("^([a-zA-Z0-9]{1,16})[^a-zA-Z0-9]?.*", withString: "$1", options: .RegularExpressionSearch))
+				let range = hashtags[i].rangeOfString("^[a-zA-Z0-9]{1,16}(?![a-zA-Z0-9])", options: .RegularExpressionSearch)
+				if range != nil {
+					hashTags.append(hashtags[i].substringWithRange(range!))
 				}
 			}
 		}
