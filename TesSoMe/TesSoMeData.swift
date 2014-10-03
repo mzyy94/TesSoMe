@@ -123,6 +123,60 @@ class TesSoMeData: NSObject {
 
 	}
 	
+	class func convertAttributedProfile(raw: String) -> NSMutableAttributedString {
+		let converter = HTMLEntityConverter()
+		var data = converter.decodeXML(raw)
+		
+		var space = " "
+		for i in 2...32 {
+			space += " "
+			data = data.stringByReplacingOccurrencesOfString("%sp(\(i))", withString: space)
+		}
+		data = data.stringByReplacingOccurrencesOfString("%br()", withString: "\n")
+		data = data.stringByReplacingOccurrencesOfString("(%h3\\([^\\)]*\\))", withString: "\n$1\n", options: .RegularExpressionSearch)
+		data = data.stringByReplacingOccurrencesOfString("(%h2\\([^\\)]*\\))", withString: "\n$1\n", options: .RegularExpressionSearch)
+		data = data.stringByReplacingOccurrencesOfString("%p\\(([^\\)]*)\\)", withString: "$1\n", options: .RegularExpressionSearch)
+		
+		let size: CGFloat = 12.0
+		var text = NSMutableAttributedString(string: data, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(size)])
+		
+		var boldRange = NSString(string: data).rangeOfString("%b\\([^\\)]*\\)", options: .RegularExpressionSearch)
+		while boldRange.length != 0 {
+			data = NSString(string: data).stringByReplacingOccurrencesOfString("%b\\(([^\\)]*)\\)", withString: "$1", options: .RegularExpressionSearch, range: boldRange)
+			
+			text.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 250.0 / 255.0, green: 10.0/255.0, blue: 20.0/255.0, alpha: 1.0), range: boldRange)
+			
+			text.deleteCharactersInRange(NSMakeRange(boldRange.location + boldRange.length - 1, 1))
+			text.deleteCharactersInRange(NSMakeRange(boldRange.location, 3))
+			boldRange = NSString(string: data).rangeOfString("%b\\([^\\)]*\\)", options: .RegularExpressionSearch, range: NSMakeRange(boldRange.location + boldRange.length - 4, data.utf16Count - (boldRange.location + boldRange.length - 4)))
+		}
+		
+		var h3Range = NSString(string: data).rangeOfString("%h3\\([^\\)]*\\)", options: NSStringCompareOptions.RegularExpressionSearch)
+		while h3Range.length != 0 {
+			data = NSString(string: data).stringByReplacingOccurrencesOfString("%h3\\(([^\\)]*)\\)", withString: "$1", options: .RegularExpressionSearch, range: h3Range)
+			text.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 250.0 / 255.0, green: 120.0/255.0, blue: 20.0/255.0, alpha: 1.0), range: h3Range)
+			text.deleteCharactersInRange(NSMakeRange(h3Range.location + h3Range.length - 1, 1))
+			text.deleteCharactersInRange(NSMakeRange(h3Range.location, 4))
+			
+			h3Range = NSString(string: data).rangeOfString("%h3\\([^\\)]*\\)", options: .RegularExpressionSearch, range: NSMakeRange(h3Range.location + h3Range.length - 5, data.utf16Count - (h3Range.location + h3Range.length - 5)))
+		}
+		
+		var h2Range = NSString(string: data).rangeOfString("%h2\\([^\\)]*\\)", options: .RegularExpressionSearch)
+		while h2Range.length != 0 {
+			let font = UIFont.boldSystemFontOfSize(size)
+			
+			data = NSString(string: data).stringByReplacingOccurrencesOfString("%h2\\(([^\\)]*)\\)", withString: "$1", options: .RegularExpressionSearch, range: h2Range)
+			text.addAttribute(NSFontAttributeName, value: font, range: h2Range)
+			
+			text.deleteCharactersInRange(NSMakeRange(h2Range.location + h2Range.length - 1, 1))
+			text.deleteCharactersInRange(NSMakeRange(h2Range.location, 4))
+			
+			h2Range = NSString(string: data).rangeOfString("%h2\\([^\\)]*\\)", options: .RegularExpressionSearch, range: NSMakeRange(h2Range.location + h2Range.length - 5, data.utf16Count - (h2Range.location + h2Range.length - 5)))
+		}
+		
+		return text
+	}
+	
 	
 	func generateAttributedMessage() -> NSAttributedString {
 		// space replace
