@@ -89,7 +89,11 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 					let insertedCellCount = timeline.count
 					
 					for (i, post) in enumerate((timeline as [NSDictionary]).reverse()) {
-						self.messages.insert(TesSoMeData(data: post), atIndex: 0)
+						let tessomeData = TesSoMeData(data: post)
+						if tessomeData.isReplyTo(self.appDelegate.usernameOfTesSoMe!) {
+							self.appDelegate.notifyMessage(tessomeData.message, from: tessomeData.username)
+						}
+						self.messages.insert(tessomeData, atIndex: 0)
 						path.append(NSIndexPath(forRow: i, inSection: 0))
 					}
 					self.latestMessageId = self.messages.first!.statusId
