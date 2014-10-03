@@ -32,6 +32,9 @@ class ReplyViewController: SuperTimelineViewController {
 				
 				self.refreshControl?.endRefreshing()
 				
+				self.updateTimelineMethod = self.updateTimeline
+				self.tableView.infiniteScrollingView.enabled = true
+
 				self.updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
 				NSRunLoop.currentRunLoop().addTimer(self.updateTimestampTimer!, forMode: NSRunLoopCommonModes)
 				
