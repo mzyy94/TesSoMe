@@ -236,8 +236,12 @@ class TesSoMeData: NSObject {
 	func isViaTesSoMe() -> Bool {
 		return message.rangeOfString("    $", options: .RegularExpressionSearch) != nil
 	}
+    
+    func isReplyTo(username: String) -> Bool {
+        return Bool(replyUserIds.filter({u in u == username}).count)
+    }
 	
-	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool) {
+	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool, repliedUsername: String! = nil) {
 		cell.statusIdLabel.text = "\(statusId)"
 		cell.usernameLabel.text = "@\(username)"
 		cell.nicknameLabel.text = nickname
@@ -245,6 +249,11 @@ class TesSoMeData: NSObject {
 		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(username).png"), forState: .Normal)
 		cell.postedDate = date
 		cell.viaTesSoMeBadge.hidden = !withBadge || !isViaTesSoMe()
+		if repliedUsername != nil && isReplyTo(repliedUsername) {
+			cell.backgroundColor = UIColor.globalTintColor(alpha: 0.1)
+		} else {
+			cell.backgroundColor = UIColor.whiteColor()
+		}
 		switch type {
 		case .Message:
 			cell.messageTextView.attributedText = generateAttributedMessage()

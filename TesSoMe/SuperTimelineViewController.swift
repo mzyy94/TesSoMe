@@ -90,7 +90,7 @@ class SuperTimelineViewController: UITableViewController {
 		var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
 		let data = messages[indexPath.row]
 		// Configure the cell...
-		data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge)
+		data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge, repliedUsername: appDelegate.usernameOfTesSoMe)
 		cell.updateTimestamp(relative: timestampIsRelative)
 		return cell
 	}

@@ -44,7 +44,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZDb-60-qGD" firstAttribute="leading" secondItem="f06-SG-QJZ" secondAttribute="trailing" constant="4" id="ElY-yW-jHs"/>
                             <constraint firstAttribute="bottom" secondItem="f06-SG-QJZ" secondAttribute="bottom" constant="-1" id="Its-4X-7Zd"/>
@@ -85,7 +84,6 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Message Text Here" translatesAutoresizingMaskIntoConstraints="NO" id="1aH-AO-rl8">
                                 <rect key="frame" x="0.0" y="0.0" width="368" height="36"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -97,7 +95,6 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="2tx-Ew-j3u"/>
                             <constraint firstAttribute="bottom" secondItem="fsy-xF-jfp" secondAttribute="bottom" constant="8" id="799-7r-aDU"/>
