@@ -132,6 +132,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		ud.synchronize()
 	}
 	
+	func notifyMessage(message: String, from username: String) {
+		let notificationTextFormat = NSLocalizedString("From @%@: %@", comment: "notification text format")
+		let localNotification = UILocalNotification()
+		localNotification.fireDate = NSDate()
+		localNotification.timeZone = NSTimeZone.defaultTimeZone()
+		localNotification.soundName = UILocalNotificationDefaultSoundName
+		localNotification.category = "REPLY_CATEGORY"
+		localNotification.alertAction = "Reply Action"
+		localNotification.alertBody = NSString(format: notificationTextFormat, username, message)
+		UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+	}
+	
 	func applicationWillResignActive(application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
