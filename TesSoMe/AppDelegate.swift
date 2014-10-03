@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
 		}
 		
+		if !ud.boolForKey("initializedNotification") {
+			initNotification(application)
+		}
+		
 		initUserDefault()
 		
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -87,6 +91,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		defaultConfig.setObject(false, forKey: "debug")
 		defaultConfig.setObject(false, forKey: "detailNetwork")
 		ud.registerDefaults(defaultConfig)
+	}
+	
+	func initNotification(application: UIApplication) {
+		let replyAction = UIMutableUserNotificationAction()
+		replyAction.identifier = "TESSOME_REPLY_NOTIFICATION"
+		replyAction.title = NSLocalizedString("Reply", comment: "Reply")
+		replyAction.activationMode = .Foreground
+		replyAction.destructive = true
+		replyAction.authenticationRequired = false
+		
+		let okAction = UIMutableUserNotificationAction()
+		okAction.identifier = "TESSOME_OPEN_NOTIFICATION"
+		okAction.title = NSLocalizedString("Open", comment: "Open timeline")
+		okAction.activationMode = .Foreground
+		okAction.destructive = false
+		okAction.authenticationRequired = false
+		
+		let replyCategory = UIMutableUserNotificationCategory()
+		replyCategory.identifier = "REPLY_CATEGORY"
+		replyCategory.setActions([replyAction, okAction], forContext: .Default)
+		
+		let classAction = UIMutableUserNotificationAction()
+		classAction.identifier = "TESSOME_CLASS_NOTIFICATION"
+		classAction.title = NSLocalizedString("Open", comment: "Open class")
+		classAction.activationMode = .Foreground
+		classAction.destructive = false
+		classAction.authenticationRequired = false
+		
+		let classCategory = UIMutableUserNotificationCategory()
+		classCategory.identifier = "CLASS_CATEGORY"
+		classCategory.setActions([classAction], forContext: .Default)
+		
+		let notificationCategories = NSSet(objects: replyCategory, classCategory)
+		
+		let notificationSettings = UIUserNotificationSettings(forTypes:  .Badge | .Sound | .Alert, categories: notificationCategories)
+		application.registerUserNotificationSettings(notificationSettings)
+		
+		ud.setBool(true, forKey: "initializedNotification")
+		ud.synchronize()
 	}
 	
 	func applicationWillResignActive(application: UIApplication) {
