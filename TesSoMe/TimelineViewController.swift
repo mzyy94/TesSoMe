@@ -31,7 +31,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 				self.setUpdateTimelineFetchTimer()
 				self.updateTimestampTimer = NSTimer(timeInterval:Double(1.0), target: self, selector: Selector("updateTimestamp"), userInfo: nil, repeats: true)
 				NSRunLoop.currentRunLoop().addTimer(self.updateTimestampTimer!, forMode: NSRunLoopCommonModes)
-				
+				self.endUpdating()
 			}
 			, onFailure: failureAction
 		)
@@ -147,6 +147,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 					dispatch_sync(dispatch_get_main_queue(), {
 						self.tableView.reloadData()
 						self.tableView.infiniteScrollingView.stopAnimating()
+						self.endUpdating()
 					})
 				})
 			}
