@@ -132,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		ud.synchronize()
 	}
 	
-	func notifyMessage(message: String, from username: String) {
+	func notifyMessage(message: String, from username: String, statusid: Int) {
 		let notificationTextFormat = NSLocalizedString("From @%@: %@", comment: "notification text format")
 		let localNotification = UILocalNotification()
 		localNotification.fireDate = NSDate()
@@ -141,7 +141,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		localNotification.category = "REPLY_CATEGORY"
 		localNotification.alertAction = "Reply Action"
 		localNotification.alertBody = NSString(format: notificationTextFormat, username, message)
+		localNotification.userInfo = ["username": username, "message": message, "statusid": statusid]
 		UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+	}
+	
+	func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+		if notification.category! == "REPLY_CATEGORY" {
+			let userInfo = NSDictionary(dictionary: notification.userInfo!)
+			let username = userInfo["username"] as String!
+			let message = userInfo["message"] as String!
+			let statusId = userInfo["statusid"] as Int!
+			let titleFormat = NSLocalizedString("Reply from @%@", comment: "reply notification title format")
+			let text = ">\(statusId)(@\(username)) "
+
+			let notificationView = MPGNotification(title: NSString(format: titleFormat, username), subtitle: message, backgroundColor: UIColor(red: 0.3, green: 0.3, blue: 1.0, alpha: 1.0), iconImage: UIImage(named: "comment_icon"))
+			notificationView.duration = 5.0
+			notificationView.animationType = .Drop
+			notificationView.setButtonConfiguration(.OneButton, withButtonTitles: [NSLocalizedString("Reply", comment: "Reply")])
+			notificationView.swipeToDismissEnabled = false
+			notificationView.buttonHandler = {
+				notification, buttonIndex in
+				if buttonIndex == notification.firstButton.tag {
+					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+				}
+			}
+			notificationView.show()
+			UIApplication.sharedApplication().cancelLocalNotification(notification)
+		}
+		
 	}
 	
 	func applicationWillResignActive(application: UIApplication) {
