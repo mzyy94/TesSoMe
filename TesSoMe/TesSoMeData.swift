@@ -144,7 +144,7 @@ class TesSoMeData: NSObject {
 		}
 	}
 	
-	class func convertAttributedProfile(raw: String) -> NSMutableAttributedString {
+	class func convertAttributedProfile(raw: String, size: CGFloat) -> NSMutableAttributedString {
 		let converter = HTMLEntityConverter()
 		var data = converter.decodeXML(raw)
 		
@@ -158,7 +158,6 @@ class TesSoMeData: NSObject {
 		data = data.stringByReplacingOccurrencesOfString("(%h2\\([^\\)]*\\))", withString: "\n$1\n", options: .RegularExpressionSearch)
 		data = data.stringByReplacingOccurrencesOfString("%p\\(([^\\)]*)\\)", withString: "$1\n", options: .RegularExpressionSearch)
 		
-		let size: CGFloat = 12.0
 		var text = NSMutableAttributedString(string: data, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(size)])
 		
 		var boldRange = NSString(string: data).rangeOfString("%b\\([^\\)]*\\)", options: .RegularExpressionSearch)

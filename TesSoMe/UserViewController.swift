@@ -105,7 +105,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				}
 				self.nicknameLabel.text = nickname
 				self.levelLabel.text = "Lv. \(level)"
-				self.profileTextView.attributedText = TesSoMeData.convertAttributedProfile(userInfo)
+				self.profileTextView.attributedText = TesSoMeData.convertAttributedProfile(userInfo, size: CGFloat(self.ud.floatForKey("fontSize")))
 			}
 			, onFailure:
 			{ err in
@@ -142,7 +142,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 							self.labels = userdata["label"] as [NSDictionary]!
 							self.nicknameLabel.text = nickname
 							self.levelLabel.text = "Lv. \(level)"
-							self.profileTextView.attributedText = TesSoMeData.convertAttributedProfile(userInfo)
+							self.profileTextView.attributedText = TesSoMeData.convertAttributedProfile(userInfo, size: CGFloat(self.ud.floatForKey("fontSize")))
 							self.informationTableView.reloadData()
 						}
 						, onFailure: nil)
