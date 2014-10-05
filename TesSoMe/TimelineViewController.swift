@@ -178,19 +178,17 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	
 	override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
 		super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
-		if !decelerate && isScrolling && self.app.applicationState != .Active {
+		if !decelerate && isScrolling && self.app.applicationState == .Active {
 			isScrolling = false
-			insertCellAtPaths(stackedCellPaths)
-			stackedCellPaths.removeAll(keepCapacity: false)
+			insertCellWhenActive()
 		}
 	}
 	
 	override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
 		super.scrollViewDidEndDecelerating(scrollView)
-		if isScrolling && self.app.applicationState != .Active {
+		if isScrolling && self.app.applicationState == .Active {
 			isScrolling = false
-			insertCellAtPaths(stackedCellPaths)
-			stackedCellPaths.removeAll(keepCapacity: false)
+			insertCellWhenActive()
 		}
 	}
 	
