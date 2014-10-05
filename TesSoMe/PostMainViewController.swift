@@ -341,11 +341,11 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			notification.duration = 5.0
 			notification.animationType = .Drop
 			notification.setButtonConfiguration(.OneButton, withButtonTitles: [NSLocalizedString("Edit", comment: "Edit")])
+			notification.swipeToDismissEnabled = false
 			notification.buttonHandler = {
 				notification, buttonIndex in
-				if buttonIndex == notification.firstButton.tag ||
-					buttonIndex == notification.backgroundView.tag {
-						self.app.openURL(NSURL(string: "tesso://post/?text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+				if buttonIndex == notification.firstButton.tag {
+					self.app.openURL(NSURL(string: "tesso://post/?text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
 				}
 			}
 			notification.show()

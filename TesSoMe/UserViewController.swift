@@ -113,6 +113,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				notification.duration = 5.0
 				notification.animationType = .Drop
 				notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
+				notification.swipeToDismissEnabled = false
 				notification.show()
 				
 				self.navigationController?.popViewControllerAnimated(true)
@@ -153,6 +154,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 					notification.duration = 5.0
 					notification.animationType = .Drop
 					notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
+					notification.swipeToDismissEnabled = false
 					notification.show()
 			})
 			NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: alertController.textFields?.first)

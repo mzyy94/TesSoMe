@@ -162,6 +162,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 		notification.duration = 5.0
 		notification.animationType = .Drop
 		notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
+		notification.swipeToDismissEnabled = false
 		notification.show()
 		endUpdating()
 	}
