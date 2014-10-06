@@ -32,6 +32,8 @@ class TesSoMeData: NSObject {
 	var fileSize: Int? = nil
 	var fileName: String? = nil
     var attributedMessage: NSAttributedString! = nil
+	
+	var isTopicIdVisible = false
 
 	
 	class func dataFromResponce(responce: NSDictionary) -> NSArray {
@@ -64,6 +66,11 @@ class TesSoMeData: NSObject {
 		message = message.stringByReplacingOccurrencesOfString("%b\\(([^\\)]*)\\)", withString: "$1", options: .RegularExpressionSearch)
 			
 		return message
+	}
+	
+	convenience init(data: NSDictionary, isTopicIdVisible visible: Bool) {
+		self.init(data: data)
+		self.isTopicIdVisible = visible
 	}
 	
 	init(data: NSDictionary) {
@@ -269,6 +276,12 @@ class TesSoMeData: NSObject {
 		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(username).png"), forState: .Normal)
 		cell.postedDate = date
 		cell.viaTesSoMeBadge.hidden = !withBadge || !isViaTesSoMe()
+		cell.topicIdLabel.text = "\(topicid + 99)"
+		if isTopicIdVisible {
+			cell.topicIdLabel.hidden = false
+		} else {
+			cell.topicIdLabel.font = UIFont.systemFontOfSize(0)
+		}
 		if repliedUsername != nil && isReplyTo(repliedUsername) {
 			cell.backgroundColor = UIColor.globalTintColor(alpha: 0.1)
 		} else {
