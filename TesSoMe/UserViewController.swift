@@ -101,7 +101,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				self.labels = userdata["label"] as [NSDictionary]!
 				let timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]
 				for post in timeline {
-					self.messages.append(TesSoMeData(data: post))
+					self.messages.append(TesSoMeData(data: post, isTopicIdVisible: true))
 				}
 				self.nicknameLabel.text = nickname
 				self.levelLabel.text = "Lv. \(level)"

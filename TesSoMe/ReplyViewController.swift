@@ -25,7 +25,7 @@ class ReplyViewController: SuperTimelineViewController {
 				
 				let timeline = TesSoMeData.tlFromResponce(data)
 				for post in timeline as [NSDictionary] {
-					self.messages.append(TesSoMeData(data: post))
+					self.messages.append(TesSoMeData(data: post, isTopicIdVisible: true))
 				}
 				self.latestMessageId = self.messages.first!.statusId
 				self.tableView.reloadData()
@@ -61,7 +61,7 @@ class ReplyViewController: SuperTimelineViewController {
 					let insertedCellCount = timeline.count
 					
 					for (i, post) in enumerate((timeline as [NSDictionary]).reverse()) {
-						self.messages.insert(TesSoMeData(data: post), atIndex: 0)
+						self.messages.insert(TesSoMeData(data: post, isTopicIdVisible: true), atIndex: 0)
 						path.append(NSIndexPath(forRow: i, inSection: 0))
 					}
 					self.latestMessageId = self.messages.first!.statusId
@@ -95,7 +95,7 @@ class ReplyViewController: SuperTimelineViewController {
 					let insertIndex = self.messages.count
 					timeline.removeAtIndex(0)
 					for (i, post) in enumerate(timeline) {
-						self.messages.insert(TesSoMeData(data: post), atIndex: insertIndex + i)
+						self.messages.insert(TesSoMeData(data: post, isTopicIdVisible: true), atIndex: insertIndex + i)
 						path.append(NSIndexPath(forRow: insertIndex + i, inSection: 0))
 					}
 					
