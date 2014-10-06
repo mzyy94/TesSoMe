@@ -337,6 +337,10 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		let apiManager = TessoApiManager()
 		var text = TesSoMeData.convertKML(self.textView.text)
 		
+		if ud.boolForKey("viaSignature") && text.utf16Count > 0 && text.utf16Count < 1018 {
+			text += "     "
+		}
+		
 		func failureAction(err: NSError) {
 			let notification = MPGNotification(title: NSLocalizedString("Post failed.", comment: "Post failed."), subtitle: err.localizedDescription, backgroundColor: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), iconImage: UIImage(named: "warning_icon"))
 			notification.duration = 5.0
