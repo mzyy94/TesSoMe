@@ -21,6 +21,7 @@
 #import <IDMPhotoBrowser/IDMPhotoBrowser.h>
 #import <SGNavigationProgress/UINavigationController+SGProgress.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
-
+#import <RDVCalendarView/RDVCalendarView.h>
+#import <RDVCalendarView/RDVCalendarDayCell.h>
 
 #endif
