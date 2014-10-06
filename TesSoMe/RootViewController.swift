@@ -38,9 +38,14 @@ class RootViewController: UITabBarController {
 	}
 	
 	func showPostView() {
+		let topicMenuViewController = appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
+		let topicid = topicMenuViewController.currentTopic
+		
 		let storyboard = UIStoryboard(name: "PostMessage", bundle: nil)
-		var postViewController: UINavigationController = storyboard.instantiateViewControllerWithIdentifier("PostNavigation") as UINavigationController
-		self.presentViewController(postViewController, animated: true, completion: nil)
+		var postNavigationController: UINavigationController = storyboard.instantiateViewControllerWithIdentifier("PostNavigation") as UINavigationController
+		let postViewController = postNavigationController.viewControllers.first as PostMainViewController
+		postViewController.topicid = topicid
+		self.presentViewController(postNavigationController, animated: true, completion: nil)
 	}
 	
 	override func didReceiveMemoryWarning() {

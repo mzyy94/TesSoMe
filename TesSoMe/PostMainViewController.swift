@@ -19,7 +19,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	var preparedText = ""
 	
 	var fileURLtoPost: NSURL? = nil
-	var topicid = 1
+	var topicid: Int! = nil
 	
 	@IBOutlet weak var postTitleBtn: UIButton!
 	@IBOutlet weak var textView: UITextView!
@@ -45,10 +45,11 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		setTitleBtnText("Message")
 		messageType = .Message
 		
-		self.textView.font = UIFont.systemFontOfSize(CGFloat(ud.floatForKey("fontSize") + 4.0))
+		if topicid == nil {
+			topicid = 1
+		}
 		
-		let topicMenuViewController = appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
-		topicid = topicMenuViewController.currentTopic
+		self.textView.font = UIFont.systemFontOfSize(CGFloat(ud.floatForKey("fontSize") + 4.0))
 		
 		self.providesPresentationContextTransitionStyle = true
 		self.definesPresentationContext = true
