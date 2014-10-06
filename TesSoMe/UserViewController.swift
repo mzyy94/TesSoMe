@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class UserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	let apiManager = TessoApiManager()
 	let ud = NSUserDefaults()
@@ -49,6 +49,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
 		self.informationTableView.delegate = self
 		self.informationTableView.dataSource = self
+		
+		self.profileTextView.delegate = self
 		
 		let profile = NSLocalizedString("Profile", comment: "Profile at segmented control")
 		let label = NSLocalizedString("Label", comment: "Label at segmented control")
@@ -238,7 +240,15 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return 0
         }
     }
-    
+
+	func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+		let webKitViewController = WebKitViewController()
+		webKitViewController.url = URL
+		
+		self.navigationController?.pushViewController(webKitViewController, animated: true)
+		return false
+	}
+	
 	func segmentedControlValueChanged(sender: HMSegmentedControl) {
         self.informationTableView.reloadData()
 	}
