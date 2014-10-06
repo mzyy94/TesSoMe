@@ -91,7 +91,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 					for (i, post) in enumerate((timeline as [NSDictionary]).reverse()) {
 						let tessomeData = TesSoMeData(data: post)
 						if tessomeData.isReplyTo(self.appDelegate.usernameOfTesSoMe!) {
-							self.appDelegate.notifyMessage(tessomeData.message, from: tessomeData.username, statusid: tessomeData.statusId)
+							self.appDelegate.notifyMessage(tessomeData.message, from: tessomeData.username, statusid: tessomeData.statusId, topicid: tessomeData.topicid)
 						}
 						self.messages.insert(tessomeData, atIndex: 0)
 						path.append(NSIndexPath(forRow: i, inSection: 0))

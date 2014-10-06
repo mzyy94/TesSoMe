@@ -55,11 +55,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let storyboard = UIStoryboard(name: "PostMessage", bundle: nil)
 			let postNavigationController = storyboard.instantiateViewControllerWithIdentifier("PostNavigation") as UINavigationController
 			let postViewController = postNavigationController.viewControllers.first as PostMainViewController
-			
+			var parameter: [String: String] = [:]
 			if let query = url.query {
-				let postText = query.stringByReplacingOccurrencesOfString("^text=", withString: "", options: .RegularExpressionSearch).stringByRemovingPercentEncoding!
-				println(postText)
-				postViewController.preparedText = postText
+				for q in query.componentsSeparatedByString("&") {
+					let element = q.componentsSeparatedByString("=")
+					if element.count == 2 {
+						let key = element[0].stringByRemovingPercentEncoding!
+						let value = element[1].stringByRemovingPercentEncoding!
+						parameter.updateValue(value, forKey: key)
+					}
+				}
+				
+				if parameter["text"] == nil {
+					postViewController.preparedText = ""
+				} else {
+					postViewController.preparedText = parameter["text"]!
+				}
+				postViewController.topicid = parameter["topic"]?.toInt()
 			}
 			
 			self.window?.rootViewController!.presentViewController(postNavigationController, animated: true, completion: nil)
@@ -132,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		ud.synchronize()
 	}
 	
-	func notifyMessage(message: String, from username: String, statusid: Int) {
+	func notifyMessage(message: String, from username: String, statusid: Int, topicid: Int) {
 		let notificationTextFormat = NSLocalizedString("From @%@: %@", comment: "notification text format")
 		let localNotification = UILocalNotification()
 		localNotification.fireDate = NSDate()
@@ -141,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		localNotification.category = "REPLY_CATEGORY"
 		localNotification.alertAction = "Reply Action"
 		localNotification.alertBody = NSString(format: notificationTextFormat, username, message)
-		localNotification.userInfo = ["username": username, "message": message, "statusid": statusid]
+		localNotification.userInfo = ["username": username, "message": message, "statusid": statusid, "topicid": topicid]
 		UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
 	}
 	
@@ -151,6 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let username = userInfo["username"] as String!
 			let message = userInfo["message"] as String!
 			let statusId = userInfo["statusid"] as Int!
+			let topicid = userInfo["topicid"] as Int!
 			let titleFormat = NSLocalizedString("Reply from @%@", comment: "reply notification title format")
 			let text = ">\(statusId)(@\(username)) "
 
@@ -162,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			notificationView.buttonHandler = {
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
 				}
 			}
 			notificationView.show()
