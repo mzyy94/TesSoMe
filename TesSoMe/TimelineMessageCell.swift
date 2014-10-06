@@ -197,6 +197,20 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 				return false
 	
 			}
+			
+			if URL.host == "search" {
+				let storyboard = UIStoryboard(name: "Main", bundle: nil)
+				let searchResultViewController = storyboard.instantiateViewControllerWithIdentifier("SearchResultView") as SearchResultViewController
+				searchResultViewController.tag = URL.query?.stringByReplacingOccurrencesOfString("=", withString: "_").stringByReplacingOccurrencesOfString("&", withString: "_and_")
+				
+				let tableView = self.superview?.superview as UITableView
+				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+				viewController.navigationController?.pushViewController(searchResultViewController, animated: true)
+				
+				return false
+				
+			}
+			
 			return true
 		}
 		
