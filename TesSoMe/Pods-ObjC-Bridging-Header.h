@@ -21,7 +21,6 @@
 #import <IDMPhotoBrowser/IDMPhotoBrowser.h>
 #import <SGNavigationProgress/UINavigationController+SGProgress.h>
 #import <HMSegmentedControl/HMSegmentedControl.h>
-#import <TapkuLibrary/TapkuLibrary.h>
 
 
 #endif

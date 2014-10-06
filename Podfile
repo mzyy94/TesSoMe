@@ -13,7 +13,6 @@ pod 'SVPullToRefresh'
 pod 'IDMPhotoBrowser'
 pod 'SGNavigationProgress'
 pod 'HMSegmentedControl'
-pod 'TapkuLibrary'
 
 end
 
