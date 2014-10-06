@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -82,14 +82,14 @@
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qHm-Ei-YRp">
                         <rect key="frame" x="70" y="31" width="368" height="167"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Message Text Here" translatesAutoresizingMaskIntoConstraints="NO" id="1aH-AO-rl8">
-                                <rect key="frame" x="0.0" y="0.0" width="368" height="36"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Message Text Here" translatesAutoresizingMaskIntoConstraints="NO" id="1aH-AO-rl8">
+                                <rect key="frame" x="0.0" y="1" width="368" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fsy-xF-jfp">
-                                <rect key="frame" x="0.0" y="36" width="368" height="125"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsy-xF-jfp">
+                                <rect key="frame" x="0.0" y="37" width="368" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fsy-xF-jfp" secondAttribute="height" multiplier="50:17" id="YlQ-JS-wyM"/>
                                 </constraints>
@@ -107,8 +107,19 @@
                             <constraint firstItem="fsy-xF-jfp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qHm-Ei-YRp" secondAttribute="leading" id="ci6-cX-vVH"/>
                         </constraints>
                     </view>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJa-DY-cc8">
+                        <rect key="frame" x="2" y="187" width="64" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="7P3-Ov-haH"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="12" id="LGz-t6-FUo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="XJa-DY-cc8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="2Lc-Co-eW6"/>
                     <constraint firstAttribute="trailing" secondItem="qHm-Ei-YRp" secondAttribute="trailing" constant="7" id="3hZ-yg-UG9"/>
                     <constraint firstItem="qHm-Ei-YRp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="59T-lB-LfJ"/>
                     <constraint firstItem="VyJ-Cw-euy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7y1-X2-c8h"/>
@@ -120,8 +131,10 @@
                     <constraint firstItem="5GX-Jb-sQs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-6" id="RNd-7Z-YDQ"/>
                     <constraint firstAttribute="bottom" secondItem="qHm-Ei-YRp" secondAttribute="bottom" id="aCF-3m-tfN"/>
                     <constraint firstItem="fME-jh-zLc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ba8-KA-jHr"/>
+                    <constraint firstAttribute="bottom" secondItem="XJa-DY-cc8" secondAttribute="bottom" id="d4t-9G-UHw"/>
                     <constraint firstItem="VyJ-Cw-euy" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="jAC-Tk-chI"/>
                     <constraint firstItem="NyX-RV-5Ir" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="jsm-nh-8cL"/>
+                    <constraint firstItem="XJa-DY-cc8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5GX-Jb-sQs" secondAttribute="bottom" id="lyL-Ya-DDz"/>
                     <constraint firstItem="NyX-RV-5Ir" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="35" id="nwL-To-fM1"/>
                     <constraint firstItem="yGv-0x-A25" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="wks-gL-9H5"/>
                 </constraints>
@@ -132,11 +145,12 @@
                 <outlet property="previewView" destination="fsy-xF-jfp" id="rar-Zg-4wD"/>
                 <outlet property="statusIdLabel" destination="5GX-Jb-sQs" id="wwt-0G-QFH"/>
                 <outlet property="timeStampLabel" destination="VyJ-Cw-euy" id="JdF-A8-QJO"/>
+                <outlet property="topicIdLabel" destination="XJa-DY-cc8" id="LWw-N3-hxH"/>
                 <outlet property="userIconBtn" destination="fME-jh-zLc" id="z6U-SA-d26"/>
                 <outlet property="usernameLabel" destination="ZDb-60-qGD" id="Iw5-4P-ffd"/>
                 <outlet property="viaTesSoMeBadge" destination="NyX-RV-5Ir" id="x4b-Sh-yc8"/>
             </connections>
-            <point key="canvasLocation" x="323.5" y="559"/>
+            <point key="canvasLocation" x="323.5" y="556"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -20,6 +20,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	@IBOutlet weak var timeStampLabel: UILabel!
 	@IBOutlet weak var viaTesSoMeBadge: UIImageView!
 	@IBOutlet weak var previewView: UIImageView!
+	@IBOutlet weak var topicIdLabel: UILabel!
 	
 	var postedDate: NSDate? = nil
 	
