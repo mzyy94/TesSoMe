@@ -94,8 +94,7 @@ class MessageDetailViewController: UITableViewController {
 							self.getRepliedMessage(messageData.relatedMessageIds)
 
 							dispatch_sync(dispatch_get_main_queue(), {
-								let path = NSIndexPath(forRow: self.replyMessages.count - 1, inSection: 2)
-								self.tableView.insertRowsAtIndexPaths([path], withRowAnimation: .None)
+								self.tableView.reloadData()
 							})
 						}
 					})
