@@ -23,6 +23,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	@IBOutlet weak var topicIdLabel: UILabel!
 	
 	var postedDate: NSDate? = nil
+	var postData: TesSoMeData! = nil
 	
 	@IBAction func userIconBtnPressed() {
 		let username = usernameLabel.text?.stringByReplacingOccurrencesOfString("@", withString: "")

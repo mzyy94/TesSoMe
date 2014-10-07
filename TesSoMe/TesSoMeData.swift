@@ -302,7 +302,7 @@ class TesSoMeData: NSObject {
 			NSLog("Unknown post type found.")
 		}
 		cell.messageTextView.font = UIFont.systemFontOfSize(fontSize)
-		
+		cell.postData = self
 		
 	}
 	
