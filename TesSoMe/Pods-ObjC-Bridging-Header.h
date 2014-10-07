@@ -24,5 +24,6 @@
 #import <RDVCalendarView/RDVCalendarView.h>
 #import <RDVCalendarView/RDVCalendarDayCell.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+#import <EAIntroView/EAIntroView.h>
 
 #endif

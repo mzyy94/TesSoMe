@@ -15,6 +15,7 @@ pod 'SGNavigationProgress'
 pod 'HMSegmentedControl'
 pod 'RDVCalendarView'
 pod 'DZNEmptyDataSet'
+pod 'EAIntroView'
 
 end
 
