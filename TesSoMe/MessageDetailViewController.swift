@@ -144,7 +144,7 @@ class MessageDetailViewController: UITableViewController {
 			var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
 			let data = replyMessages[indexPath.row]
 			data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge, withImagePreview: withImagePreview, repliedUsername: appDelegate.usernameOfTesSoMe)
-			cell.updateTimestamp(relative: timestampIsRelative)
+			cell.updateTimestamp(relative: false)
 			return cell
 		}
     }
