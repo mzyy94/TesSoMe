@@ -22,6 +22,7 @@ class MessageDetailViewController: UITableViewController {
 	var replyMessages: [TesSoMeData] = []
 	
     var targetMessageData: TesSoMeData! = nil
+	var targetStatusId: Int! = nil
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,14 +33,37 @@ class MessageDetailViewController: UITableViewController {
 		self.tableView.estimatedRowHeight = 90.5
 		self.tableView.rowHeight = UITableViewAutomaticDimension
 		
-		self.navigationItem.title = "POST: \(targetMessageData.statusId)"
+		if targetMessageData == nil {
+			getTargetMessageCell()
+			self.navigationItem.title = "POST: \(targetStatusId!)"
+		} else {
+			getRepliedMessage(targetMessageData.relatedMessageIds)
+			self.navigationItem.title = "POST: \(targetMessageData.statusId)"
+		}
 
 		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
 		withBadge = ud.boolForKey("badge")
 		withImagePreview = ud.boolForKey("imagePreview")
 		timestampIsRelative = ud.boolForKey("relativeTimestamp")
 		self.tableView.reloadData()
-		getRepliedMessage(targetMessageData.relatedMessageIds)
+	}
+	
+	func getTargetMessageCell() {
+		apiManager.getTimeline(sinceid: targetStatusId - 1, maxid: targetStatusId, onSuccess:
+			{ data in
+				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+					let timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]
+					if timeline.count == 1 {
+						dispatch_sync(dispatch_get_main_queue(), {
+							self.targetMessageData = TesSoMeData(data:timeline[0])
+							self.tableView.reloadData()
+							self.getRepliedMessage(self.targetMessageData.relatedMessageIds)
+						})
+					}
+				})
+			}
+			, onFailure: {err in println(err.localizedDescription)}
+		)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -93,7 +117,7 @@ class MessageDetailViewController: UITableViewController {
 		case 0:
 			return 0
 		case 1:
-			return (targetMessageData != nil).hashValue
+			return 1
 		case 2:
 			return replyMessages.count
 		default:
@@ -119,7 +143,7 @@ class MessageDetailViewController: UITableViewController {
 				formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
 				
 				cell.timeStampLabel.text = formatter.stringFromDate(target.date)
-				cell.viaTesSoMeBadge.hidden = target.isViaTesSoMe()
+				cell.viaTesSoMeBadge.hidden = !target.isViaTesSoMe()
 				
 				if cell.viaTesSoMeBadge.hidden {
 					cell.viaWhereLabel.text = "via Web?"

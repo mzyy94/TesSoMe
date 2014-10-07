@@ -166,7 +166,6 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
 		switch index {
 		case 0: // More button
-			let statusId = (cell as TimelineMessageCell).statusIdLabel.text!
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
 			messageDetailView.targetMessageData = self.postData
@@ -212,6 +211,19 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 				let tableView = self.superview?.superview as UITableView
 				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
 				viewController.navigationController?.pushViewController(searchResultViewController, animated: true)
+				
+				return false
+				
+			}
+
+			if URL.host == "message" {
+				let storyboard = UIStoryboard(name: "Main", bundle: nil)
+				let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
+				messageDetailView.targetStatusId = URL.lastPathComponent.toInt()
+				let tableView = self.superview?.superview as UITableView
+				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+				
+				viewController.navigationController?.pushViewController(messageDetailView, animated: true)
 				
 				return false
 				
