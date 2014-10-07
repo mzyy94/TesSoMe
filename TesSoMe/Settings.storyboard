@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -379,6 +379,41 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Preview" footerTitle="Show only image that is less than 1024 KB file size" id="Dru-c8-S8d">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="VPV-m4-7HU">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VPV-m4-7HU" id="BYw-Yd-WCK">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Image Thumbnail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5K-mM-C2w">
+                                                    <rect key="frame" x="15" y="11" width="520" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="84d-0I-UpX">
+                                                    <rect key="frame" x="543" y="7" width="51" height="30"/>
+                                                    <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="badgeSwitchChanged:" destination="tAh-8F-06f" eventType="valueChanged" id="Z9E-fq-c4M"/>
+                                                        <action selector="imagePreviewSwitchChanged:" destination="tAh-8F-06f" eventType="valueChanged" id="Hvp-gG-FSg"/>
+                                                        <action selector="viaSignatureSwitchChanged:" destination="FCf-hR-DUx" eventType="valueChanged" id="hWZ-Qy-kuo"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="v5K-mM-C2w" firstAttribute="centerY" secondItem="BYw-Yd-WCK" secondAttribute="centerY" id="1ZQ-cs-Qns"/>
+                                                <constraint firstItem="84d-0I-UpX" firstAttribute="top" secondItem="BYw-Yd-WCK" secondAttribute="topMargin" constant="-1" id="Jrl-aq-GC0"/>
+                                                <constraint firstItem="84d-0I-UpX" firstAttribute="trailing" secondItem="BYw-Yd-WCK" secondAttribute="trailingMargin" id="MRr-GD-JTf"/>
+                                                <constraint firstItem="v5K-mM-C2w" firstAttribute="leading" secondItem="BYw-Yd-WCK" secondAttribute="leadingMargin" constant="7" id="PQY-Tf-uj0"/>
+                                                <constraint firstItem="84d-0I-UpX" firstAttribute="leading" secondItem="v5K-mM-C2w" secondAttribute="trailing" constant="8" symbolic="YES" id="Sbi-y7-Fgh"/>
+                                                <constraint firstItem="v5K-mM-C2w" firstAttribute="top" secondItem="BYw-Yd-WCK" secondAttribute="topMargin" constant="3" id="ago-KG-Yi1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="tAh-8F-06f" id="Ehj-9Z-9YA"/>
@@ -389,6 +424,7 @@
                         <outlet property="absoluteCell" destination="T8d-bn-Ql4" id="tVu-M7-Gwx"/>
                         <outlet property="badgeSwitch" destination="JpJ-Mt-drk" id="ySI-fT-8R5"/>
                         <outlet property="fontSizeSlider" destination="oBJ-kW-nUI" id="ft7-Ak-DZC"/>
+                        <outlet property="imagePreviewSwitch" destination="84d-0I-UpX" id="p9P-BO-msS"/>
                         <outlet property="previewCell" destination="knC-Rb-SYN" id="Dcp-vo-zgq"/>
                         <outlet property="relativeCell" destination="f8p-Ha-QZx" id="Uwb-EP-iXn"/>
                     </connections>

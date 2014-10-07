@@ -268,7 +268,7 @@ class TesSoMeData: NSObject {
         return Bool(replyUserIds.filter({u in u == username}).count)
     }
 	
-	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool, repliedUsername: String! = nil) {
+	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool, withImagePreview imagePreview: Bool, repliedUsername: String! = nil) {
 		cell.statusIdLabel.text = "\(statusId)"
 		cell.usernameLabel.text = "@\(username)"
 		cell.nicknameLabel.text = nickname
@@ -292,7 +292,7 @@ class TesSoMeData: NSObject {
 		case .Message:
 			cell.previewView.image = nil
 		case .File:
-			if fileURL!.lastPathComponent.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
+			if imagePreview && fileSize < 1024*1024 && fileURL!.lastPathComponent.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
 				cell.previewView.sd_setImageWithURL(fileURL, placeholderImage: UIImage(named: "white.png"))
 			}
 		case .Drawing:

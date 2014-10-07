@@ -78,6 +78,7 @@ class SettingViewController: UITableViewController {
 	@IBOutlet weak var absoluteCell: UITableViewCell!
 	@IBOutlet weak var fontSizeSlider: UISlider!
 	@IBOutlet weak var badgeSwitch: UISwitch!
+	@IBOutlet weak var imagePreviewSwitch: UISwitch!
 	
 	@IBAction func fontSizeSliderChanged(sender: UISlider) {
 		sender.value = Float(Int(sender.value))
@@ -92,6 +93,10 @@ class SettingViewController: UITableViewController {
 		cell.viaTesSoMeBadge.hidden = !sender.on
 	}
 	
+	@IBAction func imagePreviewSwitchChanged(sender: UISwitch) {
+		ud.setBool(sender.on, forKey: "imagePreview")
+	}
+	
 	func initAppearanceSetting() {
 		let fontSize = ud.floatForKey("fontSize")
 		fontSizeSlider.value = fontSize
@@ -104,6 +109,7 @@ class SettingViewController: UITableViewController {
 		}
 		
 		badgeSwitch.on = ud.boolForKey("badge")
+		imagePreviewSwitch.on = ud.boolForKey("imagePreview")
 	}
 	
 	
@@ -116,7 +122,7 @@ class SettingViewController: UITableViewController {
 			let postedDate = NSDate(timeIntervalSinceNow: -557.0)
 			let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
 			let cellData = TesSoMeData(data: data)
-			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: ud.boolForKey("badge"))
+			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: ud.boolForKey("badge"), withImagePreview: ud.boolForKey("imagePreview"))
 			cell.updateTimestamp(relative: ud.boolForKey("relativeTimestamp"))
 			
 			return cell

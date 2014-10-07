@@ -217,7 +217,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
 			let data = messages[indexPath.row]
 			// Configure the cell...
-			data.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: true)
+			data.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: true, withImagePreview: ud.boolForKey("imagePreview"))
 			cell.updateTimestamp(relative: false)
 			return cell
 		default:

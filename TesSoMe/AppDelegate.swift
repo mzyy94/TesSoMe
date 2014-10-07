@@ -95,6 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		defaultConfig.setObject(true, forKey: "relativeTimestamp")
 		defaultConfig.setObject(11.0, forKey: "fontSize")
 		defaultConfig.setObject(true, forKey: "badge")
+		defaultConfig.setObject(false, forKey: "imagePreview")
 		defaultConfig.setObject(false, forKey: "viaSignature")
 		defaultConfig.setObject(true, forKey: "backgroundNotification")
 		defaultConfig.setObject(true, forKey: "vibratingNotification")
