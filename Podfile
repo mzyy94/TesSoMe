@@ -14,6 +14,7 @@ pod 'IDMPhotoBrowser'
 pod 'SGNavigationProgress'
 pod 'HMSegmentedControl'
 pod 'RDVCalendarView'
+pod 'DZNEmptyDataSet'
 
 end
 
