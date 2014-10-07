@@ -22,7 +22,6 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	@IBOutlet weak var previewView: UIImageView!
 	@IBOutlet weak var topicIdLabel: UILabel!
 	
-	var postedDate: NSDate? = nil
 	var postData: TesSoMeData! = nil
 	
 	@IBAction func userIconBtnPressed() {
@@ -100,7 +99,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		} else {
 			let dateFormatter = NSDateFormatter()
 			dateFormatter.dateFormat = "MM/dd HH:mm:ss"
-			self.timeStampLabel.text = dateFormatter.stringFromDate(postedDate!)
+			self.timeStampLabel.text = dateFormatter.stringFromDate(postData.date)
 		}
 	}
 	
@@ -118,7 +117,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-		photoCaptionView.timeStampLabel.text = dateFormatter.stringFromDate(self.postedDate!)
+		photoCaptionView.timeStampLabel.text = dateFormatter.stringFromDate(self.postData.date)
 		
 		photoCaptionView.viaTesSoMeBadge.hidden = self.viaTesSoMeBadge.hidden
 		photoCaptionView.statusIdLabel.text = self.statusIdLabel.text
@@ -144,7 +143,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
 		dateFormatter.dateFormat = "s's'"
-		let timeDate = NSDate(timeIntervalSinceReferenceDate: -postedDate!.timeIntervalSinceNow)
+		let timeDate = NSDate(timeIntervalSinceReferenceDate: -postData.date.timeIntervalSinceNow)
 		switch timeDate.timeIntervalSinceReferenceDate {
 		case 0..<60:
 			dateFormatter.dateFormat = "s's'"
@@ -154,7 +153,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 			dateFormatter.dateFormat = "h'h 'mm'm 'ss's'"
 		default:
 			dateFormatter.dateFormat = "MM/dd HH:mm:ss"
-			self.timeStampLabel.text = dateFormatter.stringFromDate(postedDate!)
+			self.timeStampLabel.text = dateFormatter.stringFromDate(postData.date)
 			return
 		}
 		let timeZone = NSTimeZone.systemTimeZone()

@@ -274,7 +274,6 @@ class TesSoMeData: NSObject {
 		cell.nicknameLabel.text = nickname
 		cell.timeStampLabel.text = NSLocalizedString("0 s", comment: "Initial seconds")
 		cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(username).png"), forState: .Normal)
-		cell.postedDate = date
 		cell.viaTesSoMeBadge.hidden = !withBadge || !isViaTesSoMe()
 		cell.topicIdLabel.text = "\(topicid + 99)"
 		if isTopicIdVisible {
