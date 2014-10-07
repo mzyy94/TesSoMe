@@ -167,7 +167,13 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 		switch index {
 		case 0: // More button
 			let statusId = (cell as TimelineMessageCell).statusIdLabel.text!
-			app.openURL(NSURL(string: "tesso://message/\(statusId)"))
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
+			messageDetailView.targetMessageCell = self
+			let tableView = self.superview?.superview as UITableView
+			let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+
+			viewController.navigationController?.pushViewController(messageDetailView, animated: true)
 		case 1: // Reply button
 			let messageId = (cell as TimelineMessageCell).statusIdLabel.text!
 			let username = (cell as TimelineMessageCell).usernameLabel.text!.stringByReplacingOccurrencesOfString("@", withString: "%40")

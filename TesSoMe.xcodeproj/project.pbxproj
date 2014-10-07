@@ -42,6 +42,8 @@
 		9EBA91AC19DB2292002C0F94 /* SuperTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBA91AB19DB2292002C0F94 /* SuperTimelineViewController.swift */; };
 		9EBC89FB19E2B32400E00F65 /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC89FA19E2B32400E00F65 /* ClassCell.swift */; };
 		9EBC89FD19E2E00B00E00F65 /* ClassEventDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC89FC19E2E00B00E00F65 /* ClassEventDayCell.swift */; };
+		9EBC89FF19E2FDE000E00F65 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC89FE19E2FDE000E00F65 /* MessageDetailViewController.swift */; };
+		9EBC8A0119E309B200E00F65 /* MessageDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC8A0019E309B200E00F65 /* MessageDetailViewCell.swift */; };
 		9EE03CD919E28E1D0003B356 /* ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE03CD819E28E1D0003B356 /* ClassViewController.swift */; };
 		9EE11FA819DDA66100AC30D6 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE11FA719DDA66100AC30D6 /* LabelCell.swift */; };
 		9EE50FDD19CC4E34006AA6EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE50FDC19CC4E34006AA6EA /* Images.xcassets */; };
@@ -138,6 +140,8 @@
 		9EBA91AB19DB2292002C0F94 /* SuperTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTimelineViewController.swift; sourceTree = "<group>"; };
 		9EBC89FA19E2B32400E00F65 /* ClassCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
 		9EBC89FC19E2E00B00E00F65 /* ClassEventDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassEventDayCell.swift; sourceTree = "<group>"; };
+		9EBC89FE19E2FDE000E00F65 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
+		9EBC8A0019E309B200E00F65 /* MessageDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewCell.swift; sourceTree = "<group>"; };
 		9EE03CD819E28E1D0003B356 /* ClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassViewController.swift; sourceTree = "<group>"; };
 		9EE11FA719DDA66100AC30D6 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		9EE50FDC19CC4E34006AA6EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				9E76D83019DA703000624761 /* PhotoCaptionView.swift */,
 				9EBC89FA19E2B32400E00F65 /* ClassCell.swift */,
 				9EBC89FC19E2E00B00E00F65 /* ClassEventDayCell.swift */,
+				9EBC8A0019E309B200E00F65 /* MessageDetailViewCell.swift */,
 				9E4D818219C9D50F0023EA4C /* TopicCell.swift */,
 			);
 			name = Views;
@@ -265,6 +270,7 @@
 				9E15A72719D27F160020601D /* PostMainViewController.swift */,
 				9EE03CD819E28E1D0003B356 /* ClassViewController.swift */,
 				9E38982619DE9D09002DBA2D /* SearchResultViewController.swift */,
+				9EBC89FE19E2FDE000E00F65 /* MessageDetailViewController.swift */,
 				9E47ADB319DD52D900F42BA4 /* UserViewController.swift */,
 				9E8FFF2119C95E4900E4459A /* SettingViewController.swift */,
 				9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */,
@@ -588,6 +594,7 @@
 				9E38982719DE9D09002DBA2D /* SearchResultViewController.swift in Sources */,
 				9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */,
 				9EBC89FD19E2E00B00E00F65 /* ClassEventDayCell.swift in Sources */,
+				9EBC8A0119E309B200E00F65 /* MessageDetailViewCell.swift in Sources */,
 				9E8FFF2A19C9868200E4459A /* TesSoMeData.swift in Sources */,
 				9E38982519DE6E07002DBA2D /* SearchViewController.swift in Sources */,
 				9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */,
@@ -599,6 +606,7 @@
 				9EB8ADCB19C3069F00CB92B2 /* AppDelegate.swift in Sources */,
 				9EBC89FB19E2B32400E00F65 /* ClassCell.swift in Sources */,
 				9E47ADB219DD30B300F42BA4 /* WebKitViewController.swift in Sources */,
+				9EBC89FF19E2FDE000E00F65 /* MessageDetailViewController.swift in Sources */,
 				9E8FFF2819C97C0A00E4459A /* TimelineViewController.swift in Sources */,
 				9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */,
 				9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */,
