@@ -33,6 +33,8 @@ class MessageDetailViewController: UITableViewController {
 		self.tableView.estimatedRowHeight = 90.5
 		self.tableView.rowHeight = UITableViewAutomaticDimension
 		
+		self.tableView.tableFooterView = UIView()
+		
 		if targetMessageData == nil {
 			getTargetMessageCell()
 			self.navigationItem.title = "POST: \(targetStatusId!)"
