@@ -85,6 +85,9 @@ class MessageDetailViewController: UITableViewController {
 	
 	func getRepliedMessage(replies: [Int]) {
 		for statusId in replies {
+			if replyMessages.filter({mes in mes.statusId == statusId}).count != 0 {
+				return
+			}
 			apiManager.getTimeline(sinceid: statusId - 1, maxid: statusId, onSuccess:
 				{ data in
 					dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
