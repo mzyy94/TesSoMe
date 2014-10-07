@@ -169,7 +169,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 			let statusId = (cell as TimelineMessageCell).statusIdLabel.text!
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
-			messageDetailView.targetMessageCell = self
+			messageDetailView.targetMessageData = self.postData
 			let tableView = self.superview?.superview as UITableView
 			let viewController = (tableView.dataSource as AnyObject!) as UIViewController
 

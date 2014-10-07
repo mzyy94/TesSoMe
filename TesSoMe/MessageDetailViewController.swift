@@ -21,6 +21,8 @@ class MessageDetailViewController: UITableViewController {
 
 	var replyMessages: [TesSoMeData] = []
 	
+    var targetMessageData: TesSoMeData! = nil
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -30,17 +32,19 @@ class MessageDetailViewController: UITableViewController {
 		self.tableView.estimatedRowHeight = 90.5
 		self.tableView.rowHeight = UITableViewAutomaticDimension
 		
-		self.navigationItem.title = "POST: \(targetMessageCell.statusIdLabel.text!)"
-	}
-	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+		self.navigationItem.title = "POST: \(targetMessageData.statusId)"
+
 		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
 		withBadge = ud.boolForKey("badge")
 		withImagePreview = ud.boolForKey("imagePreview")
 		timestampIsRelative = ud.boolForKey("relativeTimestamp")
 		self.tableView.reloadData()
-		getRepliedMessage(targetMessageCell.postData.relatedMessageIds)
+		getRepliedMessage(targetMessageData.relatedMessageIds)
+	}
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		self.tableView.reloadData()
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -78,9 +82,6 @@ class MessageDetailViewController: UITableViewController {
 		}
 	}
 	
-
-	var targetMessageCell: TimelineMessageCell! = nil
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -92,7 +93,7 @@ class MessageDetailViewController: UITableViewController {
 		case 0:
 			return 0
 		case 1:
-			return (targetMessageCell != nil).hashValue
+			return (targetMessageData != nil).hashValue
 		case 2:
 			return replyMessages.count
 		default:
@@ -106,19 +107,19 @@ class MessageDetailViewController: UITableViewController {
 		case 1:
 			let cell = tableView.dequeueReusableCellWithIdentifier("MessageDetail", forIndexPath: indexPath) as MessageDetailViewCell
 			
-			if let target = targetMessageCell {
-				cell.userIconBtn.setBackgroundImage(target.userIconBtn.backgroundImageForState(.Normal), forState: .Normal)
-				cell.nicknameLabel.text = target.nicknameLabel.text
-				cell.usernameLabel.text = target.usernameLabel.text
+			if let target = targetMessageData {
+				cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(target.username).png"), forState: .Normal)
+				cell.nicknameLabel.text = target.nickname
+				cell.usernameLabel.text = "@\(target.username)"
 				
-				cell.statusIdLabel.text = target.statusIdLabel.text
-				cell.topicIdLabel.text = target.topicIdLabel.text
+				cell.statusIdLabel.text = "\(target.statusId)"
+				cell.topicIdLabel.text = "\(target.topicid + 99)"
 				
 				let formatter = NSDateFormatter()
 				formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
 				
-				cell.timeStampLabel.text = formatter.stringFromDate(target.postData.date)
-				cell.viaTesSoMeBadge.hidden = target.viaTesSoMeBadge.hidden
+				cell.timeStampLabel.text = formatter.stringFromDate(target.date)
+				cell.viaTesSoMeBadge.hidden = target.isViaTesSoMe()
 				
 				if cell.viaTesSoMeBadge.hidden {
 					cell.viaWhereLabel.text = "via Web?"
@@ -126,13 +127,25 @@ class MessageDetailViewController: UITableViewController {
 					cell.viaWhereLabel.text = "via TesSoMe"
 				}
 				
-				let messageText = NSMutableAttributedString(attributedString: target.messageTextView.attributedText)
+				let messageText = NSMutableAttributedString(attributedString: target.attributedMessage)
 				messageText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, messageText.string.utf16Count))
 				cell.messageTextView.attributedText = messageText
 				
-				cell.previewView.image = target.previewView.image
-				
-				cell.messageTextView.font = target.messageTextView.font
+				switch target.type {
+				case .Message:
+					cell.previewView.image = nil
+				case .File:
+					if withImagePreview && target.fileSize < 1024*1024 && target.fileURL!.lastPathComponent.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
+						cell.previewView.sd_setImageWithURL(target.fileURL, placeholderImage: UIImage(named: "white.png"))
+					}
+				case .Drawing:
+					let drawingURL = NSURL(string: "https://tesso.pw/img/snspics/\(target.statusId).png")
+					cell.previewView.sd_setImageWithURL(drawingURL, placeholderImage: UIImage(named: "white.png"))
+				default:
+					NSLog("Unknown post type found.")
+				}
+				cell.messageTextView.font = UIFont.systemFontOfSize(messageFontSize)
+
 				cell.messageTextView.setNeedsDisplay()
 				cell.messageTextView.setNeedsLayout()
 				cell.messageTextView.setNeedsUpdateConstraints()
