@@ -8,6 +8,7 @@
 
 import UIKit
 import Accelerate
+import AudioToolbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -181,6 +182,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 			notificationView.show()
 			UIApplication.sharedApplication().cancelLocalNotification(notification)
+		}
+		
+		if ud.boolForKey("vibratingNotification") {
+			AudioServicesPlaySystemSound(UInt32(kSystemSoundID_Vibrate))
 		}
 		
 	}
