@@ -8,19 +8,36 @@
 
 import UIKit
 
-class SearchResultViewController: SuperTimelineViewController {
+class SearchResultViewController: SuperTimelineViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 	let apiManager = TessoApiManager()
 	
 	var type: TesSoMeSearchType = .All
 	var username: String! = nil
 	var tag: String! = nil
 	
+	var isNoResult = false
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+		self.tableView.emptyDataSetSource = self
+		self.tableView.emptyDataSetDelegate = self
     }
 
+	func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+		let title = NSLocalizedString("No Results Found", comment: "Empty data title")
+		return NSAttributedString(string: title)
+	}
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let description = NSLocalizedString("Nothing matched your search keyword. Please search again with another keyword.", comment: "Empty data description")
+        return NSAttributedString(string: description)
+    }
+	
+	func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
+		return isNoResult
+	}
+	
 	override func getTimeline() {
 		apiManager.getSearchResult(tag: tag, username: username, type: type, onSuccess:
 			{ data in
@@ -28,10 +45,10 @@ class SearchResultViewController: SuperTimelineViewController {
 				
 				let timeline = TesSoMeData.tlFromResponce(data)
 				if timeline.count == 0 {
-					let errMsg = NSLocalizedString("No result.", comment: "No result.")
-					let errorDetails = NSDictionary.dictionaryWithObjects([errMsg], forKeys: [NSLocalizedDescriptionKey], count: 1)
-					let err = NSError(domain: "API", code: 300, userInfo: errorDetails)
-					self.failureAction(err)
+					self.isNoResult = true
+					self.refreshControl?.enabled = false
+					self.tableView.tableFooterView = UIView()
+					self.tableView.reloadData()
 					return
 				}
 				for post in timeline as [NSDictionary] {
