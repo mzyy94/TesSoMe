@@ -38,8 +38,17 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		let addLabelBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addLabelToUser"))
-		self.navigationItem.rightBarButtonItem = addLabelBtn
+		if username == "" {
+			username = appDelegate.usernameOfTesSoMe!
+		}
+
+		if username == appDelegate.usernameOfTesSoMe {
+			let settingUserdataBtn = UIBarButtonItem(image: UIImage(named: "setting_icon"), style: .Plain, target: self, action: Selector("settingUserdata"))
+			self.navigationItem.rightBarButtonItem = settingUserdataBtn
+		} else {
+			let addLabelBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addLabelToUser"))
+			self.navigationItem.rightBarButtonItem = addLabelBtn
+		}
 
 		let nib = UINib(nibName: "TimelineMessageCell", bundle: nil)
 		self.informationTableView.registerNib(nib, forCellReuseIdentifier: "MessageCell")
@@ -84,10 +93,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		self.userIcon.layer.borderWidth = 1.0
 		self.userIcon.layer.cornerRadius = 4.0
 		self.userIcon.clipsToBounds = true
-		
-		if username == "" {
-			username = appDelegate.usernameOfTesSoMe!
-		}
 		
 		self.usernameLabel.text = "@\(username)"
 		self.navigationItem.title = "@\(username)"
@@ -179,7 +184,105 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		
 
 	}
+	
+	func settingUserdata() {
+		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+		
+		let addLabel = UIAlertAction(title: NSLocalizedString("Add Label", comment: "Add Label on AlertView"), style: .Default)
+			{ action in
+				self.addLabelToUser()
+		}
+		alertController.addAction(addLabel)
+		
+		let changeNickname = UIAlertAction(title: NSLocalizedString("Change Nickname", comment: "Change Nickname on AlertView"), style: .Default)
+			{ action in
+				self.changeNickname()
+		}
+		// MEMO: NO API AVAILABLE
+		//alertController.addAction(changeNickname)
+		
+		let editProfile = UIAlertAction(title: NSLocalizedString("Edit Profile", comment: "Edit Prifle on AlertView"), style: .Default)
+			{ action in
+				self.editProfile()
+		}
+		// MEMO: NO API AVAILABLE
+		//alertController.addAction(editProfile)
+		
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		
 
+		self.presentViewController(alertController, animated: true, completion: nil)
+		
+	}
+
+	func changeNickname() {
+		let alertController = UIAlertController(title: NSLocalizedString("Change Nickname", comment: "Change Nickname on AlertView"), message: NSLocalizedString("Please type new nickname.", comment: "Please type new nickname."), preferredStyle: .Alert)
+		let changeNicknameAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+			action in
+			
+			let textField = alertController.textFields?.first as UITextField
+			let newNickname = textField.text
+			
+			self.apiManager.updateProfile(nickname: newNickname, onSuccess:
+				{ data in
+					self.nicknameLabel.text = newNickname
+				}, onFailure:
+				{ err in
+					let notification = MPGNotification(title: NSLocalizedString("Can not change nickname", comment: "Can not change nickname"), subtitle: err.localizedDescription, backgroundColor: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), iconImage: UIImage(named: "warning_icon"))
+					notification.duration = 5.0
+					notification.animationType = .Drop
+					notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
+					notification.swipeToDismissEnabled = false
+					notification.show()
+			})
+		}
+		alertController.addAction(changeNicknameAction)
+		
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		
+		alertController.addTextFieldWithConfigurationHandler(
+			{ textField in
+				textField.placeholder = NSLocalizedString("New Nickname", comment: "New Nickname on AlertView")
+			}
+		)
+		
+		self.presentViewController(alertController, animated: true, completion: nil)
+	}
+	
+	
+	func editProfile() {
+		let alertController = UIAlertController(title: NSLocalizedString("Edit Profile", comment: "Edit Profile on AlertView"), message: NSLocalizedString("Please type new profile.", comment: "Please type new profile."), preferredStyle: .Alert)
+		let editProfileAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+			action in
+			
+			let textField = alertController.textFields?.first as UITextField
+			let newProfile = textField.text
+			
+			self.apiManager.updateProfile(profile: newProfile, onSuccess:
+				{ data in
+					self.profileTextView.text = newProfile
+				}, onFailure:
+				{ err in
+					let notification = MPGNotification(title: NSLocalizedString("Can not edit profile", comment: "Can not edit profile"), subtitle: err.localizedDescription, backgroundColor: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), iconImage: UIImage(named: "warning_icon"))
+					notification.duration = 5.0
+					notification.animationType = .Drop
+					notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
+					notification.swipeToDismissEnabled = false
+					notification.show()
+			})
+		}
+		alertController.addAction(editProfileAction)
+		
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		
+		alertController.addTextFieldWithConfigurationHandler(nil)
+		
+		self.presentViewController(alertController, animated: true, completion: nil)
+	}
+	
 	
 	func handleTextFieldTextDidChangeNotification(notification: NSNotification) {
 		let textField = notification.object as UITextField
@@ -191,12 +294,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 	}
 	
-
-	/*
-	tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-	func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-	func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-	*/
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return 1
