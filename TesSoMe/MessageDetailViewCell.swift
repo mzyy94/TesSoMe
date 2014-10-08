@@ -95,6 +95,19 @@ class MessageDetailViewCell: UITableViewCell, UITextViewDelegate {
 				
 			}
 			
+			if URL.host == "message" {
+				let storyboard = UIStoryboard(name: "Main", bundle: nil)
+				let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
+				messageDetailView.targetStatusId = URL.lastPathComponent.toInt()
+
+				let tableView = self.superview?.superview as UITableView
+				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
+				viewController.navigationController?.pushViewController(messageDetailView, animated: true)
+				
+				return false
+				
+			}
+
 			if URL.host == "search" {
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
 				let searchResultViewController = storyboard.instantiateViewControllerWithIdentifier("SearchResultView") as SearchResultViewController
