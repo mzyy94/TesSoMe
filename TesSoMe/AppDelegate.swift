@@ -144,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func initUserDefault() {
 		let defaultConfig = NSMutableDictionary.dictionary()
 		defaultConfig.setObject(true, forKey: "relativeTimestamp")
-		defaultConfig.setObject(11.0, forKey: "fontSize")
+		defaultConfig.setObject(16.0, forKey: "fontSize")
 		defaultConfig.setObject(true, forKey: "badge")
 		defaultConfig.setObject(false, forKey: "imagePreview")
 		defaultConfig.setObject(false, forKey: "viaSignature")
