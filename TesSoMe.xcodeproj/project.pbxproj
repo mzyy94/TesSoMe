@@ -25,6 +25,11 @@
 		9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */; };
 		9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E76D83019DA703000624761 /* PhotoCaptionView.swift */; };
 		9E76D83319DA704600624761 /* PhotoCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E76D83219DA704600624761 /* PhotoCaptionView.xib */; };
+		9E86AC6D19E434D400EA194B /* IntroSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E86AC6C19E434D400EA194B /* IntroSetting.xib */; };
+		9E86AC6F19E4369800EA194B /* IntroSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E86AC6E19E4369800EA194B /* IntroSetting.swift */; };
+		9E86AC7319E5288F00EA194B /* IntroSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E86AC7219E5288F00EA194B /* IntroSignIn.swift */; };
+		9E86AC7519E528A300EA194B /* IntroSignIn.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E86AC7419E528A300EA194B /* IntroSignIn.xib */; };
+		9E86AC7919E53D5400EA194B /* Empty.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E86AC7819E53D5400EA194B /* Empty.storyboard */; };
 		9E8FFF2219C95E4900E4459A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2119C95E4900E4459A /* SettingViewController.swift */; };
 		9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */; };
 		9E8FFF2619C96CD500E4459A /* TimelineMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */; };
@@ -118,6 +123,11 @@
 		9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLEntityConverter.swift; sourceTree = "<group>"; };
 		9E76D83019DA703000624761 /* PhotoCaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptionView.swift; sourceTree = "<group>"; };
 		9E76D83219DA704600624761 /* PhotoCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCaptionView.xib; sourceTree = "<group>"; };
+		9E86AC6C19E434D400EA194B /* IntroSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroSetting.xib; sourceTree = "<group>"; };
+		9E86AC6E19E4369800EA194B /* IntroSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroSetting.swift; sourceTree = "<group>"; };
+		9E86AC7219E5288F00EA194B /* IntroSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroSignIn.swift; sourceTree = "<group>"; };
+		9E86AC7419E528A300EA194B /* IntroSignIn.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroSignIn.xib; sourceTree = "<group>"; };
+		9E86AC7819E53D5400EA194B /* Empty.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Empty.storyboard; sourceTree = "<group>"; };
 		9E8FFF2119C95E4900E4459A /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineMessageCell.swift; sourceTree = "<group>"; };
 		9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineMessageCell.xib; sourceTree = "<group>"; };
@@ -185,6 +195,10 @@
 			isa = PBXGroup;
 			children = (
 				9EBA91A919DB1DB1002C0F94 /* white.png */,
+				9E86AC6C19E434D400EA194B /* IntroSetting.xib */,
+				9E86AC7419E528A300EA194B /* IntroSignIn.xib */,
+				9E86AC7219E5288F00EA194B /* IntroSignIn.swift */,
+				9E86AC6E19E4369800EA194B /* IntroSetting.swift */,
 				9E8FFF2319C96CD500E4459A /* TimelineMessageCell.swift */,
 				9E8FFF2419C96CD500E4459A /* TimelineMessageCell.xib */,
 				9EE11FA719DDA66100AC30D6 /* LabelCell.swift */,
@@ -266,6 +280,7 @@
 				9EB8ADD019C3069F00CB92B2 /* Main.storyboard */,
 				9E38982419DE6E07002DBA2D /* SearchViewController.swift */,
 				9E15A72519D27DD20020601D /* PostMessage.storyboard */,
+				9E86AC7819E53D5400EA194B /* Empty.storyboard */,
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
 				9E15A72719D27F160020601D /* PostMainViewController.swift */,
 				9EE03CD819E28E1D0003B356 /* ClassViewController.swift */,
@@ -465,8 +480,11 @@
 				9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */,
 				9E15A72619D27DD20020601D /* PostMessage.storyboard in Resources */,
 				9EBA91AA19DB1DB1002C0F94 /* white.png in Resources */,
+				9E86AC7919E53D5400EA194B /* Empty.storyboard in Resources */,
 				9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */,
+				9E86AC7519E528A300EA194B /* IntroSignIn.xib in Resources */,
 				9E76D83319DA704600624761 /* PhotoCaptionView.xib in Resources */,
+				9E86AC6D19E434D400EA194B /* IntroSetting.xib in Resources */,
 				9EF4489819DF203D00EE7A72 /* tessome_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,10 +614,12 @@
 				9EBC89FD19E2E00B00E00F65 /* ClassEventDayCell.swift in Sources */,
 				9EBC8A0119E309B200E00F65 /* MessageDetailViewCell.swift in Sources */,
 				9E8FFF2A19C9868200E4459A /* TesSoMeData.swift in Sources */,
+				9E86AC7319E5288F00EA194B /* IntroSignIn.swift in Sources */,
 				9E38982519DE6E07002DBA2D /* SearchViewController.swift in Sources */,
 				9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */,
 				9E47ADB419DD52D900F42BA4 /* UserViewController.swift in Sources */,
 				9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */,
+				9E86AC6F19E4369800EA194B /* IntroSetting.swift in Sources */,
 				9E9FA0E719C36A6D00E209C3 /* TessoApiManager.swift in Sources */,
 				9E15A72819D27F160020601D /* PostMainViewController.swift in Sources */,
 				9EF6703C19DAEBEB0037DB88 /* ReplyViewController.swift in Sources */,

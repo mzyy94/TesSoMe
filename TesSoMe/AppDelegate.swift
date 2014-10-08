@@ -28,26 +28,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let account = accounts.last as? NSDictionary
 			usernameOfTesSoMe = account!["acct"] as? String
 			passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
+			
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let topicMenuView = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
+			let rootTabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
+			
+			frostedViewController = REFrostedViewController(contentViewController: rootTabBarController, menuViewController: topicMenuView)
+		} else {
+			frostedViewController = REFrostedViewController(contentViewController: UIViewController(), menuViewController: UIViewController())
 		}
 		
-		if !ud.boolForKey("initializedNotification") {
-			initNotification(application)
-		}
-		
-		initUserDefault()
-		
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		let topicMenuView = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
-		let rootTabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
-		
-		frostedViewController = REFrostedViewController(contentViewController: rootTabBarController, menuViewController: topicMenuView)
 		frostedViewController!.direction = .Left
 		frostedViewController!.liveBlur = true
 		frostedViewController!.menuViewController.view.backgroundColor = UIColor.clearColor()
 		
 		self.window?.rootViewController = frostedViewController
 		
+		initUserDefault()
+		
+		if accounts == nil {
+			showIntroView(application)
+		}
+		
 		return true
+	}
+	
+	func showIntroView(application: UIApplication) {
+		let introSignIn = EAIntroPage(customViewFromNibNamed: "IntroSignIn")
+		
+		let introStreamingSetting = EAIntroPage(customViewFromNibNamed: "IntroSetting")
+		let streamingSetting = introStreamingSetting.customView as IntroSetting
+		
+		let descriptionAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+		
+		streamingSetting.titleLabel.text = NSLocalizedString("Streaming", comment: "Streaming")
+		streamingSetting.descriptionLabel.attributedText = NSAttributedString(string: NSLocalizedString("Streamimg timeline shows you the messages posted at the very time.", comment: "Streaming setting description"), attributes: descriptionAttributes)
+		streamingSetting.descriptionLabel.textAlignment = .Center
+		streamingSetting.userDefaultsKey = "streaming"
+		
+		let introNotificationSetting = EAIntroPage(customViewFromNibNamed: "IntroSetting")
+		let notificationSetting = introNotificationSetting.customView as IntroSetting
+		notificationSetting.titleLabel.text = NSLocalizedString("Notification", comment: "Notification")
+		notificationSetting.descriptionLabel.attributedText =  NSAttributedString(string: NSLocalizedString("Notify replies to you and class reminders.", comment: "Notification setting description"), attributes: descriptionAttributes)
+		notificationSetting.descriptionLabel.textAlignment = .Center
+		notificationSetting.userDefaultsKey = "backgroundNotification"
+		notificationSetting.enableAction = { self.initNotification(application) }
+		
+		let introWelcome = EAIntroPage(customViewFromNibNamed: "IntroSetting")
+		let welcomeView = introWelcome.customView as IntroSetting
+		welcomeView.titleLabel.text = NSLocalizedString("Welcome", comment: "Welcome title")
+		welcomeView.descriptionLabel.attributedText = NSAttributedString(string: NSLocalizedString("Thank you for installing TesSoMe! Enjoy your Tesso SNS life.", comment: "Welcome description"), attributes: descriptionAttributes)
+		welcomeView.enableBtn.hidden = true
+		welcomeView.disableBtn.hidden = true
+		
+		introWelcome.onPageDidAppear = {
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let topicMenuView = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
+			let rootTabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
+			
+			self.frostedViewController!.contentViewController = rootTabBarController
+			self.frostedViewController!.menuViewController = topicMenuView
+		}
+		
+		let intro = EAIntroView(frame: self.window!.frame, andPages: [introSignIn, introStreamingSetting, introNotificationSetting, introWelcome])
+		intro.skipButton.setTitle(NSLocalizedString("Let's go!", comment: "Skip button title"), forState: UIControlState.Normal)
+		intro.showSkipButtonOnlyOnLastPage = true
+		intro.scrollView.scrollEnabled = false
+		intro.pageControl = nil
+		intro.swipeToExit = false
+		
+		intro.showInView(self.window?.rootViewController?.view, animateDuration: 0.0)
 	}
 	
 	func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
