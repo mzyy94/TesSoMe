@@ -250,7 +250,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		
 		self.view.addSubview(previewImage)
 		
-		let constrains: [NSLayoutAttribute: CGFloat] = [.Top: 8.0, .Left: 8.0, .Right: -8.0, .Bottom: -8.0]
+		let constrains: [NSLayoutAttribute: CGFloat] = [.Top: 72.0, .Left: 8.0, .Right: -8.0, .Bottom: -8.0]
 		
 		for (layoutAttribute, value) in constrains {
 			let constraint = NSLayoutConstraint(item: previewImage, attribute: layoutAttribute, relatedBy: .Equal, toItem: self.view, attribute: layoutAttribute, multiplier: 1.0, constant: value)
