@@ -134,6 +134,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			
 			self.window?.rootViewController!.presentViewController(userViewController, animated: true, completion: nil)
 
+		case "message":
+			let storyboard = UIStoryboard(name: "Main", bundle: nil)
+			let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
+			messageDetailView.targetStatusId = url.lastPathComponent.toInt()
+
+			let rootViewController = self.window?.rootViewController?.childViewControllers.first as RootViewController
+			let index = rootViewController.selectedIndex
+			rootViewController.childViewControllers[index].pushViewController(messageDetailView, animated: true)
 
 		default:
 			return false
