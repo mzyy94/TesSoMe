@@ -209,6 +209,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
 	}
 	
+	func setClassAlert(title: String, date: NSDate) {
+		let notificationTextFormat = NSLocalizedString("Class '%@' will begin in 5 minutes", comment: "class notification text format")
+		let localNotification = UILocalNotification()
+		localNotification.fireDate = NSDate(timeInterval: -5 * 60.0, sinceDate: date)
+		localNotification.timeZone = NSTimeZone.defaultTimeZone()
+		localNotification.soundName = UILocalNotificationDefaultSoundName
+		localNotification.category = "CLASS_CATEGORY"
+		localNotification.alertAction = "Enter the Classroom"
+		localNotification.alertBody = NSString(format: notificationTextFormat, title)
+		localNotification.userInfo = ["date": date, "title": title]
+		UIApplication.sharedApplication().scheduleLocalNotification(localNotification)		
+	}
+	
 	func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
 		if notification.category! == "REPLY_CATEGORY" {
 			let userInfo = NSDictionary(dictionary: notification.userInfo!)
@@ -230,6 +243,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
 				}
 			}
+			notificationView.show()
+			UIApplication.sharedApplication().cancelLocalNotification(notification)
+		}
+		
+		if notification.category! == "CLASS_CATEGORY" {
+			let userInfo = NSDictionary(dictionary: notification.userInfo!)
+			let title = userInfo["title"] as String!
+
+			let descriptionText = NSLocalizedString("Class will begin in 5 minutes", comment: "reply notification description")
+			let notificationView = MPGNotification(title: title, subtitle: descriptionText, backgroundColor: UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0), iconImage: UIImage(named: "timer_icon"))
+			notificationView.duration = 5.0
+			notificationView.animationType = .Drop
+			notificationView.setButtonConfiguration(.OneButton, withButtonTitles: [NSLocalizedString("OK", comment: "OK")])
+			notificationView.swipeToDismissEnabled = false
+			notificationView.buttonHandler = nil
 			notificationView.show()
 			UIApplication.sharedApplication().cancelLocalNotification(notification)
 		}

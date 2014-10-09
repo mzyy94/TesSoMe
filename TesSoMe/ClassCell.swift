@@ -13,6 +13,7 @@ class ClassCell: UITableViewCell {
 	@IBOutlet weak var userIcon: UIImageView!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var dateLabel: UILabel!
+	@IBOutlet weak var alarmIcon: UIImageView!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,5 +30,9 @@ class ClassCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+	
+	override func prepareForReuse() {
+		self.alarmIcon.hidden = true
+	}
 
 }

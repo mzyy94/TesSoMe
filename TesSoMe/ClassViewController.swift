@@ -10,6 +10,9 @@ import UIKit
 
 class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableViewDelegate, UITableViewDataSource {
 	
+	let app = UIApplication.sharedApplication()
+	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+	
 	@IBOutlet weak var calendarViewPlace: UIView!
 	@IBOutlet weak var classTableView: UITableView!
 	
@@ -97,6 +100,13 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 		let event = currentEvent[indexPath.row]
 		let cell = tableView.dequeueReusableCellWithIdentifier("ClassCell", forIndexPath: indexPath) as ClassCell
 		
+		for notification in app.scheduledLocalNotifications as [UILocalNotification] {
+			if notification.category! == "CLASS_CATEGORY" && notification.userInfo!["date"] as NSDate == event.date {
+				cell.alarmIcon.hidden = false
+				break
+			}
+		}
+		
 		cell.titleLabel.text = event.title
 		
 		let formatter = NSDateFormatter()
@@ -112,16 +122,48 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 		let event = currentEvent[indexPath.row]
 		let cell = tableView.cellForRowAtIndexPath(indexPath) as ClassCell
 
-		let confirmationText = NSLocalizedString("Do you want to set alert?", comment: "Alert confirmation text")
-		let alertController = UIAlertController(title: cell.titleLabel.text, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
-		
-		let renameAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler: nil)
-		alertController.addAction(renameAction)
-		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
-		alertController.addAction(cancelAction)
+		if cell.alarmIcon.hidden { // Not set notification
+			let confirmationText = NSLocalizedString("Do you want to set alert?", comment: "Alert confirmation text")
+			let alertController = UIAlertController(title: cell.titleLabel.text, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
+			
+			let setClassNotificationAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler:
+				{ action in
+					self.appDelegate.setClassAlert(event.title, date: event.date)
+					cell.alarmIcon.hidden = false
+				}
+			)
+			alertController.addAction(setClassNotificationAction)
+			
+			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+			alertController.addAction(cancelAction)
+			
+			self.presentViewController(alertController, animated: true, completion: nil)
+	
+		} else { // Already set notification
+			let confirmationText = NSLocalizedString("Do you want to remove alert?", comment: "Alert confirmation text (remove class notification)")
+			let alertController = UIAlertController(title: cell.titleLabel.text, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
+			
+			let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Remove", comment: "Remove on AlertView"), style: .Destructive, handler:
+				{ action in
+	
+					for notification in self.app.scheduledLocalNotifications as [UILocalNotification] {
+						if notification.category! == "CLASS_CATEGORY" && notification.userInfo!["date"] as NSDate == event.date {
+							self.app.cancelLocalNotification(notification)
+							cell.alarmIcon.hidden = true
+							break
+						}
+					}
 
-		self.presentViewController(alertController, animated: true, completion: nil)
+				}
+			)
+			alertController.addAction(removeClassNotificationAction)
+			
+			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+			alertController.addAction(cancelAction)
+			
+			self.presentViewController(alertController, animated: true, completion: nil)
+			
+		}
 	}
 	
 	func goForward(sender: UISwipeGestureRecognizer) {
