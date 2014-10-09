@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PostMainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate {
+class PostMainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, RSKImageCropViewControllerDelegate {
 	let app = UIApplication.sharedApplication()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	let ud = NSUserDefaults()
@@ -42,6 +42,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		initMenu()
 		
 		self.textView.text = preparedText
+		self.textView.delegate = self
 		
 		setTitleBtnText("Message")
 		messageType = .Message
@@ -58,8 +59,17 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("closeView"))
 
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("sendPost"))
+		self.navigationItem.rightBarButtonItem?.enabled = false
 		
 		showKeyboard()
+	}
+	
+	func textViewDidChange(textView: UITextView) {
+		if textView.text.isEmpty || TesSoMeData.convertKML(textView.text).utf16Count > 1023 {
+			self.navigationItem.rightBarButtonItem?.enabled = false
+		} else {
+			self.navigationItem.rightBarButtonItem?.enabled = true
+		}
 	}
 	
 	func initMenu() {
@@ -160,6 +170,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 					fileManager.createFileAtPath(fileURLtoPost!.relativePath!, contents: fileToPost, attributes: nil)
 					self.setTitleBtnText("File upload")
 					self.messageType = .File
+					self.navigationItem.rightBarButtonItem?.enabled = true
 					self.addPreviewImage(image)
 					self.addRenameFileMenu()
 				}
@@ -175,6 +186,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			fileURLtoPost = infoDic[UIImagePickerControllerMediaURL] as? NSURL
 			self.setTitleBtnText("File upload")
 			self.messageType = .File
+			self.navigationItem.rightBarButtonItem?.enabled = true
 			if picker.sourceType == .Camera && mediaType == "public.movie" {
 				UISaveVideoAtPathToSavedPhotosAlbum(fileURLtoPost?.path, self, nil, nil)
 			}
@@ -187,6 +199,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	func showDrawingView() {
 		self.setTitleBtnText("Drawing")
 		self.messageType = .Drawing
+		self.navigationItem.rightBarButtonItem?.enabled = true
 		
 		let addComment = REMenuItem(title: NSLocalizedString("Add Comment", comment: "Add Comment"), image: nil, highlightedImage: nil, action:
 			{ item in
