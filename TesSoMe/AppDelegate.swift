@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		case "user":
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
+			userViewController.username = url.lastPathComponent
 			
 			self.window?.rootViewController!.presentViewController(userViewController, animated: true, completion: nil)
 
