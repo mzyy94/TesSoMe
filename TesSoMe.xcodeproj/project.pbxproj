@@ -25,6 +25,7 @@
 		9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */; };
 		9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E76D83019DA703000624761 /* PhotoCaptionView.swift */; };
 		9E76D83319DA704600624761 /* PhotoCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E76D83219DA704600624761 /* PhotoCaptionView.xib */; };
+		9E78024819E598FF00726EE6 /* PostDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E78024719E598FF00726EE6 /* PostDrawingViewController.swift */; };
 		9E86AC6D19E434D400EA194B /* IntroSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E86AC6C19E434D400EA194B /* IntroSetting.xib */; };
 		9E86AC6F19E4369800EA194B /* IntroSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E86AC6E19E4369800EA194B /* IntroSetting.swift */; };
 		9E86AC7319E5288F00EA194B /* IntroSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E86AC7219E5288F00EA194B /* IntroSignIn.swift */; };
@@ -56,6 +57,7 @@
 		9EF4489719DF203D00EE7A72 /* tessome_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EF4489519DF203D00EE7A72 /* tessome_background.png */; };
 		9EF4489819DF203D00EE7A72 /* tessome_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EF4489619DF203D00EE7A72 /* tessome_logo.png */; };
 		9EF6703C19DAEBEB0037DB88 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */; };
+		9EFE5F6A19E609B700DF8FD2 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFE5F6919E609B700DF8FD2 /* ColorPickerViewController.swift */; };
 		ABDAF7CC514440A3A2DE9A54 /* libPods-TesSoMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87FB010A8A064C8A83DA3922 /* libPods-TesSoMe.a */; };
 		F97CC65721D5414AAB4EC912 /* libPods-TesSoMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 630EA8FBBA01483BA749F9DB /* libPods-TesSoMeTests.a */; };
 		FEB790599C66421288E3AC94 /* libPods-Share.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3219F2474F4BF397934997 /* libPods-Share.a */; };
@@ -123,6 +125,7 @@
 		9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLEntityConverter.swift; sourceTree = "<group>"; };
 		9E76D83019DA703000624761 /* PhotoCaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptionView.swift; sourceTree = "<group>"; };
 		9E76D83219DA704600624761 /* PhotoCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCaptionView.xib; sourceTree = "<group>"; };
+		9E78024719E598FF00726EE6 /* PostDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDrawingViewController.swift; sourceTree = "<group>"; };
 		9E86AC6C19E434D400EA194B /* IntroSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroSetting.xib; sourceTree = "<group>"; };
 		9E86AC6E19E4369800EA194B /* IntroSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroSetting.swift; sourceTree = "<group>"; };
 		9E86AC7219E5288F00EA194B /* IntroSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroSignIn.swift; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 		9EF4489519DF203D00EE7A72 /* tessome_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tessome_background.png; sourceTree = "<group>"; };
 		9EF4489619DF203D00EE7A72 /* tessome_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tessome_logo.png; sourceTree = "<group>"; };
 		9EF6703B19DAEBEB0037DB88 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
+		9EFE5F6919E609B700DF8FD2 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		B20B5F052CA249308E7C163D /* Pods-Share.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Share.xcconfig"; path = "Pods/Pods-Share.xcconfig"; sourceTree = "<group>"; };
 		BE3219F2474F4BF397934997 /* libPods-Share.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Share.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -280,9 +284,11 @@
 				9EB8ADD019C3069F00CB92B2 /* Main.storyboard */,
 				9E38982419DE6E07002DBA2D /* SearchViewController.swift */,
 				9E15A72519D27DD20020601D /* PostMessage.storyboard */,
+				9E78024719E598FF00726EE6 /* PostDrawingViewController.swift */,
 				9E86AC7819E53D5400EA194B /* Empty.storyboard */,
 				9EB8ADCA19C3069F00CB92B2 /* AppDelegate.swift */,
 				9E15A72719D27F160020601D /* PostMainViewController.swift */,
+				9EFE5F6919E609B700DF8FD2 /* ColorPickerViewController.swift */,
 				9EE03CD819E28E1D0003B356 /* ClassViewController.swift */,
 				9E38982619DE9D09002DBA2D /* SearchResultViewController.swift */,
 				9EBC89FE19E2FDE000E00F65 /* MessageDetailViewController.swift */,
@@ -609,6 +615,7 @@
 				9EE03CD919E28E1D0003B356 /* ClassViewController.swift in Sources */,
 				9EBA91AC19DB2292002C0F94 /* SuperTimelineViewController.swift in Sources */,
 				9E8FFF2219C95E4900E4459A /* SettingViewController.swift in Sources */,
+				9EFE5F6A19E609B700DF8FD2 /* ColorPickerViewController.swift in Sources */,
 				9E38982719DE9D09002DBA2D /* SearchResultViewController.swift in Sources */,
 				9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */,
 				9EBC89FD19E2E00B00E00F65 /* ClassEventDayCell.swift in Sources */,
@@ -629,6 +636,7 @@
 				9EBC89FF19E2FDE000E00F65 /* MessageDetailViewController.swift in Sources */,
 				9E8FFF2819C97C0A00E4459A /* TimelineViewController.swift in Sources */,
 				9E8FFF2519C96CD500E4459A /* TimelineMessageCell.swift in Sources */,
+				9E78024819E598FF00726EE6 /* PostDrawingViewController.swift in Sources */,
 				9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */,
 				9E05785619C92D2A001CEA3F /* TopicMenuViewController.swift in Sources */,
 				9EE11FA819DDA66100AC30D6 /* LabelCell.swift in Sources */,

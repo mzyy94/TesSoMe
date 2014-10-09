@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PostMainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PostMainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate {
 	let app = UIApplication.sharedApplication()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	let ud = NSUserDefaults()
@@ -20,6 +20,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	
 	var fileURLtoPost: NSURL? = nil
 	var topicid: Int! = nil
+	var drawingImage: UIImage! = nil
 	
 	@IBOutlet weak var postTitleBtn: UIButton!
 	@IBOutlet weak var textView: UITextView!
@@ -94,8 +95,30 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		)
 		let selectDrawingItem = REMenuItem(title: NSLocalizedString("Drawing", comment: "Drawing on navigation bar"), image: nil, highlightedImage: nil, action:
 			{ item in
-				self.setTitleBtnText("Drawing")
-				self.messageType = .Drawing
+				let oldMenuItems = self.menu.items
+				func generateChoosePhotoFunc(own: PostMainViewController)(type: UIImagePickerControllerSourceType)(item: REMenuItem!) {
+					let picker = UIImagePickerController()
+					picker.delegate = own
+					picker.sourceType = type
+					picker.mediaTypes = ["public.image"]
+					own.presentViewController(picker, animated: true, completion: nil)
+				}
+				
+				let choosePhoto = generateChoosePhotoFunc(self)
+				
+				let takePhoto = REMenuItem(title: NSLocalizedString("Camera", comment: "Camera"), image: nil, highlightedImage: nil, action: choosePhoto(type: .Camera))
+				
+				let selectPhoto = REMenuItem(title: NSLocalizedString("Photo Library", comment: "Photo Library"), image: nil, highlightedImage: nil, action: choosePhoto(type: .PhotoLibrary))
+				
+				let whitePaper = REMenuItem(title: NSLocalizedString("White Paper", comment: "White Paper"), image: nil, highlightedImage: nil, action:
+					{ item in
+						self.showDrawingView()
+					}
+				)
+				
+				self.menu.items = [takePhoto, selectPhoto, whitePaper]
+				self.menu.showFromNavigationController(self.navigationController)
+				self.menu.items = oldMenuItems
 			}
 		)
 		self.menu = REMenu(items: [selectMessageItem, selectFileUploadItem, selectDrawingItem])
@@ -109,6 +132,18 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
 		let infoDic = NSDictionary(dictionary: info)
 		let mediaType = infoDic[UIImagePickerControllerMediaType] as String
+		
+		if picker.mediaTypes.count == 1 { // Drawing
+			let image = infoDic[UIImagePickerControllerOriginalImage] as UIImage
+			if picker.sourceType == .Camera {
+				UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+			}
+			
+			let imageCropViewController = RSKImageCropViewController(image: image, cropMode: RSKImageCropMode.Custom, cropSize: CGSize(width: 250, height: 85))
+			imageCropViewController.delegate = self
+			picker.pushViewController(imageCropViewController, animated: true)
+			return
+		}
 		
 		if mediaType == "public.image" {
 			func saveImageToTmp(image: UIImage) {
@@ -147,6 +182,51 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			self.addRenameFileMenu()
 			picker.dismissViewControllerAnimated(true, completion: nil)
 		}
+	}
+	
+	func showDrawingView() {
+		self.setTitleBtnText("Drawing")
+		self.messageType = .Drawing
+		
+		let addComment = REMenuItem(title: NSLocalizedString("Add Comment", comment: "Add Comment"), image: nil, highlightedImage: nil, action:
+			{ item in
+				let alertController = UIAlertController(title: NSLocalizedString("Add Comment", comment: "Add Comment on AlertView"), message: NSLocalizedString("Please type comments of drawing.", comment: "Please type comments of drawing."), preferredStyle: .Alert)
+				let addCommentAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+					action in
+					
+					let textField = alertController.textFields?.first as UITextField
+					self.textView.text = textField.text
+					
+					}
+				alertController.addAction(addCommentAction)
+				
+				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+				alertController.addAction(cancelAction)
+				
+				alertController.addTextFieldWithConfigurationHandler(
+					{ textField in
+						textField.text = self.textView.text
+					}
+				)
+				
+				self.presentViewController(alertController, animated: true, completion: nil)
+
+		})
+		
+		self.menu.items = [addComment]
+		
+		self.performSegueWithIdentifier("ShowDrawingView", sender: self)
+		self.navigationItem.leftBarButtonItem?.action = Selector("closeViewAll")
+	}
+	
+	func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!) {
+		drawingImage = croppedImage
+		controller.dismissViewControllerAnimated(true, completion: nil)
+		showDrawingView()
+	}
+	
+	func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController!) {
+		controller.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
 	var renameAction: UIAlertAction! = nil
@@ -320,6 +400,16 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		self.dismissViewControllerAnimated(true, completion: nil)
 	}
 
+	func closeViewAll() {
+		closeKeyboard()
+		self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+	}
+	
+	func closeViewAll(completion: (() -> Void)! = nil) {
+		closeKeyboard()
+		self.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
+	}
+	
 	func closeView(completion: (() -> Void)! = nil) {
 		closeKeyboard()
 		self.dismissViewControllerAnimated(true, completion: completion)
@@ -375,8 +465,8 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				apiManager.uploadFile(fileURL: self.fileURLtoPost!, onSuccess: onSuccess, onFailure: onFailure)(topicid: self.topicid)
 			})
 		case .Drawing:
-			closeView({
-				apiManager.sendMessage(topicid: self.topicid, message: text, onSuccess: onSuccess, onFailure: onFailure)
+			closeViewAll({
+				apiManager.sendDrawing(topicid: self.topicid, message: text, drawing: self.drawingImage, onSuccess: onSuccess, onFailure: onFailure)
 			})
 		default:
 			NSLog("Unknown message type to post (value: %d)", messageType.toRaw())
@@ -388,5 +478,12 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		// Dispose of any resources that can be recreated.
 	}
 	
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+		if segue.identifier == "ShowDrawingView" {
+			let postDrawingViewController = segue.destinationViewController.childViewControllers.first as PostDrawingViewController
+			postDrawingViewController.initialImage = drawingImage
+		}
+	}
 	
 }
