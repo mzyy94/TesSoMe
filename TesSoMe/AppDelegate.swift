@@ -196,7 +196,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		ud.synchronize()
 	}
 	
-	func notifyMessage(message: String, from username: String, statusid: Int, topicid: Int) {
+	func notifyMessage(message: String, from username: String, statusid: Int, topicid: Int) -> Bool {
+		if statusid <= ud.integerForKey("notifiedStatusId") {
+			return false
+		}
+		ud.setInteger(statusid, forKey: "notifiedStatusId")
+		ud.synchronize()
 		let notificationTextFormat = NSLocalizedString("From @%@: %@", comment: "notification text format")
 		let localNotification = UILocalNotification()
 		localNotification.fireDate = NSDate()
@@ -207,6 +212,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		localNotification.alertBody = NSString(format: notificationTextFormat, username, message)
 		localNotification.userInfo = ["username": username, "message": message, "statusid": statusid, "topicid": topicid]
 		UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+		return true
 	}
 	
 	func setClassAlert(title: String, date: NSDate) {
@@ -265,6 +271,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if ud.boolForKey("vibratingNotification") {
 			AudioServicesPlaySystemSound(UInt32(kSystemSoundID_Vibrate))
 		}
+		
+	}
+	
+	func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+		if !ud.boolForKey("backgroundNotification") {
+			completionHandler(.Failed)
+			return
+		}
+
+		let serviceName = "TesSoMe"
+		let accounts = SSKeychain.accountsForService(serviceName)
+		
+		if accounts == nil || accounts.count == 0 {
+			completionHandler(.Failed)
+			return
+		}
+		
+		let account = accounts.last as? NSDictionary
+		let username = account!["acct"] as? String
+		
+		if username == nil {
+			completionHandler(.Failed)
+			return
+		}
+		
+		let apiManager = TessoApiManager()
+		apiManager.getSearchResult(sinceid: ud.integerForKey("notifiedStatusId"), tag: "at_\(username!)", type: .All, onSuccess:
+			{ data in
+				let timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]
+				if timeline.count == 0 {
+					completionHandler(.NoData)
+					return
+				}
+				
+				for post in timeline.reverse() {
+					let tessomeData = TesSoMeData(data: post)
+					if self.notifyMessage(tessomeData.message, from: tessomeData.username, statusid: tessomeData.statusId, topicid: tessomeData.topicid) {
+						application.applicationIconBadgeNumber++
+					}
+				}
+				completionHandler(.NewData)
+			}
+			, onFailure:
+			{ err in
+				completionHandler(.Failed)
+			}
+		)
 		
 	}
 	

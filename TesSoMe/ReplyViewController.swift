@@ -32,6 +32,8 @@ class ReplyViewController: SuperTimelineViewController {
 				
 				self.refreshControl?.endRefreshing()
 				
+				self.ud.setInteger(self.latestMessageId, forKey: "notifiedStatusId")
+				
 				self.updateTimelineMethod = self.updateTimeline
 				self.tableView.infiniteScrollingView.enabled = true
 
