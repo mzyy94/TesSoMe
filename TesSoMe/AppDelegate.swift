@@ -237,7 +237,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UIApplication.sharedApplication().scheduleLocalNotification(localNotification)		
 	}
 	
-	func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+	func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+		if application.applicationState != .Active {
+			if notification.category! == "REPLY_CATEGORY" {
+				let userInfo = NSDictionary(dictionary: notification.userInfo!)
+				let username = userInfo["username"] as String!
+				let statusId = userInfo["statusid"] as Int!
+				let topicid = userInfo["topicid"] as Int!
+				let text = ">\(statusId)(@\(username)) "
+				
+				if identifier == "TESSOME_REPLY_NOTIFICATION" {
+					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+				} else {
+					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://message/\(statusId)"))
+				}
+			}
+			
+			
+			application.applicationIconBadgeNumber--
+			completionHandler()
+			return
+		}
+
 		if notification.category! == "REPLY_CATEGORY" {
 			let userInfo = NSDictionary(dictionary: notification.userInfo!)
 			let username = userInfo["username"] as String!
@@ -247,19 +268,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let titleFormat = NSLocalizedString("Reply from @%@", comment: "reply notification title format")
 			let text = ">\(statusId)(@\(username)) "
 
-			let notificationView = MPGNotification(title: NSString(format: titleFormat, username), subtitle: message, backgroundColor: UIColor(red: 0.3, green: 0.3, blue: 1.0, alpha: 1.0), iconImage: UIImage(named: "comment_icon"))
-			notificationView.duration = 5.0
-			notificationView.animationType = .Drop
-			notificationView.setButtonConfiguration(.OneButton, withButtonTitles: [NSLocalizedString("Reply", comment: "Reply")])
-			notificationView.swipeToDismissEnabled = false
-			notificationView.buttonHandler = {
-				notification, buttonIndex in
-				if buttonIndex == notification.firstButton.tag {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+			if identifier == "TESSOME_REPLY_NOTIFICATION" {
+				UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+			} else {
+				let notificationView = MPGNotification(title: NSString(format: titleFormat, username), subtitle: message, backgroundColor: UIColor(red: 0.3, green: 0.3, blue: 1.0, alpha: 1.0), iconImage: UIImage(named: "comment_icon"))
+				notificationView.duration = 5.0
+				notificationView.animationType = .Drop
+				notificationView.setButtonConfiguration(.OneButton, withButtonTitles: [NSLocalizedString("Reply", comment: "Reply")])
+				notificationView.swipeToDismissEnabled = false
+				notificationView.buttonHandler = {
+					notification, buttonIndex in
+					if buttonIndex == notification.firstButton.tag {
+						UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+					}
 				}
+				notificationView.show()
 			}
-			notificationView.show()
-			UIApplication.sharedApplication().cancelLocalNotification(notification)
 		}
 		
 		if notification.category! == "CLASS_CATEGORY" {
@@ -281,6 +305,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			AudioServicesPlaySystemSound(UInt32(kSystemSoundID_Vibrate))
 		}
 		
+		completionHandler()
 	}
 	
 	func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
