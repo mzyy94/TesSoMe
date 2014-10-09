@@ -78,8 +78,9 @@ class TessoApiManager: NSObject {
 			onSuccess?(object)
 		} else {
 			let errMsg = ((object["data"] as NSArray)[0] as NSDictionary)["data"] as String
+			let errCode = (((object["data"] as NSArray)[0] as NSDictionary)["id"] as Int)
 			let errorDetails = NSDictionary.dictionaryWithObjects([errMsg], forKeys: [NSLocalizedDescriptionKey], count: 1)
-			let err = NSError(domain: "API", code: 400, userInfo: errorDetails)
+			let err = NSError(domain: "API", code: errCode, userInfo: errorDetails)
 			onFailure?(err)
 		}
 	}
@@ -186,6 +187,16 @@ class TessoApiManager: NSObject {
 			})
 		}
 		
+	}
+	
+	func checkConnectionAndReSignIn(username: String, password: String) {
+		self.getData(mode: .Test, onSuccess: nil, onFailure:
+			{ err in
+				if err.code == 0 {
+					self.signIn(username: username, password: password, onSuccess: nil, onFailure: nil)
+				}
+			
+		})
 	}
 	
 	func getTimeline(topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
