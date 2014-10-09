@@ -17,6 +17,7 @@ pod 'RDVCalendarView'
 pod 'DZNEmptyDataSet'
 pod 'EAIntroView'
 pod 'RSKImageCropper'
+pod 'MagicalRecord'
 
 post_install do | installer |
   require 'fileutils'

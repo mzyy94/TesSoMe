@@ -26,5 +26,6 @@
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <EAIntroView/EAIntroView.h>
 #import <RSKImageCropper/RSKImageCropViewController.h>
+#import <MagicalRecord/CoreData+MagicalRecord.h>
 
 #endif
