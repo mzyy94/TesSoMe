@@ -51,6 +51,7 @@
 		9EBC89FF19E2FDE000E00F65 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC89FE19E2FDE000E00F65 /* MessageDetailViewController.swift */; };
 		9EBC8A0119E309B200E00F65 /* MessageDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC8A0019E309B200E00F65 /* MessageDetailViewCell.swift */; };
 		9EE03CD919E28E1D0003B356 /* ClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE03CD819E28E1D0003B356 /* ClassViewController.swift */; };
+		9EE0942219E689D800A121DC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0942119E689D800A121DC /* Settings.bundle */; };
 		9EE11FA819DDA66100AC30D6 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE11FA719DDA66100AC30D6 /* LabelCell.swift */; };
 		9EE50FDD19CC4E34006AA6EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE50FDC19CC4E34006AA6EA /* Images.xcassets */; };
 		9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EEF01A919C93E4B005CCF7C /* Settings.storyboard */; };
@@ -156,6 +157,7 @@
 		9EBC89FE19E2FDE000E00F65 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
 		9EBC8A0019E309B200E00F65 /* MessageDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDetailViewCell.swift; sourceTree = "<group>"; };
 		9EE03CD819E28E1D0003B356 /* ClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassViewController.swift; sourceTree = "<group>"; };
+		9EE0942119E689D800A121DC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		9EE11FA719DDA66100AC30D6 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		9EE50FDC19CC4E34006AA6EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9EEF01A919C93E4B005CCF7C /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				9EB8ADD519C3069F00CB92B2 /* LaunchScreen.xib */,
 				9EF4489519DF203D00EE7A72 /* tessome_background.png */,
 				9EF4489619DF203D00EE7A72 /* tessome_logo.png */,
+				9EE0942119E689D800A121DC /* Settings.bundle */,
 				9EB8ADC819C3069F00CB92B2 /* Supporting Files */,
 			);
 			path = TesSoMe;
@@ -485,6 +488,7 @@
 				9E8FFF2619C96CD500E4459A /* TimelineMessageCell.xib in Resources */,
 				9EB8ADD419C3069F00CB92B2 /* Images.xcassets in Resources */,
 				9E15A72619D27DD20020601D /* PostMessage.storyboard in Resources */,
+				9EE0942219E689D800A121DC /* Settings.bundle in Resources */,
 				9EBA91AA19DB1DB1002C0F94 /* white.png in Resources */,
 				9E86AC7919E53D5400EA194B /* Empty.storyboard in Resources */,
 				9EEF01AA19C93E4B005CCF7C /* Settings.storyboard in Resources */,

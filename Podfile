@@ -18,6 +18,11 @@ pod 'DZNEmptyDataSet'
 pod 'EAIntroView'
 pod 'RSKImageCropper'
 
+post_install do | installer |
+  require 'fileutils'
+  FileUtils.cp_r('Pods/Pods-TesSoMe-acknowledgements.plist', 'TesSoMe/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end
+
 end
 
 target "TesSoMeTests" do
