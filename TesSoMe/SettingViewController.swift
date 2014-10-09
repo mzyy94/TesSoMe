@@ -68,6 +68,48 @@ class SettingViewController: UITableViewController {
 				let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
 				cell.updateTimestamp(relative: isRelative)
 			}
+		case "RootSetting":
+			if indexPath == NSIndexPath(forRow: 0, inSection: 3) { // Danger
+				let confirmationText = NSLocalizedString("Do you really want to delete settings and data?", comment: "Alert confirmation text")
+				let alertController = UIAlertController(title: confirmationText, message: nil, preferredStyle: .Alert)
+				
+				let setClassNotificationAction = UIAlertAction(title: NSLocalizedString("YES", comment: "YES on AlertView"), style: .Destructive, handler:
+					{ action in
+						let serviceName = "TesSoMe"
+						for account in SSKeychain.allAccounts() {
+							let username = account["acct"]
+							SSKeychain.deletePasswordForService(serviceName, account: username as String)
+						}
+						let domain = NSBundle.mainBundle().bundleIdentifier
+						NSUserDefaults.standardUserDefaults().removePersistentDomainForName(domain!)
+						
+						let apiManager = TessoApiManager()
+						apiManager.signOut(onSuccess: nil, onFailure: nil)
+						
+						let shutdonwText = NSLocalizedString("Please restart TesSoMe immediately.", comment: "Shutdown text")
+						let shutdownAlertController = UIAlertController(title: shutdonwText, message: nil, preferredStyle: .Alert)
+						let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler:
+							{ action in
+								exit(1)
+							}
+						)
+						shutdownAlertController.addAction(okAction)
+						self.presentViewController(shutdownAlertController, animated: true, completion: nil)
+					}
+				)
+				alertController.addAction(setClassNotificationAction)
+				
+				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+				alertController.addAction(cancelAction)
+				
+				self.presentViewController(alertController, animated: true, completion: nil)
+			} else if indexPath == NSIndexPath(forRow: 0, inSection: 4) { // About mzyy94
+				let url = NSURL(string: "http://www.amazon.co.jp/registry/wishlist/1HE845FB3VZWO")
+				let webKitViewController = WebKitViewController()
+				webKitViewController.url = url
+				self.navigationController?.pushViewController(webKitViewController, animated: true)
+			}
+
 		default:
 			return
 		}
