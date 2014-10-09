@@ -25,5 +25,6 @@
 #import <RDVCalendarView/RDVCalendarDayCell.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <EAIntroView/EAIntroView.h>
+#import <RSKImageCropper/RSKImageCropViewController.h>
 
 #endif

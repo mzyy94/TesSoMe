@@ -16,6 +16,7 @@ pod 'HMSegmentedControl'
 pod 'RDVCalendarView'
 pod 'DZNEmptyDataSet'
 pod 'EAIntroView'
+pod 'RSKImageCropper'
 
 end
 
