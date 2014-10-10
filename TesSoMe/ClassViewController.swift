@@ -74,12 +74,22 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 				self.eventDays.removeAll(keepCapacity: true)
 				self.currentEvent.removeAll(keepCapacity: false)
 				
+				
+				let year = self.calendarView.month.year
+				let month = self.calendarView.month.month
+				let day = self.calendarView.indexForSelectedDayCell() + 1
+				
 				for event in classes {
-					self.eventDays.append(ClassEvent(data: event as NSDictionary))
+					let classEvent = ClassEvent(data: event as NSDictionary)
+					self.eventDays.append(classEvent)
+					if classEvent.dateComponents.year == year &&
+						classEvent.dateComponents.month == month &&
+						classEvent.dateComponents.day == day {
+							self.currentEvent.append(classEvent)
+					}
 				}
 				
 				self.calendarView.reloadData()
-				self.calendarView.selectDayCellAtIndex(self.calendarView.indexForSelectedDayCell(), animated: false)
 				self.classTableView.reloadData()
 			}, onFailure: nil)
 	}
