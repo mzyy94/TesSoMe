@@ -78,7 +78,8 @@ class TessoApiManager: NSObject {
 			onSuccess?(object)
 		} else {
 			let errMsg = ((object["data"] as NSArray)[0] as NSDictionary)["data"] as String
-			let errCode = (((object["data"] as NSArray)[0] as NSDictionary)["id"] as Int)
+//			let errCode = (((object["data"] as NSArray)[0] as NSDictionary)["id"] as Int) // MEMO: SERVER SIDE BUG
+			let errCode = 0
 			let errorDetails = NSDictionary.dictionaryWithObjects([errMsg], forKeys: [NSLocalizedDescriptionKey], count: 1)
 			let err = NSError(domain: "API", code: errCode, userInfo: errorDetails)
 			onFailure?(err)
