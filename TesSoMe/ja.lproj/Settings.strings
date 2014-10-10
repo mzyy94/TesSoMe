@@ -3,151 +3,151 @@
 "0yg-3g-7Gq.headerTitle" = "Developer";
 
 /* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "1al-mQ-xY0"; */
-"1al-mQ-xY0.placeholder" = "Password";
+"1al-mQ-xY0.placeholder" = "パスワード";
 
 /* Class = "IBUILabel"; text = "\"via TesSoMe\" signature"; ObjectID = "1mE-Ne-aqh"; */
-"1mE-Ne-aqh.text" = "\"via TesSoMe\" signature";
+"1mE-Ne-aqh.text" = "TesSoMeから投稿バッジ";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Footer"; ObjectID = "1o8-iD-GcY"; */
-"1o8-iD-GcY.headerTitle" = "Footer";
+"1o8-iD-GcY.headerTitle" = "付加情報";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Developer Mode"; ObjectID = "1rf-L0-Buw"; */
-"1rf-L0-Buw.headerTitle" = "Developer Mode";
+"1rf-L0-Buw.headerTitle" = "開発者用メニュー";
 
 /* Class = "IBUILabel"; text = "Show detail network access"; ObjectID = "3XS-Kn-Oby"; */
-"3XS-Kn-Oby.text" = "Show detail network access";
+"3XS-Kn-Oby.text" = "ネットワークログを詳細に記録";
 
 /* Class = "IBUILabel"; text = "Debug Log"; ObjectID = "4Hz-5X-0di"; */
-"4Hz-5X-0di.text" = "Debug Log";
+"4Hz-5X-0di.text" = "デバッグログを保存";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Danger"; ObjectID = "4fN-RF-PMf"; */
-"4fN-RF-PMf.headerTitle" = "Danger";
+"4fN-RF-PMf.headerTitle" = "！！！";
 
 /* Class = "IBUITableViewSection"; headerTitle = " "; ObjectID = "5OJ-UQ-RI5"; */
 "5OJ-UQ-RI5.headerTitle" = " ";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Login"; ObjectID = "6Es-Wr-CF7"; */
-"6Es-Wr-CF7.headerTitle" = "Login";
+"6Es-Wr-CF7.headerTitle" = "ログイン";
 
 /* Class = "IBUITextField"; placeholder = "User ID"; ObjectID = "7Qy-Qx-Tgq"; */
-"7Qy-Qx-Tgq.placeholder" = "User ID";
+"7Qy-Qx-Tgq.placeholder" = "ユーザーID";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Font"; ObjectID = "8Hl-gQ-i8X"; */
-"8Hl-gQ-i8X.headerTitle" = "Font";
+"8Hl-gQ-i8X.headerTitle" = "フォント";
 
 /* Class = "IBUILabel"; text = "Disabled"; ObjectID = "AOx-zv-flm"; */
-"AOx-zv-flm.text" = "Disabled";
+"AOx-zv-flm.text" = "無効";
 
 /* Class = "IBUILabel"; text = "Account Settings"; ObjectID = "AYV-hj-Ybc"; */
-"AYV-hj-Ybc.text" = "Account Settings";
+"AYV-hj-Ybc.text" = "アカウント設定";
 
 /* Class = "IBUILabel"; text = "10 Sec"; ObjectID = "BQz-1Q-gLc"; */
-"BQz-1Q-gLc.text" = "10 Sec";
+"BQz-1Q-gLc.text" = "10 秒";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Preview"; ObjectID = "BwH-Fb-qw3"; */
-"BwH-Fb-qw3.headerTitle" = "Preview";
+"BwH-Fb-qw3.headerTitle" = "プレビュー";
 
 /* Class = "IBUILabel"; text = "©2014 mzyy94. TesSoMe 2.0.0"; ObjectID = "CFx-I1-kPy"; */
 "CFx-I1-kPy.text" = "©2014 mzyy94. TesSoMe 2.0.0";
 
 /* Class = "IBUITableViewController"; title = "Streaming"; ObjectID = "Cdt-BC-dtP"; */
-"Cdt-BC-dtP.title" = "Streaming";
+"Cdt-BC-dtP.title" = "ストリーミング";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Streaming"; ObjectID = "CeZ-GK-bUu"; */
-"CeZ-GK-bUu.headerTitle" = "Streaming";
+"CeZ-GK-bUu.headerTitle" = "ストリーミング";
 
 /* Class = "IBUITableViewSection"; footerTitle = "Show only image that is less than 1024 KB file size"; ObjectID = "Dru-c8-S8d"; */
-"Dru-c8-S8d.footerTitle" = "Show only image that is less than 1024 KB file size";
+"Dru-c8-S8d.footerTitle" = "投稿された1024 KB未満の画像ファイルのみをプレビューします";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Preview"; ObjectID = "Dru-c8-S8d"; */
-"Dru-c8-S8d.headerTitle" = "Preview";
+"Dru-c8-S8d.headerTitle" = "プレビュー";
 
 /* Class = "IBUILabel"; text = "Appearance"; ObjectID = "E3e-YL-wBd"; */
-"E3e-YL-wBd.text" = "Appearance";
+"E3e-YL-wBd.text" = "外観";
 
 /* Class = "IBUITableViewController"; title = "Post"; ObjectID = "FCf-hR-DUx"; */
-"FCf-hR-DUx.title" = "Post";
+"FCf-hR-DUx.title" = "投稿設定";
 
 /* Class = "IBUILabel"; text = "Clear Data and Settings"; ObjectID = "G7L-bQ-y3g"; */
-"G7L-bQ-y3g.text" = "Clear Data and Settings";
+"G7L-bQ-y3g.text" = "データと設定の抹消";
 
 /* Class = "IBUILabel"; text = "Background Notification"; ObjectID = "GEU-7U-UYs"; */
-"GEU-7U-UYs.text" = "Background Notification";
+"GEU-7U-UYs.text" = "バックグラウンド通知";
 
 /* Class = "IBUILabel"; text = "Show \"via TesSoMe\" badge"; ObjectID = "PdK-xI-FVG"; */
-"PdK-xI-FVG.text" = "Show \"via TesSoMe\" badge";
+"PdK-xI-FVG.text" = "TesSoMeから投稿バッジを表示";
 
 /* Class = "IBUILabel"; text = "Size"; ObjectID = "PiB-bD-hC2"; */
-"PiB-bD-hC2.text" = "Size";
+"PiB-bD-hC2.text" = "サイズ";
 
 /* Class = "IBUILabel"; text = "Foreground Vibrating Notification"; ObjectID = "Qm0-Dk-ae8"; */
-"Qm0-Dk-ae8.text" = "Foreground Vibrating Notification";
+"Qm0-Dk-ae8.text" = "振動通知";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Interval"; ObjectID = "Siy-Ns-D8y"; */
-"Siy-Ns-D8y.headerTitle" = "Interval";
+"Siy-Ns-D8y.headerTitle" = "更新間隔";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Account"; ObjectID = "UK0-z0-Bzh"; */
-"UK0-z0-Bzh.headerTitle" = "Account";
+"UK0-z0-Bzh.headerTitle" = "アカウント";
 
 /* Class = "IBUIButton"; normalTitle = "Login"; ObjectID = "WA6-FI-chv"; */
-"WA6-FI-chv.normalTitle" = "Login";
+"WA6-FI-chv.normalTitle" = "ログイン";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Timestamp"; ObjectID = "Xm3-0B-mDw"; */
-"Xm3-0B-mDw.headerTitle" = "Timestamp";
+"Xm3-0B-mDw.headerTitle" = "投稿時間";
 
 /* Class = "IBUITableViewController"; title = "Account"; ObjectID = "Xxq-wa-FFq"; */
-"Xxq-wa-FFq.title" = "Account";
+"Xxq-wa-FFq.title" = "アカウント";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Reply Notification"; ObjectID = "YsZ-xz-kFT"; */
-"YsZ-xz-kFT.headerTitle" = "Reply Notification";
+"YsZ-xz-kFT.headerTitle" = "リプライ通知";
 
 /* Class = "IBUILabel"; text = "Developer Mode"; ObjectID = "aCi-Kp-sRO"; */
-"aCi-Kp-sRO.text" = "Developer Mode";
+"aCi-Kp-sRO.text" = "開発者モード";
 
 /* Class = "IBUILabel"; text = "Relative"; ObjectID = "bwn-0b-zGT"; */
-"bwn-0b-zGT.text" = "Relative";
+"bwn-0b-zGT.text" = "相対時間";
 
 /* Class = "IBUILabel"; text = "Post"; ObjectID = "c3B-S0-k5h"; */
-"c3B-S0-k5h.text" = "Post";
+"c3B-S0-k5h.text" = "投稿設定";
 
 /* Class = "IBUILabel"; text = "About mzyy94"; ObjectID = "cKK-2D-FtD"; */
-"cKK-2D-FtD.text" = "About mzyy94";
+"cKK-2D-FtD.text" = "mzyy94について";
 
 /* Class = "IBUILabel"; text = "Enabled"; ObjectID = "e0G-de-yBa"; */
-"e0G-de-yBa.text" = "Enabled";
+"e0G-de-yBa.text" = "有効";
 
 /* Class = "IBUITableViewController"; title = "Notification"; ObjectID = "ePW-yX-uxK"; */
-"ePW-yX-uxK.title" = "Notification";
+"ePW-yX-uxK.title" = "通知設定";
 
 /* Class = "IBUILabel"; text = "Notification"; ObjectID = "g9l-9j-tZ0"; */
-"g9l-9j-tZ0.text" = "Notification";
+"g9l-9j-tZ0.text" = "通知設定";
 
 /* Class = "IBUITableViewSection"; headerTitle = "Badge"; ObjectID = "jRO-IG-s3z"; */
-"jRO-IG-s3z.headerTitle" = "Badge";
+"jRO-IG-s3z.headerTitle" = "バッジ";
 
 /* Class = "IBUITableViewSection"; headerTitle = "General"; ObjectID = "ktM-HE-OYh"; */
-"ktM-HE-OYh.headerTitle" = "General";
+"ktM-HE-OYh.headerTitle" = "一般設定";
 
 /* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "ktW-nA-FdK"; */
-"ktW-nA-FdK.title" = "Settings";
+"ktW-nA-FdK.title" = "設定";
 
 /* Class = "IBUILabel"; text = "Streaming"; ObjectID = "sRc-ek-iKl"; */
-"sRc-ek-iKl.text" = "Streaming";
+"sRc-ek-iKl.text" = "ストリーミング";
 
 /* Class = "IBUITableViewController"; title = "Appearance"; ObjectID = "tAh-8F-06f"; */
-"tAh-8F-06f.title" = "Appearance";
+"tAh-8F-06f.title" = "外観";
 
 /* Class = "IBUILabel"; text = "Enabled"; ObjectID = "uia-z9-uti"; */
-"uia-z9-uti.text" = "Enabled";
+"uia-z9-uti.text" = "有効";
 
 /* Class = "IBUILabel"; text = "Show Image Thumbnail"; ObjectID = "v5K-mM-C2w"; */
-"v5K-mM-C2w.text" = "Show Image Thumbnail";
+"v5K-mM-C2w.text" = "画像サムネイルを表示する";
 
 /* Class = "IBUILabel"; text = "Absolute"; ObjectID = "wak-7H-ozC"; */
-"wak-7H-ozC.text" = "Absolute";
+"wak-7H-ozC.text" = "絶対時間";
 
 /* Class = "IBUITableViewController"; title = "Developer Mode"; ObjectID = "xNu-Me-4mX"; */
-"xNu-Me-4mX.title" = "Developer Mode";
+"xNu-Me-4mX.title" = "開発者モード";
 
 /* Class = "IBUILabel"; text = "Streaming"; ObjectID = "xYE-3g-zPq"; */
-"xYE-3g-zPq.text" = "Streaming";
+"xYE-3g-zPq.text" = "ストリーミング";

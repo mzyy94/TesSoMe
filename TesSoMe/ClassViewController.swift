@@ -212,7 +212,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
 			alertController.addAction(cancelAction)
 			
-			let setClassNotificationAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler:
+			let setClassNotificationAction = UIAlertAction(title: NSLocalizedString("Set", comment: "Set"), style: .Default, handler:
 				{ action in
 					self.appDelegate.setClassAlert(event.title, date: event.date)
 					cell.alarmIcon.hidden = false

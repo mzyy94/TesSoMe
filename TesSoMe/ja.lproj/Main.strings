@@ -1,15 +1,15 @@
 
 /* Class = "IBUISegmentedControl"; 02O-b1-Ni1.segmentTitles[0] = "All"; ObjectID = "02O-b1-Ni1"; */
-"02O-b1-Ni1.segmentTitles[0]" = "All";
+"02O-b1-Ni1.segmentTitles[0]" = "すべて";
 
 /* Class = "IBUISegmentedControl"; 02O-b1-Ni1.segmentTitles[1] = "Message"; ObjectID = "02O-b1-Ni1"; */
-"02O-b1-Ni1.segmentTitles[1]" = "Message";
+"02O-b1-Ni1.segmentTitles[1]" = "発言";
 
 /* Class = "IBUISegmentedControl"; 02O-b1-Ni1.segmentTitles[2] = "Drawing"; ObjectID = "02O-b1-Ni1"; */
-"02O-b1-Ni1.segmentTitles[2]" = "Drawing";
+"02O-b1-Ni1.segmentTitles[2]" = "手書き";
 
 /* Class = "IBUISegmentedControl"; 02O-b1-Ni1.segmentTitles[3] = "File"; ObjectID = "02O-b1-Ni1"; */
-"02O-b1-Ni1.segmentTitles[3]" = "File";
+"02O-b1-Ni1.segmentTitles[3]" = "ファイル";
 
 /* Class = "IBUILabel"; text = " "; ObjectID = "462-XQ-sfw"; */
 "462-XQ-sfw.text" = " ";
@@ -24,34 +24,34 @@
 "4Qe-XL-59h.text" = "100";
 
 /* Class = "IBUINavigationController"; title = "ProfileNavigatoinController"; ObjectID = "54g-bg-dRI"; */
-"54g-bg-dRI.title" = "ProfileNavigatoinController";
+"54g-bg-dRI.title" = "プロフィール";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "6na-jK-6jR"; */
 "6na-jK-6jR.text" = "Label";
 
 /* Class = "IBUITableViewController"; title = "TopicMenuViewController"; ObjectID = "9zC-96-m3I"; */
-"9zC-96-m3I.title" = "TopicMenuViewController";
+"9zC-96-m3I.title" = "トピック";
 
 /* Class = "IBUISearchBar"; placeholder = "Search"; ObjectID = "Azl-uw-kpL"; */
-"Azl-uw-kpL.placeholder" = "Search";
+"Azl-uw-kpL.placeholder" = "検索";
 
 /* Class = "IBUITableViewController"; title = "Result"; ObjectID = "GDr-Pt-0bd"; */
-"GDr-Pt-0bd.title" = "Result";
+"GDr-Pt-0bd.title" = "検索結果";
 
 /* Class = "IBUILabel"; text = "Title"; ObjectID = "Hng-C2-wd7"; */
-"Hng-C2-wd7.text" = "Title";
+"Hng-C2-wd7.text" = "タイトル";
 
 /* Class = "IBUITableViewController"; title = "Timeline"; ObjectID = "Ifb-SX-wwd"; */
-"Ifb-SX-wwd.title" = "Timeline";
+"Ifb-SX-wwd.title" = "タイムライン";
 
 /* Class = "IBUINavigationItem"; title = "Timeline"; ObjectID = "K3d-ds-jUE"; */
-"K3d-ds-jUE.title" = "Timeline";
+"K3d-ds-jUE.title" = "タイムライン";
 
 /* Class = "IBUILabel"; text = " "; ObjectID = "KgF-JY-vfI"; */
 "KgF-JY-vfI.text" = " ";
 
 /* Class = "IBUINavigationItem"; title = "Reply"; ObjectID = "LMW-mZ-Zve"; */
-"LMW-mZ-Zve.title" = "Reply";
+"LMW-mZ-Zve.title" = "リプライ";
 
 /* Class = "IBUINavigationController"; title = "ReplyNavigationController"; ObjectID = "LMZ-3m-Gfc"; */
 "LMZ-3m-Gfc.title" = "ReplyNavigationController";
@@ -87,16 +87,16 @@
 "aXl-x9-xEI.text" = "2014/10/10 10:10:10";
 
 /* Class = "IBUINavigationItem"; title = "Result"; ObjectID = "c0n-05-CKK"; */
-"c0n-05-CKK.title" = "Result";
+"c0n-05-CKK.title" = "検索結果";
 
 /* Class = "IBUINavigationItem"; title = "Title"; ObjectID = "eJN-qU-2p8"; */
 "eJN-qU-2p8.title" = "Title";
 
 /* Class = "IBUITableViewController"; title = "Search"; ObjectID = "eJR-ND-Ljr"; */
-"eJR-ND-Ljr.title" = "Search";
+"eJR-ND-Ljr.title" = "検索";
 
 /* Class = "IBUINavigationItem"; title = "Search"; ObjectID = "fS4-Vl-gwh"; */
-"fS4-Vl-gwh.title" = "Search";
+"fS4-Vl-gwh.title" = "検索";
 
 /* Class = "IBUILabel"; text = "Topic ID"; ObjectID = "pg2-VL-9z2"; */
 "pg2-VL-9z2.text" = "Topic ID";
@@ -108,7 +108,7 @@
 "srl-6W-r9B.text" = "NICKNAME_HERE";
 
 /* Class = "IBUITableViewController"; title = "Reply"; ObjectID = "tHk-Up-Ah3"; */
-"tHk-Up-Ah3.title" = "Reply";
+"tHk-Up-Ah3.title" = "リプライ";
 
 /* Class = "IBUILabel"; text = "Lv. 0"; ObjectID = "tq5-py-FPl"; */
 "tq5-py-FPl.text" = "Lv. 0";
