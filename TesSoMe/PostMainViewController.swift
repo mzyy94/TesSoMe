@@ -44,7 +44,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		self.textView.text = preparedText
 		self.textView.delegate = self
 		
-		setTitleBtnText("Message")
+		setTitleBtnText(NSLocalizedString("Message", comment: "Message on navigation bar"))
 		messageType = .Message
 		
 		if topicid == nil {
@@ -75,7 +75,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	func initMenu() {
 		let selectMessageItem = REMenuItem(title: NSLocalizedString("Message", comment: "Message on navigation bar"), image: nil, highlightedImage: nil, action:
 			{ item in
-				self.setTitleBtnText("Message")
+				self.setTitleBtnText(NSLocalizedString("Message", comment: "Message on navigation bar"))
 				self.messageType = .Message
 				self.showKeyboard()
 			}
@@ -168,7 +168,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				if err == nil {
 					fileURLtoPost = tmpDir.URLByAppendingPathComponent(fileName)
 					fileManager.createFileAtPath(fileURLtoPost!.relativePath!, contents: fileToPost, attributes: nil)
-					self.setTitleBtnText("File upload")
+					self.setTitleBtnText(NSLocalizedString("File upload", comment: "File upload on navigation bar"))
 					self.messageType = .File
 					self.navigationItem.rightBarButtonItem?.enabled = true
 					self.addPreviewImage(image)
@@ -184,7 +184,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			self.resizeImageActionSheet(image, compilation: saveImageToTmp)
 		} else {
 			fileURLtoPost = infoDic[UIImagePickerControllerMediaURL] as? NSURL
-			self.setTitleBtnText("File upload")
+			self.setTitleBtnText(NSLocalizedString("File upload", comment: "File upload on navigation bar"))
 			self.messageType = .File
 			self.navigationItem.rightBarButtonItem?.enabled = true
 			if picker.sourceType == .Camera && mediaType == "public.movie" {
@@ -197,7 +197,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	}
 	
 	func showDrawingView() {
-		self.setTitleBtnText("Drawing")
+		self.setTitleBtnText(NSLocalizedString("Drawing", comment: "Drawing on navigation bar"))
 		self.messageType = .Drawing
 		self.navigationItem.rightBarButtonItem?.enabled = true
 		
