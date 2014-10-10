@@ -89,6 +89,9 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 		
 		let alertController = UIAlertController(title: NSLocalizedString("Create New Class", comment: "Create New Class on AlertView"), message: NSLocalizedString("Please type a class name.", comment: "Please type a class name."), preferredStyle: .Alert)
 		
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		
 		let gotoNext = UIAlertAction(title: NSLocalizedString("Next", comment: "Next on AlertView"), style: .Default) {
 			action in
 			let textField = alertController.textFields?.first as UITextField
@@ -136,9 +139,6 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 			)
 		}
 		alertController.addAction(gotoNext)
-		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
-		alertController.addAction(cancelAction)
 		
 		alertController.addTextFieldWithConfigurationHandler(
 			{ textField in
@@ -199,6 +199,9 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 			let confirmationText = NSLocalizedString("Do you want to set alert?", comment: "Alert confirmation text")
 			let alertController = UIAlertController(title: cell.titleLabel.text, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
 			
+			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+			alertController.addAction(cancelAction)
+			
 			let setClassNotificationAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler:
 				{ action in
 					self.appDelegate.setClassAlert(event.title, date: event.date)
@@ -207,16 +210,16 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 			)
 			alertController.addAction(setClassNotificationAction)
 			
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
-			alertController.addAction(cancelAction)
-			
 			self.presentViewController(alertController, animated: true, completion: nil)
 	
 		} else { // Already set notification
 			let confirmationText = NSLocalizedString("Do you want to remove alert?", comment: "Alert confirmation text (remove class notification)")
 			let alertController = UIAlertController(title: cell.titleLabel.text, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
 			
-			let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Remove", comment: "Remove on AlertView"), style: .Destructive, handler:
+			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+			alertController.addAction(cancelAction)
+		
+			let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Remove", comment: "Remove on AlertView"), style: .Default, handler:
 				{ action in
 	
 					for notification in self.app.scheduledLocalNotifications as [UILocalNotification] {
@@ -230,9 +233,6 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 				}
 			)
 			alertController.addAction(removeClassNotificationAction)
-			
-			let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
-			alertController.addAction(cancelAction)
 			
 			self.presentViewController(alertController, animated: true, completion: nil)
 			
@@ -260,10 +260,10 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 			let deleteAction = UITableViewRowAction(style: .Default, title: NSLocalizedString("Delete", comment: "Delete"))
 				{ action, indexPath in
 					let alertTitle = NSLocalizedString("Cancel Class", comment: "Alert confirmation title (delete class event)")
-					let confirmationText = NSLocalizedString("Do you want to cancel this class?", comment: "Alert confirmation text (delete class event)")
+					let confirmationText = NSLocalizedString("Do you want to delete this class?", comment: "Alert confirmation text (delete class event)")
 					let alertController = UIAlertController(title: alertTitle, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
 					
-					let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Continue", comment: "Continue on AlertView"), style: .Destructive, handler:
+					let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Delete", comment: "Delete on AlertView"), style: .Destructive, handler:
 						{ action in
 							self.apiManager.removeClass(date: event.date, text: event.title, onSuccess:
 								{ data in

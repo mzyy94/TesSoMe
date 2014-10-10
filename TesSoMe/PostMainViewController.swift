@@ -204,7 +204,11 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		let addComment = REMenuItem(title: NSLocalizedString("Add Comment", comment: "Add Comment"), image: nil, highlightedImage: nil, action:
 			{ item in
 				let alertController = UIAlertController(title: NSLocalizedString("Add Comment", comment: "Add Comment on AlertView"), message: NSLocalizedString("Please type comments of drawing.", comment: "Please type comments of drawing."), preferredStyle: .Alert)
-				let addCommentAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+				
+				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+				alertController.addAction(cancelAction)
+
+				let addCommentAction = UIAlertAction(title: NSLocalizedString("Add", comment: "Add on AlertView"), style: .Default) {
 					action in
 					
 					let textField = alertController.textFields?.first as UITextField
@@ -212,9 +216,6 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 					
 					}
 				alertController.addAction(addCommentAction)
-				
-				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
-				alertController.addAction(cancelAction)
 				
 				alertController.addTextFieldWithConfigurationHandler(
 					{ textField in
@@ -248,7 +249,14 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		let renameFile = REMenuItem(title: NSLocalizedString("Rename file ", comment: "Rename file"), image: nil, highlightedImage: nil, action:
 			{ item in
 				let alertController = UIAlertController(title: NSLocalizedString("Rename File", comment: "Rename File on AlertView"), message: NSLocalizedString("Please type new file name.", comment: "Please type new file name."), preferredStyle: .Alert)
-				self.renameAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+				
+				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel) {
+					action in
+					NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: alertController.textFields?.first)
+				}
+				alertController.addAction(cancelAction)
+
+				self.renameAction = UIAlertAction(title: NSLocalizedString("Rename", comment: "Rename on AlertView"), style: .Default) {
 					action in
 					
 					let textField = alertController.textFields?.first as UITextField
@@ -280,11 +288,6 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				self.renameAction.enabled = false
 				alertController.addAction(self.renameAction)
 				
-				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel) {
-					action in
-					NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: alertController.textFields?.first)
-				}
-				alertController.addAction(cancelAction)
 				alertController.addTextFieldWithConfigurationHandler(
 					{ textField in
 						let label = UILabel(frame: CGRectMake(0, 0, 100, 20))

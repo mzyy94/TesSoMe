@@ -132,7 +132,14 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func addLabelToUser() {
 		let alertController = UIAlertController(title: NSLocalizedString("Add Label", comment: "Add Label on AlertView"), message: NSLocalizedString("Please type new label (max. 256 characters).", comment: "Please type new label (max. 256 characters)."), preferredStyle: .Alert)
-		self.addLabelAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel) {
+			action in
+			NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: alertController.textFields?.first)
+		}
+		alertController.addAction(cancelAction)
+		
+		self.addLabelAction = UIAlertAction(title: NSLocalizedString("Add", comment: "Add on AlertView"), style: .Default) {
 			action in
 			
 			let textField = alertController.textFields?.first as UITextField
@@ -168,12 +175,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		alertController.addAction(self.addLabelAction)
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel) {
-			action in
-			NSNotificationCenter.defaultCenter().removeObserver(self, name: UITextFieldTextDidChangeNotification, object: alertController.textFields?.first)
-		}
-		alertController.addAction(cancelAction)
-
 		alertController.addTextFieldWithConfigurationHandler(
 			{ textField in
 				NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleTextFieldTextDidChangeNotification:"), name: UITextFieldTextDidChangeNotification, object: textField)
@@ -218,7 +219,11 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 	func changeNickname() {
 		let alertController = UIAlertController(title: NSLocalizedString("Change Nickname", comment: "Change Nickname on AlertView"), message: NSLocalizedString("Please type new nickname.", comment: "Please type new nickname."), preferredStyle: .Alert)
-		let changeNicknameAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
+
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		
+		let changeNicknameAction = UIAlertAction(title: NSLocalizedString("Change", comment: "Change on AlertView"), style: .Default) {
 			action in
 			
 			let textField = alertController.textFields?.first as UITextField
@@ -239,9 +244,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		}
 		alertController.addAction(changeNicknameAction)
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
-		alertController.addAction(cancelAction)
-		
 		alertController.addTextFieldWithConfigurationHandler(
 			{ textField in
 				textField.placeholder = NSLocalizedString("New Nickname", comment: "New Nickname on AlertView")
@@ -254,6 +256,10 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	
 	func editProfile() {
 		let alertController = UIAlertController(title: NSLocalizedString("Edit Profile", comment: "Edit Profile on AlertView"), message: NSLocalizedString("Please type new profile.", comment: "Please type new profile."), preferredStyle: .Alert)
+
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		
 		let editProfileAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default) {
 			action in
 			
@@ -274,9 +280,6 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			})
 		}
 		alertController.addAction(editProfileAction)
-		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
-		alertController.addAction(cancelAction)
 		
 		alertController.addTextFieldWithConfigurationHandler(nil)
 		
