@@ -61,6 +61,10 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 		self.classTableView.dataSource = self
 		
 		getClass()
+		
+		let updateClassTimer = NSTimer(timeInterval: 60*60, target: self, selector: Selector("getClass"), userInfo: nil, repeats: true)
+		NSRunLoop.currentRunLoop().addTimer(updateClassTimer, forMode: NSRunLoopCommonModes)
+
     }
 	
 	func getClass() {
