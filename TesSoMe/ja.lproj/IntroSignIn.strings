@@ -1,0 +1,15 @@
+
+/* Class = "IBUITextField"; placeholder = "Username"; ObjectID = "2bC-IU-2rh"; */
+"2bC-IU-2rh.placeholder" = "Username";
+
+/* Class = "IBUIButton"; normalTitle = "Sign In"; ObjectID = "I5p-wU-lmV"; */
+"I5p-wU-lmV.normalTitle" = "Sign In";
+
+/* Class = "IBUITextView"; text = "Before using this app, you must sign in to Tesso SNS."; ObjectID = "UZC-CP-q26"; */
+"UZC-CP-q26.text" = "Before using this app, you must sign in to Tesso SNS.";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "ZTe-6i-m0a"; */
+"ZTe-6i-m0a.placeholder" = "Password";
+
+/* Class = "IBUILabel"; text = "Sign In"; ObjectID = "hrL-Z5-LvD"; */
+"hrL-Z5-LvD.text" = "Sign In";

@@ -119,6 +119,13 @@
 		9E2F4E8D19E7E96900E25779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntroSignIn.xib; sourceTree = "<group>"; };
 		9E2F4E9019E7E96F00E25779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IntroSetting.xib; sourceTree = "<group>"; };
 		9E2F4E9D19E7EA9C00E25779 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9E2F4E9F19E7EAD400E25779 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IntroSetting.strings; sourceTree = "<group>"; };
+		9E2F4EA019E7EAD400E25779 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IntroSignIn.strings; sourceTree = "<group>"; };
+		9E2F4EA119E7EAD400E25779 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Settings.strings; sourceTree = "<group>"; };
+		9E2F4EA219E7EAD400E25779 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		9E2F4EA319E7EAD400E25779 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PostMessage.strings; sourceTree = "<group>"; };
+		9E2F4EA419E7EAD400E25779 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		9E2F4EA519E7EAD400E25779 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9E38982419DE6E07002DBA2D /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9E38982619DE9D09002DBA2D /* SearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebKitViewController.swift; sourceTree = "<group>"; };
@@ -458,6 +465,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 9EB8ADBC19C3069F00CB92B2;
 			productRefGroup = 9EB8ADC619C3069F00CB92B2 /* Products */;
@@ -687,6 +695,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9E2F4E8719E7E95000E25779 /* Base */,
+				9E2F4EA319E7EAD400E25779 /* ja */,
 			);
 			name = PostMessage.storyboard;
 			sourceTree = "<group>";
@@ -695,6 +704,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9E2F4E8A19E7E95A00E25779 /* Base */,
+				9E2F4EA119E7EAD400E25779 /* ja */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -703,6 +713,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9E2F4E8D19E7E96900E25779 /* Base */,
+				9E2F4EA019E7EAD400E25779 /* ja */,
 			);
 			name = IntroSignIn.xib;
 			sourceTree = "<group>";
@@ -711,6 +722,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9E2F4E9019E7E96F00E25779 /* Base */,
+				9E2F4E9F19E7EAD400E25779 /* ja */,
 			);
 			name = IntroSetting.xib;
 			sourceTree = "<group>";
@@ -719,6 +731,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9E2F4E9D19E7EA9C00E25779 /* Base */,
+				9E2F4EA519E7EAD400E25779 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -727,6 +740,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9EB8ADD119C3069F00CB92B2 /* Base */,
+				9E2F4EA219E7EAD400E25779 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -735,6 +749,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9EB8ADD619C3069F00CB92B2 /* Base */,
+				9E2F4EA419E7EAD400E25779 /* ja */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

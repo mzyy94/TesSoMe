@@ -1,0 +1,153 @@
+
+/* Class = "IBUITableViewSection"; headerTitle = "Developer"; ObjectID = "0yg-3g-7Gq"; */
+"0yg-3g-7Gq.headerTitle" = "Developer";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "1al-mQ-xY0"; */
+"1al-mQ-xY0.placeholder" = "Password";
+
+/* Class = "IBUILabel"; text = "\"via TesSoMe\" signature"; ObjectID = "1mE-Ne-aqh"; */
+"1mE-Ne-aqh.text" = "\"via TesSoMe\" signature";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Footer"; ObjectID = "1o8-iD-GcY"; */
+"1o8-iD-GcY.headerTitle" = "Footer";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Developer Mode"; ObjectID = "1rf-L0-Buw"; */
+"1rf-L0-Buw.headerTitle" = "Developer Mode";
+
+/* Class = "IBUILabel"; text = "Show detail network access"; ObjectID = "3XS-Kn-Oby"; */
+"3XS-Kn-Oby.text" = "Show detail network access";
+
+/* Class = "IBUILabel"; text = "Debug Log"; ObjectID = "4Hz-5X-0di"; */
+"4Hz-5X-0di.text" = "Debug Log";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Danger"; ObjectID = "4fN-RF-PMf"; */
+"4fN-RF-PMf.headerTitle" = "Danger";
+
+/* Class = "IBUITableViewSection"; headerTitle = " "; ObjectID = "5OJ-UQ-RI5"; */
+"5OJ-UQ-RI5.headerTitle" = " ";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Login"; ObjectID = "6Es-Wr-CF7"; */
+"6Es-Wr-CF7.headerTitle" = "Login";
+
+/* Class = "IBUITextField"; placeholder = "User ID"; ObjectID = "7Qy-Qx-Tgq"; */
+"7Qy-Qx-Tgq.placeholder" = "User ID";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Font"; ObjectID = "8Hl-gQ-i8X"; */
+"8Hl-gQ-i8X.headerTitle" = "Font";
+
+/* Class = "IBUILabel"; text = "Disabled"; ObjectID = "AOx-zv-flm"; */
+"AOx-zv-flm.text" = "Disabled";
+
+/* Class = "IBUILabel"; text = "Account Settings"; ObjectID = "AYV-hj-Ybc"; */
+"AYV-hj-Ybc.text" = "Account Settings";
+
+/* Class = "IBUILabel"; text = "10 Sec"; ObjectID = "BQz-1Q-gLc"; */
+"BQz-1Q-gLc.text" = "10 Sec";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Preview"; ObjectID = "BwH-Fb-qw3"; */
+"BwH-Fb-qw3.headerTitle" = "Preview";
+
+/* Class = "IBUILabel"; text = "©2014 mzyy94. TesSoMe 2.0.0"; ObjectID = "CFx-I1-kPy"; */
+"CFx-I1-kPy.text" = "©2014 mzyy94. TesSoMe 2.0.0";
+
+/* Class = "IBUITableViewController"; title = "Streaming"; ObjectID = "Cdt-BC-dtP"; */
+"Cdt-BC-dtP.title" = "Streaming";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Streaming"; ObjectID = "CeZ-GK-bUu"; */
+"CeZ-GK-bUu.headerTitle" = "Streaming";
+
+/* Class = "IBUITableViewSection"; footerTitle = "Show only image that is less than 1024 KB file size"; ObjectID = "Dru-c8-S8d"; */
+"Dru-c8-S8d.footerTitle" = "Show only image that is less than 1024 KB file size";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Preview"; ObjectID = "Dru-c8-S8d"; */
+"Dru-c8-S8d.headerTitle" = "Preview";
+
+/* Class = "IBUILabel"; text = "Appearance"; ObjectID = "E3e-YL-wBd"; */
+"E3e-YL-wBd.text" = "Appearance";
+
+/* Class = "IBUITableViewController"; title = "Post"; ObjectID = "FCf-hR-DUx"; */
+"FCf-hR-DUx.title" = "Post";
+
+/* Class = "IBUILabel"; text = "Clear Data and Settings"; ObjectID = "G7L-bQ-y3g"; */
+"G7L-bQ-y3g.text" = "Clear Data and Settings";
+
+/* Class = "IBUILabel"; text = "Background Notification"; ObjectID = "GEU-7U-UYs"; */
+"GEU-7U-UYs.text" = "Background Notification";
+
+/* Class = "IBUILabel"; text = "Show \"via TesSoMe\" badge"; ObjectID = "PdK-xI-FVG"; */
+"PdK-xI-FVG.text" = "Show \"via TesSoMe\" badge";
+
+/* Class = "IBUILabel"; text = "Size"; ObjectID = "PiB-bD-hC2"; */
+"PiB-bD-hC2.text" = "Size";
+
+/* Class = "IBUILabel"; text = "Foreground Vibrating Notification"; ObjectID = "Qm0-Dk-ae8"; */
+"Qm0-Dk-ae8.text" = "Foreground Vibrating Notification";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Interval"; ObjectID = "Siy-Ns-D8y"; */
+"Siy-Ns-D8y.headerTitle" = "Interval";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Account"; ObjectID = "UK0-z0-Bzh"; */
+"UK0-z0-Bzh.headerTitle" = "Account";
+
+/* Class = "IBUIButton"; normalTitle = "Login"; ObjectID = "WA6-FI-chv"; */
+"WA6-FI-chv.normalTitle" = "Login";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Timestamp"; ObjectID = "Xm3-0B-mDw"; */
+"Xm3-0B-mDw.headerTitle" = "Timestamp";
+
+/* Class = "IBUITableViewController"; title = "Account"; ObjectID = "Xxq-wa-FFq"; */
+"Xxq-wa-FFq.title" = "Account";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Reply Notification"; ObjectID = "YsZ-xz-kFT"; */
+"YsZ-xz-kFT.headerTitle" = "Reply Notification";
+
+/* Class = "IBUILabel"; text = "Developer Mode"; ObjectID = "aCi-Kp-sRO"; */
+"aCi-Kp-sRO.text" = "Developer Mode";
+
+/* Class = "IBUILabel"; text = "Relative"; ObjectID = "bwn-0b-zGT"; */
+"bwn-0b-zGT.text" = "Relative";
+
+/* Class = "IBUILabel"; text = "Post"; ObjectID = "c3B-S0-k5h"; */
+"c3B-S0-k5h.text" = "Post";
+
+/* Class = "IBUILabel"; text = "About mzyy94"; ObjectID = "cKK-2D-FtD"; */
+"cKK-2D-FtD.text" = "About mzyy94";
+
+/* Class = "IBUILabel"; text = "Enabled"; ObjectID = "e0G-de-yBa"; */
+"e0G-de-yBa.text" = "Enabled";
+
+/* Class = "IBUITableViewController"; title = "Notification"; ObjectID = "ePW-yX-uxK"; */
+"ePW-yX-uxK.title" = "Notification";
+
+/* Class = "IBUILabel"; text = "Notification"; ObjectID = "g9l-9j-tZ0"; */
+"g9l-9j-tZ0.text" = "Notification";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Badge"; ObjectID = "jRO-IG-s3z"; */
+"jRO-IG-s3z.headerTitle" = "Badge";
+
+/* Class = "IBUITableViewSection"; headerTitle = "General"; ObjectID = "ktM-HE-OYh"; */
+"ktM-HE-OYh.headerTitle" = "General";
+
+/* Class = "IBUINavigationItem"; title = "Settings"; ObjectID = "ktW-nA-FdK"; */
+"ktW-nA-FdK.title" = "Settings";
+
+/* Class = "IBUILabel"; text = "Streaming"; ObjectID = "sRc-ek-iKl"; */
+"sRc-ek-iKl.text" = "Streaming";
+
+/* Class = "IBUITableViewController"; title = "Appearance"; ObjectID = "tAh-8F-06f"; */
+"tAh-8F-06f.title" = "Appearance";
+
+/* Class = "IBUILabel"; text = "Enabled"; ObjectID = "uia-z9-uti"; */
+"uia-z9-uti.text" = "Enabled";
+
+/* Class = "IBUILabel"; text = "Show Image Thumbnail"; ObjectID = "v5K-mM-C2w"; */
+"v5K-mM-C2w.text" = "Show Image Thumbnail";
+
+/* Class = "IBUILabel"; text = "Absolute"; ObjectID = "wak-7H-ozC"; */
+"wak-7H-ozC.text" = "Absolute";
+
+/* Class = "IBUITableViewController"; title = "Developer Mode"; ObjectID = "xNu-Me-4mX"; */
+"xNu-Me-4mX.title" = "Developer Mode";
+
+/* Class = "IBUILabel"; text = "Streaming"; ObjectID = "xYE-3g-zPq"; */
+"xYE-3g-zPq.text" = "Streaming";
