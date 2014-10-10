@@ -111,7 +111,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 				{ viewController, date in
 					self.apiManager.addClass(date: date, text: classname, onSuccess:
 						{ data in
-							let okAlertController = UIAlertController(title: NSLocalizedString("Creating New Class Succeeded", comment: "Creating New Class Succeeded"), message: nil, preferredStyle: .Alert)
+							let okAlertController = UIAlertController(title: NSLocalizedString("Success", comment: "Success"), message: NSLocalizedString("Creating New Class Succeeded", comment: "Creating New Class Succeeded"), preferredStyle: .Alert)
 
 							let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler: nil)
 							okAlertController.addAction(okAction)
@@ -121,7 +121,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 						}
 						, onFailure:
 						{ err in
-							let errAlertController = UIAlertController(title: NSLocalizedString("Creating New Class Failed", comment: "Creating New Class Failed"), message: err.localizedDescription, preferredStyle: .Alert)
+							let errAlertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error"), message: err.localizedDescription, preferredStyle: .Alert)
 							
 							let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler: nil)
 							errAlertController.addAction(okAction)
@@ -267,7 +267,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 						{ action in
 							self.apiManager.removeClass(date: event.date, text: event.title, onSuccess:
 								{ data in
-									let okAlertController = UIAlertController(title: NSLocalizedString("Deleting Class Succeeded", comment: "Deleting Class Succeeded"), message: nil, preferredStyle: .Alert)
+									let okAlertController = UIAlertController(title: NSLocalizedString("Success", comment: "Success"), message: NSLocalizedString("Deleting Class Succeeded", comment: "Deleting Class Succeeded"), preferredStyle: .Alert)
 									
 									let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler:
 										{ action in
@@ -280,7 +280,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 								}
 								, onFailure:
 								{ err in
-									let errAlertController = UIAlertController(title: NSLocalizedString("Deleting Class Failed", comment: "Deleting Class Failed"), message: err.localizedDescription, preferredStyle: .Alert)
+									let errAlertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error"), message: err.localizedDescription, preferredStyle: .Alert)
 									
 									let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler: nil)
 									errAlertController.addAction(okAction)
