@@ -283,6 +283,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					}
 				}
 				notificationView.show()
+				
+				let rootViewController = self.window?.rootViewController?.childViewControllers.first as RootViewController
+				let tabBarController = rootViewController.childViewControllers[1] as UITabBarController
+				tabBarController.navigationController!.tabBarItem.title = "●"
 			}
 		}
 		
