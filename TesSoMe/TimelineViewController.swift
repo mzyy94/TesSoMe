@@ -71,6 +71,10 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	}
 
 	override func updateTimeline() {
+		if isUpdating {
+			let timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("updateTimeline"), userInfo: nil, repeats: false)
+			return
+		}
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		apiManager.getTimeline(topicid: topic, sinceid: latestMessageId, onSuccess:
 			{ data in
@@ -121,6 +125,10 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	}
 	
 	override func loadOlderTimeline() {
+		if isUpdating {
+			let timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("loadOlderTimeline"), userInfo: nil, repeats: false)
+			return
+		}
 		let topic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
 		let oldestMessageId = messages.last?.statusId
 		apiManager.getTimeline(topicid: topic, maxid: oldestMessageId, onSuccess:
