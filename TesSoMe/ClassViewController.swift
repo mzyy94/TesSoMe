@@ -273,7 +273,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 					let confirmationText = NSLocalizedString("Do you want to delete this class?", comment: "Alert confirmation text (delete class event)")
 					let alertController = UIAlertController(title: alertTitle, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
 					
-					let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Delete", comment: "Delete on AlertView"), style: .Destructive, handler:
+					let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Delete", comment: "Delete"), style: .Destructive, handler:
 						{ action in
 							self.apiManager.removeClass(date: event.date, text: event.title, onSuccess:
 								{ data in

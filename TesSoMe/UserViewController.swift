@@ -202,7 +202,7 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		// MEMO: NO API AVAILABLE
 		//alertController.addAction(changeNickname)
 		
-		let editProfile = UIAlertAction(title: NSLocalizedString("Edit Profile", comment: "Edit Prifle on AlertView"), style: .Default)
+		let editProfile = UIAlertAction(title: NSLocalizedString("Edit Profile", comment: "Edit Profile on AlertView"), style: .Default)
 			{ action in
 				self.editProfile()
 		}

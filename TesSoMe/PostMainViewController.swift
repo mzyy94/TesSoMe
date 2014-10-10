@@ -203,7 +203,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		
 		let addComment = REMenuItem(title: NSLocalizedString("Add Comment", comment: "Add Comment"), image: nil, highlightedImage: nil, action:
 			{ item in
-				let alertController = UIAlertController(title: NSLocalizedString("Add Comment", comment: "Add Comment on AlertView"), message: NSLocalizedString("Please type comments of drawing.", comment: "Please type comments of drawing."), preferredStyle: .Alert)
+				let alertController = UIAlertController(title: NSLocalizedString("Add Comment", comment: "Add Comment"), message: NSLocalizedString("Please type comments of drawing.", comment: "Please type comments of drawing."), preferredStyle: .Alert)
 				
 				let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
 				alertController.addAction(cancelAction)

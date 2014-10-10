@@ -176,7 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		let okAction = UIMutableUserNotificationAction()
 		okAction.identifier = "TESSOME_OPEN_NOTIFICATION"
-		okAction.title = NSLocalizedString("Open", comment: "Open timeline")
+		okAction.title = NSLocalizedString("Open", comment: "Open")
 		okAction.activationMode = .Foreground
 		okAction.destructive = false
 		okAction.authenticationRequired = false
@@ -187,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		let classAction = UIMutableUserNotificationAction()
 		classAction.identifier = "TESSOME_CLASS_NOTIFICATION"
-		classAction.title = NSLocalizedString("Open", comment: "Open class")
+		classAction.title = NSLocalizedString("Open", comment: "Open")
 		classAction.activationMode = .Foreground
 		classAction.destructive = false
 		classAction.authenticationRequired = false
