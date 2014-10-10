@@ -55,10 +55,16 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 		calendarView.addGestureRecognizer(swipeToGoBackMonth)
 		
 		self.navigationItem.title = calendarView.monthLabel.text
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("createNewClass"))
 		
 		self.classTableView.delegate = self
 		self.classTableView.dataSource = self
 		
+		getClass()
+    }
+	
+	func getClass() {
+		self.eventDays.removeAll(keepCapacity: true)
 		apiManager.getClass(onSuccess:
 			{ data in
 				let classes = TesSoMeData.dataFromResponce(data)
@@ -70,11 +76,75 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 				}
 				
 				self.calendarView.reloadData()
-				println(self.calendarView.indexForSelectedDayCell())
 				self.calendarView.selectDayCellAtIndex(self.calendarView.indexForSelectedDayCell(), animated: false)
+				self.classTableView.reloadData()
 			}, onFailure: nil)
+	}
+	
+	func createNewClass() {
+		var classname: String! = nil
 		
-    }
+		let alertController = UIAlertController(title: NSLocalizedString("Create New Class", comment: "Create New Class on AlertView"), message: NSLocalizedString("Please type a class name.", comment: "Please type a class name."), preferredStyle: .Alert)
+		
+		let gotoNext = UIAlertAction(title: NSLocalizedString("Next", comment: "Next on AlertView"), style: .Default) {
+			action in
+			let textField = alertController.textFields?.first as UITextField
+			classname = textField.text
+
+			RMDateSelectionViewController.setLocalizedTitleForSelectButton(NSLocalizedString("Create", comment: "Create"))
+
+			let dateFormatter = NSDateFormatter()
+			dateFormatter.dateFormat = "YYYY-MM-dd HH"
+			let startDate =	dateFormatter.dateFromString(dateFormatter.stringFromDate(NSDate()))
+			
+			let dateSelectionViewController = RMDateSelectionViewController.dateSelectionController()
+			dateSelectionViewController.title = NSLocalizedString("Choose date to set class.", comment: "Choose date to set class.")
+			dateSelectionViewController.hideNowButton = true
+			dateSelectionViewController.datePicker.datePickerMode = UIDatePickerMode.DateAndTime
+			dateSelectionViewController.datePicker.minimumDate = startDate
+			dateSelectionViewController.disableBouncingWhenShowing = true
+			dateSelectionViewController.disableBlurEffects = true
+			dateSelectionViewController.showWithSelectionHandler(
+				{ viewController, date in
+					self.apiManager.addClass(date: date, text: classname, onSuccess:
+						{ data in
+							let okAlertController = UIAlertController(title: NSLocalizedString("Creating New Class Succeeded", comment: "Creating New Class Succeeded"), message: nil, preferredStyle: .Alert)
+
+							let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler: nil)
+							okAlertController.addAction(okAction)
+
+							self.presentViewController(okAlertController, animated: true, completion: nil)
+							self.getClass()
+						}
+						, onFailure:
+						{ err in
+							let errAlertController = UIAlertController(title: NSLocalizedString("Creating New Class Failed", comment: "Creating New Class Failed"), message: err.localizedDescription, preferredStyle: .Alert)
+							
+							let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler: nil)
+							errAlertController.addAction(okAction)
+							
+							self.presentViewController(errAlertController, animated: true, completion: nil)
+						}
+					)
+				}
+				, andCancelHandler:
+				{ viewController in
+				}
+			)
+		}
+		alertController.addAction(gotoNext)
+		
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		
+		alertController.addTextFieldWithConfigurationHandler(
+			{ textField in
+			}
+		)
+		
+		self.presentViewController(alertController, animated: true, completion: nil)
+		
+	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return 1
