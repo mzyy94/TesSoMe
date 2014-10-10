@@ -251,12 +251,9 @@ class TessoApiManager: NSObject {
 	
 	func convertDateToTessoAPIStyle(date:NSDate) -> String {
 		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "YYYY/M/d/H"
+		dateFormatter.dateFormat = "YYYY_MM_dd_HH"
 		
-		let timeZone = NSTimeZone.systemTimeZone()
-		let timeDiffSeconds = timeZone.secondsFromGMTForDate(date)
-		let gmtDate = date.dateByAddingTimeInterval(-NSTimeInterval(timeDiffSeconds))
-		return dateFormatter.stringFromDate(gmtDate)
+		return dateFormatter.stringFromDate(date)
 	}
 	
 	func addClass(#date: NSDate, text: String, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
