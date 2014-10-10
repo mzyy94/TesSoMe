@@ -106,7 +106,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 						let newStackedCellPaths = path + self.stackedCellPaths
 						self.stackedCellPaths = newStackedCellPaths
 						let topOffset = self.tableView.contentOffset.y
-						if topOffset > -60.0 {
+						if topOffset > -30.0 {
 							dispatch_sync(dispatch_get_main_queue(), {
 								self.navigationController!.tabBarItem.title = "●"
 							})

@@ -198,7 +198,7 @@ class SuperTimelineViewController: UITableViewController {
 		}
 		
 		let topOffset = self.tableView.contentOffset.y
-		let autoScroll = !(topOffset > -60.0) // more
+		let autoScroll = !(topOffset > -30.0) // more
 		
 		UIView.setAnimationsEnabled(false)
 		self.tableView.insertRowsAtIndexPaths(paths, withRowAnimation: .None)
