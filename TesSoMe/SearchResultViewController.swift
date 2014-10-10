@@ -19,6 +19,8 @@ class SearchResultViewController: SuperTimelineViewController, DZNEmptyDataSetSo
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("saveBookmark"))
 
 		self.tableView.emptyDataSetSource = self
 		self.tableView.emptyDataSetDelegate = self
@@ -36,6 +38,16 @@ class SearchResultViewController: SuperTimelineViewController, DZNEmptyDataSetSo
 	
 	func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
 		return isNoResult
+	}
+	
+	func saveBookmark() {
+		let alertTitle = NSLocalizedString("This function is comming soon.", comment: "comming soon")
+		let alertController = UIAlertController(title: alertTitle, message: nil, preferredStyle: .Alert)
+		
+		let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Default, handler: nil)
+		alertController.addAction(okAction)
+		
+		self.presentViewController(alertController, animated: true, completion: nil)
 	}
 	
 	override func getTimeline() {
