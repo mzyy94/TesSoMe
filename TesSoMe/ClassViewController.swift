@@ -64,7 +64,6 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
     }
 	
 	func getClass() {
-		self.eventDays.removeAll(keepCapacity: true)
 		apiManager.getClass(onSuccess:
 			{ data in
 				let classes = TesSoMeData.dataFromResponce(data)
@@ -234,6 +233,81 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 			self.presentViewController(alertController, animated: true, completion: nil)
 			
 		}
+	}
+	
+	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		if tableView.cellForRowAtIndexPath(indexPath) == nil {
+			return false
+		}
+		if indexPath.row >= currentEvent.count {
+			return false
+		}
+
+		if currentEvent[indexPath.row].username == appDelegate.usernameOfTesSoMe {
+			return true
+		}
+		return false
+	}
+	
+	func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+		let cell = tableView.cellForRowAtIndexPath(indexPath) as ClassCell
+		let event = currentEvent[indexPath.row]
+		if event.username == appDelegate.usernameOfTesSoMe {
+			let deleteAction = UITableViewRowAction(style: .Default, title: NSLocalizedString("Delete", comment: "Delete"))
+				{ action, indexPath in
+					let alertTitle = NSLocalizedString("Cancel Class", comment: "Alert confirmation title (delete class event)")
+					let confirmationText = NSLocalizedString("Do you want to cancel this class?", comment: "Alert confirmation text (delete class event)")
+					let alertController = UIAlertController(title: alertTitle, message: "\(cell.dateLabel.text!)\n\n\(confirmationText)", preferredStyle: .Alert)
+					
+					let removeClassNotificationAction = UIAlertAction(title: NSLocalizedString("Continue", comment: "Continue on AlertView"), style: .Destructive, handler:
+						{ action in
+							self.apiManager.removeClass(date: event.date, text: event.title, onSuccess:
+								{ data in
+									let okAlertController = UIAlertController(title: NSLocalizedString("Deleting Class Succeeded", comment: "Deleting Class Succeeded"), message: nil, preferredStyle: .Alert)
+									
+									let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler:
+										{ action in
+											self.getClass()
+										}
+									)
+									okAlertController.addAction(okAction)
+									
+									self.presentViewController(okAlertController, animated: true, completion: nil)
+								}
+								, onFailure:
+								{ err in
+									let errAlertController = UIAlertController(title: NSLocalizedString("Deleting Class Failed", comment: "Deleting Class Failed"), message: err.localizedDescription, preferredStyle: .Alert)
+									
+									let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK on AlertView"), style: .Cancel, handler: nil)
+									errAlertController.addAction(okAction)
+									
+									self.presentViewController(errAlertController, animated: true, completion: nil)
+								}
+							)
+							
+						}
+					)
+					alertController.addAction(removeClassNotificationAction)
+					
+					let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel on AlertView"), style: .Cancel, handler: nil)
+					alertController.addAction(cancelAction)
+					
+					self.presentViewController(alertController, animated: true, completion: nil)
+			}
+			deleteAction.backgroundColor = UIColor.redColor()
+			return [deleteAction]
+		}
+		return nil
+	}
+	
+	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		
+	}
+
+	
+	override func setEditing(editing: Bool, animated: Bool) {
+		super.setEditing(editing, animated: animated)
+		self.classTableView.allowsMultipleSelectionDuringEditing = editing
 	}
 	
 	func goForward(sender: UISwipeGestureRecognizer) {
