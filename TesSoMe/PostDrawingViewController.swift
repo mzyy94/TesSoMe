@@ -56,6 +56,9 @@ class PostDrawingViewController: UIViewController {
 		}
 		self.undoBtn.enabled = !undoStack.isEmpty
 		self.redoBtn.enabled = true
+		
+		let postMainViewController = self.presentingViewController as PostMainViewController
+		postMainViewController.drawingImage = self.drawingImage.image
 	}
 	
 	func redo() {
@@ -66,6 +69,9 @@ class PostDrawingViewController: UIViewController {
 		
 		self.undoBtn.enabled = true
 		self.redoBtn.enabled = !redoStack.isEmpty
+		
+		let postMainViewController = self.presentingViewController as PostMainViewController
+		postMainViewController.drawingImage = self.drawingImage.image
 	}
 	
 	override func viewDidLoad() {
@@ -194,9 +200,6 @@ class PostDrawingViewController: UIViewController {
 		redoBtn.enabled = false
 		drawing = false
 		path = nil
-		
-		let postMainViewController = self.presentingViewController as PostMainViewController
-		postMainViewController.drawingImage = self.drawingImage.image
 	}
 	
 	override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
