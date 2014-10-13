@@ -215,6 +215,7 @@
                         <outlet property="developerCell" destination="RMd-mJ-noD" id="NaS-bP-cb3"/>
                         <outlet property="notificationCell" destination="BPY-EC-rVB" id="fUB-OZ-I4W"/>
                         <outlet property="streamingCell" destination="U7a-lR-TEt" id="c8L-fJ-dmU"/>
+                        <outlet property="versionAndCopyrightLabel" destination="CFx-I1-kPy" id="sJU-C5-BnI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLJ-sm-sVd" userLabel="First Responder" sceneMemberID="firstResponder"/>

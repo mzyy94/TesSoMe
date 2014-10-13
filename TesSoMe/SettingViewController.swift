@@ -18,6 +18,7 @@ class SettingViewController: UITableViewController {
 	@IBOutlet weak var notificationCell: UITableViewCell!
 	@IBOutlet weak var streamingCell: UITableViewCell!
 	@IBOutlet weak var developerCell: UITableViewCell!
+	@IBOutlet weak var versionAndCopyrightLabel: UILabel!
 	
 	func initRootSetting() {
 		let enabled = NSLocalizedString("Enabled", comment: "Eanbled")
@@ -40,6 +41,10 @@ class SettingViewController: UITableViewController {
 		} else {
 			developerCell.detailTextLabel?.text = disabled
 		}
+		
+		let currentVersion = (NSBundle.mainBundle().infoDictionary["CFBundleShortVersionString"] as NSString).doubleValue
+
+		versionAndCopyrightLabel.text = "©2014 mzyy94. TesSoMe \(currentVersion)"
 		
 	}
 	
