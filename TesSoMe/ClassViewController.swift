@@ -56,6 +56,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 		
 		self.navigationItem.title = calendarView.monthLabel.text
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("createNewClass"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: Selector("getClass"))
 		
 		self.classTableView.delegate = self
 		self.classTableView.dataSource = self
