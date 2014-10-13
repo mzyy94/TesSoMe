@@ -55,13 +55,32 @@ class MessageDetailViewController: UITableViewController {
 			{ data in
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 					let timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]
-					if timeline.count == 1 {
+					func cantGetMessage() {
 						dispatch_sync(dispatch_get_main_queue(), {
-							self.targetMessageData = TesSoMeData(data:timeline[0])
-							self.tableView.reloadData()
-							self.getRepliedMessage(self.targetMessageData.relatedMessageIds)
+							let notification = MPGNotification(title: NSLocalizedString("Can not get the message", comment: "Can not get the message"), subtitle: NSLocalizedString("No message found", comment: "No message found"), backgroundColor: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0), iconImage: UIImage(named: "warning_icon"))
+							notification.duration = 5.0
+							notification.animationType = .Drop
+							notification.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
+							notification.swipeToDismissEnabled = false
+							notification.show()
 						})
+						self.navigationController?.popViewControllerAnimated(true)
 					}
+					if timeline.count == 1 {
+						let tessomeData = TesSoMeData(data:timeline[0])
+						if tessomeData.statusId == self.targetStatusId {
+							dispatch_sync(dispatch_get_main_queue(), {
+								self.targetMessageData = tessomeData
+								self.tableView.reloadData()
+								self.getRepliedMessage(self.targetMessageData.relatedMessageIds)
+							})
+						} else {
+							cantGetMessage()
+						}
+					} else {
+						cantGetMessage()
+					}
+
 				})
 			}
 			, onFailure: {err in println(err.localizedDescription)}
