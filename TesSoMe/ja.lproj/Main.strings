@@ -63,7 +63,7 @@
 "Oxs-Kf-3ik.text" = "@usesrname";
 
 /* Class = "IBUILabel"; text = "Status ID"; ObjectID = "Phr-0Q-QWU"; */
-"Phr-0Q-QWU.text" = "Status ID";
+"Phr-0Q-QWU.text" = "--------";
 
 /* Class = "IBUILabel"; text = "@usernamehere"; ObjectID = "QW1-7M-xsl"; */
 "QW1-7M-xsl.text" = "@usernamehere";
@@ -99,7 +99,7 @@
 "fS4-Vl-gwh.title" = "検索";
 
 /* Class = "IBUILabel"; text = "Topic ID"; ObjectID = "pg2-VL-9z2"; */
-"pg2-VL-9z2.text" = "Topic ID";
+"pg2-VL-9z2.text" = "---";
 
 /* Class = "IBUINavigationController"; title = "ClassNavigatioController"; ObjectID = "sW7-xK-I8O"; */
 "sW7-xK-I8O.title" = "ClassNavigatioController";
