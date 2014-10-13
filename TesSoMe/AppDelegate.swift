@@ -50,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			showIntroView(application)
 		}
 		
+		UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+		
 		return true
 	}
 	
