@@ -47,31 +47,32 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	func checkUpdate() {
 		let currentVersion = (NSBundle.mainBundle().infoDictionary["CFBundleShortVersionString"] as NSString).doubleValue// as Double
 		
-		apiManager.getSearchResult(topicid: 1, tag: "hash_tessome2_and_hash_newversion", username: "mzyy94", type: .Message, onSuccess:
-			{ data in
-				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-					let timeline = TesSoMeData.tlFromResponce(data)
-					if timeline.count < 1 {
-						return
+		let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+		sessionConfig.HTTPShouldSetCookies = true
+		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
+		req.responseSerializer.acceptableContentTypes = NSSet(object: "text/plain")
+		req.GET("https://tesso.pw/mem/mzyy94/version.json", parameters: nil, success:
+			{ res, data in
+				let newVersion = data["current"] as Double
+				
+				if newVersion > currentVersion {
+					let newVersionTitle = NSLocalizedString("New Version Available", comment: "new version notification title")
+					let newVersionMessage = NSLocalizedString("New Version %.2f is available. Update now.", comment: "new version notification message")
+					let notificationView = MPGNotification(title: newVersionTitle, subtitle: NSString(format: newVersionMessage, newVersion), backgroundColor: UIColor(red: 0.3, green: 1.0, blue: 0.3, alpha: 1.0), iconImage: nil)
+					notificationView.animationType = .Drop
+					notificationView.setButtonConfiguration(.TwoButton, withButtonTitles: [NSLocalizedString("Update", comment: "Update"), NSLocalizedString("Later", comment: "Later")])
+					notificationView.swipeToDismissEnabled = false
+					notificationView.duration = 5.0
+					notificationView.buttonHandler = {
+						notification, buttonIndex in
+						if buttonIndex == notification.firstButton.tag {
+							self.app.openURL(NSURL(string: data["url"] as String))
+						}
 					}
-					let tessomeData = TesSoMeData(data: timeline[0] as NSDictionary) as TesSoMeData
-					let newVersion = NSString(string: tessomeData.message.stringByReplacingOccurrencesOfString("[^0-9\\.]", withString: "", options: .RegularExpressionSearch)).doubleValue
-					
-					if newVersion > currentVersion {
-						dispatch_sync(dispatch_get_main_queue(), {
-							let newVersionTitle = NSLocalizedString("New Version Available", comment: "new version notification title")
-							let newVersionMessage = NSLocalizedString("New Version %.2f is available. Update now.", comment: "new version notification message")
-							let notificationView = MPGNotification(title: newVersionTitle, subtitle: NSString(format: newVersionMessage, newVersion), backgroundColor: UIColor(red: 0.3, green: 1.0, blue: 0.3, alpha: 1.0), iconImage: nil)
-							notificationView.animationType = .Drop
-							notificationView.setButtonConfiguration(.ZeroButtons, withButtonTitles: nil)
-							notificationView.swipeToDismissEnabled = false
-							notificationView.duration = 5.0
-							notificationView.show()
-						})
-					}
-				})
+					notificationView.show()
+				}
 			}
-			, onFailure: nil
+			, failure: nil
 		)
 
 	}
