@@ -47,7 +47,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	func checkUpdate() {
 		let currentVersion = (NSBundle.mainBundle().infoDictionary["CFBundleShortVersionString"] as NSString).doubleValue// as Double
 		
-		apiManager.getSearchResult(topicid: 1, tag: "hash_tessome_and_hash_newversion", username: "mzyy94", type: .Message, onSuccess:
+		apiManager.getSearchResult(topicid: 1, tag: "hash_tessome2_and_hash_newversion", username: "mzyy94", type: .Message, onSuccess:
 			{ data in
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 					let timeline = TesSoMeData.tlFromResponce(data)
