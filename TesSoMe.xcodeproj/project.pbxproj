@@ -20,6 +20,7 @@
 		9E2F4E9C19E7EA9C00E25779 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9E2F4E9E19E7EA9C00E25779 /* Localizable.strings */; };
 		9E38982519DE6E07002DBA2D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E38982419DE6E07002DBA2D /* SearchViewController.swift */; };
 		9E38982719DE9D09002DBA2D /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E38982619DE9D09002DBA2D /* SearchResultViewController.swift */; };
+		9E3F1DC619ECD83B000B2274 /* HTMLEntityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */; };
 		9E47ADB219DD30B300F42BA4 /* WebKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47ADB119DD30B300F42BA4 /* WebKitViewController.swift */; };
 		9E47ADB419DD52D900F42BA4 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47ADB319DD52D900F42BA4 /* UserViewController.swift */; };
 		9E4D818319C9D50F0023EA4C /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4D818219C9D50F0023EA4C /* TopicCell.swift */; };
@@ -438,6 +439,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 						};
 					};
 					9EB8ADC419C3069F00CB92B2 = {
@@ -448,6 +452,9 @@
 								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 						};
@@ -619,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */,
+				9E3F1DC619ECD83B000B2274 /* HTMLEntityConverter.swift in Sources */,
 				9E015F6519CEBDE200E0A177 /* TessoApiManager.swift in Sources */,
 				9E16EAE819D5CB8D007A5B7C /* UIColorExtension.swift in Sources */,
 			);
