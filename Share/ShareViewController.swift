@@ -21,6 +21,7 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 	var isFileShare = true
 
 	let selectTopicViewController = UITableViewController()
+	let topicConfig = SLComposeSheetConfigurationItem()
 	
 	override func viewDidLoad() {
 		self.navigationController?.navigationBar.backgroundColor = UIColor.globalTintColor(alpha: 0.3)
@@ -33,6 +34,14 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 		selectTopicViewController.tableView.delegate = self
 		selectTopicViewController.tableView.dataSource = self
 
+		topicConfig.title = NSLocalizedString("Topic", comment: "Topic")
+		topicConfig.value = "\(topicId + 99)"
+		topicConfig.valuePending = true
+		
+		topicConfig.tapHandler = {
+			self.pushConfigurationViewController(self.selectTopicViewController)
+		}
+		
 		let item = self.extensionContext!.inputItems[0] as NSExtensionItem
 		let itemProvider = item.attachments![0] as NSItemProvider
 		
@@ -69,12 +78,16 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 						, onFailure:
 						{ err in
 							self.topicConfig.valuePending = false
+							self.topicConfig.value = NSLocalizedString("Failed to connect to server", comment: "Failed to connect to server")
+							self.topicConfig.tapHandler = nil
 						}
 					)
 				}
 				, onFailure:
 				{ err in
-					
+					self.topicConfig.valuePending = false
+					self.topicConfig.value = NSLocalizedString("Failed to connect to server", comment: "Failed to connect to server")
+					self.topicConfig.tapHandler = nil
 				}
 			)
 		}
@@ -197,22 +210,8 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 		
 	}
 
-	let topicConfig = SLComposeSheetConfigurationItem()
-	
 	override func configurationItems() -> [AnyObject]! {
-		var configurationItems: [SLComposeSheetConfigurationItem] = []
-		
-		topicConfig.title = NSLocalizedString("Topic", comment: "Topic")
-		topicConfig.value = "\(topicId + 99)"
-		topicConfig.valuePending = true
-
-		topicConfig.tapHandler = {
-			self.pushConfigurationViewController(self.selectTopicViewController)
-		}
-		
-		configurationItems.append(topicConfig)
-
-		return configurationItems
+		return [topicConfig]
 	}
 
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
