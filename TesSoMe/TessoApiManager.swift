@@ -31,9 +31,15 @@ class TessoApiManager: NSObject {
 		case Message = 0, Drawing, FilePost, FileUpload, EditClass, UpdateProfile, AddTitle;
 	};
 	
+	var sessionConfig: NSURLSessionConfiguration! = nil
+	
+	override init() {
+		self.sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+		self.sessionConfig.HTTPShouldSetCookies = true
+		self.sessionConfig.sharedContainerIdentifier = "group.com.mzyy94.TesSoMe"
+	}
+	
 	func signIn(#username: String, password: String, onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer = AFHTTPResponseSerializer()
 		req.POST("https://tesso.pw/users/sign_in", parameters: ["data[User][username]": username, "data[User][password]": password], success:
@@ -87,8 +93,6 @@ class TessoApiManager: NSObject {
 	}
 	
 	func getData(#mode: TesSoMeGetMode, topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: Int? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer.acceptableContentTypes = NSSet(object: "text/html")
 		
@@ -131,8 +135,6 @@ class TessoApiManager: NSObject {
 	}
 
 	func sendData(#mode: TesSoMeSendMode, target: String? = nil, text: String? = nil, data: String? = nil, fileURL: NSURL? = nil, onProgress: ((session: NSURLSession!, task: NSURLSessionTask!, bytesSent:Int64, totalBytesSent:Int64, totalBytesExpectedToSend: Int64) -> Void)! = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		var sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-		sessionConfig.HTTPShouldSetCookies = true
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer.acceptableContentTypes = NSSet(object: "text/html")
 
