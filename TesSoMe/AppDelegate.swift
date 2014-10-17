@@ -27,13 +27,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if accounts != nil {
 			let account = accounts.last as? NSDictionary
 			usernameOfTesSoMe = account!["acct"] as? String
-			passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
-			
-			let storyboard = UIStoryboard(name: "Main", bundle: nil)
-			let topicMenuView = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
-			let rootTabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
-			
-			frostedViewController = REFrostedViewController(contentViewController: rootTabBarController, menuViewController: topicMenuView)
+			if usernameOfTesSoMe == nil || usernameOfTesSoMe == "" {
+				usernameOfTesSoMe = nil
+				frostedViewController = REFrostedViewController(contentViewController: UIViewController(), menuViewController: UIViewController())
+			} else {
+				passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
+				
+				let storyboard = UIStoryboard(name: "Main", bundle: nil)
+				let topicMenuView = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
+				let rootTabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
+				
+				frostedViewController = REFrostedViewController(contentViewController: rootTabBarController, menuViewController: topicMenuView)
+				
+			}
 		} else {
 			frostedViewController = REFrostedViewController(contentViewController: UIViewController(), menuViewController: UIViewController())
 		}
@@ -46,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		initUserDefault()
 		
-		if accounts == nil {
+		if accounts == nil || usernameOfTesSoMe == nil {
 			showIntroView(application)
 		}
 		
@@ -157,6 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		defaultConfig.setObject(true, forKey: "relativeTimestamp")
 		defaultConfig.setObject(16.0, forKey: "fontSize")
 		defaultConfig.setObject(true, forKey: "badge")
+		defaultConfig.setObject(false, forKey: "replyIcon")
 		defaultConfig.setObject(false, forKey: "imagePreview")
 		defaultConfig.setObject(false, forKey: "viaSignature")
 		defaultConfig.setObject(true, forKey: "backgroundNotification")
