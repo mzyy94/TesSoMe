@@ -268,7 +268,34 @@ class TesSoMeData: NSObject {
         return Bool(replyUserIds.filter({u in u == username}).count)
     }
 	
-	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool, withImagePreview imagePreview: Bool, repliedUsername: String! = nil) {
+	func replaceUsernameToIcon(fontSize: CGFloat) -> NSAttributedString {
+		let editedText = NSMutableAttributedString(attributedString: attributedMessage)
+		for username in replyUserIds {
+			var usernameRange = NSString(string: editedText.string).rangeOfString("@" + username, options: .RegularExpressionSearch)
+			while (usernameRange.length > 0) {
+				let userLink = "tesso://user/\(username)"
+				let iconURL = NSURL(string: "https://tesso.pw/img/icons/\(username).png")
+				
+				let topPadding = fontSize / 5
+				
+				let iconAttachment = NSTextAttachment()
+				iconAttachment.image = UIImage(data: NSData(contentsOfURL: iconURL))
+				iconAttachment.bounds = CGRect(x: 0, y: -topPadding, width: fontSize, height: fontSize)
+				
+				let iconString = NSAttributedString(attachment: iconAttachment)
+				let iconAttributedString = NSMutableAttributedString(attributedString: iconString)
+				
+				iconAttributedString.addAttributes([NSLinkAttributeName: NSURL(string: userLink)], range: NSMakeRange(0, 1))
+				editedText.replaceCharactersInRange(usernameRange, withAttributedString: iconAttributedString)
+				
+				usernameRange = NSString(string: editedText.string).rangeOfString("@" + username, options: .RegularExpressionSearch)
+			}
+		}
+		
+		return editedText
+	}
+	
+	func setDataToCell(inout cell: TimelineMessageCell, withFontSize fontSize: CGFloat, withBadge: Bool, withImagePreview imagePreview: Bool, repliedUsername: String! = nil, withReplyIcon replyIcon: Bool) {
 		cell.statusIdLabel.text = "\(statusId)"
 		cell.usernameLabel.text = "@\(username)"
 		cell.nicknameLabel.text = nickname
@@ -286,7 +313,11 @@ class TesSoMeData: NSObject {
 		} else {
 			cell.backgroundColor = UIColor.whiteColor()
 		}
-        cell.messageTextView.attributedText = attributedMessage
+		if replyIcon {
+			cell.messageTextView.attributedText = replaceUsernameToIcon(fontSize)
+		} else {
+			cell.messageTextView.attributedText = attributedMessage
+		}
 		switch type {
 		case .Message:
 			cell.previewView.image = nil

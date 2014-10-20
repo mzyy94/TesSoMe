@@ -56,11 +56,11 @@
 /* Class = "IBUITableViewSection"; headerTitle = "Streaming"; ObjectID = "CeZ-GK-bUu"; */
 "CeZ-GK-bUu.headerTitle" = "ストリーミング";
 
-/* Class = "IBUITableViewSection"; footerTitle = "Show only image that is less than 1024 KB file size"; ObjectID = "Dru-c8-S8d"; */
-"Dru-c8-S8d.footerTitle" = "投稿された1024 KB未満の画像ファイルのみをプレビューします";
+/* Class = "IBUITableViewSection"; footerTitle = "Show only image that is less than 1024 KB file size"; ObjectID = "eEC-Ko-Yea"; */
+"eEC-Ko-Yea.footerTitle" = "投稿された1024 KB未満の画像ファイルのみをプレビューします";
 
-/* Class = "IBUITableViewSection"; headerTitle = "Preview"; ObjectID = "Dru-c8-S8d"; */
-"Dru-c8-S8d.headerTitle" = "プレビュー";
+/* Class = "IBUITableViewSection"; headerTitle = "Preview"; ObjectID = "eEC-Ko-Yea"; */
+"eEC-Ko-Yea.headerTitle" = "プレビュー";
 
 /* Class = "IBUILabel"; text = "Appearance"; ObjectID = "E3e-YL-wBd"; */
 "E3e-YL-wBd.text" = "外観";
@@ -134,14 +134,20 @@
 /* Class = "IBUILabel"; text = "Streaming"; ObjectID = "sRc-ek-iKl"; */
 "sRc-ek-iKl.text" = "ストリーミング";
 
+/* Class = "IBUITableViewSection"; headerTitle = "Reply Icon"; ObjectID = "Dru-c8-S8d"; */
+"Dru-c8-S8d.headerTitle" = "リプライユーザーアイコン";
+
 /* Class = "IBUITableViewController"; title = "Appearance"; ObjectID = "tAh-8F-06f"; */
 "tAh-8F-06f.title" = "外観";
 
 /* Class = "IBUILabel"; text = "Enabled"; ObjectID = "uia-z9-uti"; */
 "uia-z9-uti.text" = "有効";
 
-/* Class = "IBUILabel"; text = "Show Image Thumbnail"; ObjectID = "v5K-mM-C2w"; */
-"v5K-mM-C2w.text" = "画像サムネイルを表示する";
+/* Class = "IBUILabel"; text = "Show Reply user icon"; ObjectID = "v5K-mM-C2w"; */
+"v5K-mM-C2w.text" = "リプライユーザーをアイコンで表示する";
+
+/* Class = "IBUILabel"; text = "Show Image Thumbnail"; ObjectID = "XVH-nc-bR4"; */
+"XVH-nc-bR4.text" = "画像サムネイルを表示する";
 
 /* Class = "IBUILabel"; text = "Absolute"; ObjectID = "wak-7H-ozC"; */
 "wak-7H-ozC.text" = "絶対時間";

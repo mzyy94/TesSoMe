@@ -18,6 +18,7 @@ class SuperTimelineViewController: UITableViewController {
 	var latestMessageId: Int = 0
 	var messageFontSize: CGFloat = 0.0
 	var withBadge: Bool = true
+	var withReplyIcon: Bool = false
 	var withImagePreview: Bool = false
 	var timestampIsRelative: Bool = true
 	
@@ -63,6 +64,7 @@ class SuperTimelineViewController: UITableViewController {
 		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
 		withBadge = ud.boolForKey("badge")
 		withImagePreview = ud.boolForKey("imagePreview")
+		withReplyIcon = ud.boolForKey("replyIcon")
 		timestampIsRelative = ud.boolForKey("relativeTimestamp")
 		self.tableView.reloadData()
 	}
@@ -90,7 +92,7 @@ class SuperTimelineViewController: UITableViewController {
 		var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
 		let data = messages[indexPath.row]
 		// Configure the cell...
-		data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge, withImagePreview: withImagePreview, repliedUsername: appDelegate.usernameOfTesSoMe)
+		data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge, withImagePreview: withImagePreview, repliedUsername: appDelegate.usernameOfTesSoMe, withReplyIcon: withReplyIcon)
 		cell.updateTimestamp(relative: timestampIsRelative)
 		return cell
 	}

@@ -125,12 +125,23 @@ class SettingViewController: UITableViewController {
 	@IBOutlet weak var absoluteCell: UITableViewCell!
 	@IBOutlet weak var fontSizeSlider: UISlider!
 	@IBOutlet weak var badgeSwitch: UISwitch!
+	@IBOutlet weak var replyUserIconSwitch: UISwitch!
 	@IBOutlet weak var imagePreviewSwitch: UISwitch!
 	
 	@IBAction func fontSizeSliderChanged(sender: UISlider) {
 		sender.value = Float(Int(sender.value))
 		ud.setFloat(sender.value, forKey: "fontSize")
 		let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
+
+		if ud.boolForKey("replyIcon") {
+			let postedDate = NSDate(timeIntervalSinceNow: -557.0)
+			let data = NSDictionary(dictionary: ["statusid": "1", "nickname": "", "username": "", "unixtime": "1", "topicid": "1", "type": "0", "data": ">999999(@eula) こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
+			let cellData = TesSoMeData(data: data)
+			let attributedText = cellData.replaceUsernameToIcon(CGFloat(sender.value))
+			
+			cell.messageTextView.attributedText = attributedText
+		}
+		
 		cell.messageTextView.font = UIFont.systemFontOfSize(CGFloat(sender.value))
 	}
 	
@@ -138,6 +149,10 @@ class SettingViewController: UITableViewController {
 		ud.setBool(sender.on, forKey: "badge")
 		let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
 		cell.viaTesSoMeBadge.hidden = !sender.on
+	}
+	@IBAction func replyUserIconSwitchChanged(sender: UISwitch) {
+		ud.setBool(sender.on, forKey: "replyIcon")
+		self.tableView.reloadData()
 	}
 	
 	@IBAction func imagePreviewSwitchChanged(sender: UISwitch) {
@@ -157,6 +172,7 @@ class SettingViewController: UITableViewController {
 		
 		badgeSwitch.on = ud.boolForKey("badge")
 		imagePreviewSwitch.on = ud.boolForKey("imagePreview")
+		replyUserIconSwitch.on = ud.boolForKey("replyIcon")
 	}
 	
 	
@@ -167,9 +183,9 @@ class SettingViewController: UITableViewController {
 
 			var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as TimelineMessageCell
 			let postedDate = NSDate(timeIntervalSinceNow: -557.0)
-			let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": "こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
+			let data = NSDictionary(dictionary: ["statusid": "99999", "nickname": "Eula", "username": "eula", "unixtime": "\(Int(postedDate.timeIntervalSince1970))", "topicid": "1", "type": "0", "data": ">999999(@eula) こんばんは〜 Eulaちゃんだよ！\nどうしたのかな？\n    "])
 			let cellData = TesSoMeData(data: data)
-			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: ud.boolForKey("badge"), withImagePreview: ud.boolForKey("imagePreview"))
+			cellData.setDataToCell(&cell, withFontSize: CGFloat(ud.floatForKey("fontSize")), withBadge: ud.boolForKey("badge"), withImagePreview: ud.boolForKey("imagePreview"), withReplyIcon: ud.boolForKey("replyIcon"))
 			cell.updateTimestamp(relative: ud.boolForKey("relativeTimestamp"))
 			
 			return cell

@@ -16,6 +16,7 @@ class MessageDetailViewController: UITableViewController {
 	
 	var messageFontSize: CGFloat = 0.0
 	var withBadge: Bool = true
+	var withReplyIcon: Bool = false
 	var withImagePreview: Bool = false
 	var timestampIsRelative: Bool = true
 
@@ -45,6 +46,7 @@ class MessageDetailViewController: UITableViewController {
 
 		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
 		withBadge = ud.boolForKey("badge")
+		withReplyIcon = ud.boolForKey("replyIcon")
 		withImagePreview = ud.boolForKey("imagePreview")
 		timestampIsRelative = ud.boolForKey("relativeTimestamp")
 		self.tableView.reloadData()
@@ -203,7 +205,7 @@ class MessageDetailViewController: UITableViewController {
 		default:
 			var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell", forIndexPath: indexPath) as TimelineMessageCell
 			let data = replyMessages[indexPath.row]
-			data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge, withImagePreview: withImagePreview, repliedUsername: appDelegate.usernameOfTesSoMe)
+			data.setDataToCell(&cell, withFontSize: messageFontSize, withBadge: withBadge, withImagePreview: withImagePreview, repliedUsername: appDelegate.usernameOfTesSoMe, withReplyIcon: withReplyIcon)
 			cell.updateTimestamp(relative: false)
 			return cell
 		}

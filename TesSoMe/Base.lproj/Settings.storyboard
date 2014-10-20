@@ -398,14 +398,14 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Preview" footerTitle="Show only image that is less than 1024 KB file size" id="Dru-c8-S8d">
+                            <tableViewSection headerTitle="Reply Icon" footerTitle="" id="Dru-c8-S8d">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="VPV-m4-7HU">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VPV-m4-7HU" id="BYw-Yd-WCK">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Image Thumbnail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5K-mM-C2w">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Reply user icon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5K-mM-C2w">
                                                     <rect key="frame" x="15" y="11" width="520" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -415,7 +415,7 @@
                                                     <rect key="frame" x="543" y="7" width="51" height="30"/>
                                                     <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
-                                                        <action selector="imagePreviewSwitchChanged:" destination="tAh-8F-06f" eventType="valueChanged" id="Hvp-gG-FSg"/>
+                                                        <action selector="replyUserIconSwitchChanged:" destination="tAh-8F-06f" eventType="valueChanged" id="ER4-uq-U2Y"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -431,6 +431,39 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Preview" footerTitle="Show only image that is less than 1024 KB file size" id="eEC-Ko-Yea">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="5Aw-fw-aMd">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Aw-fw-aMd" id="ekn-Xv-SCj">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Image Thumbnail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVH-nc-bR4">
+                                                    <rect key="frame" x="15" y="11" width="520" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6YL-Z9-T07">
+                                                    <rect key="frame" x="543" y="7" width="51" height="30"/>
+                                                    <color key="onTintColor" red="0.96470588239999999" green="0.31764705879999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="imagePreviewSwitchChanged:" destination="tAh-8F-06f" eventType="valueChanged" id="v5r-5I-BdG"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6YL-Z9-T07" firstAttribute="trailing" secondItem="ekn-Xv-SCj" secondAttribute="trailingMargin" id="FDZ-QJ-oxV"/>
+                                                <constraint firstItem="XVH-nc-bR4" firstAttribute="leading" secondItem="ekn-Xv-SCj" secondAttribute="leadingMargin" constant="7" id="Mjx-Le-Lbv"/>
+                                                <constraint firstItem="XVH-nc-bR4" firstAttribute="centerY" secondItem="ekn-Xv-SCj" secondAttribute="centerY" id="V9B-sg-WdA"/>
+                                                <constraint firstItem="6YL-Z9-T07" firstAttribute="leading" secondItem="XVH-nc-bR4" secondAttribute="trailing" constant="8" symbolic="YES" id="VmI-Pd-Rj4"/>
+                                                <constraint firstItem="6YL-Z9-T07" firstAttribute="top" secondItem="ekn-Xv-SCj" secondAttribute="topMargin" constant="-1" id="qfH-r7-hzT"/>
+                                                <constraint firstItem="XVH-nc-bR4" firstAttribute="top" secondItem="ekn-Xv-SCj" secondAttribute="topMargin" constant="3" id="t6e-cg-1Fg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="tAh-8F-06f" id="Ehj-9Z-9YA"/>
@@ -441,9 +474,10 @@
                         <outlet property="absoluteCell" destination="T8d-bn-Ql4" id="tVu-M7-Gwx"/>
                         <outlet property="badgeSwitch" destination="JpJ-Mt-drk" id="ySI-fT-8R5"/>
                         <outlet property="fontSizeSlider" destination="oBJ-kW-nUI" id="ft7-Ak-DZC"/>
-                        <outlet property="imagePreviewSwitch" destination="84d-0I-UpX" id="p9P-BO-msS"/>
+                        <outlet property="imagePreviewSwitch" destination="6YL-Z9-T07" id="KUs-wr-MCa"/>
                         <outlet property="previewCell" destination="knC-Rb-SYN" id="Dcp-vo-zgq"/>
                         <outlet property="relativeCell" destination="f8p-Ha-QZx" id="Uwb-EP-iXn"/>
+                        <outlet property="replyUserIconSwitch" destination="84d-0I-UpX" id="jXX-VI-BTD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yFi-0m-7gB" userLabel="First Responder" sceneMemberID="firstResponder"/>
