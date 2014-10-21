@@ -312,6 +312,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 
 		UIApplication.sharedApplication().cancelLocalNotification(notification)
+		application.applicationIconBadgeNumber = 0
 
 		if ud.boolForKey("vibratingNotification") {
 			AudioServicesPlaySystemSound(UInt32(kSystemSoundID_Vibrate))
