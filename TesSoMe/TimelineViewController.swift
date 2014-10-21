@@ -10,6 +10,9 @@ import UIKit
 
 class TimelineViewController: SuperTimelineViewController, UITabBarControllerDelegate {
 	let apiManager = TessoApiManager()
+	
+	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var pageControl: UIPageControl!
 
 	var appearing = false
 	
@@ -40,8 +43,61 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.tabBarController!.delegate = self
+		self.scrollView.delegate = self
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("insertCellWhenActive"), name: UIApplicationDidBecomeActiveNotification, object: nil)
 		checkUpdate()
+	}
+	
+	func setTopicTitle(topics: [NSDictionary]) {
+		let currentTopic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
+		var leftItem: UILabel! = nil
+		
+		for (index, topic) in enumerate(topics as [NSDictionary]) {
+			let title = topic["data"] as String
+			let topicId = (topic["id"] as String).toInt()!
+			
+			var attributedText = NSMutableAttributedString(string: "\(topicId + 99) ", attributes: [NSForegroundColorAttributeName: UIColor.globalTintColor()]) as NSMutableAttributedString
+			
+			attributedText.appendAttributedString(NSAttributedString(string: title))
+			
+			let label = UILabel()
+			label.attributedText = attributedText
+			label.textAlignment = .Center
+			label.tag = topicId
+			
+			label.setTranslatesAutoresizingMaskIntoConstraints(false)
+			label.frame = self.scrollView.frame
+			self.scrollView.addSubview(label)
+			
+			for constraintAttribute: NSLayoutAttribute in [.Width, .Height, .Top, .Bottom] {
+				self.scrollView.addConstraint(NSLayoutConstraint(item: label, attribute: constraintAttribute, relatedBy: .Equal, toItem: self.scrollView, attribute: constraintAttribute, multiplier: 1.0, constant: 0))
+			}
+			
+			if leftItem == nil {
+				self.scrollView.addConstraint(NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: .Equal, toItem: self.scrollView, attribute: .Left, multiplier: 1.0, constant: 0.0))
+			} else {
+				self.scrollView.addConstraint(NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.Left, relatedBy: .Equal, toItem: leftItem, attribute: .Right, multiplier: 1.0, constant: 0.0))
+			}
+			
+			leftItem = label
+			self.pageControl.numberOfPages = index + 1
+			
+			if topicId == currentTopic {
+				self.pageControl.currentPage = index
+			}
+		}
+		self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width * CGFloat(topics.count), height: self.scrollView.frame.height)
+	}
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		if self.scrollView.contentSize.width == 0 {
+			self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width * CGFloat(self.pageControl.numberOfPages), height: self.scrollView.frame.height)
+			
+			var rect = self.scrollView.frame
+			rect.origin = CGPoint(x: rect.width * CGFloat(self.pageControl.currentPage), y: 0)
+			self.scrollView.scrollRectToVisible(rect, animated: false)
+		}
 	}
 	
 	func checkUpdate() {
@@ -204,6 +260,21 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 		endUpdating()
 	}
 	
+	func resetTopicTitle() {
+		let currentTopic = (appDelegate.frostedViewController?.menuViewController as TopicMenuViewController).currentTopic
+		
+		for (index, topicTitleLabel) in enumerate(self.scrollView.subviews as [UILabel]) {
+			if topicTitleLabel.tag == currentTopic {
+				var rect = self.scrollView.frame
+				rect.origin = CGPoint(x: rect.width * CGFloat(index), y: 0)
+				self.scrollView.scrollRectToVisible(rect, animated: true)
+				self.pageControl.currentPage = index
+				break
+			}
+		}
+		resetTimeline()
+	}
+	
 	func resetTimeline() {
 		updateTimelineFetchTimer?.invalidate()
 		updateTimestampTimer?.invalidate()
@@ -212,8 +283,47 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 		getTimeline()
 	}
 
+	func setTopicTitlePage() {
+		let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
+		if page == self.pageControl.currentPage {
+			return
+		}
+		self.pageControl.currentPage = page
+		let topic = (scrollView.subviews[page] as UILabel).tag
+		let topicMenuController = appDelegate.frostedViewController?.menuViewController as TopicMenuViewController
+		topicMenuController.currentTopic = topic
+		
+		resetTimeline()
+	}
+	
+	override func scrollViewDidScroll(scrollView: UIScrollView) {
+		if NSStringFromClass(scrollView.dynamicType) == "UIScrollView" {
+			return
+		}
+		super.scrollViewDidScroll(scrollView)
+	}
+	
+	override func scrollViewDidScrollToTop(scrollView: UIScrollView) {
+		if NSStringFromClass(scrollView.dynamicType) == "UIScrollView" {
+			return
+		}
+		super.scrollViewDidScrollToTop(scrollView)
+	}
+	
+	override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+		if NSStringFromClass(scrollView.dynamicType) == "UIScrollView" {
+			return
+		}
+		super.scrollViewWillBeginDragging(scrollView)
+	}
 	
 	override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+		if NSStringFromClass(scrollView.dynamicType) == "UIScrollView" {
+			if decelerate {
+				setTopicTitlePage()
+			}
+			return
+		}
 		super.scrollViewDidEndDragging(scrollView, willDecelerate: decelerate)
 		if !decelerate && isScrolling && self.app.applicationState == .Active {
 			isScrolling = false
@@ -222,6 +332,9 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	}
 	
 	override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+		if NSStringFromClass(scrollView.dynamicType) == "UIScrollView" {
+			setTopicTitlePage()
+		}
 		super.scrollViewDidEndDecelerating(scrollView)
 		if isScrolling && self.app.applicationState == .Active {
 			isScrolling = false

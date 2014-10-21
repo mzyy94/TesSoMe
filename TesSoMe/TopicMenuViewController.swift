@@ -51,6 +51,11 @@ class TopicMenuViewController: UITableViewController {
 			self.getTopic()
 		})
 	}
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		tableView.reloadData()
+	}
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -123,6 +128,8 @@ class TopicMenuViewController: UITableViewController {
 				topicViewController.topics = topicsWithMsgs
 				topicViewController.tableView.reloadData()
 				
+				let timelineViewController = self.appDelegate.frostedViewController?.contentViewController.childViewControllers.first?.childViewControllers.first as TimelineViewController
+				timelineViewController.setTopicTitle(topics as [NSDictionary])
 			}
 			, onFailure: nil
 		)
@@ -155,7 +162,7 @@ class TopicMenuViewController: UITableViewController {
 		currentTopic = cell.topicNumLabel.text!.toInt()! - 99
 		tableView.reloadData()
 		let timelineViewController = appDelegate.frostedViewController?.contentViewController.childViewControllers.first?.childViewControllers.first as TimelineViewController
-		timelineViewController.resetTimeline()
+		timelineViewController.resetTopicTitle()
 		appDelegate.frostedViewController?.hideMenuViewController()
 	}
 
