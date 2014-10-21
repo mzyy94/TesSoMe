@@ -47,8 +47,8 @@
 /* Class = "IBUITableViewSection"; headerTitle = "Preview"; ObjectID = "BwH-Fb-qw3"; */
 "BwH-Fb-qw3.headerTitle" = "プレビュー";
 
-/* Class = "IBUILabel"; text = "©2014 mzyy94. TesSoMe 2.0.0"; ObjectID = "CFx-I1-kPy"; */
-"CFx-I1-kPy.text" = "©2014 mzyy94. TesSoMe 2.0.0";
+/* Class = "IBUILabel"; text = "©2014 mzyy94. TesSoMe 2.1"; ObjectID = "CFx-I1-kPy"; */
+"CFx-I1-kPy.text" = "©2014 mzyy94. TesSoMe 2.1";
 
 /* Class = "IBUITableViewController"; title = "Streaming"; ObjectID = "Cdt-BC-dtP"; */
 "Cdt-BC-dtP.title" = "ストリーミング";
