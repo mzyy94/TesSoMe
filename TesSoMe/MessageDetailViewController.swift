@@ -11,6 +11,7 @@ import UIKit
 class MessageDetailViewController: UITableViewController {
 
 	let apiManager = TessoApiManager()
+	let app = UIApplication.sharedApplication()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	let ud = NSUserDefaults()
 	
@@ -43,6 +44,8 @@ class MessageDetailViewController: UITableViewController {
 			getRepliedMessage(targetMessageData.relatedMessageIds)
 			self.navigationItem.title = "POST: \(targetMessageData.statusId)"
 		}
+		
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "reply_icon"), style: .Plain, target: self, action: Selector("replyPost"))
 
 		messageFontSize = CGFloat(ud.floatForKey("fontSize"))
 		withBadge = ud.boolForKey("badge")
@@ -50,6 +53,10 @@ class MessageDetailViewController: UITableViewController {
 		withImagePreview = ud.boolForKey("imagePreview")
 		timestampIsRelative = ud.boolForKey("relativeTimestamp")
 		self.tableView.reloadData()
+	}
+	
+	func replyPost() {
+		app.openURL(NSURL(string: "tesso://post/?topic=\(targetMessageData.topicid)&text=%3E\(targetMessageData.statusId)(\(targetMessageData.username))%20"))
 	}
 	
 	func getTargetMessageCell() {
