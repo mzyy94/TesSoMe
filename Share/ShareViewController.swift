@@ -178,7 +178,7 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 		} else if itemProvider.hasItemConformingToTypeIdentifier("public.url") {
 			itemProvider.loadItemForTypeIdentifier("public.url", options: nil, completionHandler: { (item, error) in
 				let url = item as NSURL
-				var urlString = url.absoluteString?.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+				var urlString = url.absoluteString!.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
 				
 				self.apiManager.sendMessage(topicid: self.topicId, message: "\(self.contentText) \n\(urlString)", onSuccess:
 					{ data in
