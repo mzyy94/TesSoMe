@@ -159,10 +159,13 @@ class TopicMenuViewController: UITableViewController {
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		let cell = tableView.cellForRowAtIndexPath(indexPath) as TopicCell
-		currentTopic = cell.topicNumLabel.text!.toInt()! - 99
-		tableView.reloadData()
 		let timelineViewController = appDelegate.frostedViewController?.contentViewController.childViewControllers.first?.childViewControllers.first as TimelineViewController
-		timelineViewController.resetTopicTitle()
+		let newTopic = cell.topicNumLabel.text!.toInt()! - 99
+		if newTopic != currentTopic {
+			currentTopic = newTopic
+			tableView.reloadData()
+			timelineViewController.resetTopicTitle()
+		}
 		appDelegate.frostedViewController?.hideMenuViewController()
 	}
 
