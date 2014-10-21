@@ -43,7 +43,7 @@ class TopicMenuViewController: UITableViewController {
 		self.userIconBtn.layer.cornerRadius = 4.0
 		self.userIconBtn.clipsToBounds = true
 		
-		let refreshTopicTimer = NSTimer(timeInterval:10*60, target: self, selector: Selector("refreshTopic"), userInfo: nil, repeats: true)
+		let refreshTopicTimer = NSTimer(timeInterval:5*60, target: self, selector: Selector("refreshTopic"), userInfo: nil, repeats: true)
 		NSRunLoop.currentRunLoop().addTimer(refreshTopicTimer, forMode: NSRunLoopCommonModes)
 		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
