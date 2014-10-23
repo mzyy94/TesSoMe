@@ -56,7 +56,7 @@ class MessageDetailViewController: UITableViewController {
 	}
 	
 	func replyPost() {
-		app.openURL(NSURL(string: "tesso://post/?topic=\(targetMessageData.topicid)&text=%3E\(targetMessageData.statusId)(\(targetMessageData.username))%20"))
+		app.openURL(NSURL(string: "tesso://post/?topic=\(targetMessageData.topicid)&text=%3E\(targetMessageData.statusId)(%40\(targetMessageData.username))%20"))
 	}
 	
 	func getTargetMessageCell() {
