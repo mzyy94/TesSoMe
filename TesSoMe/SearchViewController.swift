@@ -139,7 +139,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 		switch indexPath.section {
 		case 0:
 			let searchValue = searchWords[indexPath.row]
-			cell.textLabel?.text = searchValue.formatedString
+			cell.textLabel.text = searchValue.formatedString
 			return cell
 		default:
 			return cell
@@ -208,7 +208,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         return true
     }
 
-	override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+	override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
 		let indexPath = tableView.indexPathForCell(sender as UITableViewCell)!
 		if searchWords[indexPath.row].target == .User {
 			return false
@@ -220,7 +220,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 		let indexPath = tableView.indexPathForCell(sender as UITableViewCell)!
 		if indexPath.section == 0 {
 			let searchValue = searchWords[indexPath.row]
-			let type = TesSoMeSearchType.fromRaw(self.searchTypeSegmentedControl.selectedSegmentIndex - 1)!
+			let type = TesSoMeSearchType(rawValue: self.searchTypeSegmentedControl.selectedSegmentIndex - 1)!
 			var resultView = segue.destinationViewController as SearchResultViewController
 			searchValue.setSearchValue(&resultView, withType: type)
 		}

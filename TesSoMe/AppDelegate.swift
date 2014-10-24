@@ -159,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func initUserDefault() {
-		let defaultConfig = NSMutableDictionary.dictionary()
+		let defaultConfig = NSMutableDictionary()
 		defaultConfig.setObject(true, forKey: "relativeTimestamp")
 		defaultConfig.setObject(16.0, forKey: "fontSize")
 		defaultConfig.setObject(true, forKey: "badge")
@@ -257,9 +257,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				let text = ">\(statusId)(@\(username)) "
 				
 				if identifier == "TESSOME_REPLY_NOTIFICATION" {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)")!)
 				} else {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://message/\(statusId)"))
+					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://message/\(statusId)")!)
 				}
 			}
 		})
@@ -287,7 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			notificationView.buttonHandler = {
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)")!)
 				}
 			}
 			notificationView.show()

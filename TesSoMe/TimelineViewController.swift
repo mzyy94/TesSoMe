@@ -101,7 +101,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 	}
 	
 	func checkUpdate() {
-		let currentVersion = (NSBundle.mainBundle().infoDictionary["CFBundleShortVersionString"] as NSString).doubleValue// as Double
+		let currentVersion = (NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as NSString).doubleValue// as Double
 		
 		let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
 		sessionConfig.HTTPShouldSetCookies = true
@@ -122,7 +122,7 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 					notificationView.buttonHandler = {
 						notification, buttonIndex in
 						if buttonIndex == notification.firstButton.tag {
-							self.app.openURL(NSURL(string: data["url"] as String))
+							self.app.openURL(NSURL(string: data["url"] as String)!)
 						}
 					}
 					notificationView.show()

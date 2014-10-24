@@ -42,7 +42,7 @@ class SettingViewController: UITableViewController {
 			developerCell.detailTextLabel?.text = disabled
 		}
 		
-		let currentVersion = (NSBundle.mainBundle().infoDictionary["CFBundleShortVersionString"] as NSString).doubleValue
+		let currentVersion = (NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as NSString).doubleValue
 
 		versionAndCopyrightLabel.text = "©2014 mzyy94. TesSoMe \(currentVersion)"
 		

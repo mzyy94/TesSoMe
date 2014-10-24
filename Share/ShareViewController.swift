@@ -110,7 +110,7 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 	
 	func saveDataToTmp(data: NSData, fileName: String) -> NSURL! {
 		let fileManager = NSFileManager.defaultManager()
-		var tmpDir = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+		var tmpDir = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)!
 		let now = NSDate()
 		var err: NSError? = nil
 		tmpDir = tmpDir.URLByAppendingPathComponent("\(now.timeIntervalSince1970)")
@@ -130,7 +130,7 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 		if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeFileURL as NSString) {
 			itemProvider.loadItemForTypeIdentifier(kUTTypeFileURL as NSString, options: nil, completionHandler: { (item, error) in
 				let fileURL = item as NSURL
-				let data = NSData(contentsOfURL: fileURL)
+				let data = NSData(contentsOfURL: fileURL)!
 				let fileName = self.contentText
 				
 				if let fileURL = self.saveDataToTmp(data, fileName: fileName) {
@@ -153,7 +153,7 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 		} else if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as NSString) {
 			itemProvider.loadItemForTypeIdentifier(kUTTypeImage as NSString, options: nil, completionHandler: { (item, error) in
 				let imageURL = item as NSURL
-				let imgData = NSData(contentsOfURL: imageURL)
+				let imgData = NSData(contentsOfURL: imageURL)!
 				let image = UIImage(data: imgData)
 				let data = UIImageJPEGRepresentation(image, 0.8)
 				let fileName = self.contentText
@@ -231,7 +231,7 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 		let topicNumber = (topic["id"] as String!).toInt()! + 99
 		let titleAttributedText = NSMutableAttributedString(string: "\(topicNumber) ", attributes: [NSForegroundColorAttributeName: UIColor.globalTintColor()])
 		titleAttributedText.appendAttributedString(NSAttributedString(string: topic["data"] as String!))
-		cell.textLabel?.attributedText = titleAttributedText
+		cell.textLabel.attributedText = titleAttributedText
 		return cell
 	}
 	

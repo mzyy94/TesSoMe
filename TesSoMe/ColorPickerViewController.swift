@@ -19,7 +19,7 @@ class ColorPickerViewController: UICollectionViewController {
 	
 	func generateColors() {
 		for white in 0..<32 {
-			let color = UIColor(white: CGFloat(32.0 - white) / 32.0, alpha: 1.0)
+			let color = UIColor(white: (32.0 - CGFloat(white)) / 32.0, alpha: 1.0)
 			self.colors.append(color)
 		}
 		
@@ -39,11 +39,11 @@ class ColorPickerViewController: UICollectionViewController {
 		super.viewDidLoad()
 		
 		generateColors()
-		self.collectionView?.reloadData()
+		self.collectionView.reloadData()
 
 		for i in 0..<colors.count {
 			if colors[i] == color {
-				self.collectionView?.scrollToItemAtIndexPath(NSIndexPath(forRow: i, inSection: 0), atScrollPosition: .Top, animated: false)
+				self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: i, inSection: 0), atScrollPosition: .Top, animated: false)
 				break
 			}
 		}

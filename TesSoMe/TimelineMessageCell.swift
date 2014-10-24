@@ -177,7 +177,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 			let messageId = (cell as TimelineMessageCell).statusIdLabel.text!
 			let username = (cell as TimelineMessageCell).usernameLabel.text!.stringByReplacingOccurrencesOfString("@", withString: "%40")
 			let topicid = (cell as TimelineMessageCell).topicIdLabel.text!.toInt()! - 99
-			app.openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=%3E\(messageId)(\(username))%20"))
+			app.openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=%3E\(messageId)(\(username))%20")!)
 		default:
 			NSLog("Pressed SWTableViewCell utility button index is out of range.")
 		}

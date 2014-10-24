@@ -47,7 +47,7 @@ class TessoApiManager: NSObject {
 				if res.response!.URL == NSURL(string: "https://tesso.pw/sns") {
 					onSuccess?()
 				} else {
-					let errorDetails = NSDictionary.dictionaryWithObjects([NSLocalizedString("Your username or password was incorrect.", comment: "Your username or password was incorrect.")], forKeys: [NSLocalizedDescriptionKey], count: 1)
+					let errorDetails = NSDictionary(objects: [NSLocalizedString("Your username or password was incorrect.", comment: "Your username or password was incorrect.")], forKeys: [NSLocalizedDescriptionKey], count: 1)
 					let err = NSError(domain: "Sign in", code: 401, userInfo: errorDetails)
 					onFailure?(err)
 				}
@@ -60,7 +60,7 @@ class TessoApiManager: NSObject {
 	}
 	
 	func signOut(onSuccess: (() -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		var url = NSURL(string: "https://tesso.pw/users/sign_out")
+		var url = NSURL(string: "https://tesso.pw/users/sign_out")!
 		var req = NSMutableURLRequest(URL: url)
 		NSURLConnection.sendAsynchronousRequest(req, queue: NSOperationQueue.mainQueue(), completionHandler:
 			{ res, data, err in
@@ -86,7 +86,7 @@ class TessoApiManager: NSObject {
 			let errMsg = ((object["data"] as NSArray)[0] as NSDictionary)["data"] as String
 //			let errCode = (((object["data"] as NSArray)[0] as NSDictionary)["id"] as Int) // MEMO: SERVER SIDE BUG
 			let errCode = 0
-			let errorDetails = NSDictionary.dictionaryWithObjects([errMsg], forKeys: [NSLocalizedDescriptionKey], count: 1)
+			let errorDetails = NSDictionary(objects: [errMsg], forKeys: [NSLocalizedDescriptionKey], count: 1)
 			let err = NSError(domain: "API", code: errCode, userInfo: errorDetails)
 			onFailure?(err)
 		}
@@ -101,7 +101,7 @@ class TessoApiManager: NSObject {
 		app.networkActivityIndicatorVisible = true
 #endif
 
-		var param = ["mode": mode.toRaw() as AnyObject]
+		var param = ["mode": mode.rawValue as AnyObject]
 		if topicid != nil {
 			param.updateValue(topicid!, forKey: "topicid")
 		}
@@ -138,7 +138,7 @@ class TessoApiManager: NSObject {
 		let req = AFHTTPSessionManager(sessionConfiguration: sessionConfig)
 		req.responseSerializer.acceptableContentTypes = NSSet(object: "text/html")
 
-		var param = ["mode": mode.toRaw() as AnyObject]
+		var param = ["mode": mode.rawValue as AnyObject]
 		if target != nil {
 			param.updateValue(target!, forKey: "target")
 		}
@@ -219,7 +219,7 @@ class TessoApiManager: NSObject {
 	}
 	
 	func getSearchResult(topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, tag: String? = nil, username: String? = nil, type: TesSoMeSearchType = .All, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
-		var typeValue: Int? = type.toRaw()
+		var typeValue: Int? = type.rawValue
 		if type == .All {
 			typeValue = nil
 		}

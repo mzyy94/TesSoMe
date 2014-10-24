@@ -158,7 +158,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		if mediaType == "public.image" {
 			func saveImageToTmp(image: UIImage) {
 				let fileName = "Image.jpg"
-				var tmpDir = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+				var tmpDir = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)!
 				let fileToPost = UIImageJPEGRepresentation(image, 0.8)
 				let fileManager = NSFileManager.defaultManager()
 				let now = NSDate()
@@ -274,7 +274,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 					
 					let fileManager = NSFileManager.defaultManager()
 					var err: NSError? = nil
-					fileManager.moveItemAtURL(self.fileURLtoPost!, toURL: renamedFileURL, error: &err)
+					fileManager.moveItemAtURL(self.fileURLtoPost!, toURL: renamedFileURL!, error: &err)
 					if err == nil {
 						self.fileURLtoPost = renamedFileURL
 					} else {
@@ -456,7 +456,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			notification.buttonHandler = {
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag {
-					self.app.openURL(NSURL(string: "tesso://post/?topic=\(self.topicid)&text=\(self.textView.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)"))
+					self.app.openURL(NSURL(string: "tesso://post/?topic=\(self.topicid)&text=\(self.textView.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)")!)
 				}
 			}
 			notification.show()
@@ -485,7 +485,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				apiManager.sendDrawing(topicid: self.topicid, message: text, drawing: self.drawingImage, onSuccess: onSuccess, onFailure: onFailure)
 			})
 		default:
-			NSLog("Unknown message type to post (value: %d)", messageType.toRaw())
+			NSLog("Unknown message type to post (value: %d)", messageType.rawValue)
 		}
 	}
 	
