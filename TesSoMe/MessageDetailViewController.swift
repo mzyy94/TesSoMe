@@ -184,7 +184,7 @@ class MessageDetailViewController: UITableViewController {
 				}
 				
 				let messageText = NSMutableAttributedString(attributedString: target.attributedMessage)
-				messageText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, messageText.string.utf16Count))
+				messageText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSMakeRange(0, messageText.string.utf16Count))
 				cell.messageTextView.attributedText = messageText
 				
 				switch target.type {
