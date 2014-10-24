@@ -44,6 +44,8 @@ class TimelineViewController: SuperTimelineViewController, UITabBarControllerDel
 		super.viewDidLoad()
 		self.tabBarController!.delegate = self
 		self.scrollView.delegate = self
+		self.scrollView.scrollsToTop = false
+		self.tableView.scrollsToTop = true
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("insertCellWhenActive"), name: UIApplicationDidBecomeActiveNotification, object: nil)
 		checkUpdate()
 	}
