@@ -16,6 +16,7 @@ class ReplyViewController: SuperTimelineViewController {
 		if messages.count > 0 {
 			updateTimeline()
 		}
+		app.applicationIconBadgeNumber = 0
 	}
 	
 	override func getTimeline() {
