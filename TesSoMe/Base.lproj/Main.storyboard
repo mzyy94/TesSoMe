@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -912,46 +912,41 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZm-nZ-sIQ">
                                                         <rect key="frame" x="70" y="30" width="523" height="195"/>
                                                         <subviews>
+                                                            <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="7es-yu-5kd">
+                                                                <rect key="frame" x="0.0" y="0.0" width="523" height="33"/>
+                                                                <subviews>
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HML-fP-2mo">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="523" height="33"/>
+                                                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                                    </textView>
+                                                                </subviews>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="HML-fP-2mo" firstAttribute="leading" secondItem="7es-yu-5kd" secondAttribute="leading" id="3PU-4h-bsf"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="HML-fP-2mo" secondAttribute="trailing" id="3hj-Yu-rfW"/>
+                                                                    <constraint firstItem="HML-fP-2mo" firstAttribute="top" secondItem="7es-yu-5kd" secondAttribute="top" id="AOG-aA-ddP"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="HML-fP-2mo" secondAttribute="bottom" id="tYL-TQ-WEz"/>
+                                                                </constraints>
+                                                            </view>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YbC-E7-Idb">
                                                                 <rect key="frame" x="62" y="33" width="400" height="136"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="YbC-E7-Idb" secondAttribute="height" multiplier="50:17" id="13n-Mw-TTe"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4s-KW-MrI">
-                                                                <rect key="frame" x="0.0" y="0.0" width="523" height="33"/>
-                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ceo-kq-43X">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="523" height="33"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                    <subviews>
-                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7V7-Zg-8As">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="523" height="33"/>
-                                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                                            <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                                                        </textView>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="7V7-Zg-8As" secondAttribute="trailing" id="HFg-tD-KRu"/>
-                                                                        <constraint firstItem="7V7-Zg-8As" firstAttribute="leading" secondItem="ceo-kq-43X" secondAttribute="leading" id="Z6X-UK-kQE"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="7V7-Zg-8As" secondAttribute="bottom" id="ie7-VV-xE5"/>
-                                                                        <constraint firstItem="7V7-Zg-8As" firstAttribute="top" secondItem="ceo-kq-43X" secondAttribute="top" id="okl-fL-qZc"/>
-                                                                    </constraints>
-                                                                </view>
-                                                                <vibrancyEffect>
-                                                                    <blurEffect style="dark"/>
-                                                                </vibrancyEffect>
-                                                            </visualEffectView>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="YbC-E7-Idb" secondAttribute="bottom" constant="26" id="7J1-Vx-tjL"/>
+                                                            <constraint firstItem="7es-yu-5kd" firstAttribute="top" secondItem="CZm-nZ-sIQ" secondAttribute="top" id="BbO-vW-0YF"/>
                                                             <constraint firstItem="YbC-E7-Idb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CZm-nZ-sIQ" secondAttribute="leading" id="CHu-Nl-D2r"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YbC-E7-Idb" secondAttribute="trailing" id="GCf-lW-Dxf"/>
-                                                            <constraint firstItem="v4s-KW-MrI" firstAttribute="leading" secondItem="CZm-nZ-sIQ" secondAttribute="leading" id="KXm-Gj-6EM"/>
-                                                            <constraint firstAttribute="trailing" secondItem="v4s-KW-MrI" secondAttribute="trailing" id="MEb-5j-sFU"/>
-                                                            <constraint firstItem="v4s-KW-MrI" firstAttribute="top" secondItem="CZm-nZ-sIQ" secondAttribute="top" id="Wgc-9Y-6sd"/>
-                                                            <constraint firstItem="YbC-E7-Idb" firstAttribute="top" secondItem="v4s-KW-MrI" secondAttribute="bottom" id="ZfK-ua-kvb"/>
+                                                            <constraint firstItem="7es-yu-5kd" firstAttribute="leading" secondItem="CZm-nZ-sIQ" secondAttribute="leading" id="GGe-Ng-jqR"/>
+                                                            <constraint firstItem="YbC-E7-Idb" firstAttribute="top" secondItem="7es-yu-5kd" secondAttribute="bottom" id="HbZ-og-cUK"/>
+                                                            <constraint firstAttribute="trailing" secondItem="7es-yu-5kd" secondAttribute="trailing" id="RMt-D5-FrH"/>
                                                             <constraint firstAttribute="centerX" secondItem="YbC-E7-Idb" secondAttribute="centerX" id="hAQ-o9-KvB"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="wYz-ge-sho"/>
                                                         </constraints>
@@ -1032,7 +1027,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="messageTextView" destination="7V7-Zg-8As" id="xSz-4W-TrS"/>
+                                    <outlet property="messageTextView" destination="HML-fP-2mo" id="5mR-fm-31h"/>
                                     <outlet property="nicknameLabel" destination="462-XQ-sfw" id="ZkQ-YA-e20"/>
                                     <outlet property="previewView" destination="YbC-E7-Idb" id="vnQ-YA-KQz"/>
                                     <outlet property="statusIdLabel" destination="Phr-0Q-QWU" id="CLE-QV-E76"/>
