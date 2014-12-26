@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PostMainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, RSKImageCropViewControllerDelegate {
+class PostMainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, RSKImageCropViewControllerDataSource, RSKImageCropViewControllerDelegate {
 	let app = UIApplication.sharedApplication()
 	let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 	let ud = NSUserDefaults()
@@ -149,7 +149,8 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
 			}
 			
-			let imageCropViewController = RSKImageCropViewController(image: image, cropMode: RSKImageCropMode.Custom, cropSize: CGSize(width: 250, height: 85))
+			let imageCropViewController = RSKImageCropViewController(image: image, cropMode: .Custom)
+			imageCropViewController.dataSource = self
 			imageCropViewController.delegate = self
 			picker.pushViewController(imageCropViewController, animated: true)
 			return
@@ -231,6 +232,38 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 		
 		self.performSegueWithIdentifier("ShowDrawingView", sender: self)
 		self.navigationItem.leftBarButtonItem?.action = Selector("closeViewAll")
+	}
+	
+	func imageCropViewControllerCustomMaskRect(controller: RSKImageCropViewController!) -> CGRect {
+		let maskSize = CGSize(width: 250, height: 85)
+
+		let viewWidth = CGRectGetWidth(controller.view.frame)
+		let viewHeight = CGRectGetHeight(controller.view.frame)
+		
+		let maskRect = CGRectMake((viewWidth - maskSize.width) * 0.5,
+			(viewHeight - maskSize.height) * 0.5,
+			maskSize.width,
+			maskSize.height)
+		
+		return maskRect
+	}
+	
+	func imageCropViewControllerCustomMaskPath(controller: RSKImageCropViewController!) -> UIBezierPath! {
+		let rect = controller.maskRect;
+		
+		let topLeft = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
+		let topRight = CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect));
+		let bottomRight = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+		let bottomLeft = CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
+		
+		let triangle = UIBezierPath()
+		triangle.moveToPoint(topLeft)
+		triangle.addLineToPoint(topRight)
+		triangle.addLineToPoint(bottomRight)
+		triangle.addLineToPoint(bottomLeft)
+		triangle.closePath()
+		
+		return triangle
 	}
 	
 	func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!) {
