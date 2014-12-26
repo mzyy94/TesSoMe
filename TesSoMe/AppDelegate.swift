@@ -138,14 +138,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		case "user":
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
-			userViewController.username = url.lastPathComponent
+			userViewController.username = url.lastPathComponent!
 			
 			self.window?.rootViewController!.presentViewController(userViewController, animated: true, completion: nil)
 
 		case "message":
 			let storyboard = UIStoryboard(name: "Main", bundle: nil)
 			let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
-			messageDetailView.targetStatusId = url.lastPathComponent.toInt()
+			messageDetailView.targetStatusId = url.lastPathComponent?.toInt()
 
 			let rootViewController = self.window?.rootViewController?.childViewControllers.first as RootViewController
 			let index = rootViewController.selectedIndex

@@ -296,7 +296,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 						label.sizeToFit()
 						textField.rightView = label
 						textField.rightViewMode = UITextFieldViewMode.Always
-						textField.placeholder = self.fileURLtoPost?.lastPathComponent.stringByDeletingPathExtension.stringByRemovingPercentEncoding
+						textField.placeholder = self.fileURLtoPost?.lastPathComponent?.stringByDeletingPathExtension.stringByRemovingPercentEncoding
 						NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleTextFieldTextDidChangeNotification:"), name: UITextFieldTextDidChangeNotification, object: textField)
 					}
 				)

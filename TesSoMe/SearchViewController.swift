@@ -139,7 +139,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
 		switch indexPath.section {
 		case 0:
 			let searchValue = searchWords[indexPath.row]
-			cell.textLabel.text = searchValue.formatedString
+			cell.textLabel?.text = searchValue.formatedString
 			return cell
 		default:
 			return cell

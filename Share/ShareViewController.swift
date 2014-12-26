@@ -231,7 +231,7 @@ class ShareViewController: SLComposeServiceViewController, UITableViewDelegate, 
 		let topicNumber = (topic["id"] as String!).toInt()! + 99
 		let titleAttributedText = NSMutableAttributedString(string: "\(topicNumber) ", attributes: [NSForegroundColorAttributeName: UIColor.globalTintColor()])
 		titleAttributedText.appendAttributedString(NSAttributedString(string: topic["data"] as String!))
-		cell.textLabel.attributedText = titleAttributedText
+		cell.textLabel?.attributedText = titleAttributedText
 		return cell
 	}
 	

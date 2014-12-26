@@ -39,11 +39,11 @@ class ColorPickerViewController: UICollectionViewController {
 		super.viewDidLoad()
 		
 		generateColors()
-		self.collectionView.reloadData()
+		self.collectionView?.reloadData()
 
 		for i in 0..<colors.count {
 			if colors[i] == color {
-				self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: i, inSection: 0), atScrollPosition: .Top, animated: false)
+				self.collectionView?.scrollToItemAtIndexPath(NSIndexPath(forRow: i, inSection: 0), atScrollPosition: .Top, animated: false)
 				break
 			}
 		}

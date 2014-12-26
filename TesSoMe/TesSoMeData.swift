@@ -322,7 +322,7 @@ class TesSoMeData: NSObject {
 		case .Message:
 			cell.previewView.image = nil
 		case .File:
-			if imagePreview && fileSize < 1024*1024 && fileURL!.lastPathComponent.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
+			if imagePreview && fileSize < 1024*1024 && fileURL!.lastPathComponent?.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
 				cell.previewView.sd_setImageWithURL(fileURL, placeholderImage: UIImage(named: "white.png"))
 			}
 		case .Drawing:

@@ -85,7 +85,7 @@ class MessageDetailViewCell: UITableViewCell, UITextViewDelegate {
 			if URL.host == "user" {
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
 				let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
-				userViewController.username = URL.lastPathComponent
+				userViewController.username = URL.lastPathComponent!
 				
 				let tableView = self.superview?.superview as UITableView
 				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
@@ -98,7 +98,7 @@ class MessageDetailViewCell: UITableViewCell, UITextViewDelegate {
 			if URL.host == "message" {
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
 				let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
-				messageDetailView.targetStatusId = URL.lastPathComponent.toInt()
+				messageDetailView.targetStatusId = URL.lastPathComponent?.toInt()
 
 				let tableView = self.superview?.superview as UITableView
 				let viewController = (tableView.dataSource as AnyObject!) as UIViewController

@@ -191,7 +191,7 @@ class MessageDetailViewController: UITableViewController {
 				case .Message:
 					cell.previewView.image = nil
 				case .File:
-					if withImagePreview && target.fileSize < 1024*1024 && target.fileURL!.lastPathComponent.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
+					if withImagePreview && target.fileSize < 1024*1024 && target.fileURL!.lastPathComponent?.rangeOfString("(.jpe?g|.png|.gif|.bmp)$", options: .RegularExpressionSearch | .CaseInsensitiveSearch) != nil {
 						cell.previewView.sd_setImageWithURL(target.fileURL, placeholderImage: UIImage(named: "white.png"))
 					}
 				case .Drawing:
