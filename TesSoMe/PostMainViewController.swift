@@ -298,7 +298,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 					//let originalFileBaseURL = self.fileURLtoPost!.baseURL  // ERROR
 					let originalFileBaseURL = NSURL(string: self.fileURLtoPost!.absoluteString!.stringByDeletingLastPathComponent)
 					let fileExtension = self.fileURLtoPost!.pathExtension
-					let renamedFileURL = NSURL(string: "\(filename!).\(fileExtension)", relativeToURL: originalFileBaseURL)
+					let renamedFileURL = NSURL(string: "\(filename!).\(fileExtension!)", relativeToURL: originalFileBaseURL)
 					
 					if renamedFileURL == self.fileURLtoPost {
 						// Will not rename
@@ -324,7 +324,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 				alertController.addTextFieldWithConfigurationHandler(
 					{ textField in
 						let label = UILabel(frame: CGRectMake(0, 0, 100, 20))
-						label.text = " .\(self.fileURLtoPost!.pathExtension)"
+						label.text = " .\(self.fileURLtoPost!.pathExtension!)"
 						label.font = textField.font
 						label.sizeToFit()
 						textField.rightView = label
