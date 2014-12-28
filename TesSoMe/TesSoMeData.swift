@@ -14,7 +14,7 @@ enum TessoMessageType: Int {
 	case Message = 0
 	case Drawing = 1
 	case File = 2
-};
+}
 
 class TesSoMeData: NSObject {
 	

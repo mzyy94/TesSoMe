@@ -249,12 +249,12 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 	}
 	
 	func imageCropViewControllerCustomMaskPath(controller: RSKImageCropViewController!) -> UIBezierPath! {
-		let rect = controller.maskRect;
+		let rect = controller.maskRect
 		
-		let topLeft = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
-		let topRight = CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect));
-		let bottomRight = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
-		let bottomLeft = CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
+		let topLeft = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect))
+		let topRight = CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect))
+		let bottomRight = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect))
+		let bottomLeft = CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect))
 		
 		let triangle = UIBezierPath()
 		triangle.moveToPoint(topLeft)

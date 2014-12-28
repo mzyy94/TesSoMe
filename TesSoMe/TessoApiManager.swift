@@ -13,7 +13,7 @@ enum TesSoMeSearchType: Int {
 	case Message = 0
 	case Drawing = 1
 	case File = 2
-};
+}
 
 class TessoApiManager: NSObject {
 #if TARGET_IS_SHARE_EXTENSION
@@ -24,12 +24,12 @@ class TessoApiManager: NSObject {
 	let apiEndPoint = "https://tesso.pw/sns/api"
 	
 	enum TesSoMeGetMode: Int {
-		case Test = 0, Timeline, Topic, Class, Profile, SearchResult;
-	};
+		case Test = 0, Timeline, Topic, Class, Profile, SearchResult
+	}
 	
 	enum TesSoMeSendMode: Int {
-		case Message = 0, Drawing, FilePost, FileUpload, EditClass, UpdateProfile, AddTitle;
-	};
+		case Message = 0, Drawing, FilePost, FileUpload, EditClass, UpdateProfile, AddTitle
+	}
 	
 	var sessionConfig: NSURLSessionConfiguration! = nil
 	
