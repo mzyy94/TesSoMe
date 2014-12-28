@@ -119,7 +119,7 @@ class TopicMenuViewController: UITableViewController {
 					mutableDic.setValuesForKeysWithDictionary(topic)
 					mutableDic.setValue(mutableDic["data"] as String, forKeyPath: "title")
 					mutableDic.setValuesForKeysWithDictionary(latestMsg)
-					mutableDic.setValue(TesSoMeData.convertText(fromKML: converter.decodeXML(mutableDic["data"] as String)), forKeyPath: "message")
+					mutableDic.setValue(TesSoMeData.convertText(fromKML: HTMLEntityConverter.unescape(mutableDic["data"] as String)), forKeyPath: "message")
 					
 					topicsWithMsgs.append(mutableDic)
 				}

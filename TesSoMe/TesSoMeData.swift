@@ -114,17 +114,15 @@ class TesSoMeData: NSObject {
 		topicid = (data["topicid"] as String).toInt()!
 		type = TessoMessageType(rawValue: (data["type"] as String).toInt()!)!
 		
-		let converter = HTMLEntityConverter()
-		
 		switch type {
 		case .Message, .Drawing:
-			message = converter.decodeXML(data["data"] as String)
+			message = HTMLEntityConverter.unescape(data["data"] as String)
 			getReplyUsernames()
 			getRelatedMessageIds()
 			getHashTags()
             attributedMessage = generateAttributedMessage()
 		default:
-			let filedata = converter.decodeXML(data["data"] as String).componentsSeparatedByString(",")
+			let filedata = HTMLEntityConverter.unescape(data["data"] as String).componentsSeparatedByString(",")
 			fileName = filedata[1]
 			fileSize = filedata[2].toInt()
 			if filedata.count > 3 {
@@ -153,7 +151,7 @@ class TesSoMeData: NSObject {
 	
 	class func convertAttributedProfile(raw: String, size: CGFloat) -> NSMutableAttributedString {
 		let converter = HTMLEntityConverter()
-		var data = converter.decodeXML(raw)
+		var data = HTMLEntityConverter.unescape(raw)
 		
 		var space = " "
 		for i in 2...32 {

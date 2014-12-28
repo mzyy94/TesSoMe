@@ -9,7 +9,7 @@
 import UIKit
 
 class HTMLEntityConverter: NSObject {
-	func decodeXML(source: String) -> String {
+	class func unescape(source: String) -> String {
 		let message = source
 		.stringByReplacingOccurrencesOfString("&quot;", withString: "\"")
 		.stringByReplacingOccurrencesOfString("&lt;", withString: "<")
