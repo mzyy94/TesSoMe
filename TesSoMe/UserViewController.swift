@@ -310,7 +310,8 @@ class UserViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             cell.labeledUsername = data["username"] as String!
             cell.userIconBtn.sd_setBackgroundImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(cell.labeledUsername).png"), forState: .Normal)
-            cell.labelLabel.text = data["data"] as String!
+			let converter = HTMLEntityConverter()
+			cell.labelLabel.text = converter.decodeXML(data["data"] as String!)
 			
 			return cell
 		case 2:
