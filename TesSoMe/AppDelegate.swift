@@ -335,6 +335,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		let account = accounts.last as? NSDictionary
 		let username = account!["acct"] as? String
+		let password = SSKeychain.passwordForService(serviceName, account: username)
 		
 		if username == nil {
 			completionHandler(.Failed)
@@ -342,6 +343,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 		
 		let apiManager = TessoApiManager()
+		apiManager.checkConnectionAndReSignIn(username!, password: password)
 		apiManager.getSearchResult(sinceid: ud.integerForKey("notifiedStatusId"), tag: "at_\(username!)", type: .All, onSuccess:
 			{ data in
 				let timeline = TesSoMeData.tlFromResponce(data) as [NSDictionary]
