@@ -87,7 +87,7 @@ class TesSoMeURLSchemeManager: NSURL {
 			urlString += "search/"
 		case .hashtag:
 			urlString += "search/"
-			urlString += "?=\(hashtag)"
+			urlString += "?hash=\(hashtag)"
 		}
 		
 		return NSURL(string: urlString)!
