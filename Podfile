@@ -28,12 +28,18 @@ end
 end
 
 target "TesSoMeTests" do
-pod 'AFNetworking'
+pod 'AFNetworking/Serialization'
+pod 'AFNetworking/Security'
+pod 'AFNetworking/NSURLConnection'
+pod 'AFNetworking/NSURLSession'
 
 end
 
 target "Share" do
-pod 'AFNetworking'
+pod 'AFNetworking/Serialization'
+pod 'AFNetworking/Security'
+pod 'AFNetworking/NSURLConnection'
+pod 'AFNetworking/NSURLSession'
 pod 'SSKeychain'
 
 end

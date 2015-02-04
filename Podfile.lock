@@ -48,6 +48,10 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - AFNetworking/NSURLConnection
+  - AFNetworking/NSURLSession
+  - AFNetworking/Security
+  - AFNetworking/Serialization
   - DZNEmptyDataSet
   - EAIntroView
   - HMSegmentedControl
