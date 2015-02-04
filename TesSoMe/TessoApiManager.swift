@@ -254,7 +254,7 @@ class TessoApiManager: NSObject {
 	
 	func convertDateToTessoAPIStyle(date:NSDate) -> String {
 		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "YYYY_MM_dd_HH"
+		dateFormatter.dateFormat = "yyyy_MM_dd_HH"
 		
 		return dateFormatter.stringFromDate(date)
 	}

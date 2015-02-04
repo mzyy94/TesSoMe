@@ -172,7 +172,7 @@ class MessageDetailViewController: UITableViewController {
 				cell.topicIdLabel.text = "\(target.topicid + 99)"
 				
 				let formatter = NSDateFormatter()
-				formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+				formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
 				
 				cell.timeStampLabel.text = formatter.stringFromDate(target.date)
 				cell.viaTesSoMeBadge.hidden = !target.isViaTesSoMe()

@@ -111,7 +111,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 			RMDateSelectionViewController.setLocalizedTitleForSelectButton(NSLocalizedString("Create", comment: "Create"))
 
 			let dateFormatter = NSDateFormatter()
-			dateFormatter.dateFormat = "YYYY-MM-dd HH"
+			dateFormatter.dateFormat = "yyyy-MM-dd HH"
 			let startDate =	dateFormatter.dateFromString(dateFormatter.stringFromDate(NSDate()))
 			
 			let dateSelectionViewController = RMDateSelectionViewController.dateSelectionController()
@@ -170,7 +170,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		let formatter = NSDateFormatter()
-		formatter.dateFormat = NSLocalizedString("YYYY/MM/dd", comment: "Class date header format")
+		formatter.dateFormat = NSLocalizedString("yyyy/MM/dd", comment: "Class date header format")
 
 		let titleFormat = NSLocalizedString("%@ Classes (%d)", comment: "Class title header format")
 		var selectedDate = self.calendarView.selectedDate
@@ -194,7 +194,7 @@ class ClassViewController: UIViewController, RDVCalendarViewDelegate, UITableVie
 		cell.titleLabel.text = event.title
 		
 		let formatter = NSDateFormatter()
-		formatter.dateFormat = NSLocalizedString("YYYY/MM/dd HH:mm 'Start'", comment: "Class date format")
+		formatter.dateFormat = NSLocalizedString("yyyy/MM/dd HH:mm 'Start'", comment: "Class date format")
 		cell.dateLabel.text = formatter.stringFromDate(event.date)
 		
 		cell.userIcon.sd_setImageWithURL(NSURL(string: "https://tesso.pw/img/icons/\(event.username).png"))
