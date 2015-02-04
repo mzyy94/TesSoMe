@@ -10,7 +10,22 @@ import UIKit
 
 class HTMLEntityConverter: NSObject {
 	class func unescape(source: String) -> String {
-		let message = source
+		var message = NSString(string: source)
+		
+		var htmlEntityRange = message.rangeOfString("&#[0-9]{1,4};", options: .RegularExpressionSearch)
+		while htmlEntityRange.length != 0 {
+			var value = message.stringByReplacingOccurrencesOfString(".*&#([0-9]{1,4});.*", withString: "$1", options: .RegularExpressionSearch, range: message.rangeOfString(".*", options: .RegularExpressionSearch)).toInt()!
+			var newchar = NSString(format: "%c", value)
+			
+			
+			message = message.stringByReplacingCharactersInRange(htmlEntityRange, withString: newchar)
+			
+			htmlEntityRange = message.rangeOfString("&#[0-9]{1,4};", options: .RegularExpressionSearch)
+		}
+		
+
+		let result = message
+		.stringByReplacingOccurrencesOfString("&quot;", withString: "\"")
 		.stringByReplacingOccurrencesOfString("&quot;", withString: "\"")
 		.stringByReplacingOccurrencesOfString("&lt;", withString: "<")
 		.stringByReplacingOccurrencesOfString("&gt;", withString: ">")
@@ -233,6 +248,6 @@ class HTMLEntityConverter: NSObject {
 		.stringByReplacingOccurrencesOfString("&yuml;", withString: "ÿ")
 		.stringByReplacingOccurrencesOfString("&amp;", withString: "&")
 		
-		return message
+		return result
 	}
 }
