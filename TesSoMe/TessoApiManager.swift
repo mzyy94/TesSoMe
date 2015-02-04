@@ -193,13 +193,47 @@ class TessoApiManager: NSObject {
 	}
 	
 	func checkConnectionAndReSignIn(username: String, password: String) {
-		self.getData(mode: .Test, onSuccess: nil, onFailure:
-			{ err in
-				if err.code == 0 {
-					self.signIn(username: username, password: password, onSuccess: nil, onFailure: nil)
-				}
-			
-		})
+		// semaphore lock is not functional
+//        var semaphore: dispatch_semaphore_t = dispatch_semaphore_create(0)
+		var lock = true
+		
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            self.getData(mode: .Test, onSuccess:
+                { data in
+//                    dispatch_semaphore_signal(semaphore)
+					lock = false
+                    return
+                }
+                , onFailure:
+                { err in
+                    if err.code == 0 {
+                        self.signIn(username: username, password: password, onSuccess: {
+//                                dispatch_semaphore_signal(semaphore)
+								lock = false
+                                return
+                            }
+                            , onFailure:
+                            { err in
+//                                dispatch_semaphore_signal(semaphore)
+								lock = false
+                                return
+                        })
+                    } else {
+//                        dispatch_semaphore_signal(semaphore)
+						lock = false
+                    }
+                    
+            })
+//        })
+
+        println("waiting")
+//        dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 5000000000))
+		
+		while (lock) {
+			NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate())
+		}
+
+        println("go")
 	}
 	
 	func getTimeline(topicid: Int? = nil, maxid: Int? = nil, sinceid: Int? = nil, onSuccess: ((NSDictionary) -> Void)! = nil, onFailure: ((NSError) -> Void)! = nil) {
