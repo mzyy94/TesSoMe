@@ -177,7 +177,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 			let messageId = (cell as TimelineMessageCell).statusIdLabel.text!
 			let username = (cell as TimelineMessageCell).usernameLabel.text!.stringByReplacingOccurrencesOfString("@", withString: "%40")
 			let topicid = (cell as TimelineMessageCell).topicIdLabel.text!.toInt()! - 99
-			app.openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=%3E\(messageId)(\(username))%20")!)
+			TesSoMeURLSchemeManager.openURL(.reply, topicid: topicid, username: username, statusid: messageId.toInt()!)
 		default:
 			NSLog("Pressed SWTableViewCell utility button index is out of range.")
 		}
@@ -189,57 +189,11 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 	}
 	
 	func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
-		if URL.scheme == "tesso" {
-			if URL.host == "user" {
-				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
-				userViewController.username = URL.lastPathComponent!
-				
-				let tableView = self.superview?.superview as UITableView
-				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-				viewController.navigationController?.pushViewController(userViewController, animated: true)
-				
-				return false
-	
-			}
-			
-			if URL.host == "search" {
-				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let searchResultViewController = storyboard.instantiateViewControllerWithIdentifier("SearchResultView") as SearchResultViewController
-				searchResultViewController.tag = URL.query?.stringByReplacingOccurrencesOfString("=", withString: "_").stringByReplacingOccurrencesOfString("&", withString: "_and_")
-				
-				let tableView = self.superview?.superview as UITableView
-				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-				viewController.navigationController?.pushViewController(searchResultViewController, animated: true)
-				
-				return false
-				
-			}
-
-			if URL.host == "message" {
-				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
-				messageDetailView.targetStatusId = URL.lastPathComponent?.toInt()
-				let tableView = self.superview?.superview as UITableView
-				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-				
-				viewController.navigationController?.pushViewController(messageDetailView, animated: true)
-				
-				return false
-				
-			}
-			
-			return true
-		}
-		
-		let webKitViewController = WebKitViewController()
-		webKitViewController.url = URL
 		
 		let tableView = self.superview?.superview as UITableView
 		let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-		viewController.navigationController?.pushViewController(webKitViewController, animated: true)
 		
-		return false
+		return TesSoMeURLSchemeManager.routing(URL, viewController: viewController)
 	}
 	
 	override func setSelected(selected: Bool, animated: Bool) {

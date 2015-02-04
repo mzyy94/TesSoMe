@@ -231,8 +231,8 @@ class TesSoMeData: NSObject {
 		for username in replyUserIds {
 			var usernameRange = NSString(string: message).rangeOfString("@" + username, options: .RegularExpressionSearch)
 			while (usernameRange.length > 0) {
-				let userLink = "tesso://user/\(username)"
-				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: userLink)!, NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: usernameRange)
+				let userLink = TesSoMeURLSchemeManager.getURL(.user, username: username)
+				attributedMessage.addAttributes([NSLinkAttributeName: userLink, NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: usernameRange)
 				usernameRange = NSString(string: message).rangeOfString("@" + username, options: .RegularExpressionSearch, range: NSMakeRange(usernameRange.location + usernameRange.length, message.utf16Count - (usernameRange.location + usernameRange.length)))
 			}
 		}
@@ -240,8 +240,8 @@ class TesSoMeData: NSObject {
 		for messageId in relatedMessageIds {
 			var relatedMsgRange = NSString(string: message).rangeOfString(">\(messageId)", options: .RegularExpressionSearch)
 			while (relatedMsgRange.length > 0) {
-				let messageLink = "tesso://message/\(messageId)"
-				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: messageLink)!, NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: relatedMsgRange)
+				let messageLink = TesSoMeURLSchemeManager.getURL(.message, statusid: messageId)
+				attributedMessage.addAttributes([NSLinkAttributeName: messageLink, NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: relatedMsgRange)
 				relatedMsgRange = NSString(string: message).rangeOfString(">\(messageId)", options: .RegularExpressionSearch, range: NSMakeRange(relatedMsgRange.location + relatedMsgRange.length, message.utf16Count - (relatedMsgRange.location + relatedMsgRange.length)))
 			}
 		}
@@ -249,8 +249,8 @@ class TesSoMeData: NSObject {
 		for hashtag in hashTags {
 			var hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch)
 			while (hashtagRange.length > 0) {
-				let hashtagLink = "tesso://search/?hash=\(hashtag)"
-				attributedMessage.addAttributes([NSLinkAttributeName: NSURL(string: hashtagLink)!, NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: hashtagRange)
+				let hashtagLink = TesSoMeURLSchemeManager.getURL(.hashtag, hashtag: hashtag)
+				attributedMessage.addAttributes([NSLinkAttributeName: hashtagLink, NSForegroundColorAttributeName: UIColor(red: 120.0 / 255.0, green: 120.0/255.0, blue: 253.0/255.0, alpha: 1.0)], range: hashtagRange)
 				hashtagRange = NSString(string: message).rangeOfString("#\(hashtag)", options: .RegularExpressionSearch, range: NSMakeRange(hashtagRange.location + hashtagRange.length, message.utf16Count - (hashtagRange.location + hashtagRange.length)))
 			}
 		}
@@ -271,7 +271,7 @@ class TesSoMeData: NSObject {
 		for username in replyUserIds {
 			var usernameRange = NSString(string: editedText.string).rangeOfString("@" + username, options: .RegularExpressionSearch)
 			while (usernameRange.length > 0) {
-				let userLink = "tesso://user/\(username)"
+				let userLink = TesSoMeURLSchemeManager.getURL(.user, username: username)
 				let iconURL = NSURL(string: "https://tesso.pw/img/icons/\(username).png")
 				
 				let topPadding = fontSize / 5
@@ -283,7 +283,7 @@ class TesSoMeData: NSObject {
 				let iconString = NSAttributedString(attachment: iconAttachment)
 				let iconAttributedString = NSMutableAttributedString(attributedString: iconString)
 				
-				iconAttributedString.addAttributes([NSLinkAttributeName: NSURL(string: userLink)!], range: NSMakeRange(0, 1))
+				iconAttributedString.addAttributes([NSLinkAttributeName: userLink], range: NSMakeRange(0, 1))
 				editedText.replaceCharactersInRange(usernameRange, withAttributedString: iconAttributedString)
 				
 				usernameRange = NSString(string: editedText.string).rangeOfString("@" + username, options: .RegularExpressionSearch)

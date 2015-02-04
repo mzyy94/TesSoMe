@@ -65,8 +65,8 @@ class WebKitViewController: UIViewController, WKNavigationDelegate {
 			{ action in
 				let title = self.webView.title as String!
 				let url = self.webView.URL!.absoluteString as String!
-				let text = "\(title) \n\(url) ".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-				self.app.openURL(NSURL(string: "tesso://post/?text=\(text!)")!)
+				let text = "\(title) \n\(url) ".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+				TesSoMeURLSchemeManager.openURL(.post, text: text)
 		})
 		alertController.addAction(postThisSite)
 		

@@ -27,6 +27,7 @@
 		9E5D6A6319CC42BA00C3A915 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */; };
 		9E5D6A6519CC42BA00C3A915 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */; };
 		9E5D6A6819CC42BA00C3A915 /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9E5D6A5E19CC42BA00C3A915 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9E73350F1A4FFD930080675E /* TesSoMeURLSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E73350E1A4FFD930080675E /* TesSoMeURLSchemeManager.swift */; };
 		9E75922919C9C50A002DC581 /* HTMLEntityConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */; };
 		9E76D83119DA703000624761 /* PhotoCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E76D83019DA703000624761 /* PhotoCaptionView.swift */; };
 		9E76D83319DA704600624761 /* PhotoCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E76D83219DA704600624761 /* PhotoCaptionView.xib */; };
@@ -136,6 +137,7 @@
 		9E5D6A6119CC42BA00C3A915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E5D6A6219CC42BA00C3A915 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		9E5D6A6419CC42BA00C3A915 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		9E73350E1A4FFD930080675E /* TesSoMeURLSchemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TesSoMeURLSchemeManager.swift; sourceTree = "<group>"; };
 		9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLEntityConverter.swift; sourceTree = "<group>"; };
 		9E76D83019DA703000624761 /* PhotoCaptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptionView.swift; sourceTree = "<group>"; };
 		9E76D83219DA704600624761 /* PhotoCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCaptionView.xib; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				9E9FA0E619C36A6D00E209C3 /* TessoApiManager.swift */,
 				9E75922819C9C50A002DC581 /* HTMLEntityConverter.swift */,
 				9E8FFF2919C9868200E4459A /* TesSoMeData.swift */,
+				9E73350E1A4FFD930080675E /* TesSoMeURLSchemeManager.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				9EE03CD919E28E1D0003B356 /* ClassViewController.swift in Sources */,
 				9EBA91AC19DB2292002C0F94 /* SuperTimelineViewController.swift in Sources */,
 				9E8FFF2219C95E4900E4459A /* SettingViewController.swift in Sources */,
+				9E73350F1A4FFD930080675E /* TesSoMeURLSchemeManager.swift in Sources */,
 				9EFE5F6A19E609B700DF8FD2 /* ColorPickerViewController.swift in Sources */,
 				9E38982719DE9D09002DBA2D /* SearchResultViewController.swift in Sources */,
 				9E95321A19C348A80009B9EA /* RootViewController.swift in Sources */,

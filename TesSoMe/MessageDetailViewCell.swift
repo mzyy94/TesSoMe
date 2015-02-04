@@ -81,57 +81,11 @@ class MessageDetailViewCell: UITableViewCell, UITextViewDelegate {
 	}
 	
 	func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
-		if URL.scheme == "tesso" {
-			if URL.host == "user" {
-				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let userViewController = storyboard.instantiateViewControllerWithIdentifier("UserView") as UserViewController
-				userViewController.username = URL.lastPathComponent!
-				
-				let tableView = self.superview?.superview as UITableView
-				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-				viewController.navigationController?.pushViewController(userViewController, animated: true)
-				
-				return false
-				
-			}
-			
-			if URL.host == "message" {
-				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let messageDetailView = storyboard.instantiateViewControllerWithIdentifier("MessageDetailView") as MessageDetailViewController
-				messageDetailView.targetStatusId = URL.lastPathComponent?.toInt()
-
-				let tableView = self.superview?.superview as UITableView
-				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-				viewController.navigationController?.pushViewController(messageDetailView, animated: true)
-				
-				return false
-				
-			}
-
-			if URL.host == "search" {
-				let storyboard = UIStoryboard(name: "Main", bundle: nil)
-				let searchResultViewController = storyboard.instantiateViewControllerWithIdentifier("SearchResultView") as SearchResultViewController
-				searchResultViewController.tag = URL.query?.stringByReplacingOccurrencesOfString("=", withString: "_").stringByReplacingOccurrencesOfString("&", withString: "_and_")
-				
-				let tableView = self.superview?.superview as UITableView
-				let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-				viewController.navigationController?.pushViewController(searchResultViewController, animated: true)
-				
-				return false
-				
-			}
-			
-			return true
-		}
-		
-		let webKitViewController = WebKitViewController()
-		webKitViewController.url = URL
 		
 		let tableView = self.superview?.superview as UITableView
 		let viewController = (tableView.dataSource as AnyObject!) as UIViewController
-		viewController.navigationController?.pushViewController(webKitViewController, animated: true)
 		
-		return false
+		return TesSoMeURLSchemeManager.routing(URL, viewController: viewController)
 	}
 	
 

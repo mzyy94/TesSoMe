@@ -257,9 +257,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				let text = ">\(statusId)(@\(username)) "
 				
 				if identifier == "TESSOME_REPLY_NOTIFICATION" {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)")!)
+					TesSoMeURLSchemeManager.openURL(.post, topicid: topicid, text: text)
 				} else {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://message/\(statusId)")!)
+					TesSoMeURLSchemeManager.openURL(.message, statusid: statusId)
 				}
 			}
 		})
@@ -287,7 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			notificationView.buttonHandler = {
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag {
-					UIApplication.sharedApplication().openURL(NSURL(string: "tesso://post/?topic=\(topicid)&text=\(text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)")!)
+					TesSoMeURLSchemeManager.openURL(.post, topicid: topicid, text: text)
 				}
 			}
 			notificationView.show()

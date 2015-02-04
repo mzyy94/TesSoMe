@@ -489,7 +489,7 @@ class PostMainViewController: UIViewController, UIImagePickerControllerDelegate,
 			notification.buttonHandler = {
 				notification, buttonIndex in
 				if buttonIndex == notification.firstButton.tag {
-					self.app.openURL(NSURL(string: "tesso://post/?topic=\(self.topicid)&text=\(self.textView.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)")!)
+					TesSoMeURLSchemeManager.openURL(.post, topicid: self.topicid, text: self.textView.text)
 				}
 			}
 			notification.show()
