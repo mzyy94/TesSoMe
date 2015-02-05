@@ -30,9 +30,6 @@ class RootViewController: UITabBarController {
 			viewController.tabBarItem.setTitleTextAttributes(unreadMessageLabelAppearance, forState: .Normal)
 		}
 		
-		let apiManager = TessoApiManager()
-		apiManager.checkConnectionAndReSignIn(appDelegate.usernameOfTesSoMe!, password: appDelegate.passwordOfTesSoMe!)
-		
 		self.tabBar.tintColor = UIColor.globalTintColor()
 	}
 

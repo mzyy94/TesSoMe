@@ -33,6 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			} else {
 				passwordOfTesSoMe = SSKeychain.passwordForService(serviceName, account: usernameOfTesSoMe)
 				
+				let apiManager = TessoApiManager()
+				apiManager.checkConnectionAndReSignIn(usernameOfTesSoMe!, password: passwordOfTesSoMe!)
+
 				let storyboard = UIStoryboard(name: "Main", bundle: nil)
 				let topicMenuView = storyboard.instantiateViewControllerWithIdentifier("TopicMenuView") as UITableViewController
 				let rootTabBarController = storyboard.instantiateViewControllerWithIdentifier("RootTabBarController") as UITabBarController
