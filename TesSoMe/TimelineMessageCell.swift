@@ -175,7 +175,7 @@ class TimelineMessageCell: SWTableViewCell, SWTableViewCellDelegate, IDMPhotoBro
 			viewController.navigationController?.pushViewController(messageDetailView, animated: true)
 		case 1: // Reply button
 			let messageId = (cell as TimelineMessageCell).statusIdLabel.text!
-			let username = (cell as TimelineMessageCell).usernameLabel.text!.stringByReplacingOccurrencesOfString("@", withString: "%40")
+			let username = (cell as TimelineMessageCell).usernameLabel.text!.stringByReplacingOccurrencesOfString("@", withString: "")
 			let topicid = (cell as TimelineMessageCell).topicIdLabel.text!.toInt()! - 99
 			TesSoMeURLSchemeManager.openURL(.reply, topicid: topicid, username: username, statusid: messageId.toInt()!)
 		default:
