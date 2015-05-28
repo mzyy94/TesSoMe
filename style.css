@@ -1,0 +1,108 @@
+body {
+	-webkit-user-select: none;
+	width: 100%;
+	margin: 20px auto;
+	-webkit-font-smoothing: antialiased;
+	color: rgb(51, 51, 51);
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', メイリオ, Meiryo, 'ＭＳ Ｐゴシック', Helvetica, Arial, Verdana, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: none;
+	text-rendering: optimizelegibility;
+
+}
+nav {
+	width: 980px;
+	margin: 0 auto;
+	border-bottom: 1px solid rgb(186, 186, 186);
+	padding: 0;
+}
+nav h1 {
+	font-size: 38px;
+	margin: 18px 8px;
+	display: inline-block;
+}
+nav ul {
+	float: right;
+	display: block;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+	margin-bottom: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 8px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+}
+nav li {
+	display: inline-block;
+	margin-right: 32px;
+	color: rgb(66, 66, 66);
+}
+nav a {
+	color: rgb(66, 66, 66);
+	text-decoration: none;
+}
+nav .current {
+	color: rgb(166, 166, 166);
+}
+.button {
+	display: inline-block;
+	background-color: rgb(100, 160, 246);
+	text-decoration: none;
+	font-size: 12px;
+	margin: 32px;
+	padding: 6px 10px;
+	border: 1px solid rgb(186, 186, 186);
+	width: auto;
+	color: white;
+	font-weight: bold;
+	border-radius: 6px;
+	text-align: right;
+}
+header {
+	width: 960px;
+	margin: 0 auto;
+}
+header p {
+	font-size: 18px;
+	line-height: 32px;
+	text-align:center;
+}
+header > img {
+	border-bottom: 1px solid rgb(186, 186, 186);
+}
+section:nth-child(2n) {
+	background-color: rgb(246, 246, 246);
+}
+section article {
+	padding: 82px 20px;
+	width: 960px;
+	margin: 0 auto;
+}
+article img {
+	display: inline-block;
+}
+article h1 {
+	display: inline-block;
+	margin: 0;
+}
+article div {
+	padding: 0;
+}
+article p {
+	font-size: 18px;
+	line-height: 32px;
+}
+article img.left ~ * {
+	display: inline-block;
+	width: 400px;
+	float: right;
+}
+article > div:first-child {
+	width: 960px;
+	text-align: center;
+}
